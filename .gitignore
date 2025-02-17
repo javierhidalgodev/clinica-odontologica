@@ -1,0 +1,33 @@
+# Archivos de compilaci�n y dependencias
+target/
+*.class
+
+# Configuraci�n de Eclipse, IntelliJ IDEA y NetBeans
+/.idea/
+/*.iml
+/.vscode/
+/*.ipr
+/.settings/
+/*.iws
+/.nbproject/private/
+
+# Archivos generados por Maven
+.mvn/
+mvnw
+mvnw.cmd
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+
+# Repositorio local de Maven (si lo tienes dentro del proyecto, lo cual no es com�n)
+/.m2/
+
+# Archivos de logs
+*.log
+
+# Archivos espec�ficos de SO
+.DS_Store
+Thumbs.db
+/nbproject/
