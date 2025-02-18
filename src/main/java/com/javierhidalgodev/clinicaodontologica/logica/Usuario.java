@@ -1,10 +1,20 @@
 package com.javierhidalgodev.clinicaodontologica.logica;
 
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  *
  * @author Javi
  */
-public class Usuario {
+
+@Entity
+public class Usuario implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idUser;
     private String username;
     private String password;
@@ -13,8 +23,7 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(int idUser, String username, String password, String role) {
-        this.idUser = idUser;
+    public Usuario(String username, String password, String role) {
         this.username = username;
         this.password = password;
         this.role = role;

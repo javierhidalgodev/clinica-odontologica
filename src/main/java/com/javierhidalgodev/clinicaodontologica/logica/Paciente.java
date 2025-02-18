@@ -1,40 +1,48 @@
 package com.javierhidalgodev.clinicaodontologica.logica;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
  * @author Javi
  */
-public class Paciente extends Persona {
 
-    private int idPatient;
+@Entity
+public class Paciente extends Persona implements Serializable {
+
+//    private int idPatient;
     private boolean prepaidHealth;
     private String bloodType;
+    @OneToOne
     private Responsable guardian;
+    @OneToMany(mappedBy = "patient")
     private List<Turno> appointments;
 
     public Paciente() {
         
     }
 
-    public Paciente(int idPatient, boolean prepaidHealth, String bloodType, Responsable guardian, List<Turno> appointments, String name, String surname, String phone, String address, Date birthdate, String dni) {
+    public Paciente(/*int idPatient,*/ boolean prepaidHealth, String bloodType, Responsable guardian, List<Turno> appointments, String name, String surname, String phone, String address, Date birthdate, String dni) {
         super(name, surname, phone, address, birthdate, dni);
-        this.idPatient = idPatient;
+//        this.idPatient = idPatient;
         this.prepaidHealth = prepaidHealth;
         this.bloodType = bloodType;
         this.guardian = guardian;
         this.appointments = appointments;
     }
     
-    public int getIdPatient() {
-        return idPatient;
-    }
-
-    public void setIdPatient(int idPatient) {
-        this.idPatient = idPatient;
-    }
+//    public int getIdPatient() {
+//        return idPatient;
+//    }
+//
+//    public void setIdPatient(int idPatient) {
+//        this.idPatient = idPatient;
+//    }
 
     public boolean isPrepaidHealth() {
         return prepaidHealth;

@@ -1,17 +1,37 @@
 package com.javierhidalgodev.clinicaodontologica.logica;
 
+import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
  * @author Javi
  */
-public class Turno {
+
+@Entity
+public class Turno implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idAppointment;
+    @Temporal(TemporalType.DATE)
     private Date appointment;
     private String hour;
     private String treatment;
-//    private Odontologo odontologist;
+    @ManyToOne
+    @JoinColumn(name = "idAppointment") // Esto esá mal
+    private Odontologo odontologist;
+    @ManyToOne
+    @JoinColumn(name = "idAppointment")
+    private Paciente patient;
 
     public Turno() {
     }
