@@ -29,39 +29,55 @@
         Gestión
     </div>
 
-    <!-- Nav Item - Pages Collapse Menu -->
+    <!-- Nav Item - Odontologist Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-           aria-expanded="true" aria-controls="collapseTwo">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOdontologist"
+           aria-expanded="true" aria-controls="collapseOdontologist">
             <i class="fas fa-solid fa-stethoscope"></i>
             <span>Odontólogos</span>
         </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="collapseOdontologist" class="collapse" aria-labelledby="headingOdontologist" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Acciones</h6>
-                <a class="collapse-item" href="buttons.html">Ver profesionales</a>
-                <a class="collapse-item" href="altas.jsp">Nuevo profesional</a>
+                <a class="collapse-item" href="#">Ver profesionales</a>
+                <a class="collapse-item" href="altaOdontologo.jsp">Nuevo profesional</a>
             </div>
         </div>
     </li>
 
-    <!-- Nav Item - Utilities Collapse Menu -->
+    <!-- Nav Item - Patients Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-           aria-expanded="true" aria-controls="collapseUtilities">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePatients"
+           aria-expanded="true" aria-controls="collapsePatients">
             <i class="fas fa-solid fa-hospital-user"></i>
             <span>Pacientes</span>
         </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+        <div id="collapsePatients" class="collapse" aria-labelledby="headingPatients"
              data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Acciones</h6>
-                <a class="collapse-item" href="utilities-color.html">Ver pacientes</a>
-                <a class="collapse-item" href="utilities-border.html">Nuevo paciente</a>
+                <a class="collapse-item" href="#">Ver pacientes</a>
+                <a class="collapse-item" href="#">Nuevo paciente</a>
             </div>
         </div>
     </li>
 
+    <!-- Nav Item - Users Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUsers"
+           aria-expanded="true" aria-controls="collapseUsers">
+            <i class="fas fa-solid fa-hospital-user"></i>
+            <span>Usuarios</span>
+        </a>
+        <div id="collapseUsers" class="collapse" aria-labelledby="headingUsers"
+             data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Acciones</h6>
+                <a class="collapse-item" href="#">Ver pacientes</a>
+                <a class="collapse-item" href="altaUsuario.jsp">Nuevo paciente</a>
+            </div>
+        </div>
+    </li>
     <!-- Divider -->
     <!--            <hr class="sidebar-divider">
     

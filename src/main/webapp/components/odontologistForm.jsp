@@ -12,42 +12,48 @@
                     </div>
                     <form class="user">
                         <div class="form-group row">
-                            <div class="col-sm-6 mb-3 mb-sm-0">
+                            <div class="col-md-6 mb-3 mb-md-0">
                                 <input type="text" class="form-control form-control-user" id="exampleFirstName"
                                        placeholder="First Name">
                             </div>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control form-control-user" id="exampleLastName"
-                                       placeholder="Last Name">
+                            <div class="col-md-6">
+                                <input type="text" class="form-control form-control-user" id="exampleSurname"
+                                       placeholder="Surname">
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group row">
+                            <div class="col-md-6 mb-3 mb-md-0">
                             <input type="text" class="form-control form-control-user" id="exampleInputAddress"
                                    placeholder="Address">
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm-6 mb-3 mb-sm-0">
+                            </div>
+                            <div class="col-md-6 mb-3 mb-md-0">
                                 <input type="tel" class="form-control form-control-user" id="examplePhone"
                                        placeholder="Phone">
                             </div>
-                            <div class="col-sm-6">
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-6 mb-3 mb-md-0">
+                                <input type="tel" class="form-control form-control-user" id="exampleSpecialization"
+                                       placeholder="Specialization">
+                            </div>
+                            <div class="col-md-6">
                                 <input type="text" class="form-control form-control-user" id="exampleDNI"
                                        placeholder="DNI">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class="col-sm-6 mb-3 mb-sm-0">
+                            <div class="col-md-6 mb-3 mb-md-0">
                                 <input type="password" class="form-control form-control-user"
                                        id="exampleInputPassword" placeholder="Password">
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-md-6">
                                 <input type="password" class="form-control form-control-user"
                                        id="exampleRepeatPassword" placeholder="Repeat Password">
                             </div>
                         </div>
-                        <a href="login.html" class="btn btn-success btn-user btn-block">
-                            Register Account
-                        </a>
+                        <button type="submit" class="btn btn-success btn-user btn-block">
+                            Create
+                        </button>
                     </form>
                 </div>
             </div>

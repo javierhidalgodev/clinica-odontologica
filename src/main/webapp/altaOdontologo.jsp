@@ -24,7 +24,7 @@
 
                         <!-- Page Heading -->
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                            <h1 class="h3 mb-0 text-gray-800">Vista de altas</h1>
+                            <h1 class="h3 mb-0 text-gray-800">Alta de nuevo profesional</h1>
                         </div>
                         
                         <%@include file="components/odontologistForm.jsp" %>
