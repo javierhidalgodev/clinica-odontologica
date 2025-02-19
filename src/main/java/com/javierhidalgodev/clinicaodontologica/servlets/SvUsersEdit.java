@@ -53,6 +53,7 @@ public class SvUsersEdit extends HttpServlet {
         userToEdit.setRole(role);
         
         controller.editUser(userToEdit);
+        request.removeAttribute("userToEdit");
         
         response.sendRedirect("SvUsers");
         
