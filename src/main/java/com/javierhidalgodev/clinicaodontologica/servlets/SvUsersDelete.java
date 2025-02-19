@@ -1,10 +1,8 @@
 package com.javierhidalgodev.clinicaodontologica.servlets;
 
 import com.javierhidalgodev.clinicaodontologica.logica.Controller;
-import com.javierhidalgodev.clinicaodontologica.logica.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,10 +13,10 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Javi
  */
-@WebServlet(name = "SvUsers", urlPatterns = {"/SvUsers"})
-public class SvUsers extends HttpServlet {
+@WebServlet(name = "SvUsersDelete", urlPatterns = {"/SvUsersDelete"})
+public class SvUsersDelete extends HttpServlet {
 
-    Controller controller = new Controller();
+        Controller controller = new Controller();
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -27,24 +25,20 @@ public class SvUsers extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        List<Usuario> users = controller.getAllUsers();
-        
-        request.getSession().setAttribute("userList", users);
-        response.sendRedirect("vistaUsuarios.jsp");
-        
+
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String username = (String) request.getParameter("username");
-        String password = (String) request.getParameter("password");
-        String role = (String) request.getParameter("role");
+        String idUserToDelete = request.getParameter("id");
         
-        controller.createUser(username, password, role);
-        
+        if(idUserToDelete != null && !idUserToDelete.isEmpty()) {
+            int idUser = Integer.parseInt(idUserToDelete);
+            controller.destroyUser(idUser);
+        }
+                
         response.sendRedirect("SvUsers");
     }
 

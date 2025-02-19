@@ -24,10 +24,10 @@
 
                         <!-- Page Heading -->
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                            <h1 class="h3 mb-0 text-gray-800">Alta de nuevo usuario</h1>
+                            <h1 class="h3 mb-0 text-gray-800">Edición de usuario</h1>
                         </div>
                         
-                        <%@include file="components/userForm.jsp" %>
+                        <%@include file="components/userEditForm.jsp" %>
 
                         <%@include file="components/footer.jsp" %>
 

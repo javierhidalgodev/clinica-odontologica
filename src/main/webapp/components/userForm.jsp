@@ -1,3 +1,4 @@
+<%@page import="com.javierhidalgodev.clinicaodontologica.logica.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <div class="container">

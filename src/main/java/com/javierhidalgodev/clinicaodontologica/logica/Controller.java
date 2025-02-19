@@ -1,6 +1,7 @@
 package com.javierhidalgodev.clinicaodontologica.logica;
 
 import com.javierhidalgodev.clinicaodontologica.persistencia.PersistenceController;
+import java.util.List;
 
 /**
  *
@@ -15,6 +16,22 @@ public class Controller {
         Usuario newUser = new Usuario(username, password, role);
 
         persistenceController.createUser(newUser);
+    }
+
+    public List<Usuario> getAllUsers() {
+        return persistenceController.getAllUsers();
+    }
+
+    public void destroyUser(int idUser) {
+        persistenceController.destroyUser(idUser);
+    }
+
+    public Usuario getUserById(int userId) {
+        return persistenceController.getUserById(userId);
+    }
+
+    public void editUser(Usuario userToEdit) {
+        persistenceController.editUser(userToEdit);
     }
     
 }

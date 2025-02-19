@@ -1,6 +1,10 @@
 package com.javierhidalgodev.clinicaodontologica.persistencia;
 
 import com.javierhidalgodev.clinicaodontologica.logica.Usuario;
+import com.javierhidalgodev.clinicaodontologica.persistencia.exceptions.NonexistentEntityException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -19,6 +23,30 @@ public class PersistenceController {
 
     public void createUser(Usuario newUser) {
         userController.create(newUser);
+    }
+
+    public List<Usuario> getAllUsers() {
+        return userController.findUsuarioEntities();
+    }
+
+    public void destroyUser(int idUser) {
+        try {
+            userController.destroy(idUser);
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(PersistenceController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public Usuario getUserById(int userId) {
+        return userController.findUsuario(userId);
+    }
+
+    public void editUser(Usuario userToEdit) {
+        try {
+            userController.edit(userToEdit);
+        } catch (Exception ex) {
+            Logger.getLogger(PersistenceController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }

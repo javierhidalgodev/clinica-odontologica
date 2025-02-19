@@ -73,8 +73,8 @@
              data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Acciones</h6>
-                <a class="collapse-item" href="#">Ver pacientes</a>
-                <a class="collapse-item" href="altaUsuario.jsp">Nuevo paciente</a>
+                <a class="collapse-item" href="SvUsers">Ver usuarios</a>
+                <a class="collapse-item" href="altaUsuario.jsp">Nuevo usuario</a>
             </div>
         </div>
     </li>
