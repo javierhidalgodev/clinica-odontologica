@@ -33,5 +33,13 @@ public class Controller {
     public void editUser(Usuario userToEdit) {
         persistenceController.editUser(userToEdit);
     }
+
+    public boolean verifyUser(String username, String password) {
+        
+        Usuario user = persistenceController.getUserByLogin(username, password);
+        
+        return user != null;
+        
+    }
     
 }

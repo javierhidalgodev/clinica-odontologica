@@ -48,5 +48,9 @@ public class PersistenceController {
             Logger.getLogger(PersistenceController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    public Usuario getUserByLogin(String username, String password) {
+        return userController.getUserByLogin(username, password);
+    }
     
 }
