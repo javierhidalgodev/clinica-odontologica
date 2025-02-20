@@ -36,7 +36,7 @@
                     <%
                         if (!userList.isEmpty()) {
                             int i = 0;
-                            System.out.println(userList.get(0).getIdUser());
+
                             for (Usuario u : userList) {%>
                     <tr>
                         <td class="w-fit"><%= i + 1%></td>

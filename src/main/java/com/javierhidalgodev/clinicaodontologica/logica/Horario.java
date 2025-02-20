@@ -12,14 +12,14 @@ public class Horario implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idWorkSchedule;
     private String entryTime;
-    private String exit;
+    private String exitTime;
 
     public Horario() {
     }
 
     public Horario(String entry, String exit) {
         this.entryTime = entry;
-        this.exit = exit;
+        this.exitTime = exit;
     }
 
     public int getIdWorkSchedule() {
@@ -39,10 +39,10 @@ public class Horario implements Serializable {
     }
 
     public String getExit() {
-        return exit;
+        return exitTime;
     }
 
     public void setExit(String exit) {
-        this.exit = exit;
+        this.exitTime = exit;
     }
 }

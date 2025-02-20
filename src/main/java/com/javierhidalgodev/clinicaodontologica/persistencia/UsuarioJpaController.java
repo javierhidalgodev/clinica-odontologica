@@ -146,7 +146,7 @@ public class UsuarioJpaController implements Serializable {
         cq.select(root).where(cb.equal(root.get("username"), username), cb.equal(root.get("password"), password));
         
         List<Usuario> users = em.createQuery(cq).getResultList();
-        return users.get(0);
+        return users.isEmpty() ? null : users.get(0);
         
     }
     
