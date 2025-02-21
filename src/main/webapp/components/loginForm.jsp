@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="flex flex-column items-center mt-5">
-    <h1 class="text-white text-center">CLINICA TU MADRE</h1>
+    <div class="w-100" style="height: 50px; background-image: url('./img/logo-vitaldent.png'); background-size: contain; background-position: center; background-repeat: no-repeat"></div>
     <div class="col-12">
 
         <div class="card o-hidden border-0 shadow-lg my-5">
