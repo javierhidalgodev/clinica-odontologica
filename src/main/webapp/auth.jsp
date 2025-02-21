@@ -1,9 +1,10 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.util.List"%>
 <%
     HttpSession mysession = request.getSession(false);
     String user = (String) mysession.getAttribute("usernameSession");
-
-    if (mysession == null || user == null) {
+    
+    // No detecta la sesión como nula... ¿por qué?
+    if (mysession.getAttribute("usernameSession") == null) {
         response.sendRedirect("login.jsp");
     }
 %>

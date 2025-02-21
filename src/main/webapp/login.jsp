@@ -1,5 +1,14 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
+<%
+
+HttpSession mysession = request.getSession(false);
+String usernameSession = (String) mysession.getAttribute("usernameSession");
+
+if(usernameSession != null) response.sendRedirect("index.jsp");
+
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,7 +20,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Login</title>
+    <title>Clínica Odontológica - Login</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
