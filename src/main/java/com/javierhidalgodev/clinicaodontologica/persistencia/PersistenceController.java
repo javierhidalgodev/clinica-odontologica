@@ -1,5 +1,6 @@
 package com.javierhidalgodev.clinicaodontologica.persistencia;
 
+import com.javierhidalgodev.clinicaodontologica.logica.Odontologo;
 import com.javierhidalgodev.clinicaodontologica.logica.Usuario;
 import com.javierhidalgodev.clinicaodontologica.persistencia.exceptions.NonexistentEntityException;
 import java.util.List;
@@ -51,6 +52,10 @@ public class PersistenceController {
 
     public Usuario getUserByLogin(String username, String password) {
         return userController.getUserByLogin(username, password);
+    }
+
+    public void createOdontologist(Odontologo odontologist) {
+        odontologistController.create(odontologist);
     }
     
 }
