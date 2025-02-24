@@ -21,22 +21,30 @@
                         </div>
                         <div class="form-group row">
                             <div class="col-md-6 mb-3 mb-md-0">
-                            <input type="text" class="form-control form-control-user" id="exampleInputAddress" name="address" placeholder="Address">
+                                <input type="text" class="form-control form-control-user" id="exampleInputAddress" name="address" placeholder="Address">
                             </div>
                             <div class="col-md-6 mb-3 mb-md-0">
                                 <input type="tel" class="form-control form-control-user" id="examplePhone" name="phone" placeholder="Phone">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class="col-md-6 mb-3 mb-md-0">
-                                <input type="tel" class="form-control form-control-user" id="exampleSpecialization" name="specialization" placeholder="Specialization">
+                            <div class="col-md-6">
+                                <input type="date" class="form-control form-control-user" id="exampleBirthday" name="birthday">
                             </div>
                             <div class="col-md-6">
                                 <input type="text" class="form-control form-control-user" id="exampleDNI" name="dni" placeholder="DNI">
                             </div>
                         </div>
-                        <div class="form-group">
-                            <input type="date" class="form-control form-control-user" id="exampleBirthday" name="birthday">
+                        <div class="form-group row">
+                            <div class="col-md-6 mb-3 mb-md-0">
+                                <input type="text" class="form-control form-control-user" id="exampleSpecialization" name="specialization" placeholder="Specialization">
+                            </div>
+                            <div class="col-md-6">
+                                <select class="form-control form-control-user" style="padding: 1.5rem 1.5rem" id="exampleWorkSchedule" name="workSchedule">
+                                    <option>Mañana</option>
+                                    <option>Tarde</option>
+                                </select>
+                            </div>
                         </div>
                         <button type="submit" class="btn btn-success btn-user btn-block">
                             Create
