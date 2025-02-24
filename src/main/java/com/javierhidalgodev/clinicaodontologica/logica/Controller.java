@@ -4,6 +4,7 @@ import com.javierhidalgodev.clinicaodontologica.persistencia.PersistenceControll
 import java.text.DateFormat;
 import java.time.LocalDate;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -45,13 +46,31 @@ public class Controller {
         
     }
 
-    public void createOdontologist(String firstName, String surname, String address, String phone, String specialization, String dni, String birthday) {
+    public void createOdontologist(String firstName, String surname, String address, String phone, String birthday, String dni, String specialization, String workSchedule) {
         
         LocalDate localDate = LocalDate.parse(birthday);
         Date birth = Date.valueOf(localDate);
+        List<Turno> workShiftList = new ArrayList<>();
+        Horario wS = null;
         
-        Odontologo odontologist = new Odontologo(specialization, null, null, null, surname, surname, phone, address, birth, dni);
+        List<Horario> workScheduleList = persistenceController.getWorkScheduleList();
+        for(Horario h : workScheduleList) {
+            System.out.println(h.getName());
+            if(h.getName().equals(workSchedule)) {
+                wS = h;
+            }
+        }
+        
+        Odontologo odontologist = new Odontologo(firstName, surname, address, phone, birth, dni, specialization, wS == null ? null : wS, workShiftList, null);
         
         persistenceController.createOdontologist(odontologist);
+    }
+
+    public List<Horario> getWorkScheduleList() {
+        return persistenceController.getWorkScheduleList();
+    }
+
+    public List<Odontologo> getAllOdontologists() {
+        return persistenceController.getAllOdontologists();
     }
 }

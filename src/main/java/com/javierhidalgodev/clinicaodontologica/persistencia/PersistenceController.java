@@ -1,5 +1,6 @@
 package com.javierhidalgodev.clinicaodontologica.persistencia;
 
+import com.javierhidalgodev.clinicaodontologica.logica.Horario;
 import com.javierhidalgodev.clinicaodontologica.logica.Odontologo;
 import com.javierhidalgodev.clinicaodontologica.logica.Usuario;
 import com.javierhidalgodev.clinicaodontologica.persistencia.exceptions.NonexistentEntityException;
@@ -56,6 +57,14 @@ public class PersistenceController {
 
     public void createOdontologist(Odontologo odontologist) {
         odontologistController.create(odontologist);
+    }
+
+    public List<Horario> getWorkScheduleList() {
+        return workScheduleController.findHorarioEntities();
+    }
+
+    public List<Odontologo> getAllOdontologists() {
+        return odontologistController.findOdontologoEntities();
     }
     
 }

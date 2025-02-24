@@ -1,7 +1,7 @@
 package com.javierhidalgodev.clinicaodontologica.logica;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -27,7 +27,7 @@ public class Odontologo extends Persona implements Serializable {
     public Odontologo() {
     }
 
-    public Odontologo(/*int idOdontologist,*/ String specialization, Horario workSchedule, List<Turno> workShift, Usuario user, String name, String surname, String phone, String address, Date birthdate, String dni) {
+    public Odontologo(String name, String surname, String address, String phone, Date birthdate, String dni, String specialization, Horario workSchedule, List<Turno> workShift, Usuario user) {
         super(name, surname, phone, address, birthdate, dni);
 //        this.idOdontologist = idOdontologist;
         this.specialization = specialization;

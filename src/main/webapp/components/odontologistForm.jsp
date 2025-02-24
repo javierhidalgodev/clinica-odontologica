@@ -1,4 +1,10 @@
+<%@page import="com.javierhidalgodev.clinicaodontologica.logica.Horario"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%
+    List<Horario> workScheduleList = (List<Horario>) session.getAttribute("workScheduleList");
+%>
 
 <div class="container">
 
@@ -40,9 +46,15 @@
                                 <input type="text" class="form-control form-control-user" id="exampleSpecialization" name="specialization" placeholder="Specialization">
                             </div>
                             <div class="col-md-6">
-                                <select class="form-control form-control-user" style="padding: 1.5rem 1.5rem" id="exampleWorkSchedule" name="workSchedule">
-                                    <option>Mañana</option>
-                                    <option>Tarde</option>
+                                <select class="form-control form-control-user" id="exampleWorkSchedule" name="workSchedule">
+                                    <option disabled="" selected="true" value="">Select one</option>
+                                    <%
+                                        for(Horario wS : workScheduleList) {
+                                    %> <option value="<%= wS.getName() %>"><%= wS.getEntryTime() %> -  <%= wS.getExitTime() %></option> <%
+                                        }
+                                    %>
+<!--                                    <option value="morning">Mañana</option>
+                                    <option value="evening">Tarde</option>-->
                                 </select>
                             </div>
                         </div>

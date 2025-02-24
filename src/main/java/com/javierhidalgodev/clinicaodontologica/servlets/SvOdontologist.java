@@ -1,9 +1,9 @@
 package com.javierhidalgodev.clinicaodontologica.servlets;
 
 import com.javierhidalgodev.clinicaodontologica.logica.Controller;
-import com.mysql.cj.Session;
+import com.javierhidalgodev.clinicaodontologica.logica.Odontologo;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,12 +20,17 @@ public class SvOdontologist extends HttpServlet {
     Controller controller = new Controller();
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException {        
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        List<Odontologo> odontologistsList = controller.getAllOdontologists();
+        
+        request.getSession().setAttribute("odontologistsList", odontologistsList);
+
+        response.sendRedirect("vistaOdontologos.jsp");
     }
 
     @Override
@@ -39,10 +44,11 @@ public class SvOdontologist extends HttpServlet {
         String specialization = request.getParameter("specialization");
         String dni = request.getParameter("dni");
         String birthday = request.getParameter("birthday");
+        String workShedule = request.getParameter("workSchedule");
         
-        System.out.println(birthday);
+        controller.createOdontologist(firstName, surname, address, phone, birthday, dni, specialization, workShedule);
         
-        controller.createOdontologist(firstName, surname, address, phone, specialization, dni, birthday);
+        response.sendRedirect("SvOdontologists");
         
     }
 

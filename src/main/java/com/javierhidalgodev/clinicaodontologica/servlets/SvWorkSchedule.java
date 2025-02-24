@@ -1,21 +1,23 @@
 package com.javierhidalgodev.clinicaodontologica.servlets;
 
 import com.javierhidalgodev.clinicaodontologica.logica.Controller;
-import com.javierhidalgodev.clinicaodontologica.logica.Usuario;
+import com.javierhidalgodev.clinicaodontologica.logica.Horario;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Javi
  */
-@WebServlet(name = "SvUsers", urlPatterns = {"/SvUsers"})
-public class SvUsers extends HttpServlet {
+@WebServlet(name = "SvWorkSchedule", urlPatterns = {"/SvWorkSchedule"})
+public class SvWorkSchedule extends HttpServlet {
 
     Controller controller = new Controller();
     
@@ -27,24 +29,16 @@ public class SvUsers extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        List<Usuario> users = controller.getAllUsers();
+        List<Horario> workScheduleList = controller.getWorkScheduleList();
+        HttpSession mysession = request.getSession();
+        mysession.setAttribute("workScheduleList", workScheduleList);
         
-        request.getSession().setAttribute("userList", users);
-        response.sendRedirect("vistaUsuarios.jsp");
-        
+        response.sendRedirect("altaOdontologo.jsp");
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        String username = (String) request.getParameter("username");
-        String password = (String) request.getParameter("password");
-        String role = (String) request.getParameter("role");
-        
-        controller.createUser(username, password, role);
-        
-        response.sendRedirect("SvUsers");
     }
 
     @Override
