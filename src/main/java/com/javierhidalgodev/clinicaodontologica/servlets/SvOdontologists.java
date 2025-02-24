@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Javi
  */
-@WebServlet(name = "SvOdontologist", urlPatterns = {"/SvOdontologist"})
-public class SvOdontologist extends HttpServlet {
+@WebServlet(name = "SvOdontologists", urlPatterns = {"/SvOdontologists"})
+public class SvOdontologists extends HttpServlet {
 
     Controller controller = new Controller();
     

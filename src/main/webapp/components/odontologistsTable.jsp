@@ -1,5 +1,4 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.text.DateFormat"%>
 <%@page import="com.javierhidalgodev.clinicaodontologica.logica.Odontologo"%>
 <%@page import="java.util.List"%>
@@ -28,6 +27,8 @@
                         <th>DNI</th>
                         <th>Specialization</th>
                         <th>Work Schedule</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
                     </tr>
                 </thead>
                 <tfoot>
@@ -40,6 +41,8 @@
                         <th>DNI</th>
                         <th>Specialization</th>
                         <th>Work Schedule</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
                     </tr>
                 </tfoot>
                 <tbody>
@@ -49,21 +52,27 @@
 
                                 for (Odontologo o : odontologistsList) {%>
                     <tr>
-                        <td class="w-fit"><%= i + 1%></td>
-                        <td class="w-50"><%= o.getName() + " " + o.getSurname() %></td>
-                        <td class="w-50"><%= o.getAddress()%></td>
-                        <td class="w-50"><%= o.getPhone()%></td>
-                        <td class="w-50"><fmt:formatDate value="${o.getBirthday()}" pattern="dd-MM-yyyy"/></td>
-                        <td class="w-50"><%= o.getDni() %></td>
-                        <td class="w-50"><%= o.getSpecialization() %></td>
-                        <td class="w-50"><%= o.getWorkSchedule().getEntryTime() + " - " + o.getWorkSchedule().getExitTime() %></td>
-                        <td class="w-fit">
+                        <td><%= i + 1%></td>
+                        <td><%= o.getName() + " " + o.getSurname() %></td>
+                        <td><%= o.getAddress()%></td>
+                        <td><%= o.getPhone()%></td>
+                        <td>
+                            <%
+                                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+                                String formatDate = simpleDateFormat.format(o.getBirthdate());
+                            %>
+                            <%= formatDate %>
+                        </td>
+                        <td><%= o.getDni() %></td>
+                        <td><%= o.getSpecialization() %></td>
+                        <td><%= o.getWorkSchedule().getEntryTime() + " - " + o.getWorkSchedule().getExitTime() %></td>
+                        <td>
                             <form action="SvUsersEdit" method="GET">
                                 <input type="hidden" name="id" value="<%= o.getId()%>" />
                                 <button type="submit" href="SvUsersEdit" class="btn btn-primary">Editar</button>
                             </form>
                         </td>
-                        <td class="w-fit">
+                        <td>
                             <form action="SvUsersDelete" method="POST">
                                 <input type="hidden" name="id" value="<%= o.getId()%>" />
                                 <button type="submit" class="btn btn-danger">Eliminar</button>
@@ -76,7 +85,7 @@
                     } else {
                     %>
                     <tr class="bg-gray-200 text-center font-weight-bold">
-                        <td colspan="5">No data available</td>
+                        <td colspan="8">No data available</td>
                     </tr>
                     <%
                         }
