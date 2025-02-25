@@ -35,7 +35,7 @@
                                 <input type="date" class="form-control form-control-user" id="exampleBirthday" name="patientBirthdate" onchange="checkDate()">
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control form-control-user" id="exampleDNI" name="dni" placeholder="patientDNI">
+                                <input type="text" class="form-control form-control-user" id="exampleDNI" name="dni" placeholder="Patient DNI">
                             </div>
                         </div>
                         <div class="form-group row">

@@ -2,6 +2,7 @@ package com.javierhidalgodev.clinicaodontologica.persistencia;
 
 import com.javierhidalgodev.clinicaodontologica.logica.Horario;
 import com.javierhidalgodev.clinicaodontologica.logica.Odontologo;
+import com.javierhidalgodev.clinicaodontologica.logica.Paciente;
 import com.javierhidalgodev.clinicaodontologica.logica.Responsable;
 import com.javierhidalgodev.clinicaodontologica.logica.Usuario;
 import com.javierhidalgodev.clinicaodontologica.persistencia.exceptions.NonexistentEntityException;
@@ -71,6 +72,10 @@ public class PersistenceController {
 
     public Responsable createGuardian(Responsable guardian) {
         return guardianController.create(guardian);
+    }
+
+    public void createPatient(Paciente patient) {
+        patientController.create(patient);
     }
     
 }

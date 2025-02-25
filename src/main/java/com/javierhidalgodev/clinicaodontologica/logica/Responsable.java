@@ -47,4 +47,9 @@ public class Responsable extends Persona {
 //    public void setPatient(Paciente patient) {
 //        this.patient = patient;
 //    }
+
+    @Override
+    public String toString() {
+        return "Responsable{" + "relationship=" + relationship + '}';
+    }
 }

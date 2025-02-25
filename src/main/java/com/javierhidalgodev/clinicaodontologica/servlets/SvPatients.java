@@ -3,7 +3,8 @@ package com.javierhidalgodev.clinicaodontologica.servlets;
 import com.javierhidalgodev.clinicaodontologica.logica.Controller;
 import com.javierhidalgodev.clinicaodontologica.logica.Responsable;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.time.LocalDate;
+import java.time.Period;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -42,9 +43,12 @@ public class SvPatients extends HttpServlet {
         String prepaidHealth = request.getParameter("prepaidHealth");
         String bloodType = request.getParameter("bloodType");
 
-        String guardianFirstName = request.getParameter("guardianFirstName");
-
-        if (!guardianFirstName.trim().isEmpty()) {
+        LocalDate today = LocalDate.now();
+        LocalDate birth = LocalDate.parse(patientBirthdate);
+        Period period = Period.between(birth, today);
+        
+        if (period.getYears() < 18) {
+            String guardianFirstName = request.getParameter("guardianFirstName");
             String guardianSurname = request.getParameter("guardianSurname");
             String guardianAddress = request.getParameter("guardianAddress");
             String guardianPhone = request.getParameter("guardianPhone");
@@ -53,10 +57,10 @@ public class SvPatients extends HttpServlet {
             String relationship = request.getParameter("relationship");
 
             Responsable guardian = controller.createGuardian(guardianFirstName, guardianSurname, guardianAddress, guardianPhone, guardianBirthdate, guardianDNI, relationship);
-            
-            controller.createPatient(patientFirstName, patientSurname, patientAddress, patientPhone, patientBirthdate, patientDNI, prepaidHealth, bloodType, guardian);
+
+            controller.createPatient(patientFirstName, patientSurname, patientAddress, patientPhone, birth, patientDNI, prepaidHealth, bloodType, guardian);
         } else {
-            controller.createPatient(patientFirstName, patientSurname, patientAddress, patientPhone, patientBirthdate, patientDNI, prepaidHealth, bloodType, null);
+            controller.createPatient(patientFirstName, patientSurname, patientAddress, patientPhone, birth, patientDNI, prepaidHealth, bloodType, null);
         }
 
     }

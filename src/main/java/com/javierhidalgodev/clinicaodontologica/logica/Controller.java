@@ -85,14 +85,14 @@ public class Controller {
 
     }
 
-    public void createPatient(String patientFirstName, String patientSurname, String patientAddress, String patientPhone, String patientBirthdate, String patientDNI, String prepaidHealth, String bloodType, Responsable guardian) {
+    public void createPatient(String patientFirstName, String patientSurname, String patientAddress, String patientPhone, LocalDate patientBirthdate, String patientDNI, String prepaidHealth, String bloodType, Responsable guardian) {
 
         boolean pPH = Boolean.parseBoolean(prepaidHealth);
         List<Turno> appointments = new ArrayList<>();
-        LocalDate localDate = LocalDate.parse(patientBirthdate);
-        Date birth = Date.valueOf(localDate);
+        Date birth = Date.valueOf(patientBirthdate);
         
         Paciente patient = new Paciente(pPH, bloodType, guardian, appointments, bloodType, patientSurname, bloodType, patientAddress, birth, patientDNI);
-
+        
+        persistenceController.createPatient(patient);
     }
 }

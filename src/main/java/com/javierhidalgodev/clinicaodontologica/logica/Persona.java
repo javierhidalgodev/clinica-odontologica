@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -17,7 +18,7 @@ import javax.persistence.TemporalType;
  * La estrategia de herencia TABLE_PER_CLASS indica a la base de datos que debe haber una clase tabla por cada una de las clases que heredan de esta clase.
  * Además se añade el ID en la clase madre, para que todas las hijas tengan la misma estrategia de generación y no tenga que duplicarse código.
  */
-@Entity
+@MappedSuperclass
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Persona implements Serializable {
     
