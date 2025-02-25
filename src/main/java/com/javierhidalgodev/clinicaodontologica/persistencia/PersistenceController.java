@@ -2,8 +2,10 @@ package com.javierhidalgodev.clinicaodontologica.persistencia;
 
 import com.javierhidalgodev.clinicaodontologica.logica.Horario;
 import com.javierhidalgodev.clinicaodontologica.logica.Odontologo;
+import com.javierhidalgodev.clinicaodontologica.logica.Responsable;
 import com.javierhidalgodev.clinicaodontologica.logica.Usuario;
 import com.javierhidalgodev.clinicaodontologica.persistencia.exceptions.NonexistentEntityException;
+import java.sql.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -65,6 +67,10 @@ public class PersistenceController {
 
     public List<Odontologo> getAllOdontologists() {
         return odontologistController.findOdontologoEntities();
+    }
+
+    public Responsable createGuardian(Responsable guardian) {
+        return guardianController.create(guardian);
     }
     
 }

@@ -40,7 +40,7 @@
         <div id="collapseOdontologist" class="collapse" aria-labelledby="headingOdontologist" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Acciones</h6>
-                <a class="collapse-item" href="SvOdontologist">Ver profesionales</a>
+                <a class="collapse-item" href="SvOdontologists">Ver profesionales</a>
                 <a class="collapse-item" href="SvWorkSchedule">Nuevo profesional</a>
             </div>
         </div>
@@ -57,8 +57,8 @@
              data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Acciones</h6>
-                <a class="collapse-item" href="#">Ver pacientes</a>
-                <a class="collapse-item" href="#">Nuevo paciente</a>
+                <a class="collapse-item" href="SvPatients">Ver pacientes</a>
+                <a class="collapse-item" href="altaPaciente.jsp">Nuevo paciente</a>
             </div>
         </div>
     </li>

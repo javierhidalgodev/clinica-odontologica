@@ -31,13 +31,16 @@ public class ResponsableJpaController implements Serializable {
         emf = Persistence.createEntityManagerFactory("clinicaJPU");
     }
     
-    public void create(Responsable responsable) {
+    public Responsable create(Responsable responsable) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
             em.persist(responsable);
+            em.flush();
+            em.refresh(responsable);
             em.getTransaction().commit();
+            return responsable;
         } finally {
             if (em != null) {
                 em.close();

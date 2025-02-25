@@ -1,4 +1,4 @@
-package com.javierhidalgodev.clinicaodontologica.logica;
+    package com.javierhidalgodev.clinicaodontologica.logica;
 
 import java.util.Date;
 import javax.persistence.Entity;
