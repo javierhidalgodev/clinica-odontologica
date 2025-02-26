@@ -3,6 +3,7 @@ package com.javierhidalgodev.clinicaodontologica.servlets;
 import com.javierhidalgodev.clinicaodontologica.logica.Controller;
 import com.javierhidalgodev.clinicaodontologica.logica.Horario;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,7 +19,7 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "SvWorkSchedule", urlPatterns = {"/SvWorkSchedule"})
 public class SvWorkSchedule extends HttpServlet {
 
-    Controller controller = Controller.getInstance();
+    Controller controller = new Controller();
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -28,25 +29,16 @@ public class SvWorkSchedule extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        List<Horario> workSchedulesList = controller.getWorkScheduleList();
+        List<Horario> workScheduleList = controller.getWorkScheduleList();
+        HttpSession mysession = request.getSession();
+        mysession.setAttribute("workScheduleList", workScheduleList);
         
-        HttpSession mySession = request.getSession();
-        mySession.setAttribute("workSchedulesList", workSchedulesList);
-        
-        response.sendRedirect("vistaHorarios.jsp");
+        response.sendRedirect("altaOdontologo.jsp");
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        String wsName = request.getParameter("WSName");
-        String entryTime = request.getParameter("entryTime");
-        String exitTime = request.getParameter("exitTime");
-        
-        controller.createWorkSchedule(wsName, entryTime, exitTime);
-        
-        response.sendRedirect("SvWorkSchedule");
     }
 
     @Override
