@@ -41,7 +41,7 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Acciones</h6>
                 <a class="collapse-item" href="SvOdontologists">Ver profesionales</a>
-                <a class="collapse-item" href="SvWorkSchedule">Nuevo profesional</a>
+                <a class="collapse-item" href="SvWSToOdonto">Nuevo profesional</a>
             </div>
         </div>
     </li>
@@ -67,7 +67,7 @@
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUsers"
            aria-expanded="true" aria-controls="collapseUsers">
-            <i class="fas fa-solid fa-hospital-user"></i>
+            <i class="fas fa-solid fa-users"></i>
             <span>Usuarios</span>
         </a>
         <div id="collapseUsers" class="collapse" aria-labelledby="headingUsers"
@@ -79,10 +79,26 @@
             </div>
         </div>
     </li>
+
     <!-- Divider -->
-    <!--            <hr class="sidebar-divider">
-    
-                 Heading 
+    <hr class="sidebar-divider">
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseWorkSchedule"
+           aria-expanded="true" aria-controls="collapseWorkSchedule">
+            <i class="fas fa-solid fa-clock"></i>
+            <span>Horarios de trabajo</span>
+        </a>
+        <div id="collapseWorkSchedule" class="collapse" aria-labelledby="headingWorkSchedule"
+             data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Acciones</h6>
+                <a class="collapse-item" href="SvWorkSchedule">Ver horarios</a>
+                <a class="collapse-item" href="altaHorario.jsp">Nuevo horario</a>
+            </div>
+        </div>
+    </li>
+    <!--             Heading 
                 <div class="sidebar-heading">
                     Addons
                 </div>

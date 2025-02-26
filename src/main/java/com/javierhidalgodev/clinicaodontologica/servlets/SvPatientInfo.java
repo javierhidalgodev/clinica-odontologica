@@ -1,6 +1,7 @@
 package com.javierhidalgodev.clinicaodontologica.servlets;
 
 import com.javierhidalgodev.clinicaodontologica.logica.Controller;
+import com.javierhidalgodev.clinicaodontologica.logica.Paciente;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -13,10 +14,10 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Javi
  */
-@WebServlet(name = "SvUsersDelete", urlPatterns = {"/SvUsersDelete"})
-public class SvUsersDelete extends HttpServlet {
+@WebServlet(name = "SvPatientInfo", urlPatterns = {"/SvPatientInfo"})
+public class SvPatientInfo extends HttpServlet {
 
-        Controller controller = Controller.getInstance();
+    Controller controller = Controller.getInstance();
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -25,21 +26,24 @@ public class SvUsersDelete extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
+        String id = request.getParameter("id");
+        
+        if(id != null) {
+            int patientID = Integer.parseInt(id);
+            
+            Paciente patient = controller.getPatientById(patientID);
+            
+            request.setAttribute("patientDetails", patient);
+            
+            response.sendRedirect("vistaPaciente.jsp");
+        }
+        
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        String idUserToDelete = request.getParameter("id");
-        
-        if(idUserToDelete != null && !idUserToDelete.isEmpty()) {
-            int idUser = Integer.parseInt(idUserToDelete);
-            controller.destroyUser(idUser);
-        }
-                
-        response.sendRedirect("SvUsers");
     }
 
     @Override

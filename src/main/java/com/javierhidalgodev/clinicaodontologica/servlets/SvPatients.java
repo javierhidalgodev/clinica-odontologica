@@ -1,15 +1,18 @@
 package com.javierhidalgodev.clinicaodontologica.servlets;
 
 import com.javierhidalgodev.clinicaodontologica.logica.Controller;
+import com.javierhidalgodev.clinicaodontologica.logica.Paciente;
 import com.javierhidalgodev.clinicaodontologica.logica.Responsable;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -18,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "SvPatients", urlPatterns = {"/SvPatients"})
 public class SvPatients extends HttpServlet {
 
-    Controller controller = new Controller();
+    Controller controller = Controller.getInstance();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -28,6 +31,12 @@ public class SvPatients extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        List<Paciente> patientsList = controller.getAllPatients();
+        HttpSession mySession = request.getSession();
+        mySession.setAttribute("patientsList", patientsList);
+        response.sendRedirect("vistaPacientes.jsp");
+        
     }
 
     @Override
@@ -62,7 +71,8 @@ public class SvPatients extends HttpServlet {
         } else {
             controller.createPatient(patientFirstName, patientSurname, patientAddress, patientPhone, birth, patientDNI, prepaidHealth, bloodType, null);
         }
-
+        
+        response.sendRedirect("SvPatients");
     }
 
     /**

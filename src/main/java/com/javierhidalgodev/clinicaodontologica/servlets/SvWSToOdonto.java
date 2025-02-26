@@ -3,7 +3,6 @@ package com.javierhidalgodev.clinicaodontologica.servlets;
 import com.javierhidalgodev.clinicaodontologica.logica.Controller;
 import com.javierhidalgodev.clinicaodontologica.logica.Horario;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,10 +15,10 @@ import javax.servlet.http.HttpSession;
  *
  * @author Javi
  */
-@WebServlet(name = "SvWorkSchedule", urlPatterns = {"/SvWorkSchedule"})
-public class SvWorkSchedule extends HttpServlet {
+@WebServlet(name = "SvWSToOdonto", urlPatterns = {"/SvWSToOdonto"})
+public class SvWSToOdonto extends HttpServlet {
 
-    Controller controller = new Controller();
+    Controller controller = Controller.getInstance();
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

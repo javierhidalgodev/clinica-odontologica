@@ -24,10 +24,10 @@
 
                         <!-- Page Heading -->
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                            <h1 class="h3 mb-0 text-gray-800">Vista de ondontólogos</h1>
+                            <h1 class="h3 mb-0 text-gray-800">Vista de pacientes</h1>
                         </div>
                         
-                        <%@include file="components/odontologistsTable.jsp" %>
+                        <%@include file="components/patientsTable.jsp" %>
 
                         <%@include file="components/footer.jsp" %>
 

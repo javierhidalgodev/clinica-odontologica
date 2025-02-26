@@ -3,6 +3,7 @@ package com.javierhidalgodev.clinicaodontologica.logica;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -20,7 +21,7 @@ public class Paciente extends Persona implements Serializable {
     private String bloodType;
     @OneToOne
     private Responsable guardian;
-    @OneToMany(mappedBy = "patient")
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
     private List<Turno> appointments;
 
     public Paciente() {

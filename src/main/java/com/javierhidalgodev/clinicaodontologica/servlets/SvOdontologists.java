@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "SvOdontologists", urlPatterns = {"/SvOdontologists"})
 public class SvOdontologists extends HttpServlet {
 
-    Controller controller = new Controller();
+    Controller controller = Controller.getInstance();
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {        

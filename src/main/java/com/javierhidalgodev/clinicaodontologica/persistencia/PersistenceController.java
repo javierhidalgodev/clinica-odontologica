@@ -77,5 +77,17 @@ public class PersistenceController {
     public void createPatient(Paciente patient) {
         patientController.create(patient);
     }
+
+    public List<Paciente> getAllPatients() {
+        return patientController.findPacienteEntities();
+    }
+
+    public void createWorkSchedule(Horario workSchedule) {
+        workScheduleController.create(workSchedule);
+    }
+
+    public Paciente getPatientById(int patientID) {
+        return patientController.findPaciente(patientID);
+    }
     
 }

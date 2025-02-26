@@ -50,7 +50,7 @@
                                     <option disabled="" selected="true" value="">Select one</option>
                                     <%
                                         for(Horario wS : workScheduleList) {
-                                    %> <option value="<%= wS.getName() %>"><%= wS.getEntryTime() %> -  <%= wS.getExitTime() %></option> <%
+                                    %> <option value="<%= wS.getName()%>"><%= wS.getName() + " / " + wS.getEntryTime() %> -  <%= wS.getExitTime() %></option> <%
                                         }
                                     %>
 <!--                                    <option value="morning">Mañana</option>

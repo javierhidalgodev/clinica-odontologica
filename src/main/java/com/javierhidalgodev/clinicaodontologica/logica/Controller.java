@@ -1,7 +1,6 @@
 package com.javierhidalgodev.clinicaodontologica.logica;
 
 import com.javierhidalgodev.clinicaodontologica.persistencia.PersistenceController;
-import java.text.DateFormat;
 import java.time.LocalDate;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -12,8 +11,19 @@ import java.util.List;
  * @author Javi
  */
 public class Controller {
-
+    public static Controller instance;
     PersistenceController persistenceController = new PersistenceController();
+    
+    private Controller() {
+    };
+    
+    public static Controller getInstance() {
+        if(instance == null) {
+            instance = new Controller();
+        }
+        
+        return instance;
+    }
 
     public void createUser(String username, String password, String role) {
 
@@ -91,8 +101,22 @@ public class Controller {
         List<Turno> appointments = new ArrayList<>();
         Date birth = Date.valueOf(patientBirthdate);
         
-        Paciente patient = new Paciente(pPH, bloodType, guardian, appointments, bloodType, patientSurname, bloodType, patientAddress, birth, patientDNI);
+        Paciente patient = new Paciente(pPH, bloodType, guardian, appointments, patientFirstName, patientSurname, patientPhone, patientAddress, birth, patientDNI);
         
         persistenceController.createPatient(patient);
+    }
+
+    public List<Paciente> getAllPatients() {
+        return persistenceController.getAllPatients();
+    }
+
+    public void createWorkSchedule(String wsName, String entryTime, String exitTime) {
+        Horario workSchedule = new Horario(wsName, entryTime, exitTime);
+        
+        persistenceController.createWorkSchedule(workSchedule);
+    }
+
+    public Paciente getPatientById(int patientID) {
+        return persistenceController.getPatientById(patientID);
     }
 }

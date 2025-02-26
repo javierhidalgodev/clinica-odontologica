@@ -69,7 +69,7 @@
                         <td>
                             <form action="SvUsersEdit" method="GET">
                                 <input type="hidden" name="id" value="<%= o.getId()%>" />
-                                <button type="submit" href="SvUsersEdit" class="btn btn-primary">Editar</button>
+                                <button type="submit" class="btn btn-primary">Editar</button>
                             </form>
                         </td>
                         <td>

@@ -1,3 +1,4 @@
+<%@page import="com.javierhidalgodev.clinicaodontologica.logica.Paciente"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.text.DateFormat"%>
 <%@page import="com.javierhidalgodev.clinicaodontologica.logica.Odontologo"%>
@@ -7,7 +8,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
-    List<Odontologo> odontologistsList = (List<Odontologo>) session.getAttribute("odontologistsList");
+    List<Paciente> patientsList = (List<Paciente>) session.getAttribute("patientsList");
 %>
 
 <div class="card shadow mb-4">
@@ -25,10 +26,7 @@
                         <th>Phone</th>
                         <th>Date of birth</th>
                         <th>DNI</th>
-                        <th>Specialization</th>
-                        <th>Work Schedule</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
+                        <th>Details</th>
                     </tr>
                 </thead>
                 <tfoot>
@@ -39,45 +37,34 @@
                         <th>Phone</th>
                         <th>Date of birth</th>
                         <th>DNI</th>
-                        <th>Specialization</th>
-                        <th>Work Schedule</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
+                        <th>Details</th>
                     </tr>
                 </tfoot>
                 <tbody>
                     <%
-                        if (!odontologistsList.isEmpty()) {
+                        if (!patientsList.isEmpty()) {
                             int i = 0;
 
-                                for (Odontologo o : odontologistsList) {%>
+                                for (Paciente p : patientsList) {%>
                     <tr>
                         <td><%= i + 1%></td>
-                        <td><%= o.getName() + " " + o.getSurname() %></td>
-                        <td><%= o.getAddress()%></td>
-                        <td><%= o.getPhone()%></td>
+                        <td><%= p.getName() + " " + p.getSurname() %></td>
+                        <td><%= p.getAddress()%></td>
+                        <td><%= p.getPhone()%></td>
                         <td>
                             <%
                                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
-                                String formatDate = simpleDateFormat.format(o.getBirthdate());
+                                String formatDate = simpleDateFormat.format(p.getBirthdate());
                             %>
                             <%= formatDate %>
                         </td>
-                        <td><%= o.getDni() %></td>
-                        <td><%= o.getSpecialization() %></td>
-                        <td><%= o.getWorkSchedule() != null ? o.getWorkSchedule().getExitTime() + " - " + o.getWorkSchedule().getExitTime() : "Not assigned" %></td>
+                        <td><%= p.getDni() %></td>
                         <td>
-                            <form action="SvUsersEdit" method="GET">
-                                <input type="hidden" name="id" value="<%= o.getId()%>" />
-                                <button type="submit" href="SvUsersEdit" class="btn btn-primary">Editar</button>
+                            <form action="SvPatientInfo" method="GET">
+                                <input type="hidden" name="id" value="<%= p.getId()%>" />
+                                <button type="submit" class="btn btn-primary">Details</button>
                             </form>
-                        </td>
-                        <td>
-                            <form action="SvUsersDelete" method="POST">
-                                <input type="hidden" name="id" value="<%= o.getId()%>" />
-                                <button type="submit" class="btn btn-danger">Eliminar</button>
-                            </form>
-                        </td>
+                        </td>                        
                     </tr> <%
 
                             i++;
@@ -85,7 +72,7 @@
                     } else {
                     %>
                     <tr class="bg-gray-200 text-center font-weight-bold">
-                        <td colspan="8">No data available</td>
+                        <td colspan="7">No data available</td>
                     </tr>
                     <%
                         }
