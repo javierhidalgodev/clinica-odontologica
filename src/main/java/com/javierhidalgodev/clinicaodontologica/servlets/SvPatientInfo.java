@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -18,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 public class SvPatientInfo extends HttpServlet {
 
     Controller controller = Controller.getInstance();
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     }
@@ -26,19 +27,20 @@ public class SvPatientInfo extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         String id = request.getParameter("id");
-        
-        if(id != null) {
+
+        if (id != null) {
             int patientID = Integer.parseInt(id);
-            
+
             Paciente patient = controller.getPatientById(patientID);
             
-            request.setAttribute("patientDetails", patient);
-            
+            HttpSession mySession = request.getSession();
+            mySession.setAttribute("patientDetails", patient);
+            System.out.println(patient.getPrepaidHealth());
             response.sendRedirect("vistaPaciente.jsp");
         }
-        
+
     }
 
     @Override

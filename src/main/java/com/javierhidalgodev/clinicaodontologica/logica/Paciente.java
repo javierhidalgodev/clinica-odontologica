@@ -45,7 +45,7 @@ public class Paciente extends Persona implements Serializable {
 //        this.idPatient = idPatient;
 //    }
 
-    public boolean isPrepaidHealth() {
+    public boolean getPrepaidHealth() {
         return prepaidHealth;
     }
 

@@ -2,8 +2,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <% 
-    Paciente patient = (Paciente) request.getAttribute("patientDetails");
-    System.out.println(patient.getName());
+    Paciente patient = (Paciente) session.getAttribute("patientDetails");
 %>
 
 <!DOCTYPE html>
@@ -34,8 +33,19 @@
                             <h1 class="h3 mb-0 text-gray-800">Detalles del paciente</h1>
                         </div>
                         
-                        <p><%= patient.getBloodType() %></p>
-
+                        <p>Name: <%= patient.getName() %></p>
+                        <p>Surname: <%= patient.getSurname()%></p>
+                        <p>Address: <%= patient.getAddress()%></p>
+                        <p>Phone: <%= patient.getPhone()%></p>
+                        <p>DNI: <%= patient.getDni()%></p>
+                        <p>Blood type: <%= patient.getBloodType()%></p>
+                        <p>DNI: <%= patient.getDni()%></p>
+                        <p>Prepaid Health: <%= patient.getPrepaidHealth() ? "Sí" : "No" %></p>
+                        
+                        <% if(patient.getGuardian() != null) { %>
+                            <h4>Guardian</h4>
+                            <p><%= patient.getGuardian().getName() %></p>
+                        <% } %>
                         <%@include file="components/footer.jsp" %>
 
                     </div>
