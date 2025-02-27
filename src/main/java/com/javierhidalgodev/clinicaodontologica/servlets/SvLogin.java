@@ -16,38 +16,38 @@ import javax.servlet.http.HttpServletResponse;
 public class SvLogin extends HttpServlet {
 
     Controller controller = Controller.getInstance();
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
     }
 
-    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     }
 
-    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        
+
         boolean loginSuccessfull = false;
-        
-        loginSuccessfull = controller.verifyUser(username, password);
-        
-        if(loginSuccessfull) {
-            System.out.println(loginSuccessfull);
-            request.getSession().setAttribute("usernameSession", username);
-            response.sendRedirect("index.jsp");
-        } else {
-            response.sendRedirect("error.jsp");
+
+        try {
+            loginSuccessfull = controller.verifyUser(username, password);
+
+            if (loginSuccessfull) {
+                System.out.println(loginSuccessfull);
+                request.getSession().setAttribute("usernameSession", username);
+                response.sendRedirect("index.jsp");
+            } else {
+                response.sendRedirect("error.jsp");
+            }
+        } catch (Exception e) {
+            response.sendRedirect("offline.jsp");
         }
-        
     }
 
     @Override

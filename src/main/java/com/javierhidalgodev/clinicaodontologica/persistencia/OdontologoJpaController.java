@@ -18,23 +18,12 @@ import javax.persistence.criteria.Root;
  */
 public class OdontologoJpaController implements Serializable {
 
-    public OdontologoJpaController(EntityManagerFactory emf) {
-        this.emf = emf;
-    }
-    private EntityManagerFactory emf = null;
-
-    public EntityManager getEntityManager() {
-        return emf.createEntityManager();
-    }
-        
     public OdontologoJpaController() {
-        emf = Persistence.createEntityManagerFactory("clinicaJPU");
     }
-    
+
     public void create(Odontologo odontologo) {
-        EntityManager em = null;
+        EntityManager em = PersistenceManager.getInstance().getEntityManager();
         try {
-            em = getEntityManager();
             em.getTransaction().begin();
             em.persist(odontologo);
             em.getTransaction().commit();
@@ -46,9 +35,8 @@ public class OdontologoJpaController implements Serializable {
     }
 
     public void edit(Odontologo odontologo) throws NonexistentEntityException, Exception {
-        EntityManager em = null;
+        EntityManager em = PersistenceManager.getInstance().getEntityManager();
         try {
-            em = getEntityManager();
             em.getTransaction().begin();
             odontologo = em.merge(odontologo);
             em.getTransaction().commit();
@@ -69,9 +57,8 @@ public class OdontologoJpaController implements Serializable {
     }
 
     public void destroy(int id) throws NonexistentEntityException {
-        EntityManager em = null;
+        EntityManager em = PersistenceManager.getInstance().getEntityManager();
         try {
-            em = getEntityManager();
             em.getTransaction().begin();
             Odontologo odontologo;
             try {
@@ -98,7 +85,7 @@ public class OdontologoJpaController implements Serializable {
     }
 
     private List<Odontologo> findOdontologoEntities(boolean all, int maxResults, int firstResult) {
-        EntityManager em = getEntityManager();
+        EntityManager em = PersistenceManager.getInstance().getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
             cq.select(cq.from(Odontologo.class));
@@ -114,7 +101,7 @@ public class OdontologoJpaController implements Serializable {
     }
 
     public Odontologo findOdontologo(int id) {
-        EntityManager em = getEntityManager();
+        EntityManager em = PersistenceManager.getInstance().getEntityManager();
         try {
             return em.find(Odontologo.class, id);
         } finally {
@@ -123,7 +110,7 @@ public class OdontologoJpaController implements Serializable {
     }
 
     public int getOdontologoCount() {
-        EntityManager em = getEntityManager();
+        EntityManager em = PersistenceManager.getInstance().getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
             Root<Odontologo> rt = cq.from(Odontologo.class);
@@ -134,5 +121,5 @@ public class OdontologoJpaController implements Serializable {
             em.close();
         }
     }
-    
+
 }

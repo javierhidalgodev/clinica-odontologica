@@ -18,23 +18,12 @@ import javax.persistence.criteria.Root;
  */
 public class SecretarioJpaController implements Serializable {
 
-    public SecretarioJpaController(EntityManagerFactory emf) {
-        this.emf = emf;
-    }
-    private EntityManagerFactory emf = null;
-
-    public EntityManager getEntityManager() {
-        return emf.createEntityManager();
-    }
-
     public SecretarioJpaController() {
-        emf = Persistence.createEntityManagerFactory("clinicaJPU");
     }
-    
+
     public void create(Secretario secretario) {
-        EntityManager em = null;
+        EntityManager em = PersistenceManager.getInstance().getEntityManager();
         try {
-            em = getEntityManager();
             em.getTransaction().begin();
             em.persist(secretario);
             em.getTransaction().commit();
@@ -46,9 +35,8 @@ public class SecretarioJpaController implements Serializable {
     }
 
     public void edit(Secretario secretario) throws NonexistentEntityException, Exception {
-        EntityManager em = null;
+        EntityManager em = PersistenceManager.getInstance().getEntityManager();
         try {
-            em = getEntityManager();
             em.getTransaction().begin();
             secretario = em.merge(secretario);
             em.getTransaction().commit();
@@ -69,9 +57,8 @@ public class SecretarioJpaController implements Serializable {
     }
 
     public void destroy(int id) throws NonexistentEntityException {
-        EntityManager em = null;
+        EntityManager em = PersistenceManager.getInstance().getEntityManager();
         try {
-            em = getEntityManager();
             em.getTransaction().begin();
             Secretario secretario;
             try {
@@ -98,7 +85,7 @@ public class SecretarioJpaController implements Serializable {
     }
 
     private List<Secretario> findSecretarioEntities(boolean all, int maxResults, int firstResult) {
-        EntityManager em = getEntityManager();
+        EntityManager em = PersistenceManager.getInstance().getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
             cq.select(cq.from(Secretario.class));
@@ -114,7 +101,7 @@ public class SecretarioJpaController implements Serializable {
     }
 
     public Secretario findSecretario(int id) {
-        EntityManager em = getEntityManager();
+        EntityManager em = PersistenceManager.getInstance().getEntityManager();
         try {
             return em.find(Secretario.class, id);
         } finally {
@@ -123,7 +110,7 @@ public class SecretarioJpaController implements Serializable {
     }
 
     public int getSecretarioCount() {
-        EntityManager em = getEntityManager();
+        EntityManager em = PersistenceManager.getInstance().getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
             Root<Secretario> rt = cq.from(Secretario.class);
@@ -134,5 +121,5 @@ public class SecretarioJpaController implements Serializable {
             em.close();
         }
     }
-    
+
 }

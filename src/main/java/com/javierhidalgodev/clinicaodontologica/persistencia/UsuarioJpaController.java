@@ -8,7 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
-import javax.persistence.Persistence;
+import javax.persistence.PersistenceException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -18,24 +18,13 @@ import javax.persistence.criteria.Root;
  * @author Javi
  */
 public class UsuarioJpaController implements Serializable {
-    
-    public UsuarioJpaController(EntityManagerFactory emf) {
-        this.emf = emf;
-    }
-    private EntityManagerFactory emf = null;
-
-    public EntityManager getEntityManager() {
-        return emf.createEntityManager();
-    }
 
     public UsuarioJpaController() {
-        emf = Persistence.createEntityManagerFactory("clinicaJPU");
     }
-    
+
     public void create(Usuario usuario) {
-        EntityManager em = null;
+        EntityManager em = PersistenceManager.getInstance().getEntityManager();
         try {
-            em = getEntityManager();
             em.getTransaction().begin();
             em.persist(usuario);
             em.getTransaction().commit();
@@ -47,9 +36,8 @@ public class UsuarioJpaController implements Serializable {
     }
 
     public void edit(Usuario usuario) throws NonexistentEntityException, Exception {
-        EntityManager em = null;
+        EntityManager em = PersistenceManager.getInstance().getEntityManager();
         try {
-            em = getEntityManager();
             em.getTransaction().begin();
             usuario = em.merge(usuario);
             em.getTransaction().commit();
@@ -70,9 +58,8 @@ public class UsuarioJpaController implements Serializable {
     }
 
     public void destroy(int id) throws NonexistentEntityException {
-        EntityManager em = null;
+        EntityManager em = PersistenceManager.getInstance().getEntityManager();
         try {
-            em = getEntityManager();
             em.getTransaction().begin();
             Usuario usuario;
             try {
@@ -99,7 +86,7 @@ public class UsuarioJpaController implements Serializable {
     }
 
     private List<Usuario> findUsuarioEntities(boolean all, int maxResults, int firstResult) {
-        EntityManager em = getEntityManager();
+        EntityManager em = PersistenceManager.getInstance().getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
             cq.select(cq.from(Usuario.class));
@@ -115,7 +102,7 @@ public class UsuarioJpaController implements Serializable {
     }
 
     public Usuario findUsuario(int id) {
-        EntityManager em = getEntityManager();
+        EntityManager em = PersistenceManager.getInstance().getEntityManager();
         try {
             return em.find(Usuario.class, id);
         } finally {
@@ -124,7 +111,7 @@ public class UsuarioJpaController implements Serializable {
     }
 
     public int getUsuarioCount() {
-        EntityManager em = getEntityManager();
+        EntityManager em = PersistenceManager.getInstance().getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
             Root<Usuario> rt = cq.from(Usuario.class);
@@ -137,17 +124,20 @@ public class UsuarioJpaController implements Serializable {
     }
 
     public Usuario getUserByLogin(String username, String password) {
-        
-        EntityManager em = getEntityManager();
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery cq = cb.createQuery(Usuario.class);
-        Root<Usuario> root = cq.from(Usuario.class);
-        
-        cq.select(root).where(cb.equal(root.get("username"), username), cb.equal(root.get("password"), password));
-        
-        List<Usuario> users = em.createQuery(cq).getResultList();
-        return users.isEmpty() ? null : users.get(0);
-        
+        EntityManager em = PersistenceManager.getInstance().getEntityManager();
+        try {
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery cq = cb.createQuery(Usuario.class);
+            Root<Usuario> root = cq.from(Usuario.class);
+
+            cq.select(root).where(cb.equal(root.get("username"), username), cb.equal(root.get("password"), password));
+
+            List<Usuario> users = em.createQuery(cq).getResultList();
+            return users.isEmpty() ? null : users.get(0);
+        } catch (PersistenceException e) {
+            throw new Error("MAL: " + e.getMessage());
+        } finally {
+            em.close();
+        }
     }
-    
 }

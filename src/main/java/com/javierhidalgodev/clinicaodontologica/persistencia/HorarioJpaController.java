@@ -8,7 +8,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
-import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
@@ -18,23 +17,12 @@ import javax.persistence.criteria.Root;
  */
 public class HorarioJpaController implements Serializable {
 
-    public HorarioJpaController(EntityManagerFactory emf) {
-        this.emf = emf;
-    }
-    private EntityManagerFactory emf = null;
-
-    public EntityManager getEntityManager() {
-        return emf.createEntityManager();
-    }
-
     public HorarioJpaController() {
-        emf = Persistence.createEntityManagerFactory("clinicaJPU");
     }
     
     public void create(Horario horario) {
-        EntityManager em = null;
+        EntityManager em = PersistenceManager.getInstance().getEntityManager();
         try {
-            em = getEntityManager();
             em.getTransaction().begin();
             em.persist(horario);
             em.getTransaction().commit();
@@ -46,9 +34,8 @@ public class HorarioJpaController implements Serializable {
     }
 
     public void edit(Horario horario) throws NonexistentEntityException, Exception {
-        EntityManager em = null;
+        EntityManager em = PersistenceManager.getInstance().getEntityManager();
         try {
-            em = getEntityManager();
             em.getTransaction().begin();
             horario = em.merge(horario);
             em.getTransaction().commit();
@@ -69,9 +56,8 @@ public class HorarioJpaController implements Serializable {
     }
 
     public void destroy(int id) throws NonexistentEntityException {
-        EntityManager em = null;
+        EntityManager em = PersistenceManager.getInstance().getEntityManager();
         try {
-            em = getEntityManager();
             em.getTransaction().begin();
             Horario horario;
             try {
@@ -98,7 +84,7 @@ public class HorarioJpaController implements Serializable {
     }
 
     private List<Horario> findHorarioEntities(boolean all, int maxResults, int firstResult) {
-        EntityManager em = getEntityManager();
+        EntityManager em = PersistenceManager.getInstance().getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
             cq.select(cq.from(Horario.class));
@@ -114,7 +100,7 @@ public class HorarioJpaController implements Serializable {
     }
 
     public Horario findHorario(int id) {
-        EntityManager em = getEntityManager();
+        EntityManager em = PersistenceManager.getInstance().getEntityManager();
         try {
             return em.find(Horario.class, id);
         } finally {
@@ -123,7 +109,7 @@ public class HorarioJpaController implements Serializable {
     }
 
     public int getHorarioCount() {
-        EntityManager em = getEntityManager();
+        EntityManager em = PersistenceManager.getInstance().getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
             Root<Horario> rt = cq.from(Horario.class);
@@ -134,5 +120,5 @@ public class HorarioJpaController implements Serializable {
             em.close();
         }
     }
-    
+
 }

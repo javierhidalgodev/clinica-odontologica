@@ -18,23 +18,12 @@ import javax.persistence.criteria.Root;
  */
 public class TurnoJpaController implements Serializable {
 
-    public TurnoJpaController(EntityManagerFactory emf) {
-        this.emf = emf;
-    }
-    private EntityManagerFactory emf = null;
-
-    public EntityManager getEntityManager() {
-        return emf.createEntityManager();
-    }
-
     public TurnoJpaController() {
-        emf = Persistence.createEntityManagerFactory("clinicaJPU");
     }
-    
+
     public void create(Turno turno) {
-        EntityManager em = null;
+        EntityManager em = PersistenceManager.getInstance().getEntityManager();
         try {
-            em = getEntityManager();
             em.getTransaction().begin();
             em.persist(turno);
             em.getTransaction().commit();
@@ -46,9 +35,8 @@ public class TurnoJpaController implements Serializable {
     }
 
     public void edit(Turno turno) throws NonexistentEntityException, Exception {
-        EntityManager em = null;
+        EntityManager em = PersistenceManager.getInstance().getEntityManager();
         try {
-            em = getEntityManager();
             em.getTransaction().begin();
             turno = em.merge(turno);
             em.getTransaction().commit();
@@ -69,9 +57,8 @@ public class TurnoJpaController implements Serializable {
     }
 
     public void destroy(int id) throws NonexistentEntityException {
-        EntityManager em = null;
+        EntityManager em = PersistenceManager.getInstance().getEntityManager();
         try {
-            em = getEntityManager();
             em.getTransaction().begin();
             Turno turno;
             try {
@@ -98,7 +85,7 @@ public class TurnoJpaController implements Serializable {
     }
 
     private List<Turno> findTurnoEntities(boolean all, int maxResults, int firstResult) {
-        EntityManager em = getEntityManager();
+        EntityManager em = PersistenceManager.getInstance().getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
             cq.select(cq.from(Turno.class));
@@ -114,7 +101,7 @@ public class TurnoJpaController implements Serializable {
     }
 
     public Turno findTurno(int id) {
-        EntityManager em = getEntityManager();
+        EntityManager em = PersistenceManager.getInstance().getEntityManager();
         try {
             return em.find(Turno.class, id);
         } finally {
@@ -123,7 +110,7 @@ public class TurnoJpaController implements Serializable {
     }
 
     public int getTurnoCount() {
-        EntityManager em = getEntityManager();
+        EntityManager em = PersistenceManager.getInstance().getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
             Root<Turno> rt = cq.from(Turno.class);
@@ -134,5 +121,5 @@ public class TurnoJpaController implements Serializable {
             em.close();
         }
     }
-    
+
 }

@@ -18,23 +18,12 @@ import javax.persistence.criteria.Root;
  */
 public class PersonaJpaController implements Serializable {
 
-    public PersonaJpaController(EntityManagerFactory emf) {
-        this.emf = emf;
-    }
-    private EntityManagerFactory emf = null;
-
-    public EntityManager getEntityManager() {
-        return emf.createEntityManager();
-    }
-
     public PersonaJpaController() {
-        emf = Persistence.createEntityManagerFactory("clinicaJPU");
     }
 
     public void create(Persona persona) {
-        EntityManager em = null;
+        EntityManager em = PersistenceManager.getInstance().getEntityManager();
         try {
-            em = getEntityManager();
             em.getTransaction().begin();
             em.persist(persona);
             em.getTransaction().commit();
@@ -46,9 +35,8 @@ public class PersonaJpaController implements Serializable {
     }
 
     public void edit(Persona persona) throws NonexistentEntityException, Exception {
-        EntityManager em = null;
+        EntityManager em = PersistenceManager.getInstance().getEntityManager();
         try {
-            em = getEntityManager();
             em.getTransaction().begin();
             persona = em.merge(persona);
             em.getTransaction().commit();
@@ -69,9 +57,8 @@ public class PersonaJpaController implements Serializable {
     }
 
     public void destroy(int id) throws NonexistentEntityException {
-        EntityManager em = null;
+        EntityManager em = PersistenceManager.getInstance().getEntityManager();
         try {
-            em = getEntityManager();
             em.getTransaction().begin();
             Persona persona;
             try {
@@ -98,7 +85,7 @@ public class PersonaJpaController implements Serializable {
     }
 
     private List<Persona> findPersonaEntities(boolean all, int maxResults, int firstResult) {
-        EntityManager em = getEntityManager();
+        EntityManager em = PersistenceManager.getInstance().getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
             cq.select(cq.from(Persona.class));
@@ -114,7 +101,7 @@ public class PersonaJpaController implements Serializable {
     }
 
     public Persona findPersona(int id) {
-        EntityManager em = getEntityManager();
+        EntityManager em = PersistenceManager.getInstance().getEntityManager();
         try {
             return em.find(Persona.class, id);
         } finally {
@@ -123,7 +110,7 @@ public class PersonaJpaController implements Serializable {
     }
 
     public int getPersonaCount() {
-        EntityManager em = getEntityManager();
+        EntityManager em = PersistenceManager.getInstance().getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
             Root<Persona> rt = cq.from(Persona.class);

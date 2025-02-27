@@ -6,7 +6,6 @@ import com.javierhidalgodev.clinicaodontologica.logica.Paciente;
 import com.javierhidalgodev.clinicaodontologica.logica.Responsable;
 import com.javierhidalgodev.clinicaodontologica.logica.Usuario;
 import com.javierhidalgodev.clinicaodontologica.persistencia.exceptions.NonexistentEntityException;
-import java.sql.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,16 +15,33 @@ import java.util.logging.Logger;
  * @author Javi
  */
 public class PersistenceController {
- 
-    PersonaJpaController peopleController = new PersonaJpaController();
-    OdontologoJpaController odontologistController = new OdontologoJpaController();
-    PacienteJpaController patientController = new PacienteJpaController();
-    ResponsableJpaController guardianController = new ResponsableJpaController();
-    SecretarioJpaController secretaryController = new SecretarioJpaController();
-    HorarioJpaController workScheduleController = new HorarioJpaController();
-    TurnoJpaController workShiftController = new TurnoJpaController();
-    UsuarioJpaController userController = new UsuarioJpaController();
+    private static PersistenceController instance;
+    
+//    private final PersonaJpaController peopleController;
+    private final OdontologoJpaController odontologistController;
+    private final PacienteJpaController patientController;
+    private final ResponsableJpaController guardianController;
+//    private final SecretarioJpaController secretaryController;
+    private final HorarioJpaController workScheduleController;
+//    TurnoJpaController workShiftController;
+    private final UsuarioJpaController userController;
 
+    private PersistenceController() {
+        this.odontologistController = new OdontologoJpaController();
+        this.patientController = new PacienteJpaController();
+        this.guardianController = new ResponsableJpaController();
+        this.workScheduleController = new HorarioJpaController();
+        this.userController = new UsuarioJpaController();
+    }
+    
+    public static PersistenceController getInstance() {
+        if(instance == null) {
+            instance = new PersistenceController();
+        }
+        
+        return instance;
+    }
+    
     public void createUser(Usuario newUser) {
         userController.create(newUser);
     }

@@ -15,8 +15,8 @@
 
                 <!-- 404 Error Text -->
                 <div class="text-center my-auto">
-                    <div class="error mx-auto" data-text="404">404</div>
-                    <p class="lead text-gray-800 mb-5">Credenciales inválidas</p>
+                    <div class="error mx-auto" data-text="500">500</div>
+                    <p class="lead text-gray-800 mb-5">Offline mamón</p>
                     <a href="login.jsp">&larr; Volver al login</a>
                 </div>
 

@@ -18,23 +18,12 @@ import javax.persistence.criteria.Root;
  */
 public class PacienteJpaController implements Serializable {
 
-    public PacienteJpaController(EntityManagerFactory emf) {
-        this.emf = emf;
-    }
-    private EntityManagerFactory emf = null;
-
-    public EntityManager getEntityManager() {
-        return emf.createEntityManager();
-    }
-        
     public PacienteJpaController() {
-        emf = Persistence.createEntityManagerFactory("clinicaJPU");
     }
     
     public void create(Paciente paciente) {
-        EntityManager em = null;
+        EntityManager em = PersistenceManager.getInstance().getEntityManager();
         try {
-            em = getEntityManager();
             em.getTransaction().begin();
             em.persist(paciente);
             em.getTransaction().commit();
@@ -46,9 +35,8 @@ public class PacienteJpaController implements Serializable {
     }
 
     public void edit(Paciente paciente) throws NonexistentEntityException, Exception {
-        EntityManager em = null;
+        EntityManager em = PersistenceManager.getInstance().getEntityManager();
         try {
-            em = getEntityManager();
             em.getTransaction().begin();
             paciente = em.merge(paciente);
             em.getTransaction().commit();
@@ -69,9 +57,8 @@ public class PacienteJpaController implements Serializable {
     }
 
     public void destroy(int id) throws NonexistentEntityException {
-        EntityManager em = null;
+        EntityManager em = PersistenceManager.getInstance().getEntityManager();
         try {
-            em = getEntityManager();
             em.getTransaction().begin();
             Paciente paciente;
             try {
@@ -98,7 +85,7 @@ public class PacienteJpaController implements Serializable {
     }
 
     private List<Paciente> findPacienteEntities(boolean all, int maxResults, int firstResult) {
-        EntityManager em = getEntityManager();
+        EntityManager em = PersistenceManager.getInstance().getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
             cq.select(cq.from(Paciente.class));
@@ -114,7 +101,7 @@ public class PacienteJpaController implements Serializable {
     }
 
     public Paciente findPaciente(int id) {
-        EntityManager em = getEntityManager();
+        EntityManager em = PersistenceManager.getInstance().getEntityManager();
         try {
             return em.find(Paciente.class, id);
         } finally {
@@ -123,7 +110,7 @@ public class PacienteJpaController implements Serializable {
     }
 
     public int getPacienteCount() {
-        EntityManager em = getEntityManager();
+        EntityManager em = PersistenceManager.getInstance().getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
             Root<Paciente> rt = cq.from(Paciente.class);
@@ -134,5 +121,5 @@ public class PacienteJpaController implements Serializable {
             em.close();
         }
     }
-    
+
 }

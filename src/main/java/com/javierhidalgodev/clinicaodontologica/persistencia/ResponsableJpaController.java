@@ -18,23 +18,12 @@ import javax.persistence.criteria.Root;
  */
 public class ResponsableJpaController implements Serializable {
 
-    public ResponsableJpaController(EntityManagerFactory emf) {
-        this.emf = emf;
-    }
-    private EntityManagerFactory emf = null;
-
-    public EntityManager getEntityManager() {
-        return emf.createEntityManager();
-    }
-
     public ResponsableJpaController() {
-        emf = Persistence.createEntityManagerFactory("clinicaJPU");
     }
-    
+
     public Responsable create(Responsable responsable) {
-        EntityManager em = null;
+        EntityManager em = PersistenceManager.getInstance().getEntityManager();
         try {
-            em = getEntityManager();
             em.getTransaction().begin();
             em.persist(responsable);
             em.flush();
@@ -49,9 +38,8 @@ public class ResponsableJpaController implements Serializable {
     }
 
     public void edit(Responsable responsable) throws NonexistentEntityException, Exception {
-        EntityManager em = null;
+        EntityManager em = PersistenceManager.getInstance().getEntityManager();
         try {
-            em = getEntityManager();
             em.getTransaction().begin();
             responsable = em.merge(responsable);
             em.getTransaction().commit();
@@ -72,9 +60,8 @@ public class ResponsableJpaController implements Serializable {
     }
 
     public void destroy(int id) throws NonexistentEntityException {
-        EntityManager em = null;
+        EntityManager em = PersistenceManager.getInstance().getEntityManager();
         try {
-            em = getEntityManager();
             em.getTransaction().begin();
             Responsable responsable;
             try {
@@ -101,7 +88,7 @@ public class ResponsableJpaController implements Serializable {
     }
 
     private List<Responsable> findResponsableEntities(boolean all, int maxResults, int firstResult) {
-        EntityManager em = getEntityManager();
+        EntityManager em = PersistenceManager.getInstance().getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
             cq.select(cq.from(Responsable.class));
@@ -117,7 +104,7 @@ public class ResponsableJpaController implements Serializable {
     }
 
     public Responsable findResponsable(int id) {
-        EntityManager em = getEntityManager();
+        EntityManager em = PersistenceManager.getInstance().getEntityManager();
         try {
             return em.find(Responsable.class, id);
         } finally {
@@ -126,7 +113,7 @@ public class ResponsableJpaController implements Serializable {
     }
 
     public int getResponsableCount() {
-        EntityManager em = getEntityManager();
+        EntityManager em = PersistenceManager.getInstance().getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
             Root<Responsable> rt = cq.from(Responsable.class);
@@ -137,5 +124,5 @@ public class ResponsableJpaController implements Serializable {
             em.close();
         }
     }
-    
+
 }

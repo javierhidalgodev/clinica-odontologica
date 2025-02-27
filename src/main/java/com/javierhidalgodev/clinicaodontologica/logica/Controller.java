@@ -11,17 +11,18 @@ import java.util.List;
  * @author Javi
  */
 public class Controller {
-    public static Controller instance;
-    PersistenceController persistenceController = new PersistenceController();
     
+    public static Controller instance;
+    PersistenceController persistenceController = PersistenceController.getInstance();
+
     private Controller() {
     };
     
     public static Controller getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new Controller();
         }
-        
+
         return instance;
     }
 
@@ -48,12 +49,16 @@ public class Controller {
         persistenceController.editUser(userToEdit);
     }
 
-    public boolean verifyUser(String username, String password) {
+    public boolean verifyUser(String username, String password) throws Exception {
 
-        Usuario user = persistenceController.getUserByLogin(username, password);
+        try {
+            Usuario user = persistenceController.getUserByLogin(username, password);
+            return user != null;
 
-        return user != null;
-
+        } catch (RuntimeException e) {
+            System.out.println("Error de conexión: " + e.getMessage());
+            throw new Exception("SIN CONEXIÓN");
+        }
     }
 
     public void createOdontologist(String firstName, String surname, String address, String phone, String birthday, String dni, String specialization, String workSchedule) {
@@ -100,9 +105,9 @@ public class Controller {
         boolean pPH = Boolean.parseBoolean(prepaidHealth);
         List<Turno> appointments = new ArrayList<>();
         Date birth = Date.valueOf(patientBirthdate);
-        
+
         Paciente patient = new Paciente(pPH, bloodType, guardian, appointments, patientFirstName, patientSurname, patientPhone, patientAddress, birth, patientDNI);
-        
+
         persistenceController.createPatient(patient);
     }
 
@@ -112,7 +117,7 @@ public class Controller {
 
     public void createWorkSchedule(String wsName, String entryTime, String exitTime) {
         Horario workSchedule = new Horario(wsName, entryTime, exitTime);
-        
+
         persistenceController.createWorkSchedule(workSchedule);
     }
 
