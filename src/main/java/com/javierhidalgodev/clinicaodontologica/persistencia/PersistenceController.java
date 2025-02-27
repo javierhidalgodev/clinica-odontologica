@@ -4,8 +4,10 @@ import com.javierhidalgodev.clinicaodontologica.logica.Horario;
 import com.javierhidalgodev.clinicaodontologica.logica.Odontologo;
 import com.javierhidalgodev.clinicaodontologica.logica.Paciente;
 import com.javierhidalgodev.clinicaodontologica.logica.Responsable;
+import com.javierhidalgodev.clinicaodontologica.logica.Secretario;
 import com.javierhidalgodev.clinicaodontologica.logica.Usuario;
 import com.javierhidalgodev.clinicaodontologica.persistencia.exceptions.NonexistentEntityException;
+import java.sql.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,13 +23,14 @@ public class PersistenceController {
     private final OdontologoJpaController odontologistController;
     private final PacienteJpaController patientController;
     private final ResponsableJpaController guardianController;
-//    private final SecretarioJpaController secretaryController;
+    private final SecretarioJpaController secretaryController;
     private final HorarioJpaController workScheduleController;
 //    TurnoJpaController workShiftController;
     private final UsuarioJpaController userController;
 
     private PersistenceController() {
         this.odontologistController = new OdontologoJpaController();
+        this.secretaryController = new SecretarioJpaController();
         this.patientController = new PacienteJpaController();
         this.guardianController = new ResponsableJpaController();
         this.workScheduleController = new HorarioJpaController();
@@ -104,6 +107,12 @@ public class PersistenceController {
 
     public Paciente getPatientById(int patientID) {
         return patientController.findPaciente(patientID);
+    }
+
+    public void createSecretary(String firstName, String surname, String address, String phone, Date birth, String dni, String floor, User user) {
+        Secretario secretary = new Secretario(floor, user, firstName, surname, phone, address, birth, dni);
+        
+        secretaryController.create(secretary);
     }
     
 }

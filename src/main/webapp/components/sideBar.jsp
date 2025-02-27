@@ -46,6 +46,22 @@
         </div>
     </li>
 
+        <!-- Nav Item - Odontologist Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSecretaries"
+           aria-expanded="true" aria-controls="collapseSecretaries">
+            <i class="fas fa-solid fa-briefcase"></i>
+            <span>Secreatarios</span>
+        </a>
+        <div id="collapseSecretaries" class="collapse" aria-labelledby="headingSecretaries" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Acciones</h6>
+                <a class="collapse-item" href="SvSecretaries">Ver profesionales</a>
+                <a class="collapse-item" href="altaSecretario.jsp">Nuevo profesional</a>
+            </div>
+        </div>
+    </li>
+    
     <!-- Nav Item - Patients Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePatients"

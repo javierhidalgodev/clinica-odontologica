@@ -14,9 +14,6 @@ public class Controller {
     
     public static Controller instance;
     PersistenceController persistenceController = PersistenceController.getInstance();
-
-    private Controller() {
-    };
     
     public static Controller getInstance() {
         if (instance == null) {
@@ -123,5 +120,13 @@ public class Controller {
 
     public Paciente getPatientById(int patientID) {
         return persistenceController.getPatientById(patientID);
+    }
+
+    public void createSecretary(String firstName, String surname, String address, String phone, String birthday, String dni, String floor) {
+        
+        LocalDate localDate = LocalDate.parse(birthday);
+        Date birth = Date.valueOf(localDate);
+        
+        persistenceController.createSecretary(firstName, surname, address, phone, birth, dni, floor, null);
     }
 }
