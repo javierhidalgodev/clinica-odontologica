@@ -154,5 +154,13 @@ public class PersistenceController {
             Logger.getLogger(PersistenceController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    public void destroySecretary(int idSecretary) {
+        try {
+            secretaryController.destroy(idSecretary);
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(PersistenceController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
 }

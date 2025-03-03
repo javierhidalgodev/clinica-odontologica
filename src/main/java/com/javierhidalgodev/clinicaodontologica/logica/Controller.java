@@ -177,4 +177,8 @@ public class Controller {
         
         persistenceController.editSecretary(secretaryToEdit);
     }
+
+    public void destroySecretary(int idSecretary) {
+        persistenceController.destroySecretary(idSecretary);
+    }
 }

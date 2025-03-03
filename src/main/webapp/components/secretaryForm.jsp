@@ -14,26 +14,26 @@
                     <form class="user" action="SvSecretaries" method="POST">
                         <div class="form-group row">
                             <div class="col-md-6 mb-3 mb-md-0">
-                                <input type="text" class="form-control form-control-user" id="exampleFirstName" name="firstName" placeholder="First Name">
+                                <input type="text" class="form-control form-control-user" id="exampleFirstName" name="firstName" placeholder="First Name" required>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control form-control-user" id="exampleSurname" name="surname" placeholder="Surname">
+                                <input type="text" class="form-control form-control-user" id="exampleSurname" name="surname" placeholder="Surname" required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-md-6 mb-3 mb-md-0">
-                                <input type="text" class="form-control form-control-user" id="exampleInputAddress" name="address" placeholder="Address">
+                                <input type="text" class="form-control form-control-user" id="exampleInputAddress" name="address" placeholder="Address" required>
                             </div>
                             <div class="col-md-6 mb-3 mb-md-0">
-                                <input type="tel" class="form-control form-control-user" id="examplePhone" name="phone" placeholder="Phone">
+                                <input type="tel" class="form-control form-control-user" id="examplePhone" name="phone" placeholder="Phone" required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-md-6">
-                                <input type="date" class="form-control form-control-user" id="exampleBirthday" name="birthday">
+                                <input type="date" class="form-control form-control-user" id="exampleBirthday" name="birthday" required>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control form-control-user" id="exampleDNI" name="dni" placeholder="DNI">
+                                <input type="text" class="form-control form-control-user" id="exampleDNI" name="dni" placeholder="DNI" required>
                             </div>
                         </div>
                         <div class="form-group row">

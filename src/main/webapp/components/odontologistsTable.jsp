@@ -7,11 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
-    List<Odontologo> odontologistsList = (List<Odontologo>) session.getAttribute("odontologistsList");
-    
-    for(Odontologo o : odontologistsList) {
-    System.out.println(o.getWorkSchedule());
-    }
+    List<Odontologo> odontologistsList = (List) session.getAttribute("odontologistsList");
 %>
 
 <div class="card shadow mb-4">

@@ -28,26 +28,26 @@
                     <form class="user" action="SvOdontologistsEdit" method="POST">
                         <div class="form-group row">
                             <div class="col-md-6 mb-3 mb-md-0">
-                                <input type="text" class="form-control form-control-user" id="exampleFirstName" name="firstName" value="<%= odontologistToEdit.getName()%>" placeholder="First Name">
+                                <input type="text" class="form-control form-control-user" id="exampleFirstName" name="firstName" value="<%= odontologistToEdit.getName()%>" placeholder="First Name" required>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control form-control-user" id="exampleSurname" name="surname" value="<%= odontologistToEdit.getSurname()%>" placeholder="Surname">
+                                <input type="text" class="form-control form-control-user" id="exampleSurname" name="surname" value="<%= odontologistToEdit.getSurname()%>" placeholder="Surname" required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-md-6 mb-3 mb-md-0">
-                                <input type="text" class="form-control form-control-user" id="exampleInputAddress" name="address" value="<%= odontologistToEdit.getAddress()%>" placeholder="Address">
+                                <input type="text" class="form-control form-control-user" id="exampleInputAddress" name="address" value="<%= odontologistToEdit.getAddress()%>" placeholder="Address" required>
                             </div>
                             <div class="col-md-6 mb-3 mb-md-0">
-                                <input type="tel" class="form-control form-control-user" id="examplePhone" name="phone" value="<%= odontologistToEdit.getPhone()%>" placeholder="Phone">
+                                <input type="tel" class="form-control form-control-user" id="examplePhone" name="phone" value="<%= odontologistToEdit.getPhone()%>" placeholder="Phone" required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-md-6">
-                                <input type="date" class="form-control form-control-user" id="exampleBirthdate" name="birthdate" value="<%= birth%>">
+                                <input type="date" class="form-control form-control-user" id="exampleBirthdate" name="birthdate" value="<%= birth%>" required>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" class="form-control form-control-user" id="exampleDNI" name="dni" value="<%= odontologistToEdit.getDni()%>" placeholder="DNI" disabled="">
+                                <input type="text" class="form-control form-control-user" id="exampleDNI" name="dni" value="<%= odontologistToEdit.getDni()%>" placeholder="DNI" disabled="" required>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -56,8 +56,8 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="exampleWorkSchedule" class="text-xs">Work Schedule (Actual: <%= odontologistWorkSchedule %>)</label>
-                                <select class="form-control form-control-user" id="exampleWorkSchedule" name="workSchedule">
-                                    <option disabled="" value="">Select one to change</option>
+                                <select class="form-control form-control-user" id="exampleWorkSchedule" name="workSchedule" required aria-required="true">
+                                    <option selected>Select one to change</option>
                                     <%
                                         for(Horario wS : workScheduleList) {
                                         %> <option value="<%= wS.getIdWorkSchedule() %>"><%= wS.getName() + " / " + wS.getEntryTime() %> -  <%= wS.getExitTime() %></option> <%
