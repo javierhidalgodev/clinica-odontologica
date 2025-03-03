@@ -12,6 +12,7 @@
     String birth = sdf.format(odontologistToEdit.getBirthdate());
 
     List<Horario> workScheduleList = (List<Horario>) session.getAttribute("workScheduleList");
+    String odontologistWorkSchedule = odontologistToEdit.getWorkSchedule() != null ? odontologistToEdit.getWorkSchedule().getName() : "not assigned";
 %>
 
 <div class="container">
@@ -54,18 +55,19 @@
                                 <input type="text" class="form-control form-control-user" id="exampleSpecialization" name="specialization" value="<%= odontologistToEdit.getSpecialization()%>" placeholder="Specialization">
                             </div>
                             <div class="col-md-6">
+                                <label for="exampleWorkSchedule" class="text-xs">Work Schedule (Actual: <%= odontologistWorkSchedule %>)</label>
                                 <select class="form-control form-control-user" id="exampleWorkSchedule" name="workSchedule">
-                                    <option disabled="" value="">Select one</option>
+                                    <option disabled="" value="">Select one to change</option>
                                     <%
                                         for(Horario wS : workScheduleList) {
-                                        %> <option value="<%= wS.getIdWorkSchedule() %>" selected="<%= wS.getIdWorkSchedule() == odontologistToEdit.getWorkSchedule().getIdWorkSchedule() %>"><%= wS.getName() + " / " + wS.getEntryTime() %> -  <%= wS.getExitTime() %></option> <%
+                                        %> <option value="<%= wS.getIdWorkSchedule() %>"><%= wS.getName() + " / " + wS.getEntryTime() %> -  <%= wS.getExitTime() %></option> <%
                                         }
                                     %>
                                 </select>
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-success btn-user btn-block">
+                        <button type="submit" class="btn btn-success btn-user btn-block font-weight-bold">
                             Edit
                         </button>
                     </form>

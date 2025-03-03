@@ -139,7 +139,6 @@ public class Controller {
         int workScheduleId = Integer.parseInt(workSchedule);
         
         Horario wS = persistenceController.getWorkScheduleById(workScheduleId);
-        System.out.println(wS.getName());
         
         odontologistToEdit.setName(firstName);
         odontologistToEdit.setSurname(surname);
@@ -149,5 +148,33 @@ public class Controller {
         odontologistToEdit.setWorkSchedule(wS);
         
         persistenceController.editOdontologist(odontologistToEdit);
+    }
+    
+    public List<Secretario> getAllSecretaries() {
+        return persistenceController.getAllSecretaries();
+    }
+
+    public void destroyOdontologist(int odontoID) {
+        persistenceController.destroyOdontologist(odontoID);
+    }
+
+    public Secretario getSecretaryById(int secretaryId) {
+        return persistenceController.getSecretaryById(secretaryId);
+    }
+
+    public void editSecretary(Secretario secretaryToEdit, String firstName, String surname, String address, String phone, String birthday, String dni, String floor) {
+        LocalDate localDate = LocalDate.parse(birthday);
+        Date birth = Date.valueOf(localDate);
+        
+        secretaryToEdit.setName(firstName);
+        secretaryToEdit.setSurname(surname);
+        secretaryToEdit.setAddress(address);
+        secretaryToEdit.setPhone(phone);
+        secretaryToEdit.setBirthdate(birth);
+        secretaryToEdit.setDni(dni);
+        secretaryToEdit.setFloor(floor);
+        secretaryToEdit.setUser(null);
+        
+        persistenceController.editSecretary(secretaryToEdit);
     }
 }

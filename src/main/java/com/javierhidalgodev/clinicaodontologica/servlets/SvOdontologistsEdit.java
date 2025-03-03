@@ -3,9 +3,7 @@ package com.javierhidalgodev.clinicaodontologica.servlets;
 import com.javierhidalgodev.clinicaodontologica.logica.Controller;
 import com.javierhidalgodev.clinicaodontologica.logica.Horario;
 import com.javierhidalgodev.clinicaodontologica.logica.Odontologo;
-import com.javierhidalgodev.clinicaodontologica.logica.Usuario;
 import java.io.IOException;
-import java.sql.Date;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,18 +34,19 @@ public class SvOdontologistsEdit extends HttpServlet {
         if (odontologistIdToEdit != null && !odontologistIdToEdit.isEmpty()) {
             int odontologistId = Integer.parseInt(odontologistIdToEdit);
             Odontologo odontologistToEdit = controller.getOdontologistById(odontologistId);
-
-            request.getSession().setAttribute("odontologistToEdit", odontologistToEdit);
+            
+            HttpSession mySession = request.getSession();
+            mySession.setAttribute("odontologistToEdit", odontologistToEdit);
 
             if (request.getSession().getAttribute("workScheduleList") == null) {
                 List<Horario> workScheduleList = controller.getWorkScheduleList();
-                HttpSession mysession = request.getSession();
-                mysession.setAttribute("workScheduleList", workScheduleList);
+                System.out.println(workScheduleList.isEmpty());
+                
+                mySession.setAttribute("workScheduleList", workScheduleList);
             }
 
             response.sendRedirect("edicionOdontologo.jsp");
         }
-
     }
 
     @Override

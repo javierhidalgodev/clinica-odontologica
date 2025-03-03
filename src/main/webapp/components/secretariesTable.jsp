@@ -1,3 +1,4 @@
+<%@page import="com.javierhidalgodev.clinicaodontologica.logica.Secretario"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.text.DateFormat"%>
 <%@page import="com.javierhidalgodev.clinicaodontologica.logica.Odontologo"%>
@@ -7,11 +8,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
-    List<Odontologo> odontologistsList = (List<Odontologo>) session.getAttribute("odontologistsList");
-    
-    for(Odontologo o : odontologistsList) {
-    System.out.println(o.getWorkSchedule());
-    }
+    List<Secretario> secretariesList = (List<Secretario>) session.getAttribute("secretariesList");
 %>
 
 <div class="card shadow mb-4">
@@ -29,8 +26,7 @@
                         <th>Phone</th>
                         <th>Date of birth</th>
                         <th>DNI</th>
-                        <th>Specialization</th>
-                        <th>Work Schedule</th>
+                        <th>Position</th>
                         <th>Edit</th>
                         <th>Delete</th>
                     </tr>
@@ -43,42 +39,40 @@
                         <th>Phone</th>
                         <th>Date of birth</th>
                         <th>DNI</th>
-                        <th>Specialization</th>
-                        <th>Work Schedule</th>
+                        <th>Position</th>
                         <th>Edit</th>
                         <th>Delete</th>
                     </tr>
                 </tfoot>
                 <tbody>
                     <%
-                        if (!odontologistsList.isEmpty()) {
+                        if (!secretariesList.isEmpty()) {
                             int i = 0;
 
-                                for (Odontologo o : odontologistsList) {%>
+                                for (Secretario s : secretariesList) {%>
                     <tr>
                         <td><%= i + 1%></td>
-                        <td><%= o.getName() + " " + o.getSurname() %></td>
-                        <td><%= o.getAddress()%></td>
-                        <td><%= o.getPhone()%></td>
+                        <td><%= s.getName() + " " + s.getSurname() %></td>
+                        <td><%= s.getAddress()%></td>
+                        <td><%= s.getPhone()%></td>
                         <td>
                             <%
                                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
-                                String formatDate = simpleDateFormat.format(o.getBirthdate());
+                                String formatDate = simpleDateFormat.format(s.getBirthdate());
                             %>
                             <%= formatDate %>
                         </td>
-                        <td><%= o.getDni() %></td>
-                        <td><%= o.getSpecialization() %></td>
-                        <td><%= o.getWorkSchedule() != null ? o.getWorkSchedule().getName() + " / " + o.getWorkSchedule().getEntryTime() + " - " + o.getWorkSchedule().getExitTime() : "Not assigned" %></td>
+                        <td><%= s.getDni() %></td>
+                        <td><%= s.getFloor()%></td>
                         <td>
-                            <form action="SvOdontologistsEdit" method="GET">
-                                <input type="hidden" name="id" value="<%= o.getId()%>" />
+                            <form action="SvSecretariesEdit" method="GET">
+                                <input type="hidden" name="idToEdit" value="<%= s.getId()%>" />
                                 <button type="submit" class="btn btn-primary">Editar</button>
                             </form>
                         </td>
                         <td>
-                            <form action="SvOdontologistsDelete" method="POST">
-                                <input type="hidden" name="idToDelete" value="<%= o.getId()%>" />
+                            <form action="SvSecretariesDelete" method="POST">
+                                <input type="hidden" name="id" value="<%= s.getId()%>" />
                                 <button type="submit" class="btn btn-danger">Eliminar</button>
                             </form>
                         </td>
@@ -89,7 +83,7 @@
                     } else {
                     %>
                     <tr class="bg-gray-200 text-center font-weight-bold">
-                        <td colspan="10">No data available</td>
+                        <td colspan="9">No data available</td>
                     </tr>
                     <%
                         }

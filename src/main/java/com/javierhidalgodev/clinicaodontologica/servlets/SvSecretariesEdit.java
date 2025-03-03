@@ -3,8 +3,6 @@ package com.javierhidalgodev.clinicaodontologica.servlets;
 import com.javierhidalgodev.clinicaodontologica.logica.Controller;
 import com.javierhidalgodev.clinicaodontologica.logica.Secretario;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,8 +14,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Javi
  */
-@WebServlet(name = "SvSecretaries", urlPatterns = {"/SvSecretaries"})
-public class SvSecretaries extends HttpServlet {
+@WebServlet(name = "SvSecretariesEdit", urlPatterns = {"/SvSecretariesEdit"})
+public class SvSecretariesEdit extends HttpServlet {
 
     Controller controller = Controller.getInstance();
 
@@ -28,13 +26,18 @@ public class SvSecretaries extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        List<Secretario> secretariesList = (List<Secretario>) controller.getAllSecretaries();
-        
-        HttpSession mySession = request.getSession();
-        mySession.setAttribute("secretariesList", secretariesList);
-        
-        response.sendRedirect("vistaSecretarios.jsp");
+
+        String secretaryIdToEdit = request.getParameter("idToEdit");
+
+        if (secretaryIdToEdit != null && !secretaryIdToEdit.isEmpty()) {
+            int secretaryId = Integer.parseInt(secretaryIdToEdit);
+            Secretario secretaryToEdit = controller.getSecretaryById(secretaryId);
+
+            HttpSession mySession = request.getSession();
+            mySession.setAttribute("secretaryToEdit", secretaryToEdit);
+
+            response.sendRedirect("edicionSecretario.jsp");
+        }
     }
 
     @Override
@@ -49,7 +52,10 @@ public class SvSecretaries extends HttpServlet {
         String dni = request.getParameter("dni");
         String birthday = request.getParameter("birthday");
 
-        controller.createSecretary(firstName, surname, address, phone, birthday, dni, floor);
+        HttpSession mySession = request.getSession();
+        Secretario secretaryToEdit = (Secretario) mySession.getAttribute("secretaryToEdit");
+        
+        controller.editSecretary(secretaryToEdit, firstName, surname, address, phone, birthday, dni, floor);
 
         response.sendRedirect("SvSecretaries");
     }

@@ -46,12 +46,12 @@
         </div>
     </li>
 
-        <!-- Nav Item - Odontologist Collapse Menu -->
+        <!-- Nav Item - Secretaries Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSecretaries"
            aria-expanded="true" aria-controls="collapseSecretaries">
             <i class="fas fa-solid fa-briefcase"></i>
-            <span>Secreatarios</span>
+            <span>Secretarios</span>
         </a>
         <div id="collapseSecretaries" class="collapse" aria-labelledby="headingSecretaries" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">

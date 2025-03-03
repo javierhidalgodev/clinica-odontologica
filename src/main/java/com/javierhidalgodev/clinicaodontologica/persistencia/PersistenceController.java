@@ -130,5 +130,29 @@ public class PersistenceController {
             Logger.getLogger(PersistenceController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    public List<Secretario> getAllSecretaries() {
+        return secretaryController.findSecretarioEntities();
+    }
+
+    public void destroyOdontologist(int odontoID) {
+        try {
+            odontologistController.destroy(odontoID);
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(PersistenceController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public Secretario getSecretaryById(int secretaryId) {
+        return secretaryController.findSecretario(secretaryId);
+    }
+
+    public void editSecretary(Secretario secretaryToEdit) {
+        try {
+            secretaryController.edit(secretaryToEdit);
+        } catch (Exception ex) {
+            Logger.getLogger(PersistenceController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
 }

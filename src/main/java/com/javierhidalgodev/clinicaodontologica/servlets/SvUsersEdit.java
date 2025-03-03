@@ -43,18 +43,21 @@ public class SvUsersEdit extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String username = request.getParameter("username");
-        String role = request.getParameter("role");
+        String role;
+        
+        if(request.getParameter("role") != null) {
+            role = request.getParameter("role");
+        } else {
+            role = "NA";
+        }
         
         Usuario userToEdit = (Usuario) request.getSession().getAttribute("userToEdit");
-        userToEdit.setUsername(username);
         userToEdit.setRole(role);
         
         controller.editUser(userToEdit);
         request.removeAttribute("userToEdit");
         
         response.sendRedirect("SvUsers");
-        
     }
 
     @Override
