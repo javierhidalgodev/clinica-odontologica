@@ -129,4 +129,25 @@ public class Controller {
         
         persistenceController.createSecretary(firstName, surname, address, phone, birth, dni, floor, null);
     }
+
+    public Odontologo getOdontologistById(int odontologistId) {
+        return persistenceController.getOdontologistById(odontologistId);
+    }
+
+    public void editOdontologist(Odontologo odontologistToEdit, String firstName, String surname, String address, String phone, String birthdate, String specialization, String workSchedule) {
+        
+        int workScheduleId = Integer.parseInt(workSchedule);
+        
+        Horario wS = persistenceController.getWorkScheduleById(workScheduleId);
+        System.out.println(wS.getName());
+        
+        odontologistToEdit.setName(firstName);
+        odontologistToEdit.setSurname(surname);
+        odontologistToEdit.setAddress(address);
+        odontologistToEdit.setBirthdate(Date.valueOf(birthdate));
+        odontologistToEdit.setSpecialization(specialization);
+        odontologistToEdit.setWorkSchedule(wS);
+        
+        persistenceController.editOdontologist(odontologistToEdit);
+    }
 }

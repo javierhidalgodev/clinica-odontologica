@@ -3,6 +3,8 @@ package com.javierhidalgodev.clinicaodontologica.servlets;
 import com.javierhidalgodev.clinicaodontologica.logica.Controller;
 import com.javierhidalgodev.clinicaodontologica.logica.Odontologo;
 import java.io.IOException;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -45,7 +47,7 @@ public class SvOdontologists extends HttpServlet {
         String dni = request.getParameter("dni");
         String birthday = request.getParameter("birthday");
         String workShedule = request.getParameter("workSchedule");
-        
+                
         controller.createOdontologist(firstName, surname, address, phone, birthday, dni, specialization, workShedule);
         
         response.sendRedirect("SvOdontologists");

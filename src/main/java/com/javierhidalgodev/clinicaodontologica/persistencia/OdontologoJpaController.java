@@ -35,6 +35,7 @@ public class OdontologoJpaController implements Serializable {
     }
 
     public void edit(Odontologo odontologo) throws NonexistentEntityException, Exception {
+        System.out.println("Entro por aquí");
         EntityManager em = PersistenceManager.getInstance().getEntityManager();
         try {
             em.getTransaction().begin();

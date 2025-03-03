@@ -102,6 +102,7 @@ public class UsuarioJpaController implements Serializable {
     }
 
     public Usuario findUsuario(int id) {
+        System.out.println(id);
         EntityManager em = PersistenceManager.getInstance().getEntityManager();
         try {
             return em.find(Usuario.class, id);

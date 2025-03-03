@@ -3,7 +3,6 @@ package com.javierhidalgodev.clinicaodontologica.servlets;
 import com.javierhidalgodev.clinicaodontologica.logica.Controller;
 import com.javierhidalgodev.clinicaodontologica.logica.Usuario;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,7 +31,6 @@ public class SvUsersEdit extends HttpServlet {
         if (userIdToEdit != null && !userIdToEdit.isEmpty()) {
             int userId = Integer.parseInt(userIdToEdit);
             Usuario userToEdit = controller.getUserById(userId);
-            System.out.println(userToEdit.getUsername());
             
             request.getSession().setAttribute("userToEdit", userToEdit);
             

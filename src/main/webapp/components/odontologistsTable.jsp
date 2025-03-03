@@ -65,9 +65,9 @@
                         </td>
                         <td><%= o.getDni() %></td>
                         <td><%= o.getSpecialization() %></td>
-                        <td><%= o.getWorkSchedule() != null ? o.getWorkSchedule().getExitTime() + " - " + o.getWorkSchedule().getExitTime() : "Not assigned" %></td>
+                        <td><%= o.getWorkSchedule() != null ? o.getWorkSchedule().getName() + " / " + o.getWorkSchedule().getEntryTime() + " - " + o.getWorkSchedule().getExitTime() : "Not assigned" %></td>
                         <td>
-                            <form action="SvUsersEdit" method="GET">
+                            <form action="SvOdontologistsEdit" method="GET">
                                 <input type="hidden" name="id" value="<%= o.getId()%>" />
                                 <button type="submit" class="btn btn-primary">Editar</button>
                             </form>

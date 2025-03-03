@@ -109,10 +109,26 @@ public class PersistenceController {
         return patientController.findPaciente(patientID);
     }
 
-    public void createSecretary(String firstName, String surname, String address, String phone, Date birth, String dni, String floor, User user) {
+    public void createSecretary(String firstName, String surname, String address, String phone, Date birth, String dni, String floor, Usuario user) {
         Secretario secretary = new Secretario(floor, user, firstName, surname, phone, address, birth, dni);
         
         secretaryController.create(secretary);
+    }
+
+    public Odontologo getOdontologistById(int odontologistId) {
+        return odontologistController.findOdontologo(odontologistId);
+    }
+
+    public Horario getWorkScheduleById(int workScheduleId) {
+        return workScheduleController.findHorario(workScheduleId);
+    }
+
+    public void editOdontologist(Odontologo odontologistToEdit) {
+        try {
+            odontologistController.edit(odontologistToEdit);
+        } catch (Exception ex) {
+            Logger.getLogger(PersistenceController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }
