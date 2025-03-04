@@ -1,5 +1,6 @@
 package com.javierhidalgodev.clinicaodontologica.servlets;
 
+import com.javierhidalgodev.clinicaodontologica.dto.user.UserDTO;
 import com.javierhidalgodev.clinicaodontologica.logica.Controller;
 import com.javierhidalgodev.clinicaodontologica.logica.Usuario;
 import java.io.IOException;
@@ -27,7 +28,7 @@ public class SvUsers extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        List<Usuario> users = controller.getAllUsers();
+        List<UserDTO> users = controller.getAllUsers();
         
         request.getSession().setAttribute("userList", users);
         response.sendRedirect("vistaUsuarios.jsp");

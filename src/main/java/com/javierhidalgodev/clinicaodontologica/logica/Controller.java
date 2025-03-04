@@ -1,6 +1,8 @@
 package com.javierhidalgodev.clinicaodontologica.logica;
 
+import com.javierhidalgodev.clinicaodontologica.dto.user.UserDTO;
 import com.javierhidalgodev.clinicaodontologica.persistencia.PersistenceController;
+import java.sql.Array;
 import java.time.LocalDate;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -30,8 +32,15 @@ public class Controller {
         persistenceController.createUser(newUser);
     }
 
-    public List<Usuario> getAllUsers() {
-        return persistenceController.getAllUsers();
+    public List<UserDTO> getAllUsers() {
+        List<Usuario> users = persistenceController.getAllUsers();
+        
+        List<UserDTO> usersDTO = new ArrayList<>();
+        for(Usuario u : users) {
+            usersDTO.add(new UserDTO(u.getIdUser(), u.getUsername(), u.getRole()));
+        }
+        
+        return usersDTO;
     }
 
     public void destroyUser(int idUser) {
