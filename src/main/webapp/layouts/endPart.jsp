@@ -18,3 +18,13 @@
 </body>
 
 </html>
+
+<style>
+    select, input[type=date] {
+        padding: 1rem 1rem 2rem 1rem !important;
+    }
+
+    label {
+        font-size: smaller;
+    }
+</style>
