@@ -7,7 +7,6 @@
     Secretario secretaryToEdit = (Secretario) session.getAttribute("secretaryToEdit");
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     String birth = sdf.format(secretaryToEdit.getBirthdate());
-    
 %>
 
 <div class="container">

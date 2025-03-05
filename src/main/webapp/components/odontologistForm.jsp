@@ -6,83 +6,68 @@
     List<Horario> workScheduleList = (List<Horario>) session.getAttribute("workScheduleList");
 %>
 
-<div class="container">
-    <div class="card o-hidden border-0 shadow-lg my-5">
-        <div class="card-body p-0">
-            <!-- Nested Row within Card Body -->
-            <div>
-                <div class="p-5">
-                    <div class="text-center">
-                        <h1 class="h4 text-gray-900 mb-4 text-left">Create an Odontologist!</h1>
-                    </div>
-                    <form class="user" action="SvOdontologists" method="POST" id="form">
-                        <div class="form-group row">
-                            <div class="col-md-6 mb-3 mb-md-0">
-                                <label for="firstName">Name</label>
-                                <input type="text" class="form-control form-control-user" id="firstName" name="firstName" placeholder="First Name" >
-                                <span id="errorFirstName" class="error-validation"></span>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="surname">Surname</label>
-                                <input type="text" class="form-control form-control-user" id="surname" name="surname" placeholder="Surname" >
-                                <span id="errorSurname" class="error-validation"></span>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-md-6 mb-3 mb-md-0">
-                                <label for="address">Address</label>
-                                <input type="text" class="form-control form-control-user" id="address" name="address" placeholder="Address" >
-                                <span id="errorAddress" class="error-validation"></span>
-                            </div>
-                            <div class="col-md-6 mb-3 mb-md-0">
-                                <label for="phone">Phone</label>
-                                <input type="tel" class="form-control form-control-user" id="phone" name="phone" placeholder="Phone" >
-                                <span id="errorPhone" class="error-validation"></span>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-md-6">
-                                <label for="birthdate">Birthdate</label>
-                                <input type="date" class="form-control form-control-user" id="birthdate" name="birthday" >
-                                <span id="errorBirthdate" class="error-validation"></span>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="dni">DNI</label>
-                                <input type="text" class="form-control form-control-user" id="dni" name="dni" placeholder="DNI" >
-                                <span id="errorDNI" class="error-validation"></span>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-md-6 mb-3 mb-md-0">
-                                <label for="specialization">Specialization</label>
-                                <input type="text" class="form-control form-control-user" id="specialization" name="specialization" placeholder="Specialization">
-                                <span id="errorSpecialization" class="error-validation"></span>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="workSchedule">Work Schedule</label>
-                                <select class="form-control form-control-user" id="workSchedule" name="workSchedule" >
-                                    <option selected>Select one</option>
-                                    <%
-                                        for (Horario wS : workScheduleList) {
-                                    %> <option value="<%= wS.getName()%>"><%= wS.getName() + " / " + wS.getEntryTime()%> -  <%= wS.getExitTime()%></option> <%
-                                        }
-                                    %>
-                                    <!--                                    <option value="morning">Mañana</option>
-                                                                        <option value="evening">Tarde</option>-->
-                                </select>
-                                <span id="errorWorkSchedule" class="error-validation"></span>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-success btn-user btn-block">
-                            Create
-                        </button>
-                    </form>
-                </div>
-            </div>
+<form class="user" action="SvOdontologists" method="POST" id="form">
+    <div class="form-group row">
+        <div class="col-md-6 mb-3 mb-md-0">
+            <label for="firstName">Name</label>
+            <input type="text" class="form-control form-control-user" id="firstName" name="firstName" placeholder="First Name" >
+            <span id="errorFirstName" class="error-validation"></span>
+        </div>
+        <div class="col-md-6">
+            <label for="surname">Surname</label>
+            <input type="text" class="form-control form-control-user" id="surname" name="surname" placeholder="Surname" >
+            <span id="errorSurname" class="error-validation"></span>
         </div>
     </div>
-
-</div>
+    <div class="form-group row">
+        <div class="col-md-6 mb-3 mb-md-0">
+            <label for="address">Address</label>
+            <input type="text" class="form-control form-control-user" id="address" name="address" placeholder="Address" >
+            <span id="errorAddress" class="error-validation"></span>
+        </div>
+        <div class="col-md-6 mb-3 mb-md-0">
+            <label for="phone">Phone</label>
+            <input type="tel" class="form-control form-control-user" id="phone" name="phone" placeholder="Phone" >
+            <span id="errorPhone" class="error-validation"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-6">
+            <label for="birthdate">Birthdate</label>
+            <input type="date" class="form-control form-control-user" id="birthdate" name="birthday" >
+            <span id="errorBirthdate" class="error-validation"></span>
+        </div>
+        <div class="col-md-6">
+            <label for="dni">DNI</label>
+            <input type="text" class="form-control form-control-user" id="dni" name="dni" placeholder="DNI" >
+            <span id="errorDNI" class="error-validation"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-6 mb-3 mb-md-0">
+            <label for="specialization">Specialization</label>
+            <input type="text" class="form-control form-control-user" id="specialization" name="specialization" placeholder="Specialization">
+            <span id="errorSpecialization" class="error-validation"></span>
+        </div>
+        <div class="col-md-6">
+            <label for="workSchedule">Work Schedule</label>
+            <select class="form-control form-control-user" id="workSchedule" name="workSchedule" >
+                <option selected>Select one</option>
+                <%
+                    for (Horario wS : workScheduleList) {
+                %> <option value="<%= wS.getName()%>"><%= wS.getName() + " / " + wS.getEntryTime()%> -  <%= wS.getExitTime()%></option> <%
+                    }
+                %>
+                <!--                                    <option value="morning">Mañana</option>
+                                                    <option value="evening">Tarde</option>-->
+            </select>
+            <span id="errorWorkSchedule" class="error-validation"></span>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-success btn-user btn-block">
+        Create
+    </button>
+</form>
 
 <script>
     function validateForm(e) {
