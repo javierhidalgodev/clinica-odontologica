@@ -47,8 +47,9 @@ function validateForm(ev) {
         } else {
             field.nextElementSibling.textContent = "";
         }
-
     });
+    
+    if(isValid) form.submit();
 }
 
 function showError(field, message) {
