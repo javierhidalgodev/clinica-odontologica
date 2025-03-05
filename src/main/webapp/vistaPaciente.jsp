@@ -5,8 +5,6 @@
     Paciente patient = (Paciente) session.getAttribute("patientDetails");
 %>
 
-
-
 <p>Name: <%= patient.getName()%></p>
 <p>Surname: <%= patient.getSurname()%></p>
 <p>Address: <%= patient.getAddress()%></p>

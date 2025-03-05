@@ -11,74 +11,66 @@
     List<Paciente> patientsList = (List<Paciente>) session.getAttribute("patientsList");
 %>
 
-<div class="card shadow mb-4">
-    <!--    <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
-        </div>-->
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Address</th>
-                        <th>Phone</th>
-                        <th>Date of birth</th>
-                        <th>DNI</th>
-                        <th>Details</th>
-                    </tr>
-                </thead>
-                <tfoot>
-                    <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Address</th>
-                        <th>Phone</th>
-                        <th>Date of birth</th>
-                        <th>DNI</th>
-                        <th>Details</th>
-                    </tr>
-                </tfoot>
-                <tbody>
-                    <%
-                        if (!patientsList.isEmpty()) {
-                            int i = 0;
+<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Phone</th>
+            <th>Date of birth</th>
+            <th>DNI</th>
+            <th>Details</th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Phone</th>
+            <th>Date of birth</th>
+            <th>DNI</th>
+            <th>Details</th>
+        </tr>
+    </tfoot>
+    <tbody>
+        <%
+            if (!patientsList.isEmpty()) {
+                int i = 0;
 
-                                for (Paciente p : patientsList) {%>
-                    <tr>
-                        <td><%= i + 1%></td>
-                        <td><%= p.getName() + " " + p.getSurname() %></td>
-                        <td><%= p.getAddress()%></td>
-                        <td><%= p.getPhone()%></td>
-                        <td>
-                            <%
-                                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
-                                String formatDate = simpleDateFormat.format(p.getBirthdate());
-                            %>
-                            <%= formatDate %>
-                        </td>
-                        <td><%= p.getDni() %></td>
-                        <td>
-                            <form action="SvPatientInfo" method="GET">
-                                <input type="hidden" name="id" value="<%= p.getId()%>" />
-                                <button type="submit" class="btn btn-primary">Details</button>
-                            </form>
-                        </td>                        
-                    </tr> <%
+                            for (Paciente p : patientsList) {%>
+        <tr>
+            <td><%= i + 1%></td>
+            <td><%= p.getName() + " " + p.getSurname()%></td>
+            <td><%= p.getAddress()%></td>
+            <td><%= p.getPhone()%></td>
+            <td>
+                <%
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+                    String formatDate = simpleDateFormat.format(p.getBirthdate());
+                %>
+                <%= formatDate%>
+            </td>
+            <td><%= p.getDni()%></td>
+            <td>
+                <form action="SvPatientInfo" method="GET">
+                    <input type="hidden" name="id" value="<%= p.getId()%>" />
+                    <button type="submit" class="btn btn-primary">Details</button>
+                </form>
+            </td>                        
+        </tr> <%
 
-                            i++;
-                        }
-                    } else {
-                    %>
-                    <tr class="bg-gray-200 text-center font-weight-bold">
-                        <td colspan="7">No data available</td>
-                    </tr>
-                    <%
-                        }
-                    %>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
+                i++;
+            }
+        } else {
+        %>
+        <tr class="bg-gray-200 text-center font-weight-bold">
+            <td colspan="7">No data available</td>
+        </tr>
+        <%
+            }
+        %>
+    </tbody>
+</table>
+
