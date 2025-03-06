@@ -155,7 +155,7 @@ public class Controller {
         odontologistToEdit.setBirthdate(Date.valueOf(birthdate));
         odontologistToEdit.setSpecialization(specialization);
         odontologistToEdit.setWorkSchedule(wS);
-        
+                
         persistenceController.editOdontologist(odontologistToEdit);
     }
     
@@ -171,7 +171,7 @@ public class Controller {
         return persistenceController.getSecretaryById(secretaryId);
     }
 
-    public void editSecretary(Secretario secretaryToEdit, String firstName, String surname, String address, String phone, String birthday, String dni, String floor) {
+    public void editSecretary(Secretario secretaryToEdit, String firstName, String surname, String address, String phone, String birthday, String floor) {
         LocalDate localDate = LocalDate.parse(birthday);
         Date birth = Date.valueOf(localDate);
         
@@ -180,7 +180,6 @@ public class Controller {
         secretaryToEdit.setAddress(address);
         secretaryToEdit.setPhone(phone);
         secretaryToEdit.setBirthdate(birth);
-        secretaryToEdit.setDni(dni);
         secretaryToEdit.setFloor(floor);
         secretaryToEdit.setUser(null);
         

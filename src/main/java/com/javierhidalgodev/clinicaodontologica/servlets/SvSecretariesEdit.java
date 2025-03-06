@@ -55,7 +55,7 @@ public class SvSecretariesEdit extends HttpServlet {
         HttpSession mySession = request.getSession();
         Secretario secretaryToEdit = (Secretario) mySession.getAttribute("secretaryToEdit");
         
-        controller.editSecretary(secretaryToEdit, firstName, surname, address, phone, birthday, dni, floor);
+        controller.editSecretary(secretaryToEdit, firstName, surname, address, phone, birthday, floor);
 
         response.sendRedirect("SvSecretaries");
     }
