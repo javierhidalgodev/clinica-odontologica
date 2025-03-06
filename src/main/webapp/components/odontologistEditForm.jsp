@@ -10,7 +10,7 @@
     Odontologo odontologistToEdit = (Odontologo) session.getAttribute("odontologistToEdit");
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     String birth = sdf.format(odontologistToEdit.getBirthdate());
-    
+
     List<Horario> workScheduleList = (List<Horario>) session.getAttribute("workScheduleList");
     String odontologistWorkSchedule = odontologistToEdit.getWorkSchedule() != null ? odontologistToEdit.getWorkSchedule().getName() : "not assigned";
 %>
@@ -72,7 +72,7 @@
         </div>
     </div>
 
-    <button type="submit" class="btn btn-success btn-user btn-block font-weight-bold">
+    <button id="submitBtn" type="submit" class="btn btn-success btn-user btn-block font-weight-bold">
         Edit
     </button>
 </form>

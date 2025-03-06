@@ -64,7 +64,7 @@
             <span id="errorWorkSchedule" class="error-validation"></span>
         </div>
     </div>
-    <button type="submit" class="btn btn-success btn-user btn-block">
+    <button id="submitBtn" type="submit" class="btn btn-success btn-user btn-block">
         Create
     </button>
 </form>

@@ -25,4 +25,14 @@ public enum Relationship {
     public String getRelationshipDescription() {
         return relationshipDescription;
     }
+    
+    public static String fromKey(String key) {
+        for(Relationship r : Relationship.values()) {
+            if(r.getRelationship().equals(key)) {
+                return r.getRelationshipDescription();
+            }
+        }
+        
+        return "not assigned";
+    }
 }

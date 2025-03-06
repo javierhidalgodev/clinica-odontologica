@@ -1,12 +1,19 @@
+<%@page import="com.javierhidalgodev.clinicaodontologica.logica.Paciente"%>
 <%@page import="com.javierhidalgodev.clinicaodontologica.logica.Relationship"%>
 <%@page import="com.javierhidalgodev.clinicaodontologica.logica.BloodType"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
+<%
+
+    Paciente patient = (Paciente) session.getAttribute("patientDetails");
+
+%>
+
 <form class="user" action="SvPatients" method="POST" id="form">
     <div class="form-group row">
         <div class="col-md-6 mb-3 mb-md-0">
-            <input type="text" class="form-control form-control-user" id="exampleFirstName" name="patientFirstName" placeholder="First Name" data-validations="required|minLength:3|maxLength:20">
+            <input type="text" class="form-control form-control-user" id="exampleFirstName" name="patientFirstName" placeholder="First Name" value="<%= patient.getName() %>" data-validations="required|minLength:3|maxLength:20">
             <span class="error-validation"></span>
         </div>
         <div class="col-md-6">

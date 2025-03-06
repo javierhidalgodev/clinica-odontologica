@@ -61,13 +61,13 @@
             <td>
                 <form action="SvSecretariesEdit" method="GET">
                     <input type="hidden" name="idToEdit" value="<%= s.getId()%>" />
-                    <button type="submit" class="btn btn-primary">Editar</button>
+                    <button type="submit" class="btn btn-primary fas fa-edit"></button>
                 </form>
             </td>
             <td>
                 <form action="SvSecretariesDelete" method="POST">
                     <input type="hidden" name="id" value="<%= s.getId()%>" />
-                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                    <button type="submit" class="btn btn-danger fas fa-trash-alt"></button>
                 </form>
             </td>
         </tr> <%

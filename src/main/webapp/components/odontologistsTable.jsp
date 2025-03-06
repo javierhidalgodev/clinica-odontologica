@@ -63,13 +63,13 @@
             <td>
                 <form action="SvOdontologistsEdit" method="GET">
                     <input type="hidden" name="id" value="<%= o.getId()%>" />
-                    <button type="submit" class="btn btn-primary">Editar</button>
+                    <button type="submit" class="btn btn-primary fas fa-edit"></button>
                 </form>
             </td>
             <td>
                 <form action="SvOdontologistsDelete" method="POST">
                     <input type="hidden" name="idToDelete" value="<%= o.getId()%>" />
-                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                    <button type="submit" class="btn btn-danger fas fa-trash-alt"></button>
                 </form>
             </td>
         </tr> <%
