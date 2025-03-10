@@ -206,4 +206,9 @@ public class Controller {
         
         persistenceController.editPatient(patientToEdit);
     }
+
+    public void destroyPatient(int patientID) {
+        System.out.println(patientID);
+        persistenceController.destroyPatient(patientID);
+    }
 }

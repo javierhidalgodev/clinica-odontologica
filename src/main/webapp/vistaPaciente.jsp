@@ -16,11 +16,14 @@
     <div class="card-header py-3">
         <div class="d-flex justify-content-between align-items-center">
             <span class="m-0 font-weight-bold text-primary">Pacient Info</span>
-            <div class="" id="actions">
+            <div class="d-flex" id="actions">
 
-                <a href="edicionPaciente.jsp" class="btn btn-success">Editar</a>
+                <a href="edicionPaciente.jsp" class="btn btn-success mr-2">Editar</a>
 
-                <button  class="btn btn-danger">Eliminar</button>
+                <form action="SvPatientDelete" method="POST">
+                    <input type="hidden" id="patientIdToDelete" name="idToDelete" value="<%= patient.getId() %>">
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                </form>
             </div>
         </div>
     </div>
@@ -55,7 +58,7 @@
             <p>Surname: <%= guardian.getSurname()%></p>
             <p>Address: <%= guardian.getAddress()%></p>
             <p>Phone: <%= guardian.getPhone()%></p>
-            <p>Birthdate: <%= sdf.format(guardian.getBirthdate()) %></p>
+            <p>Birthdate: <%= sdf.format(guardian.getBirthdate())%></p>
             <p>DNI: <%= guardian.getDni()%></p>
             <p>Relationship: <%= Relationship.fromKey(guardian.getRelationship())%></p>
         </div>
