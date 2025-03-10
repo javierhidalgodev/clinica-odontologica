@@ -190,4 +190,20 @@ public class Controller {
     public void destroySecretary(int idSecretary) {
         persistenceController.destroySecretary(idSecretary);
     }
+
+    public void editPatient(Paciente patientToEdit, String patientFirstName, String patientSurname, String patientAddress, String patientPhone, String patientBirthdate, String prepaidHealth, String bloodType) {
+        LocalDate localDate = LocalDate.parse(patientBirthdate);
+        Date birth = Date.valueOf(localDate);
+        Boolean pPH = Boolean.parseBoolean(prepaidHealth);
+        
+        patientToEdit.setName(patientFirstName);
+        patientToEdit.setSurname(patientSurname);
+        patientToEdit.setAddress(patientAddress);
+        patientToEdit.setPhone(patientPhone);
+        patientToEdit.setBirthdate(birth);
+        patientToEdit.setPrepaidHealth(pPH);
+        patientToEdit.setBloodType(bloodType);
+        
+        persistenceController.editPatient(patientToEdit);
+    }
 }

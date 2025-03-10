@@ -162,5 +162,12 @@ public class PersistenceController {
             Logger.getLogger(PersistenceController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
+    public void editPatient(Paciente patientToEdit) {
+        try {
+            patientController.edit(patientToEdit);
+        } catch (Exception ex) {
+            Logger.getLogger(PersistenceController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

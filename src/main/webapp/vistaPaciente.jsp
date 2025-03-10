@@ -1,3 +1,4 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.javierhidalgodev.clinicaodontologica.logica.Relationship"%>
 <%@page import="com.javierhidalgodev.clinicaodontologica.logica.Responsable"%>
 <%@page import="com.javierhidalgodev.clinicaodontologica.logica.Paciente"%>
@@ -5,6 +6,9 @@
 <%@include file="layouts/firstPart.jsp" %>
 <%
     Paciente patient = (Paciente) session.getAttribute("patientDetails");
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    String patientBirth = sdf.format(patient.getBirthdate());
+
     Responsable guardian = patient.getGuardian();
 %>
 
@@ -13,9 +17,9 @@
         <div class="d-flex justify-content-between align-items-center">
             <span class="m-0 font-weight-bold text-primary">Pacient Info</span>
             <div class="" id="actions">
-                                    
+
                 <a href="edicionPaciente.jsp" class="btn btn-success">Editar</a>
-               
+
                 <button  class="btn btn-danger">Eliminar</button>
             </div>
         </div>
@@ -25,7 +29,7 @@
         <p>Surname: <%= patient.getSurname()%></p>
         <p>Address: <%= patient.getAddress()%></p>
         <p>Phone: <%= patient.getPhone()%></p>
-        <p>DNI: <%= patient.getDni()%></p>
+        <p>Birthdate: <%= patientBirth%></p>
         <p>Blood type: <%= patient.getBloodType()%></p>
         <p>DNI: <%= patient.getDni()%></p>
         <p>Prepaid Health: <%= patient.getPrepaidHealth() ? "Sí" : "No"%></p>
@@ -51,6 +55,7 @@
             <p>Surname: <%= guardian.getSurname()%></p>
             <p>Address: <%= guardian.getAddress()%></p>
             <p>Phone: <%= guardian.getPhone()%></p>
+            <p>Birthdate: <%= sdf.format(guardian.getBirthdate()) %></p>
             <p>DNI: <%= guardian.getDni()%></p>
             <p>Relationship: <%= Relationship.fromKey(guardian.getRelationship())%></p>
         </div>
