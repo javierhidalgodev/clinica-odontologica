@@ -18,6 +18,7 @@ function validateField(ev) {
             return;
 
         if (rule === "required" && value === "") {
+            console.log(value);
             message = "Campo requerido";
         } else if (rule.startsWith("minLength")) {
             const min = parseInt(rule.split(":")[1]);

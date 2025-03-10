@@ -64,7 +64,7 @@
                 <option selected value="">Select one to change</option>
                 <%
                     for (Horario wS : workScheduleList) {
-                %> <option value="<%= wS.getIdWorkSchedule()%>"><%= wS.getName() + " / " + wS.getEntryTime()%> -  <%= wS.getExitTime()%></option> <%
+                %> <option value="<%= wS.getIdWorkSchedule()%>" <%= odontologistWorkSchedule.equals(wS.getName()) ? "selected" : "" %> ><%= wS.getName() + " / " + wS.getEntryTime()%> -  <%= wS.getExitTime()%></option> <%
                     }
                 %>
             </select>

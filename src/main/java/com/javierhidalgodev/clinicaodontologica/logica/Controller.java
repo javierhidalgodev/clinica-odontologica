@@ -152,6 +152,7 @@ public class Controller {
         odontologistToEdit.setName(firstName);
         odontologistToEdit.setSurname(surname);
         odontologistToEdit.setAddress(address);
+        odontologistToEdit.setPhone(phone);
         odontologistToEdit.setBirthdate(Date.valueOf(birthdate));
         odontologistToEdit.setSpecialization(specialization);
         odontologistToEdit.setWorkSchedule(wS);
