@@ -33,9 +33,9 @@
         <p>Address: <%= patient.getAddress()%></p>
         <p>Phone: <%= patient.getPhone()%></p>
         <p>Birthdate: <%= patientBirth%></p>
-        <p>Blood type: <%= patient.getBloodType()%></p>
         <p>DNI: <%= patient.getDni()%></p>
         <p>Prepaid Health: <%= patient.getPrepaidHealth() ? "Sí" : "No"%></p>
+        <p>Blood type: <%= patient.getBloodType()%></p>
     </div>
 </div>
 
