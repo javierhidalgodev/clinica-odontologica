@@ -20,7 +20,7 @@
 
                 <a href="edicionPaciente.jsp" class="btn btn-success mr-2">Editar</a>
 
-                <form action="SvPatientDelete" method="POST">
+                <form action="SvPatientDelete" method="POST" id="deleteForm">
                     <input type="hidden" id="patientIdToDelete" name="idToDelete" value="<%= patient.getId() %>">
                     <button type="submit" class="btn btn-danger">Eliminar</button>
                 </form>
@@ -67,3 +67,19 @@
 <% }%>
 
 <%@include file="layouts/endPart.jsp" %>
+
+<script>
+    deleteForm = document.getElementById("deleteForm");
+    
+    function confirmDelete(ev) {
+        ev.preventDefault();
+        
+        confirmation = confirm("¿Estás seguro de que deseas eliminar el registro? Esta operación es irreversible.");
+        
+        if(confirmation) {
+            deleteForm.submit();
+        }
+    }
+    
+    deleteForm.addEventListener("submit", confirmDelete);
+</script>
