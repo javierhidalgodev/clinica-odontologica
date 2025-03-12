@@ -175,6 +175,25 @@ public class Controller {
 
     }
 
+    public void editGuardian(Responsable guardian, String firstName, String surname, String address, String phone, String birthdate, String relationship) {
+
+        LocalDate localDate = LocalDate.parse(birthdate);
+        Date birth = Date.valueOf(localDate);
+
+        guardian.setName(firstName);
+        guardian.setSurname(surname);
+        guardian.setAddress(address);
+        guardian.setPhone(phone);
+        guardian.setBirthdate(birth);
+        guardian.setRelationship(relationship);
+
+        persistenceController.editGuardian(guardian);
+    }
+
+    public void destroyGuardian(int guardianIdToDelete) {
+        persistenceController.destroyGuardian(guardianIdToDelete);
+    }
+
     // Secretary
     public void createSecretary(String firstName, String surname, String address, String phone, String birthday, String dni, String floor) {
 
@@ -220,20 +239,5 @@ public class Controller {
 
     public List<Horario> getWorkScheduleList() {
         return persistenceController.getWorkScheduleList();
-    }
-
-    public void editGuardian(Responsable guardian, String firstName, String surname, String address, String phone, String birthdate, String relationship) {
-        
-        LocalDate localDate = LocalDate.parse(birthdate);
-        Date birth = Date.valueOf(localDate);
-        
-        guardian.setName(firstName);
-        guardian.setSurname(surname);
-        guardian.setAddress(address);
-        guardian.setPhone(phone);
-        guardian.setBirthdate(birth);
-        guardian.setRelationship(relationship);
-
-        persistenceController.editGuardian(guardian);
     }
 }

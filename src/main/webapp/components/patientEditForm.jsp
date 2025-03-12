@@ -76,6 +76,8 @@
         </div>
     </div>
     <hr>
+    <%
+        if (patient.getGuardian() == null) { %>
     <div id="guardianData" class="d-none">
         <h6>Guardian data</h6>
         <div class="form-group row">
@@ -122,6 +124,7 @@
             <span class="error-validation"></span>
         </div>
     </div>
+    <% }%>
     <button id="submitBtn" type="submit" class="btn btn-success btn-user btn-block">
         Edit
     </button>
@@ -140,10 +143,12 @@
             today = new Date();
             guardianDataForm = document.getElementById("guardianData")
 
-            if (over18 < today) {
-                guardianDataForm.classList.replace("d-block", "d-none");
-            } else {
-                guardianDataForm.classList.replace("d-none", "d-block");
+            if(guardianDataForm !== null) {
+                if (over18 < today) {
+                    guardianDataForm.classList.replace("d-block", "d-none");
+                } else {
+                    guardianDataForm.classList.replace("d-none", "d-block");
+                }
             }
         }
     }

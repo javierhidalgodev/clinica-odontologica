@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -20,6 +21,7 @@ public class Paciente extends Persona implements Serializable {
     private boolean prepaidHealth;
     private String bloodType;
     @OneToOne
+    @JoinColumn(nullable = true)
     private Responsable guardian;
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
     private List<Turno> appointments;

@@ -52,7 +52,7 @@ public class SvPatientsEdit extends HttpServlet {
         LocalDate birth = LocalDate.parse(patientBirthdate);
         Period period = Period.between(birth, today);
 
-        if (period.getYears() < 18) {
+        if (patientToEdit.getGuardian() == null && period.getYears() < 18) {
             String guardianFirstName = request.getParameter("guardianFirstName");
             String guardianSurname = request.getParameter("guardianSurname");
             String guardianAddress = request.getParameter("guardianAddress");

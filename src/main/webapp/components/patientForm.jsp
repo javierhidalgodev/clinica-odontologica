@@ -19,13 +19,13 @@
             <input type="text" class="form-control form-control-user" id="exampleInputAddress" name="patientAddress" placeholder="Address" data-validations="required|minLength:3|maxLength:50">
             <span class="error-validation"></span>
         </div>
-        <div class="col-md-6 mb-3 mb-md-0">
+        <div class="col-md-6">
             <input type="tel" class="form-control form-control-user" id="examplePhone" name="patientPhone" placeholder="Phone" data-validations="required|phone">
             <span class="error-validation"></span>
         </div>
     </div>
     <div class="form-group row">
-        <div class="col-md-6">
+        <div class="col-md-6 mb-3 mb-md-0">
             <input type="date" class="form-control form-control-user" id="exampleBirthday" name="patientBirthdate" onchange="checkDate()" data-validations="required">
             <span class="error-validation"></span>
         </div>

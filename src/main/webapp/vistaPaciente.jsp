@@ -64,9 +64,8 @@
 
                     if (period.getYears() > 18) {
                 %>
-                        <form action = "SvGuardianDelete" method = "POST" data - form - action = "delete"
-                              > <input type = "hidden" id = "guardianIdToDelete" name = "idGuardianToDelete" value =
-                                 "<%= patient.getGuardian().getId()%>">
+                        <form action = "SvGuardianDelete" method = "POST" data-form-action="delete">
+                            <input type="hidden" id="guardianIdToDelete" name="guardianIdToDelete" value="<%= patient.getGuardian().getId()%>">
                             <button type="submit" class="btn btn-danger">Eliminar</button>
                         </form>
                 <% } %>
@@ -87,7 +86,6 @@
 
 <script>
     deleteForms = document.querySelectorAll("[data-form-action=delete]");
-    console.log(deleteForms);
 
     function confirmDelete(ev) {
         ev.preventDefault();

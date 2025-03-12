@@ -199,4 +199,12 @@ public class PersistenceController {
     public Horario getWorkScheduleById(int workScheduleId) {
         return workScheduleController.findHorario(workScheduleId);
     }
+
+    public void destroyGuardian(int guardianIdToDelete) {
+        try {
+            guardianController.destroy(guardianIdToDelete);
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(PersistenceController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
