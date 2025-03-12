@@ -1,4 +1,3 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="flex flex-column items-center mt-5">
     <div class="w-100" style="height: 50px; background-image: url('./img/logo-vitaldent.png'); background-size: contain; background-position: center; background-repeat: no-repeat"></div>
     <div class="col-12">

@@ -1,6 +1,5 @@
 <%@page import="com.javierhidalgodev.clinicaodontologica.logica.Horario"%>
 <%@page import="java.util.List"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
     List<Horario> workScheduleList = (List<Horario>) session.getAttribute("workScheduleList");
@@ -58,7 +57,7 @@
                 %> <option value="<%= wS.getName()%>"><%= wS.getName() + " / " + wS.getEntryTime()%> -  <%= wS.getExitTime()%></option> <%
                     }
                 %>
-                <!--                                    <option value="morning">MaÃ±ana</option>
+                <!--                                    <option value="morning">Mañana</option>
                                                     <option value="evening">Tarde</option>-->
             </select>
             <span id="errorWorkSchedule" class="error-validation"></span>

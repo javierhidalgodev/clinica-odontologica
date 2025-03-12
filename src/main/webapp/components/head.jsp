@@ -1,5 +1,3 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-
 <head>
 
     <meta charset="utf-8">
@@ -8,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Consultorio OdontolÃ³gico</title>
+    <title>Consultorio Odontológico</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">

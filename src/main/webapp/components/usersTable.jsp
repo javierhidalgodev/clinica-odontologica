@@ -2,7 +2,6 @@
 <%@page import="java.util.List"%>
 <%@page import="com.javierhidalgodev.clinicaodontologica.logica.Usuario"%>
 <%@page import="javax.swing.table.DefaultTableModel"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
     List<UserDTO> userList = (List) session.getAttribute("userList");

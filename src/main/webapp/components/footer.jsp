@@ -1,5 +1,3 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-
 <!-- Footer -->
 <footer class="sticky-footer bg-white">
     <div class="container my-auto">

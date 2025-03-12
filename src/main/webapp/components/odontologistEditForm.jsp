@@ -4,7 +4,6 @@
 <%@page import="java.time.LocalDate"%>
 <%@page import="java.util.logging.SimpleFormatter"%>
 <%@page import="com.javierhidalgodev.clinicaodontologica.logica.Odontologo"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
     Odontologo odontologistToEdit = (Odontologo) session.getAttribute("odontologistToEdit");

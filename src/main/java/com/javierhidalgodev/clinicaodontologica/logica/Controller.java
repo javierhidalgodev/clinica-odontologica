@@ -190,8 +190,8 @@ public class Controller {
         persistenceController.editGuardian(guardian);
     }
 
-    public void destroyGuardian(int guardianIdToDelete) {
-        persistenceController.destroyGuardian(guardianIdToDelete);
+    public void destroyGuardian(Paciente patient, int guardianIdToDelete) {        
+        persistenceController.destroyGuardian(patient, guardianIdToDelete);
     }
 
     // Secretary

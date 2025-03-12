@@ -1,5 +1,4 @@
 <%@page import="java.util.List"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <form class="user" action="SvSecretaries" method="POST" id="form">
     <div class="form-group row">

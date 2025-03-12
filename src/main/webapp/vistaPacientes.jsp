@@ -1,4 +1,3 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="layouts/firstPart.jsp" %>
 
 <div class="card shadow mb-4">

@@ -4,7 +4,6 @@
 <%@page import="com.javierhidalgodev.clinicaodontologica.logica.Relationship"%>
 <%@page import="com.javierhidalgodev.clinicaodontologica.logica.BloodType"%>
 <%@page import="java.util.List"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
 
@@ -118,7 +117,7 @@
                 %> <option value="<%= relationship.getRelationship()%>"><%= relationship.getRelationshipDescription()%></option> <%
                     }
                 %>
-                <!--                                    <option value="morning">MaÃ±ana</option>
+                <!--                                    <option value="morning">Mañana</option>
                                                     <option value="evening">Tarde</option>-->
             </select>
             <span class="error-validation"></span>

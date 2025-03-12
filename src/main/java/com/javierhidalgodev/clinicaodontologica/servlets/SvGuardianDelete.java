@@ -2,7 +2,6 @@ package com.javierhidalgodev.clinicaodontologica.servlets;
 
 import com.javierhidalgodev.clinicaodontologica.logica.Controller;
 import com.javierhidalgodev.clinicaodontologica.logica.Paciente;
-import com.javierhidalgodev.clinicaodontologica.logica.Responsable;
 import java.io.IOException;
 import java.time.LocalDate;
 import javax.servlet.ServletException;
@@ -36,14 +35,16 @@ public class SvGuardianDelete extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        HttpSession mySession = request.getSession();
+        Paciente patient = (Paciente) mySession.getAttribute("patientDetails");
+
         String guardianIdToDelete = request.getParameter("guardianIdToDelete");
 
-        if (guardianIdToDelete != null && !guardianIdToDelete.isEmpty()) {
+        if (patient != null && guardianIdToDelete != null && !guardianIdToDelete.isEmpty()) {
             int guardianID = Integer.parseInt(guardianIdToDelete);
-            controller.destroyGuardian(guardianID);
+            controller.destroyGuardian(patient, guardianID);
             response.sendRedirect("SvPatients");
         }
-
     }
 
     /**

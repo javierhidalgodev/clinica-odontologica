@@ -200,10 +200,18 @@ public class PersistenceController {
         return workScheduleController.findHorario(workScheduleId);
     }
 
-    public void destroyGuardian(int guardianIdToDelete) {
+    public void destroyGuardian(Paciente patient, int guardianIdToDelete) {
+        patient.setGuardian(null);
+        
         try {
-            guardianController.destroy(guardianIdToDelete);
-        } catch (NonexistentEntityException ex) {
+            patientController.edit(patient);
+            
+            try {
+                guardianController.destroy(guardianIdToDelete);
+            } catch (NonexistentEntityException ex) {
+                Logger.getLogger(PersistenceController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (Exception ex) {
             Logger.getLogger(PersistenceController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

@@ -4,7 +4,6 @@
 <%@page import="com.javierhidalgodev.clinicaodontologica.logica.Relationship"%>
 <%@page import="com.javierhidalgodev.clinicaodontologica.logica.Responsable"%>
 <%@page import="com.javierhidalgodev.clinicaodontologica.logica.Paciente"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="layouts/firstPart.jsp" %>
 <%
     Paciente patient = (Paciente) session.getAttribute("patientDetails");
@@ -36,7 +35,7 @@
         <p>Phone: <%= patient.getPhone()%></p>
         <p>Birthdate: <%= patientBirth%></p>
         <p>DNI: <%= patient.getDni()%></p>
-        <p>Prepaid Health: <%= patient.getPrepaidHealth() ? "SÃ­" : "No"%></p>
+        <p>Prepaid Health: <%= patient.getPrepaidHealth() ? "Sí" : "No"%></p>
         <p>Blood type: <%= patient.getBloodType()%></p>
     </div>
 </div>
@@ -90,7 +89,7 @@
     function confirmDelete(ev) {
         ev.preventDefault();
 
-        confirmation = confirm("Â¿EstÃ¡s seguro de que deseas eliminar el registro? Esta operaciÃ³n es irreversible.");
+        confirmation = confirm("¿Estás seguro de que deseas eliminar el registro? Esta operación es irreversible.");
 
         if (confirmation) {
             ev.target.submit();

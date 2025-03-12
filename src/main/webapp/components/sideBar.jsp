@@ -1,4 +1,3 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%--<%@include file="../auth.jsp" %>--%>
 
 <!-- Sidebar -->
@@ -9,7 +8,7 @@
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-solid fa-tooth"></i>
         </div>
-        <div class="sidebar-brand-text mx-3 text-left">Consultorio OdontolÃ³gico</div>
+        <div class="sidebar-brand-text mx-3 text-left">Consultorio Odontológico</div>
     </a>
 
     <!-- Divider -->
@@ -19,7 +18,7 @@
     <li class="nav-item active">
         <a class="nav-link" href="index.html">
             <i class="fas fa-solid fa-bars"></i>
-            <span>MenÃº</span></a>
+            <span>Menú</span></a>
     </li>
 
     <!-- Divider -->
@@ -27,7 +26,7 @@
 
     <!-- Heading -->
     <div class="sidebar-heading">
-        GestiÃ³n
+        Gestión
     </div>
 
     <!-- Nav Item - Odontologist Collapse Menu -->
@@ -35,7 +34,7 @@
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOdontologist"
            aria-expanded="true" aria-controls="collapseOdontologist">
             <i class="fas fa-solid fa-stethoscope"></i>
-            <span>OdontÃ³logos</span>
+            <span>Odontólogos</span>
         </a>
         <div id="collapseOdontologist" class="collapse" aria-labelledby="headingOdontologist" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">

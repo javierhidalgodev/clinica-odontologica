@@ -1,6 +1,5 @@
 <%@page import="com.javierhidalgodev.clinicaodontologica.logica.Horario"%>
 <%@page import="java.util.List"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <form class="user" action="SvWorkSchedule" method="POST">
     <div class="form-group">

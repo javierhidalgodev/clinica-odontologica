@@ -1,7 +1,6 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.javierhidalgodev.clinicaodontologica.logica.Secretario"%>
 <%@page import="java.util.List"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
     Secretario secretaryToEdit = (Secretario) session.getAttribute("secretaryToEdit");
