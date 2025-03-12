@@ -13,10 +13,10 @@ import java.util.List;
  * @author Javi
  */
 public class Controller {
-    
+
     public static Controller instance;
     PersistenceController persistenceController = PersistenceController.getInstance();
-    
+
     public static Controller getInstance() {
         if (instance == null) {
             instance = new Controller();
@@ -25,6 +25,8 @@ public class Controller {
         return instance;
     }
 
+    // User
+    
     public void createUser(String username, String password, String role) {
 
         Usuario newUser = new Usuario(username, password, role);
@@ -32,27 +34,27 @@ public class Controller {
         persistenceController.createUser(newUser);
     }
 
-    public List<UserDTO> getAllUsers() {
-        List<Usuario> users = persistenceController.getAllUsers();
-        
-        List<UserDTO> usersDTO = new ArrayList<>();
-        for(Usuario u : users) {
-            usersDTO.add(new UserDTO(u.getIdUser(), u.getUsername(), u.getRole()));
-        }
-        
-        return usersDTO;
-    }
-
     public void destroyUser(int idUser) {
         persistenceController.destroyUser(idUser);
     }
 
-    public Usuario getUserById(int userId) {
-        return persistenceController.getUserById(userId);
-    }
-
     public void editUser(Usuario userToEdit) {
         persistenceController.editUser(userToEdit);
+    }
+
+    public List<UserDTO> getAllUsers() {
+        List<Usuario> users = persistenceController.getAllUsers();
+
+        List<UserDTO> usersDTO = new ArrayList<>();
+        for (Usuario u : users) {
+            usersDTO.add(new UserDTO(u.getIdUser(), u.getUsername(), u.getRole()));
+        }
+
+        return usersDTO;
+    }
+
+    public Usuario getUserById(int userId) {
+        return persistenceController.getUserById(userId);
     }
 
     public boolean verifyUser(String username, String password) throws Exception {
@@ -67,6 +69,8 @@ public class Controller {
         }
     }
 
+    // Odontologist
+    
     public void createOdontologist(String firstName, String surname, String address, String phone, String birthday, String dni, String specialization, String workSchedule) {
 
         LocalDate localDate = LocalDate.parse(birthday);
@@ -87,25 +91,37 @@ public class Controller {
         persistenceController.createOdontologist(odontologist);
     }
 
-    public List<Horario> getWorkScheduleList() {
-        return persistenceController.getWorkScheduleList();
+    public void destroyOdontologist(int odontoID) {
+        persistenceController.destroyOdontologist(odontoID);
+    }
+
+    public void editOdontologist(Odontologo odontologistToEdit, String firstName, String surname, String address, String phone, String birthdate, String specialization, String workSchedule) {
+
+        int workScheduleId = Integer.parseInt(workSchedule);
+
+        Horario wS = persistenceController.getWorkScheduleById(workScheduleId);
+
+        odontologistToEdit.setName(firstName);
+        odontologistToEdit.setSurname(surname);
+        odontologistToEdit.setAddress(address);
+        odontologistToEdit.setPhone(phone);
+        odontologistToEdit.setBirthdate(Date.valueOf(birthdate));
+        odontologistToEdit.setSpecialization(specialization);
+        odontologistToEdit.setWorkSchedule(wS);
+
+        persistenceController.editOdontologist(odontologistToEdit);
     }
 
     public List<Odontologo> getAllOdontologists() {
         return persistenceController.getAllOdontologists();
     }
 
-    public Responsable createGuardian(String guardianFirstName, String guardianSurname, String guardianAddress, String guardianPhone, String guardianBirthdate, String guardianDNI, String relationship) {
-
-        LocalDate localDate = LocalDate.parse(guardianBirthdate);
-        Date birth = Date.valueOf(localDate);
-
-        Responsable guardian = new Responsable(relationship, guardianFirstName, guardianSurname, guardianPhone, guardianAddress, birth, guardianDNI);
-
-        return persistenceController.createGuardian(guardian);
-
+    public Odontologo getOdontologistById(int odontologistId) {
+        return persistenceController.getOdontologistById(odontologistId);
     }
 
+    // Patient
+    
     public void createPatient(String patientFirstName, String patientSurname, String patientAddress, String patientPhone, LocalDate patientBirthdate, String patientDNI, String prepaidHealth, String bloodType, Responsable guardian) {
 
         boolean pPH = Boolean.parseBoolean(prepaidHealth);
@@ -117,85 +133,16 @@ public class Controller {
         persistenceController.createPatient(patient);
     }
 
-    public List<Paciente> getAllPatients() {
-        return persistenceController.getAllPatients();
+    public void destroyPatient(int patientID) {
+        System.out.println(patientID);
+        persistenceController.destroyPatient(patientID);
     }
 
-    public void createWorkSchedule(String wsName, String entryTime, String exitTime) {
-        Horario workSchedule = new Horario(wsName, entryTime, exitTime);
-
-        persistenceController.createWorkSchedule(workSchedule);
-    }
-
-    public Paciente getPatientById(int patientID) {
-        return persistenceController.getPatientById(patientID);
-    }
-
-    public void createSecretary(String firstName, String surname, String address, String phone, String birthday, String dni, String floor) {
-        
-        LocalDate localDate = LocalDate.parse(birthday);
-        Date birth = Date.valueOf(localDate);
-        
-        persistenceController.createSecretary(firstName, surname, address, phone, birth, dni, floor, null);
-    }
-
-    public Odontologo getOdontologistById(int odontologistId) {
-        return persistenceController.getOdontologistById(odontologistId);
-    }
-
-    public void editOdontologist(Odontologo odontologistToEdit, String firstName, String surname, String address, String phone, String birthdate, String specialization, String workSchedule) {
-        
-        int workScheduleId = Integer.parseInt(workSchedule);
-        
-        Horario wS = persistenceController.getWorkScheduleById(workScheduleId);
-        
-        odontologistToEdit.setName(firstName);
-        odontologistToEdit.setSurname(surname);
-        odontologistToEdit.setAddress(address);
-        odontologistToEdit.setPhone(phone);
-        odontologistToEdit.setBirthdate(Date.valueOf(birthdate));
-        odontologistToEdit.setSpecialization(specialization);
-        odontologistToEdit.setWorkSchedule(wS);
-                
-        persistenceController.editOdontologist(odontologistToEdit);
-    }
-    
-    public List<Secretario> getAllSecretaries() {
-        return persistenceController.getAllSecretaries();
-    }
-
-    public void destroyOdontologist(int odontoID) {
-        persistenceController.destroyOdontologist(odontoID);
-    }
-
-    public Secretario getSecretaryById(int secretaryId) {
-        return persistenceController.getSecretaryById(secretaryId);
-    }
-
-    public void editSecretary(Secretario secretaryToEdit, String firstName, String surname, String address, String phone, String birthday, String floor) {
-        LocalDate localDate = LocalDate.parse(birthday);
-        Date birth = Date.valueOf(localDate);
-        
-        secretaryToEdit.setName(firstName);
-        secretaryToEdit.setSurname(surname);
-        secretaryToEdit.setAddress(address);
-        secretaryToEdit.setPhone(phone);
-        secretaryToEdit.setBirthdate(birth);
-        secretaryToEdit.setFloor(floor);
-        secretaryToEdit.setUser(null);
-        
-        persistenceController.editSecretary(secretaryToEdit);
-    }
-
-    public void destroySecretary(int idSecretary) {
-        persistenceController.destroySecretary(idSecretary);
-    }
-
-    public void editPatient(Paciente patientToEdit, String patientFirstName, String patientSurname, String patientAddress, String patientPhone, String patientBirthdate, String prepaidHealth, String bloodType) {
+    public void editPatient(Paciente patientToEdit, String patientFirstName, String patientSurname, String patientAddress, String patientPhone, String patientBirthdate, String prepaidHealth, String bloodType, Responsable guardian) {
         LocalDate localDate = LocalDate.parse(patientBirthdate);
         Date birth = Date.valueOf(localDate);
         Boolean pPH = Boolean.parseBoolean(prepaidHealth);
-        
+
         patientToEdit.setName(patientFirstName);
         patientToEdit.setSurname(patientSurname);
         patientToEdit.setAddress(patientAddress);
@@ -203,12 +150,77 @@ public class Controller {
         patientToEdit.setBirthdate(birth);
         patientToEdit.setPrepaidHealth(pPH);
         patientToEdit.setBloodType(bloodType);
-        
+
         persistenceController.editPatient(patientToEdit);
     }
 
-    public void destroyPatient(int patientID) {
-        System.out.println(patientID);
-        persistenceController.destroyPatient(patientID);
+    public List<Paciente> getAllPatients() {
+        return persistenceController.getAllPatients();
+    }
+
+    public Paciente getPatientById(int patientID) {
+        return persistenceController.getPatientById(patientID);
+    }
+
+    // Guardian
+    
+    public Responsable createGuardian(String guardianFirstName, String guardianSurname, String guardianAddress, String guardianPhone, String guardianBirthdate, String guardianDNI, String relationship) {
+
+        LocalDate localDate = LocalDate.parse(guardianBirthdate);
+        Date birth = Date.valueOf(localDate);
+
+        Responsable guardian = new Responsable(relationship, guardianFirstName, guardianSurname, guardianPhone, guardianAddress, birth, guardianDNI);
+
+        return persistenceController.createGuardian(guardian);
+
+    }
+
+    // Secretary
+    
+    public void createSecretary(String firstName, String surname, String address, String phone, String birthday, String dni, String floor) {
+
+        LocalDate localDate = LocalDate.parse(birthday);
+        Date birth = Date.valueOf(localDate);
+
+        persistenceController.createSecretary(firstName, surname, address, phone, birth, dni, floor, null);
+    }
+
+    public void destroySecretary(int idSecretary) {
+        persistenceController.destroySecretary(idSecretary);
+    }
+
+    public void editSecretary(Secretario secretaryToEdit, String firstName, String surname, String address, String phone, String birthday, String floor) {
+        LocalDate localDate = LocalDate.parse(birthday);
+        Date birth = Date.valueOf(localDate);
+
+        secretaryToEdit.setName(firstName);
+        secretaryToEdit.setSurname(surname);
+        secretaryToEdit.setAddress(address);
+        secretaryToEdit.setPhone(phone);
+        secretaryToEdit.setBirthdate(birth);
+        secretaryToEdit.setFloor(floor);
+        secretaryToEdit.setUser(null);
+
+        persistenceController.editSecretary(secretaryToEdit);
+    }
+
+    public List<Secretario> getAllSecretaries() {
+        return persistenceController.getAllSecretaries();
+    }
+
+    public Secretario getSecretaryById(int secretaryId) {
+        return persistenceController.getSecretaryById(secretaryId);
+    }
+    
+    // Work Schedule
+    
+    public void createWorkSchedule(String wsName, String entryTime, String exitTime) {
+        Horario workSchedule = new Horario(wsName, entryTime, exitTime);
+
+        persistenceController.createWorkSchedule(workSchedule);
+    }
+
+    public List<Horario> getWorkScheduleList() {
+        return persistenceController.getWorkScheduleList();
     }
 }
