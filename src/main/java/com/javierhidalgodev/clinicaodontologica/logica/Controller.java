@@ -5,6 +5,7 @@ import com.javierhidalgodev.clinicaodontologica.persistencia.PersistenceControll
 import java.sql.Array;
 import java.time.LocalDate;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -219,5 +220,20 @@ public class Controller {
 
     public List<Horario> getWorkScheduleList() {
         return persistenceController.getWorkScheduleList();
+    }
+
+    public void editGuardian(Responsable guardian, String firstName, String surname, String address, String phone, String birthdate, String relationship) {
+        
+        LocalDate localDate = LocalDate.parse(birthdate);
+        Date birth = Date.valueOf(localDate);
+        
+        guardian.setName(firstName);
+        guardian.setSurname(surname);
+        guardian.setAddress(address);
+        guardian.setPhone(phone);
+        guardian.setBirthdate(birth);
+        guardian.setRelationship(relationship);
+
+        persistenceController.editGuardian(guardian);
     }
 }

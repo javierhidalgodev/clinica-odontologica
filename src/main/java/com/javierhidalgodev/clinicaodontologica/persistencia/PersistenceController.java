@@ -17,8 +17,9 @@ import java.util.logging.Logger;
  * @author Javi
  */
 public class PersistenceController {
+
     private static PersistenceController instance;
-    
+
 //    private final PersonaJpaController peopleController;
     private final OdontologoJpaController odontologistController;
     private final PacienteJpaController patientController;
@@ -36,21 +37,19 @@ public class PersistenceController {
         this.workScheduleController = new HorarioJpaController();
         this.userController = new UsuarioJpaController();
     }
-    
+
     public static PersistenceController getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new PersistenceController();
         }
-        
+
         return instance;
     }
+
+    // User
     
     public void createUser(Usuario newUser) {
         userController.create(newUser);
-    }
-
-    public List<Usuario> getAllUsers() {
-        return userController.findUsuarioEntities();
     }
 
     public void destroyUser(int idUser) {
@@ -61,10 +60,6 @@ public class PersistenceController {
         }
     }
 
-    public Usuario getUserById(int userId) {
-        return userController.findUsuario(userId);
-    }
-
     public void editUser(Usuario userToEdit) {
         try {
             userController.edit(userToEdit);
@@ -73,66 +68,22 @@ public class PersistenceController {
         }
     }
 
+    public List<Usuario> getAllUsers() {
+        return userController.findUsuarioEntities();
+    }
+
+    public Usuario getUserById(int userId) {
+        return userController.findUsuario(userId);
+    }
+
     public Usuario getUserByLogin(String username, String password) {
         return userController.getUserByLogin(username, password);
     }
 
+    // Odontologist
+    
     public void createOdontologist(Odontologo odontologist) {
         odontologistController.create(odontologist);
-    }
-
-    public List<Horario> getWorkScheduleList() {
-        return workScheduleController.findHorarioEntities();
-    }
-
-    public List<Odontologo> getAllOdontologists() {
-        return odontologistController.findOdontologoEntities();
-    }
-
-    public Responsable createGuardian(Responsable guardian) {
-        return guardianController.create(guardian);
-    }
-
-    public void createPatient(Paciente patient) {
-        patientController.create(patient);
-    }
-
-    public List<Paciente> getAllPatients() {
-        return patientController.findPacienteEntities();
-    }
-
-    public void createWorkSchedule(Horario workSchedule) {
-        workScheduleController.create(workSchedule);
-    }
-
-    public Paciente getPatientById(int patientID) {
-        return patientController.findPaciente(patientID);
-    }
-
-    public void createSecretary(String firstName, String surname, String address, String phone, Date birth, String dni, String floor, Usuario user) {
-        Secretario secretary = new Secretario(floor, user, firstName, surname, phone, address, birth, dni);
-        
-        secretaryController.create(secretary);
-    }
-
-    public Odontologo getOdontologistById(int odontologistId) {
-        return odontologistController.findOdontologo(odontologistId);
-    }
-
-    public Horario getWorkScheduleById(int workScheduleId) {
-        return workScheduleController.findHorario(workScheduleId);
-    }
-
-    public void editOdontologist(Odontologo odontologistToEdit) {
-        try {
-            odontologistController.edit(odontologistToEdit);
-        } catch (Exception ex) {
-            Logger.getLogger(PersistenceController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    public List<Secretario> getAllSecretaries() {
-        return secretaryController.findSecretarioEntities();
     }
 
     public void destroyOdontologist(int odontoID) {
@@ -143,21 +94,31 @@ public class PersistenceController {
         }
     }
 
-    public Secretario getSecretaryById(int secretaryId) {
-        return secretaryController.findSecretario(secretaryId);
-    }
-
-    public void editSecretary(Secretario secretaryToEdit) {
+    public void editOdontologist(Odontologo odontologistToEdit) {
         try {
-            secretaryController.edit(secretaryToEdit);
+            odontologistController.edit(odontologistToEdit);
         } catch (Exception ex) {
             Logger.getLogger(PersistenceController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public void destroySecretary(int idSecretary) {
+    public List<Odontologo> getAllOdontologists() {
+        return odontologistController.findOdontologoEntities();
+    }
+
+    public Odontologo getOdontologistById(int odontologistId) {
+        return odontologistController.findOdontologo(odontologistId);
+    }
+
+    // Patient
+    
+    public void createPatient(Paciente patient) {
+        patientController.create(patient);
+    }
+
+    public void destroyPatient(int patientID) {
         try {
-            secretaryController.destroy(idSecretary);
+            patientController.destroy(patientID);
         } catch (NonexistentEntityException ex) {
             Logger.getLogger(PersistenceController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -171,11 +132,71 @@ public class PersistenceController {
         }
     }
 
-    public void destroyPatient(int patientID) {
+    public List<Paciente> getAllPatients() {
+        return patientController.findPacienteEntities();
+    }
+
+    public Paciente getPatientById(int patientID) {
+        return patientController.findPaciente(patientID);
+    }
+
+    // Guardian
+    
+    public Responsable createGuardian(Responsable guardian) {
+        return guardianController.create(guardian);
+    }
+
+    public void editGuardian(Responsable guardian) {
         try {
-            patientController.destroy(patientID);
+            guardianController.edit(guardian);
+        } catch (Exception ex) {
+            Logger.getLogger(PersistenceController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    // Secretary
+    
+    public void createSecretary(String firstName, String surname, String address, String phone, Date birth, String dni, String floor, Usuario user) {
+        Secretario secretary = new Secretario(floor, user, firstName, surname, phone, address, birth, dni);
+
+        secretaryController.create(secretary);
+    }
+
+    public void destroySecretary(int idSecretary) {
+        try {
+            secretaryController.destroy(idSecretary);
         } catch (NonexistentEntityException ex) {
             Logger.getLogger(PersistenceController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public void editSecretary(Secretario secretaryToEdit) {
+        try {
+            secretaryController.edit(secretaryToEdit);
+        } catch (Exception ex) {
+            Logger.getLogger(PersistenceController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public List<Secretario> getAllSecretaries() {
+        return secretaryController.findSecretarioEntities();
+    }
+
+    public Secretario getSecretaryById(int secretaryId) {
+        return secretaryController.findSecretario(secretaryId);
+    }
+
+    // WorkSchedule
+    
+    public void createWorkSchedule(Horario workSchedule) {
+        workScheduleController.create(workSchedule);
+    }
+
+    public List<Horario> getWorkScheduleList() {
+        return workScheduleController.findHorarioEntities();
+    }
+
+    public Horario getWorkScheduleById(int workScheduleId) {
+        return workScheduleController.findHorario(workScheduleId);
     }
 }
