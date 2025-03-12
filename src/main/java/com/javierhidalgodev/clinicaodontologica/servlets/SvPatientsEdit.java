@@ -47,8 +47,26 @@ public class SvPatientsEdit extends HttpServlet {
         String patientBirthdate = request.getParameter("patientBirthdate");
         String prepaidHealth = request.getParameter("prepaidHealth");
         String bloodType = request.getParameter("bloodType");
+        
+        LocalDate today = LocalDate.now();
+        LocalDate birth = LocalDate.parse(patientBirthdate);
+        Period period = Period.between(birth, today);
+        
+        if(period.getYears() < 18) {
+            String guardianFirstName = request.getParameter("guardianFirstName");
+            String guardianSurname = request.getParameter("guardianSurname");
+            String guardianAddress = request.getParameter("guardianAddress");
+            String guardianPhone = request.getParameter("guardianPhone");
+            String guardianBirthdate = request.getParameter("guardianBirthdate");
+            String guardianDNI = request.getParameter("guardianDNI");
+            String relationship = request.getParameter("relationship");
 
-        controller.editPatient(patientToEdit, patientFirstName, patientSurname, patientAddress, patientPhone, patientBirthdate, prepaidHealth, bloodType);
+            Responsable guardian = controller.createGuardian(guardianFirstName, guardianSurname, guardianAddress, guardianPhone, guardianBirthdate, guardianDNI, relationship);
+
+            controller.editPatient(patientToEdit, patientFirstName, patientSurname, patientAddress, patientPhone, birth, prepaidHealth, bloodType, guardian);
+        }
+
+        controller.editPatient(patientToEdit, patientFirstName, patientSurname, patientAddress, patientPhone, birth, prepaidHealth, bloodType, null);
 
         response.sendRedirect("SvPatients");
     }

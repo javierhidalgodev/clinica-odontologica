@@ -43,7 +43,7 @@
     <div class="form-group row">
         <div class="col-md-6 mb-3 mb-md-0">
             <label for="birthdate">Birthdate</label>            
-            <input type="date" class="form-control form-control-user" id="birthdate" name="patientBirthdate" value="<%= birth%>" data-validations="required">
+            <input type="date" class="form-control form-control-user" id="patientBirthdate" name="patientBirthdate" value="<%= birth%>" onchange="checkDate()" data-validations="required">
             <span class="error-validation"></span>
         </div>
         <div class="col-md-6">
@@ -75,10 +75,80 @@
             <span class="error-validation"></span>
         </div>
     </div>
+    <hr>
+    <div id="guardianData" class="d-none">
+        <h6>Guardian data</h6>
+        <div class="form-group row">
+            <div class="col-md-6 mb-3 mb-md-0">
+                <input type="text" class="form-control form-control-user" id="exampleFirstName" name="guardianFirstName" placeholder="First Name" data-validations="required|minLength:3|maxLength:20">
+                <span class="error-validation"></span>                
+            </div>
+            <div class="col-md-6">
+                <input type="text" class="form-control form-control-user" id="exampleSurname" name="guardianSurname" placeholder="Surname" data-validations="required|minLength:3|maxLength:50">
+                <span class="error-validation"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-6 mb-3 mb-md-0">
+                <input type="text" class="form-control form-control-user" id="exampleInputAddress" name="guardianAddress" placeholder="Address" data-validations="required|minLength:5|maxLength:50">
+                <span class="error-validation"></span>
+            </div>
+            <div class="col-md-6">
+                <input type="tel" class="form-control form-control-user" id="examplePhone" name="guardianPhone" placeholder="Phone" data-validations="required|phone">
+                <span class="error-validation"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-6 mb-3 mb-md-0">
+                <input type="date" class="form-control form-control-user" id="exampleBirthday" name="guardianBirthdate" onchange="checkDate()" data-validations="required|birthdate">
+                <span class="error-validation"></span>
+            </div>
+            <div class="col-md-6">
+                <input type="text" class="form-control form-control-user" id="exampleDNI" name="guardianDNI" placeholder="DNI" data-validations="required|dni">
+                <span class="error-validation"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <select class="form-control form-control-user" id="exampleRelationship" name="relationship" data-validations="required">
+                <option disabled="" selected="true" value="">RELATIONSHIP - Select one</option>
+                <%
+                    for (Relationship relationship : Relationship.values()) {
+                %> <option value="<%= relationship.getRelationship()%>"><%= relationship.getRelationshipDescription()%></option> <%
+                    }
+                %>
+                <!--                                    <option value="morning">Mañana</option>
+                                                    <option value="evening">Tarde</option>-->
+            </select>
+            <span class="error-validation"></span>
+        </div>
+    </div>
     <button id="submitBtn" type="submit" class="btn btn-success btn-user btn-block">
         Edit
     </button>
 </form>
+
+<script>
+
+    function checkDate() {
+        dateField = document.getElementById("patientBirthdate");
+        dateValue = dateField.value;
+
+
+        if (dateValue) {
+            over18 = new Date(dateValue);
+            over18.setFullYear(parseInt(over18.getFullYear()) + 18);
+            today = new Date();
+            guardianDataForm = document.getElementById("guardianData")
+
+            if (over18 < today) {
+                guardianDataForm.classList.replace("d-block", "d-none");
+            } else {
+                guardianDataForm.classList.replace("d-none", "d-block");
+            }
+        }
+    }
+
+</script>
 
 <script src="js/validations.js"></script>
 

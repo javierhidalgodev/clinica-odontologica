@@ -26,7 +26,6 @@ public class Controller {
     }
 
     // User
-    
     public void createUser(String username, String password, String role) {
 
         Usuario newUser = new Usuario(username, password, role);
@@ -70,7 +69,6 @@ public class Controller {
     }
 
     // Odontologist
-    
     public void createOdontologist(String firstName, String surname, String address, String phone, String birthday, String dni, String specialization, String workSchedule) {
 
         LocalDate localDate = LocalDate.parse(birthday);
@@ -121,7 +119,6 @@ public class Controller {
     }
 
     // Patient
-    
     public void createPatient(String patientFirstName, String patientSurname, String patientAddress, String patientPhone, LocalDate patientBirthdate, String patientDNI, String prepaidHealth, String bloodType, Responsable guardian) {
 
         boolean pPH = Boolean.parseBoolean(prepaidHealth);
@@ -138,9 +135,8 @@ public class Controller {
         persistenceController.destroyPatient(patientID);
     }
 
-    public void editPatient(Paciente patientToEdit, String patientFirstName, String patientSurname, String patientAddress, String patientPhone, String patientBirthdate, String prepaidHealth, String bloodType, Responsable guardian) {
-        LocalDate localDate = LocalDate.parse(patientBirthdate);
-        Date birth = Date.valueOf(localDate);
+    public void editPatient(Paciente patientToEdit, String patientFirstName, String patientSurname, String patientAddress, String patientPhone, LocalDate patientBirthdate, String prepaidHealth, String bloodType, Responsable guardian) {
+        Date birth = Date.valueOf(patientBirthdate);
         Boolean pPH = Boolean.parseBoolean(prepaidHealth);
 
         patientToEdit.setName(patientFirstName);
@@ -150,6 +146,10 @@ public class Controller {
         patientToEdit.setBirthdate(birth);
         patientToEdit.setPrepaidHealth(pPH);
         patientToEdit.setBloodType(bloodType);
+
+        if (guardian != null) {
+            patientToEdit.setGuardian(guardian);
+        }
 
         persistenceController.editPatient(patientToEdit);
     }
@@ -163,7 +163,6 @@ public class Controller {
     }
 
     // Guardian
-    
     public Responsable createGuardian(String guardianFirstName, String guardianSurname, String guardianAddress, String guardianPhone, String guardianBirthdate, String guardianDNI, String relationship) {
 
         LocalDate localDate = LocalDate.parse(guardianBirthdate);
@@ -176,7 +175,6 @@ public class Controller {
     }
 
     // Secretary
-    
     public void createSecretary(String firstName, String surname, String address, String phone, String birthday, String dni, String floor) {
 
         LocalDate localDate = LocalDate.parse(birthday);
@@ -211,9 +209,8 @@ public class Controller {
     public Secretario getSecretaryById(int secretaryId) {
         return persistenceController.getSecretaryById(secretaryId);
     }
-    
+
     // Work Schedule
-    
     public void createWorkSchedule(String wsName, String entryTime, String exitTime) {
         Horario workSchedule = new Horario(wsName, entryTime, exitTime);
 
