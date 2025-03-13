@@ -1,3 +1,4 @@
+<%@page import="com.javierhidalgodev.clinicaodontologica.dto.user.UserDTO"%>
 <%@page import="com.javierhidalgodev.clinicaodontologica.logica.Horario"%>
 <%@page import="java.util.List"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -10,6 +11,8 @@
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     String birth = sdf.format(odontologistToEdit.getBirthdate());
 
+    List<UserDTO> userList = (List) session.getAttribute("userList");
+    
     List<Horario> workScheduleList = (List<Horario>) session.getAttribute("workScheduleList");
     String odontologistWorkSchedule = odontologistToEdit.getWorkSchedule() != null ? odontologistToEdit.getWorkSchedule().getName() : "not assigned";
 %>
@@ -63,7 +66,21 @@
                 <option selected value="">Select one to change</option>
                 <%
                     for (Horario wS : workScheduleList) {
-                %> <option value="<%= wS.getIdWorkSchedule()%>" <%= odontologistWorkSchedule.equals(wS.getName()) ? "selected" : "" %> ><%= wS.getName() + " / " + wS.getEntryTime()%> -  <%= wS.getExitTime()%></option> <%
+                %> <option value="<%= wS.getIdWorkSchedule()%>" <%= odontologistWorkSchedule.equals(wS.getName()) ? "selected" : ""%> ><%= wS.getName() + " / " + wS.getEntryTime()%> -  <%= wS.getExitTime()%></option> <%
+                    }
+                %>
+            </select>
+            <span id="errorWorkSchedule" class="error-validation"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div>
+            <label for="user">User</label>
+            <select class="form-control form-control-user" id="workSchedule" name="workSchedule" data-validations="required">
+                <option selected value="">Select one to change</option>
+                <%
+                    for (UserDTO u : userList) {
+                %> <option value="<%= u.getId() %>" ><%= u.getUsername() %></option> <%
                     }
                 %>
             </select>

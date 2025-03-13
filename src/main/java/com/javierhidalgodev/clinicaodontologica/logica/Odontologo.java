@@ -20,19 +20,18 @@ public class Odontologo extends Persona implements Serializable {
     private Horario workSchedule;
     @OneToMany(mappedBy = "odontologist")
     private List<Turno> workShift;
-    @OneToOne
-    private Usuario user;
+//    private Usuario user;
 
     public Odontologo() {
     }
 
-    public Odontologo(String name, String surname, String address, String phone, Date birthdate, String dni, String specialization, Horario workSchedule, List<Turno> workShift, Usuario user) {
+    public Odontologo(String name, String surname, String address, String phone, Date birthdate, String dni, String specialization, Horario workSchedule, List<Turno> workShift /*, Usuario user*/) {
         super(name, surname, phone, address, birthdate, dni);
 //        this.idOdontologist = idOdontologist;
         this.specialization = specialization;
         this.workSchedule = workSchedule;
         this.workShift = workShift;
-        this.user = user;
+//        this.user = user;
     }
 
 //    public int getIdOdontologist() {
@@ -67,11 +66,11 @@ public class Odontologo extends Persona implements Serializable {
         this.workShift = workShift;
     }
 
-    public Usuario getUser() {
-        return user;
-    }
-
-    public void setUser(Usuario user) {
-        this.user = user;
-    }
+//    public Usuario getUser() {
+//        return user;
+//    }
+//
+//    public void setUser(Usuario user) {
+//        this.user = user;
+//    }
 }

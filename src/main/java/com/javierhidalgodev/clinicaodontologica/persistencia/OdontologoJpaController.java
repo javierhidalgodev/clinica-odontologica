@@ -5,10 +5,8 @@ import com.javierhidalgodev.clinicaodontologica.persistencia.exceptions.Nonexist
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
-import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
@@ -35,7 +33,6 @@ public class OdontologoJpaController implements Serializable {
     }
 
     public void edit(Odontologo odontologo) throws NonexistentEntityException, Exception {
-        System.out.println("Entro por aquí");
         EntityManager em = PersistenceManager.getInstance().getEntityManager();
         try {
             em.getTransaction().begin();

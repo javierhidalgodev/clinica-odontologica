@@ -2,10 +2,8 @@ package com.javierhidalgodev.clinicaodontologica.logica;
 
 import com.javierhidalgodev.clinicaodontologica.dto.user.UserDTO;
 import com.javierhidalgodev.clinicaodontologica.persistencia.PersistenceController;
-import java.sql.Array;
 import java.time.LocalDate;
 import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +27,7 @@ public class Controller {
     // User
     public void createUser(String username, String password, String role) {
 
-        Usuario newUser = new Usuario(username, password, role);
+        Usuario newUser = new Usuario(username, password, role, null);
 
         persistenceController.createUser(newUser);
     }
@@ -85,7 +83,7 @@ public class Controller {
             }
         }
 
-        Odontologo odontologist = new Odontologo(firstName, surname, address, phone, birth, dni, specialization, wS == null ? null : wS, workShiftList, null);
+        Odontologo odontologist = new Odontologo(firstName, surname, address, phone, birth, dni, specialization, wS == null ? null : wS, workShiftList);
 
         persistenceController.createOdontologist(odontologist);
     }
@@ -200,7 +198,7 @@ public class Controller {
         LocalDate localDate = LocalDate.parse(birthday);
         Date birth = Date.valueOf(localDate);
 
-        persistenceController.createSecretary(firstName, surname, address, phone, birth, dni, floor, null);
+        persistenceController.createSecretary(firstName, surname, address, phone, birth, dni, floor);
     }
 
     public void destroySecretary(int idSecretary) {
@@ -217,7 +215,6 @@ public class Controller {
         secretaryToEdit.setPhone(phone);
         secretaryToEdit.setBirthdate(birth);
         secretaryToEdit.setFloor(floor);
-        secretaryToEdit.setUser(null);
 
         persistenceController.editSecretary(secretaryToEdit);
     }
@@ -239,5 +236,9 @@ public class Controller {
 
     public List<Horario> getWorkScheduleList() {
         return persistenceController.getWorkScheduleList();
+    }
+
+    public List<UserDTO> getAllFreeUsers() {
+        return persistenceController.getAllFreeUsers();
     }
 }

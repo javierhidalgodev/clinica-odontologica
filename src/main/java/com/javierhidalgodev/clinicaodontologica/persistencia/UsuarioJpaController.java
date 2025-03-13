@@ -1,11 +1,12 @@
 package com.javierhidalgodev.clinicaodontologica.persistencia;
 
+import com.javierhidalgodev.clinicaodontologica.dto.user.UserDTO;
 import com.javierhidalgodev.clinicaodontologica.logica.Usuario;
 import com.javierhidalgodev.clinicaodontologica.persistencia.exceptions.NonexistentEntityException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceException;
@@ -140,5 +141,21 @@ public class UsuarioJpaController implements Serializable {
         } finally {
             em.close();
         }
+    }
+
+    public List<UserDTO> findFreeUsuarioEntities() {
+        EntityManager em = PersistenceManager.getInstance().getEntityManager();
+        
+//        try {
+//            CriteriaBuilder cb = em.getCriteriaBuilder();
+//            CriteriaQuery cq = cb.createQuery(Usuario.class);
+//            Root<Usuario> root = cq.from(Usuario.class);
+//            
+//            cq.select(root).where(cb.isNull(root.get("")))
+//        } catch (Exception e) {
+//        }
+
+        List<UserDTO> users = new ArrayList<>();
+        return users;
     }
 }

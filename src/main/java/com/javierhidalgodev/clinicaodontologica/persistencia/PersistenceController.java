@@ -1,5 +1,6 @@
 package com.javierhidalgodev.clinicaodontologica.persistencia;
 
+import com.javierhidalgodev.clinicaodontologica.dto.user.UserDTO;
 import com.javierhidalgodev.clinicaodontologica.logica.Horario;
 import com.javierhidalgodev.clinicaodontologica.logica.Odontologo;
 import com.javierhidalgodev.clinicaodontologica.logica.Paciente;
@@ -156,8 +157,8 @@ public class PersistenceController {
 
     // Secretary
     
-    public void createSecretary(String firstName, String surname, String address, String phone, Date birth, String dni, String floor, Usuario user) {
-        Secretario secretary = new Secretario(floor, user, firstName, surname, phone, address, birth, dni);
+    public void createSecretary(String firstName, String surname, String address, String phone, Date birth, String dni, String floor) {
+        Secretario secretary = new Secretario(floor, firstName, surname, phone, address, birth, dni);
 
         secretaryController.create(secretary);
     }
@@ -214,5 +215,9 @@ public class PersistenceController {
         } catch (Exception ex) {
             Logger.getLogger(PersistenceController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public List<UserDTO> getAllFreeUsers() {
+        return userController.findFreeUsuarioEntities();
     }
 }

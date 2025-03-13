@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -19,14 +21,18 @@ public class Usuario implements Serializable {
     private String username;
     private String password;
     private String role;
+    @OneToOne
+    @JoinColumn(nullable = true)
+    private Persona professional;
 
     public Usuario() {
     }
 
-    public Usuario(String username, String password, String role) {
+    public Usuario(String username, String password, String role, Persona professional) {
         this.username = username;
         this.password = password;
         this.role = role;
+        this.professional = professional;
     }
 
     public int getIdUser() {
@@ -60,6 +66,12 @@ public class Usuario implements Serializable {
     public void setRole(String role) {
         this.role = role;
     }
-    
-    
+
+    public Persona getProfessional() {
+        return professional;
+    }
+
+    public void setProfessional(Persona professional) {
+        this.professional = professional;
+    }
 }

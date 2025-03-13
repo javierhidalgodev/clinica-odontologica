@@ -2,7 +2,6 @@ package com.javierhidalgodev.clinicaodontologica.servlets;
 
 import com.javierhidalgodev.clinicaodontologica.dto.user.UserDTO;
 import com.javierhidalgodev.clinicaodontologica.logica.Controller;
-import com.javierhidalgodev.clinicaodontologica.logica.Usuario;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
