@@ -51,6 +51,17 @@ public class Controller {
         return usersDTO;
     }
 
+    public List<UserDTO> getAllFreeUsers() {
+        List<Usuario> users = persistenceController.getAllFreeUsers();
+
+        List<UserDTO> usersDTO = new ArrayList<>();
+        for (Usuario u : users) {
+            usersDTO.add(new UserDTO(u.getIdUser(), u.getUsername(), u.getRole()));
+        }
+
+        return usersDTO;
+    }
+
     public Usuario getUserById(int userId) {
         return persistenceController.getUserById(userId);
     }
@@ -83,7 +94,7 @@ public class Controller {
             }
         }
 
-        Odontologo odontologist = new Odontologo(firstName, surname, address, phone, birth, dni, specialization, wS == null ? null : wS, workShiftList);
+        Odontologo odontologist = new Odontologo(firstName, surname, address, phone, birth, dni, specialization, wS == null ? null : wS, workShiftList, null);
 
         persistenceController.createOdontologist(odontologist);
     }
@@ -92,11 +103,17 @@ public class Controller {
         persistenceController.destroyOdontologist(odontoID);
     }
 
-    public void editOdontologist(Odontologo odontologistToEdit, String firstName, String surname, String address, String phone, String birthdate, String specialization, String workSchedule) {
+    public void editOdontologist(Odontologo odontologistToEdit, String firstName, String surname, String address, String phone, String birthdate, String specialization, String workSchedule, String user) {
 
         int workScheduleId = Integer.parseInt(workSchedule);
 
         Horario wS = persistenceController.getWorkScheduleById(workScheduleId);
+        Usuario userFinal = null;
+        
+        if (user != null && !user.isEmpty()) {
+            int userId = Integer.parseInt(user);
+            userFinal = persistenceController.getUserById(userId);
+        }
 
         odontologistToEdit.setName(firstName);
         odontologistToEdit.setSurname(surname);
@@ -105,6 +122,7 @@ public class Controller {
         odontologistToEdit.setBirthdate(Date.valueOf(birthdate));
         odontologistToEdit.setSpecialization(specialization);
         odontologistToEdit.setWorkSchedule(wS);
+        odontologistToEdit.setUser(userFinal);
 
         persistenceController.editOdontologist(odontologistToEdit);
     }
@@ -188,7 +206,7 @@ public class Controller {
         persistenceController.editGuardian(guardian);
     }
 
-    public void destroyGuardian(Paciente patient, int guardianIdToDelete) {        
+    public void destroyGuardian(Paciente patient, int guardianIdToDelete) {
         persistenceController.destroyGuardian(patient, guardianIdToDelete);
     }
 
@@ -236,9 +254,5 @@ public class Controller {
 
     public List<Horario> getWorkScheduleList() {
         return persistenceController.getWorkScheduleList();
-    }
-
-    public List<UserDTO> getAllFreeUsers() {
-        return persistenceController.getAllFreeUsers();
     }
 }

@@ -11,7 +11,7 @@
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     String birth = sdf.format(odontologistToEdit.getBirthdate());
 
-    List<UserDTO> userList = (List) session.getAttribute("userList");
+    List<UserDTO> freeUserList = (List) session.getAttribute("freeUserList");
     
     List<Horario> workScheduleList = (List<Horario>) session.getAttribute("workScheduleList");
     String odontologistWorkSchedule = odontologistToEdit.getWorkSchedule() != null ? odontologistToEdit.getWorkSchedule().getName() : "not assigned";
@@ -75,16 +75,22 @@
     </div>
     <div class="form-group">
         <div>
+            <%
+                if(odontologistToEdit.getUser() == null) {
+            %>
             <label for="user">User</label>
-            <select class="form-control form-control-user" id="workSchedule" name="workSchedule" data-validations="required">
+            <select class="form-control form-control-user" id="user" name="user" >
                 <option selected value="">Select one to change</option>
                 <%
-                    for (UserDTO u : userList) {
+                    for (UserDTO u : freeUserList) {
                 %> <option value="<%= u.getId() %>" ><%= u.getUsername() %></option> <%
                     }
                 %>
             </select>
             <span id="errorWorkSchedule" class="error-validation"></span>
+            <% } else { %>
+            <p>User assigned: <strong><%= odontologistToEdit.getUser().getUsername() %></strong></p>
+            <% } %>
         </div>
     </div>
 

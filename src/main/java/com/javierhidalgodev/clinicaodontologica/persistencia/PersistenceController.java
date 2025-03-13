@@ -217,7 +217,7 @@ public class PersistenceController {
         }
     }
 
-    public List<UserDTO> getAllFreeUsers() {
+    public List<Usuario> getAllFreeUsers() {
         return userController.findFreeUsuarioEntities();
     }
 }

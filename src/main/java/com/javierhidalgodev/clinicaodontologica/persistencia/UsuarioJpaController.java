@@ -143,19 +143,23 @@ public class UsuarioJpaController implements Serializable {
         }
     }
 
-    public List<UserDTO> findFreeUsuarioEntities() {
+    public List<Usuario> findFreeUsuarioEntities() {
         EntityManager em = PersistenceManager.getInstance().getEntityManager();
         
-//        try {
-//            CriteriaBuilder cb = em.getCriteriaBuilder();
-//            CriteriaQuery cq = cb.createQuery(Usuario.class);
-//            Root<Usuario> root = cq.from(Usuario.class);
-//            
-//            cq.select(root).where(cb.isNull(root.get("")))
-//        } catch (Exception e) {
-//        }
+        try {
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery cq = cb.createQuery(Usuario.class);
+            Root<Usuario> root = cq.from(Usuario.class);
+            
+            cq.select(root).where(cb.isNull(root.get("odontologist")), cb.isNull(root.get("secretary")));
+            
+            List<Usuario> users = em.createQuery(cq).getResultList();
+            return users;
+        } catch (Exception e) {
+            throw new Error("MAL: " + e.getMessage());
+        } finally {
+            em.close();
+        }
 
-        List<UserDTO> users = new ArrayList<>();
-        return users;
     }
 }

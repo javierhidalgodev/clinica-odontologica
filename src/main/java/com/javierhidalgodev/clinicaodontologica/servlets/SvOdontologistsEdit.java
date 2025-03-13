@@ -40,7 +40,7 @@ public class SvOdontologistsEdit extends HttpServlet {
             
             HttpSession mySession = request.getSession();
             mySession.setAttribute("odontologistToEdit", odontologistToEdit);
-            mySession.setAttribute("userList", userList);
+            mySession.setAttribute("freeUserList", userList);
             
             if (request.getSession().getAttribute("workScheduleList") == null) {
                 List<Horario> workScheduleList = controller.getWorkScheduleList();
@@ -64,10 +64,11 @@ public class SvOdontologistsEdit extends HttpServlet {
         String birthdate = request.getParameter("birthdate");
         String specialization = request.getParameter("specialization");
         String workSchedule = request.getParameter("workSchedule");
+        String user = request.getParameter("user");
 
         Odontologo odontologistToEdit = (Odontologo) request.getSession().getAttribute("odontologistToEdit");
-
-        controller.editOdontologist(odontologistToEdit, firstName, surname, address, phone, birthdate, specialization, workSchedule);
+        
+        controller.editOdontologist(odontologistToEdit, firstName, surname, address, phone, birthdate, specialization, workSchedule, user);
         request.removeAttribute("odontologistToEdit");
 
         response.sendRedirect("SvOdontologists");
