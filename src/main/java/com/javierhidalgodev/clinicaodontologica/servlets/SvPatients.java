@@ -4,6 +4,7 @@ import com.javierhidalgodev.clinicaodontologica.logica.Controller;
 import com.javierhidalgodev.clinicaodontologica.logica.Paciente;
 import com.javierhidalgodev.clinicaodontologica.logica.Responsable;
 import java.io.IOException;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.List;
@@ -65,7 +66,9 @@ public class SvPatients extends HttpServlet {
             String guardianDNI = request.getParameter("guardianDNI");
             String relationship = request.getParameter("relationship");
 
-            Responsable guardian = controller.createGuardian(guardianFirstName, guardianSurname, guardianAddress, guardianPhone, guardianBirthdate, guardianDNI, relationship);
+            Date guardianBirth = Date.valueOf(guardianBirthdate);
+
+            Responsable guardian = new Responsable(relationship, guardianFirstName, guardianSurname, guardianPhone, guardianAddress, guardianBirth, guardianDNI);
 
             controller.createPatient(patientFirstName, patientSurname, patientAddress, patientPhone, birth, patientDNI, prepaidHealth, bloodType, guardian);
         } else {
