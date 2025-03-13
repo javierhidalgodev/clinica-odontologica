@@ -206,11 +206,11 @@ public class PersistenceController {
         try {
             patientController.edit(patient);
             
-            try {
-                guardianController.destroy(guardianIdToDelete);
-            } catch (NonexistentEntityException ex) {
-                Logger.getLogger(PersistenceController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+//            try {
+//                guardianController.destroy(guardianIdToDelete);
+//            } catch (NonexistentEntityException ex) {
+//                Logger.getLogger(PersistenceController.class.getName()).log(Level.SEVERE, null, ex);
+//            }
         } catch (Exception ex) {
             Logger.getLogger(PersistenceController.class.getName()).log(Level.SEVERE, null, ex);
         }

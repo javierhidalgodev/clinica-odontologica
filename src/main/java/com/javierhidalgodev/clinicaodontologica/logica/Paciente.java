@@ -20,7 +20,7 @@ public class Paciente extends Persona implements Serializable {
 //    private int idPatient;
     private boolean prepaidHealth;
     private String bloodType;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(nullable = true)
     private Responsable guardian;
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
