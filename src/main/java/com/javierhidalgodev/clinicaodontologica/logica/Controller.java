@@ -27,7 +27,7 @@ public class Controller {
     // User
     public void createUser(String username, String password, String role) {
 
-        Usuario newUser = new Usuario(username, password, role, null);
+        Usuario newUser = new Usuario(username, password, role);
 
         persistenceController.createUser(newUser);
     }

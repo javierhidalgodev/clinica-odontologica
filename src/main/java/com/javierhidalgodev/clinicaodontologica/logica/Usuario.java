@@ -12,9 +12,9 @@ import javax.persistence.OneToOne;
  *
  * @author Javi
  */
-
 @Entity
 public class Usuario implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idUser;
@@ -23,16 +23,36 @@ public class Usuario implements Serializable {
     private String role;
     @OneToOne
     @JoinColumn(nullable = true)
-    private Persona professional;
+    private Odontologo odontologist;
+    @OneToOne
+    @JoinColumn(nullable = true)
+    private Secretario secretary;
 
     public Usuario() {
     }
 
-    public Usuario(String username, String password, String role, Persona professional) {
+    public Usuario(String username, String password, String role, Odontologo professional) {
         this.username = username;
         this.password = password;
         this.role = role;
-        this.professional = professional;
+        this.odontologist = professional;
+        this.secretary = null;
+    }
+
+    public Usuario(String username, String password, String role, Secretario professional) {
+        this.username = username;
+        this.password = password;
+        this.role = role;
+        this.odontologist = null;
+        this.secretary = professional;
+    }
+
+    public Usuario(String username, String password, String role) {
+        this.username = username;
+        this.password = password;
+        this.role = role;
+        this.odontologist = null;
+        this.secretary = null;
     }
 
     public int getIdUser() {
@@ -67,11 +87,19 @@ public class Usuario implements Serializable {
         this.role = role;
     }
 
-    public Persona getProfessional() {
-        return professional;
+    public Odontologo getOdontologist() {
+        return odontologist;
     }
 
-    public void setProfessional(Persona professional) {
-        this.professional = professional;
+    public void setOdontologist(Odontologo odontologist) {
+        this.odontologist = odontologist;
+    }
+
+    public Secretario getSecretary() {
+        return secretary;
+    }
+
+    public void setSecretary(Secretario secretary) {
+        this.secretary = secretary;
     }
 }
