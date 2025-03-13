@@ -50,3 +50,13 @@
     </div>
 
 </div>
+
+<style>
+    select {
+        padding: 1rem 1rem 2rem 1rem !important;
+    }
+
+    label {
+        font-size: smaller;
+    }
+</style>
