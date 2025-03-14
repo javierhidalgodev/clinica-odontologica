@@ -71,7 +71,11 @@ public class Odontologo extends Persona implements Serializable {
     }
 
     public UserDTO getUser() {
-        return new UserDTO(user.getIdUser(), user.getUsername(), user.getRole());
+        if(user != null) {
+            return new UserDTO(user.getIdUser(), user.getUsername(), user.getRole());            
+        }
+        
+        return null;
     }
 
     public void setUser(Usuario user) {

@@ -33,6 +33,24 @@ public class Controller {
     }
 
     public void destroyUser(int idUser) {
+        Usuario userToDelete = persistenceController.getUserById(idUser);
+
+        if (userToDelete != null) {
+            if (userToDelete.getOdontologist() != null) {
+                Odontologo odonto = userToDelete.getOdontologist();
+                odonto.setUser(null);
+
+                persistenceController.editOdontologist(odonto);
+            }
+
+            if(userToDelete.getSecretary() != null) {
+                Secretario secre = userToDelete.getSecretary();
+//                secre.setUser(null);
+
+                persistenceController.editSecretary(secre);
+            }
+        }
+                
         persistenceController.destroyUser(idUser);
     }
 
@@ -109,7 +127,7 @@ public class Controller {
 
         Horario wS = persistenceController.getWorkScheduleById(workScheduleId);
         Usuario userFinal = null;
-        
+
         if (user != null && !user.isEmpty()) {
             int userId = Integer.parseInt(user);
             userFinal = persistenceController.getUserById(userId);
