@@ -1,5 +1,6 @@
 package com.javierhidalgodev.clinicaodontologica.logica;
 
+import com.javierhidalgodev.clinicaodontologica.dto.user.UserDTO;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
@@ -69,8 +70,8 @@ public class Odontologo extends Persona implements Serializable {
         this.workShift = workShift;
     }
 
-    public Usuario getUser() {
-        return user;
+    public UserDTO getUser() {
+        return new UserDTO(user.getIdUser(), user.getUsername(), user.getRole());
     }
 
     public void setUser(Usuario user) {

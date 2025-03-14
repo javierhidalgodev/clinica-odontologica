@@ -89,7 +89,7 @@
             </select>
             <span id="errorWorkSchedule" class="error-validation"></span>
             <% } else { %>
-            <p>User assigned: <strong><%= odontologistToEdit.getUser().getUsername() %></strong></p>
+            <p>User assigned: <strong><%= odontologistToEdit.getUser().getUsername %></strong></p>
             <% } %>
         </div>
     </div>
