@@ -151,7 +151,7 @@ public class UsuarioJpaController implements Serializable {
             CriteriaQuery cq = cb.createQuery(Usuario.class);
             Root<Usuario> root = cq.from(Usuario.class);
             
-            cq.select(root).where(cb.isNull(root.get("odontologist")), cb.isNull(root.get("secretary")));
+            cq.select(root).where(cb.and(cb.isNull(root.get("odontologist")), cb.isNull(root.get("secretary"))));
             
             List<Usuario> users = em.createQuery(cq).getResultList();
             return users;

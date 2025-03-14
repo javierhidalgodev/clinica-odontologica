@@ -27,6 +27,7 @@ public class SvUsers extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        System.out.println("hola");
         List<UserDTO> users = controller.getAllUsers();
         
         request.getSession().setAttribute("userList", users);

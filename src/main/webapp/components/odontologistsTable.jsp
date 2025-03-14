@@ -66,7 +66,7 @@
                 </form>
             </td>
             <td>
-                <form action="SvOdontologistsDelete" method="POST">
+                <form action="SvOdontologistsDelete" method="POST" data-form-action="delete">
                     <input type="hidden" name="idToDelete" value="<%= o.getId()%>" />
                     <button type="submit" class="btn btn-danger fas fa-trash-alt"></button>
                 </form>
@@ -85,3 +85,20 @@
         %>
     </tbody>
 </table>
+    
+    <script>
+        deleteForms = document.querySelectorAll("[data-form-action=delete]");
+        
+        function confirmDelete(ev) {
+            ev.preventDefault();
+            
+            confirmation = confirm("¿Seguro que desea eliminar el registro? Esta operación es irreversible");
+            
+            if(confirmation) {
+                ev.target.submit();
+            }
+        }
+        
+        deleteForms.forEach(f => f.addEventListener("submit", confirmDelete))
+        
+    </script>

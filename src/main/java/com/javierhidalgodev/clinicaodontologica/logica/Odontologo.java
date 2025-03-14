@@ -16,13 +16,12 @@ import javax.persistence.OneToOne;
 
 @Entity
 public class Odontologo extends Persona implements Serializable {
-//    private int idOdontologist;
     private String specialization;
     @OneToOne
     private Horario workSchedule;
     @OneToMany(mappedBy = "odontologist")
     private List<Turno> workShift;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(nullable = true)
     private Usuario user;
 
@@ -76,5 +75,9 @@ public class Odontologo extends Persona implements Serializable {
 
     public void setUser(Usuario user) {
         this.user = user;
+        
+        if(user != null) {
+            user.setOdontologist(this);
+        }
     }
 }
