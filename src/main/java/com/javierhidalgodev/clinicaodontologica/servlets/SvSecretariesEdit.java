@@ -1,8 +1,10 @@
 package com.javierhidalgodev.clinicaodontologica.servlets;
 
+import com.javierhidalgodev.clinicaodontologica.dto.user.UserDTO;
 import com.javierhidalgodev.clinicaodontologica.logica.Controller;
 import com.javierhidalgodev.clinicaodontologica.logica.Secretario;
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,9 +34,11 @@ public class SvSecretariesEdit extends HttpServlet {
         if (secretaryIdToEdit != null && !secretaryIdToEdit.isEmpty()) {
             int secretaryId = Integer.parseInt(secretaryIdToEdit);
             Secretario secretaryToEdit = controller.getSecretaryById(secretaryId);
+            List<UserDTO> userList = controller.getAllFreeUsers();
 
             HttpSession mySession = request.getSession();
             mySession.setAttribute("secretaryToEdit", secretaryToEdit);
+            mySession.setAttribute("freeUserList", userList);
 
             response.sendRedirect("edicionSecretario.jsp");
         }
@@ -51,12 +55,14 @@ public class SvSecretariesEdit extends HttpServlet {
         String floor = request.getParameter("floor");
         String dni = request.getParameter("dni");
         String birthday = request.getParameter("birthday");
+        String user = request.getParameter("user");
 
         HttpSession mySession = request.getSession();
         Secretario secretaryToEdit = (Secretario) mySession.getAttribute("secretaryToEdit");
-        
-        controller.editSecretary(secretaryToEdit, firstName, surname, address, phone, birthday, floor);
 
+        controller.editSecretary(secretaryToEdit, firstName, surname, address, phone, birthday, floor, user);
+
+        request.removeAttribute("secretaryToEdit");
         response.sendRedirect("SvSecretaries");
     }
 

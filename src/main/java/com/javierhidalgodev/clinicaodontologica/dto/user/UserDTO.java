@@ -8,11 +8,13 @@ public class UserDTO {
     private int id;
     private String username;
     private String role;
+    private String professional;
     
-    public UserDTO(int id, String username, String role){
+    public UserDTO(int id, String username, String role, String professional){
         this.id = id;
         this.username = username;
         this.role = role;
+        this.professional = professional;
     }
 
     public int getId() {
@@ -37,5 +39,13 @@ public class UserDTO {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getProfessional() {
+        return professional;
+    }
+
+    public void setProfessional(String professional) {
+        this.professional = professional;
     }
 }

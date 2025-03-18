@@ -1,3 +1,4 @@
+<%@page import="com.javierhidalgodev.clinicaodontologica.dto.user.UserDTO"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.javierhidalgodev.clinicaodontologica.logica.Secretario"%>
 <%@page import="java.util.List"%>
@@ -6,6 +7,8 @@
     Secretario secretaryToEdit = (Secretario) session.getAttribute("secretaryToEdit");
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     String birth = sdf.format(secretaryToEdit.getBirthdate());
+
+    List<UserDTO> freeUserList = (List) session.getAttribute("freeUserList");
 %>
 
 <form id="form" class="user" action="SvSecretariesEdit" method="POST">
@@ -35,12 +38,30 @@
             <span id="errorBirthdate" class="error-validation"></span>
         </div>
         <div class="col-md-6">
-            <input type="text" class="form-control form-control-user" id="dni" name="dni" placeholder="DNI" value="<%= secretaryToEdit.getDni() %>" disabled >
+            <input type="text" class="form-control form-control-user" id="dni" name="dni" placeholder="DNI" value="<%= secretaryToEdit.getDni()%>" disabled >
         </div>
     </div>
     <div class="form-group row">
         <div class="col-md-6 mb-3 mb-md-0">
             <input type="text" class="form-control form-control-user" id="examplefloor" name="floor" placeholder="Position" value="<%= secretaryToEdit.getFloor()%>">
+        </div>
+    </div>
+    <div class="form-group">
+        <div>
+            <% if (secretaryToEdit.getUser() != null && freeUserList != null) {%>
+            <p>User assigned: <strong><%= secretaryToEdit.getUser().getUsername()%></strong></p>
+            <% } else {%>
+            <label for="user">User</label>
+            <select class="form-control form-control-user" id="user" name="user" >
+                <option selected value="">Select one to change</option>
+                <%
+                    for (UserDTO u : freeUserList) {
+                %> <option value="<%= u.getId()%>" ><%= u.getUsername()%></option> <%
+                    }
+                %>
+            </select>
+            <span id="errorWorkSchedule" class="error-validation"></span>
+            <% }%>
         </div>
     </div>
     <button id="submitBtn" type="submit" class="btn btn-success btn-user btn-block font-weight-bold">

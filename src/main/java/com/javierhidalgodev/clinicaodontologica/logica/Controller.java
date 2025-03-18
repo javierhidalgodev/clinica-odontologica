@@ -43,14 +43,14 @@ public class Controller {
                 persistenceController.editOdontologist(odonto);
             }
 
-            if(userToDelete.getSecretary() != null) {
+            if (userToDelete.getSecretary() != null) {
                 Secretario secre = userToDelete.getSecretary();
 //                secre.setUser(null);
 
                 persistenceController.editSecretary(secre);
             }
         }
-                
+
         persistenceController.destroyUser(idUser);
     }
 
@@ -63,7 +63,7 @@ public class Controller {
 
         List<UserDTO> usersDTO = new ArrayList<>();
         for (Usuario u : users) {
-            usersDTO.add(new UserDTO(u.getIdUser(), u.getUsername(), u.getRole()));
+            usersDTO.add(new UserDTO(u.getIdUser(), u.getUsername(), u.getRole(), null));
         }
 
         return usersDTO;
@@ -74,7 +74,7 @@ public class Controller {
 
         List<UserDTO> usersDTO = new ArrayList<>();
         for (Usuario u : users) {
-            usersDTO.add(new UserDTO(u.getIdUser(), u.getUsername(), u.getRole()));
+            usersDTO.add(new UserDTO(u.getIdUser(), u.getUsername(), u.getRole(), null));
         }
 
         return usersDTO;
@@ -84,11 +84,24 @@ public class Controller {
         return persistenceController.getUserById(userId);
     }
 
-    public boolean verifyUser(String username, String password) throws Exception {
+    public UserDTO verifyUser(String username, String password) throws Exception {
 
         try {
             Usuario user = persistenceController.getUserByLogin(username, password);
-            return user != null;
+
+            if (user != null) {
+                UserDTO userData = new UserDTO(user.getIdUser(), user.getUsername(), user.getRole(), null);
+                
+                if(user.getOdontologist() != null) {
+                    userData.setProfessional("odontologist");
+                } else if (user.getSecretary() != null) {
+                    userData.setProfessional("secretary");
+                }
+                
+                return userData;
+            }
+
+            return null;
 
         } catch (RuntimeException e) {
             System.out.println("Error de conexión: " + e.getMessage());
@@ -241,9 +254,15 @@ public class Controller {
         persistenceController.destroySecretary(idSecretary);
     }
 
-    public void editSecretary(Secretario secretaryToEdit, String firstName, String surname, String address, String phone, String birthday, String floor) {
+    public void editSecretary(Secretario secretaryToEdit, String firstName, String surname, String address, String phone, String birthday, String floor, String user) {
         LocalDate localDate = LocalDate.parse(birthday);
         Date birth = Date.valueOf(localDate);
+        Usuario userFinal = null;
+
+        if (user != null && !user.isEmpty()) {
+            int userId = Integer.parseInt(user);
+            userFinal = persistenceController.getUserById(userId);
+        }
 
         secretaryToEdit.setName(firstName);
         secretaryToEdit.setSurname(surname);
@@ -251,6 +270,7 @@ public class Controller {
         secretaryToEdit.setPhone(phone);
         secretaryToEdit.setBirthdate(birth);
         secretaryToEdit.setFloor(floor);
+        secretaryToEdit.setUser(userFinal);
 
         persistenceController.editSecretary(secretaryToEdit);
     }
@@ -272,5 +292,9 @@ public class Controller {
 
     public List<Horario> getWorkScheduleList() {
         return persistenceController.getWorkScheduleList();
+    }
+
+    public List<Paciente> getPatientsByOdontologist(int id) {
+        return persistenceController.getPatientsByOdontologist(id);
     }
 }

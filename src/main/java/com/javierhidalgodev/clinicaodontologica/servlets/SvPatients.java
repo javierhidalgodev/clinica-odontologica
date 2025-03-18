@@ -1,5 +1,6 @@
 package com.javierhidalgodev.clinicaodontologica.servlets;
 
+import com.javierhidalgodev.clinicaodontologica.dto.user.UserDTO;
 import com.javierhidalgodev.clinicaodontologica.logica.Controller;
 import com.javierhidalgodev.clinicaodontologica.logica.Paciente;
 import com.javierhidalgodev.clinicaodontologica.logica.Responsable;
@@ -32,12 +33,25 @@ public class SvPatients extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        List<Paciente> patientsList = controller.getAllPatients();
+
         HttpSession mySession = request.getSession();
-        mySession.setAttribute("patientsList", patientsList);
+        UserDTO userSession = (UserDTO) mySession.getAttribute("userSession");
+
+        if (userSession.getRole() != null && userSession.getRole().equals("admin")) {
+            List<Paciente> patientsList = controller.getAllPatients();
+            mySession.setAttribute("patientsList", patientsList);
+        } else {
+            if (userSession.getProfessional().equals("odontologist")) {
+                List<Paciente> patientList = controller.getPatientsByOdontologist(userSession.getId());
+            } else if (userSession.getProfessional().equals("secretary")) {
+
+            } else {
+
+            }
+        }
+
         response.sendRedirect("vistaPacientes.jsp");
-        
+
     }
 
     @Override
@@ -56,7 +70,7 @@ public class SvPatients extends HttpServlet {
         LocalDate today = LocalDate.now();
         LocalDate birth = LocalDate.parse(patientBirthdate);
         Period period = Period.between(birth, today);
-        
+
         if (period.getYears() < 18) {
             String guardianFirstName = request.getParameter("guardianFirstName");
             String guardianSurname = request.getParameter("guardianSurname");
@@ -74,7 +88,7 @@ public class SvPatients extends HttpServlet {
         } else {
             controller.createPatient(patientFirstName, patientSurname, patientAddress, patientPhone, birth, patientDNI, prepaidHealth, bloodType, null);
         }
-        
+
         response.sendRedirect("SvPatients");
     }
 

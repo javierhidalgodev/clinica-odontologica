@@ -220,4 +220,9 @@ public class PersistenceController {
     public List<Usuario> getAllFreeUsers() {
         return userController.findFreeUsuarioEntities();
     }
+
+    public List<Paciente> getPatientsByOdontologist(int id) {
+//        return patientController.getPatientsByOdontologist(id);
+        return patientController.findPacienteEntities();
+    }
 }

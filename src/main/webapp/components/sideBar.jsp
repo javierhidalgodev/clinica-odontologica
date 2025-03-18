@@ -1,10 +1,14 @@
-<%--<%@include file="../auth.jsp" %>--%>
+<%@page import="com.javierhidalgodev.clinicaodontologica.dto.user.UserDTO"%>
+<%
+
+    UserDTO userSessionSideBar = (UserDTO) request.getAttribute("userSession");
+
+%>
 
 <!-- Sidebar -->
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
-    <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.jsp">
+<!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="${pageContext.request.contextPath}/index.jsp">
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-solid fa-tooth"></i>
         </div>
@@ -15,11 +19,11 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item active">
-        <a class="nav-link" href="index.html">
-            <i class="fas fa-solid fa-bars"></i>
-            <span>Menú</span></a>
-    </li>
+    <!--    <li class="nav-item active">
+            <a class="nav-link" href="index.html">
+                <i class="fas fa-solid fa-bars"></i>
+                <span>Menú</span></a>
+        </li>-->
 
     <!-- Divider -->
     <hr class="sidebar-divider">
@@ -29,90 +33,16 @@
         Gestión
     </div>
 
-    <!-- Nav Item - Odontologist Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOdontologist"
-           aria-expanded="true" aria-controls="collapseOdontologist">
-            <i class="fas fa-solid fa-stethoscope"></i>
-            <span>Odontólogos</span>
-        </a>
-        <div id="collapseOdontologist" class="collapse" aria-labelledby="headingOdontologist" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Acciones</h6>
-                <a class="collapse-item" href="SvOdontologists">Ver profesionales</a>
-                <a class="collapse-item" href="SvWSToOdonto">Nuevo profesional</a>
-            </div>
-        </div>
-    </li>
+    <% if (userSessionSideBar != null && userSessionSideBar.getRole() != null && userSessionSideBar.getRole().equals("admin")) { %>
 
-        <!-- Nav Item - Secretaries Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSecretaries"
-           aria-expanded="true" aria-controls="collapseSecretaries">
-            <i class="fas fa-solid fa-briefcase"></i>
-            <span>Secretarios</span>
-        </a>
-        <div id="collapseSecretaries" class="collapse" aria-labelledby="headingSecretaries" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Acciones</h6>
-                <a class="collapse-item" href="SvSecretaries">Ver profesionales</a>
-                <a class="collapse-item" href="altaSecretario.jsp">Nuevo profesional</a>
-            </div>
-        </div>
-    </li>
-    
-    <!-- Nav Item - Patients Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePatients"
-           aria-expanded="true" aria-controls="collapsePatients">
-            <i class="fas fa-solid fa-hospital-user"></i>
-            <span>Pacientes</span>
-        </a>
-        <div id="collapsePatients" class="collapse" aria-labelledby="headingPatients"
-             data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Acciones</h6>
-                <a class="collapse-item" href="SvPatients">Ver pacientes</a>
-                <a class="collapse-item" href="altaPaciente.jsp">Nuevo paciente</a>
-            </div>
-        </div>
-    </li>
+    <%@include file="adminSideBar.jsp" %>
 
-    <!-- Nav Item - Users Collapse Menu -->
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUsers"
-           aria-expanded="true" aria-controls="collapseUsers">
-            <i class="fas fa-solid fa-users"></i>
-            <span>Usuarios</span>
-        </a>
-        <div id="collapseUsers" class="collapse" aria-labelledby="headingUsers"
-             data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Acciones</h6>
-                <a class="collapse-item" href="SvUsers">Ver usuarios</a>
-                <a class="collapse-item" href="altaUsuario.jsp">Nuevo usuario</a>
-            </div>
-        </div>
-    </li>
+    <% } else { %>
 
-    <!-- Divider -->
-    <hr class="sidebar-divider">
+    <%@include file="userSideBar.jsp" %>
 
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseWorkSchedule"
-           aria-expanded="true" aria-controls="collapseWorkSchedule">
-            <i class="fas fa-solid fa-clock"></i>
-            <span>Horarios de trabajo</span>
-        </a>
-        <div id="collapseWorkSchedule" class="collapse" aria-labelledby="headingWorkSchedule"
-             data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Acciones</h6>
-                <a class="collapse-item" href="SvWorkSchedule">Ver horarios</a>
-                <a class="collapse-item" href="altaHorario.jsp">Nuevo horario</a>
-            </div>
-        </div>
-    </li>
+    <% }%>
+
     <!--             Heading 
                 <div class="sidebar-heading">
                     Addons
@@ -156,17 +86,11 @@
                  Divider 
                 <hr class="sidebar-divider d-none d-md-block">-->
 
+
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
     </div>
-
-    <!-- Sidebar Message -->
-    <!--            <div class="sidebar-card d-none d-lg-flex">
-                    <img class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="...">
-                    <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
-                    <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
-                </div>-->
 
 </ul>
 <!-- End of Sidebar -->

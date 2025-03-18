@@ -1,11 +1,12 @@
+<%@page import="com.javierhidalgodev.clinicaodontologica.dto.user.UserDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
 
 HttpSession mysession = request.getSession(false);
-String usernameSession = (String) mysession.getAttribute("usernameSession");
+UserDTO userSession = (UserDTO) mysession.getAttribute("userSession");
 
-if(usernameSession != null) response.sendRedirect("index.jsp");
+if(userSession != null) response.sendRedirect("index.jsp");
 
 %>
 

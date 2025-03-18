@@ -1,7 +1,6 @@
 package com.javierhidalgodev.clinicaodontologica.servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,7 +24,8 @@ public class SvLogout extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        request.getSession().removeAttribute("usernameSession");
+        request.getSession().removeAttribute("userSession");
+        request.getSession().invalidate();
         response.sendRedirect("login.jsp");
         
     }

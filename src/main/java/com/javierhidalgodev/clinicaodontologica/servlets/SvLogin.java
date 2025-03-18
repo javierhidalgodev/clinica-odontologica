@@ -1,5 +1,6 @@
 package com.javierhidalgodev.clinicaodontologica.servlets;
 
+import com.javierhidalgodev.clinicaodontologica.dto.user.UserDTO;
 import com.javierhidalgodev.clinicaodontologica.logica.Controller;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -33,14 +34,15 @@ public class SvLogin extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        boolean loginSuccessfull = false;
+        UserDTO loginSuccessfull = null;
 
         try {
+//            loginSuccessfull = controller.verifyUser(username, password);
             loginSuccessfull = controller.verifyUser(username, password);
 
-            if (loginSuccessfull) {
-                System.out.println(loginSuccessfull);
-                request.getSession().setAttribute("usernameSession", username);
+            if (loginSuccessfull != null) {
+                request.getSession().setAttribute("userSession", loginSuccessfull);
+                
                 response.sendRedirect("index.jsp");
             } else {
                 response.sendRedirect("error.jsp");

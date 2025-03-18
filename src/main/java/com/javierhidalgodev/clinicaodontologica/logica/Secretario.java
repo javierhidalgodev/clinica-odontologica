@@ -1,7 +1,10 @@
 package com.javierhidalgodev.clinicaodontologica.logica;
 
+import com.javierhidalgodev.clinicaodontologica.dto.user.UserDTO;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 /**
@@ -13,7 +16,9 @@ import javax.persistence.OneToOne;
 public class Secretario extends Persona {
 //    private int idSecretary;
     private String floor;
-//    private Usuario user;
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(nullable = true)
+    private Usuario user;
 
     public Secretario() {
     }
@@ -41,11 +46,19 @@ public class Secretario extends Persona {
         this.floor = floor;
     }
 
-//    public Usuario getUser() {
-//        return user;
-//    }
-//
-//    public void setUser(Usuario user) {
-//        this.user = user;
-//    }
+    public UserDTO getUser() {
+        if(user != null) {
+            return new UserDTO(user.getIdUser(), user.getUsername(), user.getRole(), null);
+        }
+        
+        return null;
+    }
+
+    public void setUser(Usuario user) {
+        this.user = user;
+        
+        if(user != null) {
+            user.setSecretary(this);
+        }
+    }
 }

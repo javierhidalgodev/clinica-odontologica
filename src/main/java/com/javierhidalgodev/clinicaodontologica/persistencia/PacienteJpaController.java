@@ -9,6 +9,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
@@ -20,7 +21,7 @@ public class PacienteJpaController implements Serializable {
 
     public PacienteJpaController() {
     }
-    
+
     public void create(Paciente paciente) {
         EntityManager em = PersistenceManager.getInstance().getEntityManager();
         try {
@@ -121,5 +122,19 @@ public class PacienteJpaController implements Serializable {
             em.close();
         }
     }
+
+//    List<Paciente> getPatientsByOdontologist(int id) {
+//        EntityManager em = PersistenceManager.getInstance().getEntityManager();
+//
+//        try {
+//            CriteriaBuilder cb = em.getCriteriaBuilder();
+//            CriteriaQuery cq = cb.createQuery(Paciente.class);
+//            Root<Paciente> root = cq.from(Paciente.class);
+//            
+//            // Hay que hacer referencia a las citas, no al paciente.
+////            cq.select(root).where(cb.equal(root.get(), root))
+//        } finally {
+//        }
+//    }
 
 }
