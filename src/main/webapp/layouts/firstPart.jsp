@@ -1,9 +1,5 @@
-<%@include file="../auth.jsp" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%
-    UserDTO userSession = (UserDTO) session.getAttribute("userSession");
-    request.setAttribute("userSession", userSession);
-%>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<jsp:include page="/auth.jsp" />
 
 <!DOCTYPE html>
 <html lang="en">

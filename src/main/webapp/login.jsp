@@ -1,17 +1,14 @@
+<%@page import="java.util.Enumeration"%>
+<%@page import="java.util.List"%>
 <%@page import="com.javierhidalgodev.clinicaodontologica.dto.user.UserDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
-
-    HttpSession mySession = request.getSession(false);
-    UserDTO userSession = (UserDTO) mySession.getAttribute("userSession");
-
-    System.out.println(userSession == null);
-
+    UserDTO userSession = (UserDTO) session.getAttribute("userSession");
+    
     if (userSession != null) {
         response.sendRedirect("index.jsp");
     }
-
 %>
 
 <!DOCTYPE html>

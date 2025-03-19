@@ -1,14 +1,9 @@
 <%@page import="com.javierhidalgodev.clinicaodontologica.dto.user.UserDTO"%>
-<%
-
-    UserDTO userSessionSideBar = (UserDTO) request.getAttribute("userSession");
-
-%>
 
 <!-- Sidebar -->
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="${pageContext.request.contextPath}/index.jsp">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.jsp">
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-solid fa-tooth"></i>
         </div>
@@ -33,15 +28,10 @@
         Gestión
     </div>
 
-    <% if (userSessionSideBar != null && userSessionSideBar.getRole() != null && userSessionSideBar.getRole().equals("admin")) { %>
+
 
     <%@include file="adminSideBar.jsp" %>
 
-    <% } else { %>
-
-    <%@include file="userSideBar.jsp" %>
-
-    <% }%>
 
     <!--             Heading 
                 <div class="sidebar-heading">
