@@ -12,7 +12,7 @@
     String birth = sdf.format(odontologistToEdit.getBirthdate());
 
     List<UserDTO> freeUserList = (List) session.getAttribute("freeUserList");
-    
+
     List<Horario> workScheduleList = (List<Horario>) session.getAttribute("workScheduleList");
     String odontologistWorkSchedule = odontologistToEdit.getWorkSchedule() != null ? odontologistToEdit.getWorkSchedule().getName() : "not assigned";
 %>
@@ -76,21 +76,27 @@
     <div class="form-group">
         <div>
             <%
-                if(odontologistToEdit.getUser() == null) {
+                if (odontologistToEdit.getUser() == null) {
             %>
             <label for="user">User</label>
             <select class="form-control form-control-user" id="user" name="user" >
+
+                <% if (freeUserList.size() == 0) { %>
+                <option selected value="">No free users available</option>
+                <% } else { %>
                 <option selected value="">Select one to change</option>
                 <%
                     for (UserDTO u : freeUserList) {
-                %> <option value="<%= u.getId() %>" ><%= u.getUsername() %></option> <%
+                %> <option value="<%= u.getId()%>" ><%= u.getUsername()%></option> <%
+                        }
                     }
                 %>
+
             </select>
             <span id="errorWorkSchedule" class="error-validation"></span>
-            <% } else { %>
-            <p>User assigned: <strong><%= odontologistToEdit.getUser().getUsername() %></strong></p>
-            <% } %>
+            <% } else {%>
+            <p>User assigned: <strong><%= odontologistToEdit.getUser().getUsername()%></strong></p>
+            <% }%>
         </div>
     </div>
 
