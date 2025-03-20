@@ -4,6 +4,7 @@ import com.javierhidalgodev.clinicaodontologica.logica.Controller;
 import com.javierhidalgodev.clinicaodontologica.logica.Odontologo;
 import java.io.IOException;
 import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,7 +30,7 @@ public class SvOdontologists extends HttpServlet {
         List<Odontologo> odontologistsList = controller.getAllOdontologists();
         
         request.getSession().setAttribute("odontologistsList", odontologistsList);
-
+        
         response.sendRedirect("vistaOdontologos.jsp");
     }
 

@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
-<jsp:include page="/auth.jsp" />
+<%@include file="../auth.jsp" %>
 
 <!DOCTYPE html>
 <html lang="en">

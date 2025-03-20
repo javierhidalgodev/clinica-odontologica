@@ -1,14 +1,12 @@
 <%@page import="com.javierhidalgodev.clinicaodontologica.dto.user.UserDTO"%>
 <%
 
-    UserDTO userSession = (UserDTO) session.getAttribute("userSession");
+    HttpSession mySession = request.getSession(false);
+    UserDTO user = (UserDTO) mySession.getAttribute("userSession");
 
-    if (userSession == null) {
-        System.out.println("ME EJECUTO MAMONES");
-        session.invalidate();
+    if (user == null) {
+        mySession.invalidate();
         response.sendRedirect("login.jsp");
-    } else {
-        System.out.println(userSession.getProfessional());
+        return;
     }
-
 %>
