@@ -3,7 +3,7 @@
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePatients"
        aria-expanded="true" aria-controls="collapsePatients">
         <i class="fas fa-solid fa-hospital-user"></i>
-        <span>Mis pacientes</span>
+        <span>Pacientes</span>
     </a>
     <div id="collapsePatients" class="collapse" aria-labelledby="headingPatients"
          data-parent="#accordionSidebar">
@@ -20,7 +20,7 @@
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSecretaries"
        aria-expanded="true" aria-controls="collapseSecretaries">
         <i class="fas fa-solid fa-briefcase"></i>
-        <span>Mis citas</span>
+        <span>Citas</span>
     </a>
     <div id="collapseSecretaries" class="collapse" aria-labelledby="headingSecretaries" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
@@ -36,7 +36,7 @@
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOdontologist"
        aria-expanded="true" aria-controls="collapseOdontologist">
         <i class="fas fa-solid fa-stethoscope"></i>
-        <span>Mis horarios</span>
+        <span>Horarios</span>
     </a>
     <div id="collapseOdontologist" class="collapse" aria-labelledby="headingOdontologist" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">

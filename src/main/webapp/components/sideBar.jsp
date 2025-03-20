@@ -2,7 +2,7 @@
 
 <!-- Sidebar -->
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-<!-- Sidebar - Brand -->
+    <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.jsp">
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-solid fa-tooth"></i>
@@ -28,11 +28,11 @@
         Gestión
     </div>
 
-
-
+    <% if (session.getAttribute("userRole").equals("admin")) { %>
     <%@include file="adminSideBar.jsp" %>
-
-
+    <% } else { %>
+    <%@include file="userSideBar.jsp" %>
+    <% }%>
     <!--             Heading 
                 <div class="sidebar-heading">
                     Addons

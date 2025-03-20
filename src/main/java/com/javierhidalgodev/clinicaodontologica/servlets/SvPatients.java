@@ -36,22 +36,25 @@ public class SvPatients extends HttpServlet {
 
         HttpSession mySession = request.getSession();
         UserDTO userSession = (UserDTO) mySession.getAttribute("userSession");
+        List<Paciente> patientsList = null;
 
         if (userSession.getRole() != null && userSession.getRole().equals("admin")) {
-            List<Paciente> patientsList = controller.getAllPatients();
-            mySession.setAttribute("patientsList", patientsList);
+            patientsList = controller.getAllPatients();
         } else {
-            if (userSession.getProfessional().equals("odontologist")) {
-                List<Paciente> patientList = controller.getPatientsByOdontologist(userSession.getId());
-            } else if (userSession.getProfessional().equals("secretary")) {
-
+            if (userSession.getProfessional() != null) {
+                if (userSession.getProfessional().equals("odontologist")) {
+                    patientsList = controller.getPatientsByOdontologist(userSession.getId());
+                } else {
+                    patientsList = controller.getAllPatients();
+                }
             } else {
-
+                response.sendRedirect("index.jsp");
+                return;
             }
         }
 
+        mySession.setAttribute("patientsList", patientsList);
         response.sendRedirect("vistaPacientes.jsp");
-
     }
 
     @Override
