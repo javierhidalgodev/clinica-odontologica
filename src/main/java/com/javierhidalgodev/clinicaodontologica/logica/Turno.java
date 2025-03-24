@@ -35,12 +35,12 @@ public class Turno implements Serializable {
     public Turno() {
     }
 
-    public Turno(int idAppointment, Date appointment, String hour, String treatment/*, Odontologo odontologist*/) {
-        this.idAppointment = idAppointment;
-        this.appointment = appointment;
-        this.hour = hour;
+    public Turno(Date appointmentDate, String appointmentHour, String treatment, Odontologo odontologist, Paciente patient) {
+        this.appointment = appointmentDate;
+        this.hour = appointmentHour;
         this.treatment = treatment;
-//        this.odontologist = odontologist;
+        this.odontologist = odontologist;
+        this.patient = patient;
     }
 
     public int getIdAppointment() {
@@ -75,11 +75,19 @@ public class Turno implements Serializable {
         this.treatment = treatment;
     }
 
-//    public Odontologo getOdontologist() {
-//        return odontologist;
-//    }
-//
-//    public void setOdontologist(Odontologo odontologist) {
-//        this.odontologist = odontologist;
-//    }
+    public Odontologo getOdontologist() {
+        return odontologist;
+    }
+
+    public void setOdontologist(Odontologo odontologist) {
+        this.odontologist = odontologist;
+    }
+
+    public Paciente getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Paciente patient) {
+        this.patient = patient;
+    }
 }

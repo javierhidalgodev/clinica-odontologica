@@ -297,4 +297,34 @@ public class Controller {
     public List<Paciente> getPatientsByOdontologist(int id) {
         return persistenceController.getPatientsByOdontologist(id);
     }
+
+    public List<Odontologo> getOdontologistsByWS(int ws) {
+        return persistenceController.getOdontologistsByWS(ws);
+    }
+
+    public void createAppointment(String date, String hour, String professional, String patient) {
+        
+        int professionalID = Integer.parseInt(professional);
+        int patientID = Integer.parseInt(patient);
+        
+        Odontologo odonto = persistenceController.getOdontologistById(professionalID);
+        Paciente pat = persistenceController.getPatientById(patientID);
+        
+        if(odonto != null && pat != null) {
+            Date appointmentDate = Date.valueOf(date);
+            
+            Turno appointment = new Turno(appointmentDate, hour, "", odonto, pat);
+            
+            persistenceController.createAppointment(appointment);
+        }
+        
+    }
+
+    public List<Turno> getAllAppointments() {
+        return persistenceController.getAllAppointments();
+    }
+
+    public Turno getAppointmentById(int id) {
+        return persistenceController.getAppointmentById(id);
+    }
 }

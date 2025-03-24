@@ -63,11 +63,11 @@
 
                     if (period.getYears() > 18) {
                 %>
-                        <form action = "SvGuardianDelete" method = "POST" data-form-action="delete">
-                            <input type="hidden" id="guardianIdToDelete" name="guardianIdToDelete" value="<%= patient.getGuardian().getId()%>">
-                            <button type="submit" class="btn btn-danger">Eliminar</button>
-                        </form>
-                <% } %>
+                <form action = "SvGuardianDelete" method = "POST" data-form-action="delete">
+                    <input type="hidden" id="guardianIdToDelete" name="guardianIdToDelete" value="<%= patient.getGuardian().getId()%>">
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                </form>
+                <% }%>
             </div>
             <p>Name: <%= guardian.getName()%></p>
             <p>Surname: <%= guardian.getSurname()%></p>

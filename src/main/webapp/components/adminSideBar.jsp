@@ -82,3 +82,18 @@
         </div>
     </div>
 </li>
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAppointments"
+       aria-expanded="true" aria-controls="collapseApointments">
+        <i class="fas fa-solid fa-calendar"></i>
+        <span>Citas</span>
+    </a>
+    <div id="collapseAppointments" class="collapse" aria-labelledby="headingAppointments"
+         data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Acciones</h6>
+            <a class="collapse-item" href="SvAppointmentsView">Ver citas</a>
+            <a class="collapse-item" href="SvAppointments">Citar paciente</a>
+        </div>
+    </div>
+</li>

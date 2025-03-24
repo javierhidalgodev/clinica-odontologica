@@ -14,7 +14,7 @@
             <%@include file="../components/sideBar.jsp" %>
 
             <!-- Content Wrapper -->
-            <div id="content-wrapper" class="d-flex flex-column">
+            <div id="content-wrapper" class="d-flex flex-column mb-5">
 
                 <!-- Main Content -->
                 <div id="content">

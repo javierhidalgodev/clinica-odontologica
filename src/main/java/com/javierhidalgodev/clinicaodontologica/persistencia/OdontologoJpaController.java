@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
@@ -120,4 +121,21 @@ public class OdontologoJpaController implements Serializable {
         }
     }
 
+    List<Odontologo> getOdontologistsByWS(int ws) {
+        EntityManager em = PersistenceManager.getInstance().getEntityManager();
+        try {
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery cq = cb.createQuery(Odontologo.class);
+            Root<Odontologo> root = cq.from(Odontologo.class);
+            
+            
+            
+            cq.select(root).where(cb.equal(root.get("workSchedule").get("idWorkSchedule"), ws));
+            
+            List<Odontologo> odontos = em.createQuery(cq).getResultList();
+            return odontos;
+        } finally {
+            em.close();
+        }
+    }
 }

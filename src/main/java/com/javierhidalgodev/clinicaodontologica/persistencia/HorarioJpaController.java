@@ -1,6 +1,7 @@
 package com.javierhidalgodev.clinicaodontologica.persistencia;
 
 import com.javierhidalgodev.clinicaodontologica.logica.Horario;
+import com.javierhidalgodev.clinicaodontologica.logica.Odontologo;
 import com.javierhidalgodev.clinicaodontologica.persistencia.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
@@ -8,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
@@ -19,7 +21,7 @@ public class HorarioJpaController implements Serializable {
 
     public HorarioJpaController() {
     }
-    
+
     public void create(Horario horario) {
         EntityManager em = PersistenceManager.getInstance().getEntityManager();
         try {

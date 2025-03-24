@@ -6,6 +6,7 @@ import com.javierhidalgodev.clinicaodontologica.logica.Odontologo;
 import com.javierhidalgodev.clinicaodontologica.logica.Paciente;
 import com.javierhidalgodev.clinicaodontologica.logica.Responsable;
 import com.javierhidalgodev.clinicaodontologica.logica.Secretario;
+import com.javierhidalgodev.clinicaodontologica.logica.Turno;
 import com.javierhidalgodev.clinicaodontologica.logica.Usuario;
 import com.javierhidalgodev.clinicaodontologica.persistencia.exceptions.NonexistentEntityException;
 import java.sql.Date;
@@ -27,7 +28,7 @@ public class PersistenceController {
     private final ResponsableJpaController guardianController;
     private final SecretarioJpaController secretaryController;
     private final HorarioJpaController workScheduleController;
-//    TurnoJpaController workShiftController;
+    private final TurnoJpaController appointmentController;
     private final UsuarioJpaController userController;
 
     private PersistenceController() {
@@ -36,6 +37,7 @@ public class PersistenceController {
         this.patientController = new PacienteJpaController();
         this.guardianController = new ResponsableJpaController();
         this.workScheduleController = new HorarioJpaController();
+        this.appointmentController = new TurnoJpaController();
         this.userController = new UsuarioJpaController();
     }
 
@@ -224,5 +226,21 @@ public class PersistenceController {
     public List<Paciente> getPatientsByOdontologist(int id) {
 //        return patientController.getPatientsByOdontologist(id);
         return patientController.findPacienteEntities();
+    }
+
+    public List<Odontologo> getOdontologistsByWS(int ws) {
+        return odontologistController.getOdontologistsByWS(ws);
+    }
+
+    public void createAppointment(Turno appointment) {
+        appointmentController.create(appointment);
+    }
+
+    public List<Turno> getAllAppointments() {
+        return appointmentController.findTurnoEntities();
+    }
+
+    public Turno getAppointmentById(int id) {
+        return appointmentController.findTurno(id);
     }
 }

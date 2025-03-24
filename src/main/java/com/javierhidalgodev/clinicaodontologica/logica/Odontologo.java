@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -19,6 +20,7 @@ import javax.persistence.OneToOne;
 public class Odontologo extends Persona implements Serializable {
     private String specialization;
     @OneToOne
+    @JoinColumn(name = "id_work_schedule")
     private Horario workSchedule;
     @OneToMany(mappedBy = "odontologist")
     private List<Turno> workShift;
