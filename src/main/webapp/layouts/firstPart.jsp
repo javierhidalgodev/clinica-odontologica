@@ -14,10 +14,10 @@
             <%@include file="../components/sideBar.jsp" %>
 
             <!-- Content Wrapper -->
-            <div id="content-wrapper" class="d-flex flex-column mb-5">
+            <div id="content-wrapper" class="d-flex flex-column">
 
                 <!-- Main Content -->
-                <div id="content">
+                <div id="content" class="mb-5">
 
                     <%@include file="../components/topBar.jsp" %>
 
