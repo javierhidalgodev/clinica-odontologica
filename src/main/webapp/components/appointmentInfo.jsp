@@ -1,3 +1,4 @@
+<%@page import="com.javierhidalgodev.clinicaodontologica.logica.Responsable"%>
 <%@page import="com.javierhidalgodev.clinicaodontologica.logica.Paciente"%>
 <%@page import="com.javierhidalgodev.clinicaodontologica.logica.Turno"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -28,16 +29,26 @@
     <div class="card-body">
         <p>Nombre y apellidos: <%= patient.getName()%> <%= patient.getSurname()%></p>
         <%
-            String odontoBirthdate = simpleDateFormat.format(odontologist.getBirthdate());
+            String patientBirthdate = simpleDateFormat.format(patient.getBirthdate());
         %>
-        <p>Fecha nacimiento: <%= odontoBirthdate%></p>
+        <p>Fecha nacimiento: <%= patientBirthdate%></p>
         <p>Seguridad Social: <%= patient.getPrepaidHealth() ? "Sí" : "No"%></p>
         <p>Grupo Sangíneo: <%= patient.getBloodType()%></p>
         <p>Teléfono: <%= patient.getPhone()%></p>
         <p>Dirección: <%= patient.getAddress()%></p>
-
-        <% if (patient.getGuardian() != null) { %>
-        <h6 class="text-primary">Información del responsable</h6>
+        <hr>
+        <% if (patient.getGuardian() != null) {
+            Responsable guardian = patient.getGuardian();
+        %>
+        <h6 class="text-primary font-weight-bold">Información del responsable</h6>
+        <p>Nombre y apellidos: <%= guardian.getName()%> <%= guardian.getSurname()%></p>
+        <%
+            String guardianBirthdate = simpleDateFormat.format(guardian.getBirthdate());
+        %>
+        <p>Fecha nacimiento: <%= guardianBirthdate %></p>
+        <p>Seguridad Social: <%= guardian.getRelationship() %></p>
+        <p>Teléfono: <%= guardian.getPhone()%></p>
+        <p>Dirección: <%= guardian.getAddress()%></p>
         <% } %>
     </div>
 </div>
