@@ -20,69 +20,93 @@
 
 %>
 
-<div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <div class="d-flex justify-content-between align-items-center">
-            <span class="m-0 font-weight-bold text-primary">Pacient Info</span>
-        </div>
+<div class="row">
+    <div class="col-xl-8 col-l-7">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <span class="m-0 font-weight-bold text-primary">Pacient</span>
+                    <form action="SvPatientInfo" method="GET">
+                        <input type="hidden" name="id" value="<%= patient.getId()%>" />
+                        <button type="submit" class="btn btn-sm btn-primary">Details</button>
+                    </form>
+                </div>
+            </div>
+            <div class="card-body">
+                <p>Full Name: <%= patient.getName()%> <%= patient.getSurname()%></p>
+                <%
+                    String patientBirthdate = simpleDateFormat.format(patient.getBirthdate());
+                %>
+                <p>Birthdate: <%= patientBirthdate%></p>
+                <p>Prepaid Health: <%= patient.getPrepaidHealth() ? "Sí" : "No"%></p>
+                <p>Blood Type: <%= patient.getBloodType()%></p>
+                <p>Phone: <%= patient.getPhone()%></p>
+                <p>Address <%= patient.getAddress()%></p>
+            </div>
+        </div>    
     </div>
-    <div class="card-body">
-        <p>Nombre y apellidos: <%= patient.getName()%> <%= patient.getSurname()%></p>
-        <%
-            String patientBirthdate = simpleDateFormat.format(patient.getBirthdate());
-        %>
-        <p>Fecha nacimiento: <%= patientBirthdate%></p>
-        <p>Seguridad Social: <%= patient.getPrepaidHealth() ? "Sí" : "No"%></p>
-        <p>Grupo Sangíneo: <%= patient.getBloodType()%></p>
-        <p>Teléfono: <%= patient.getPhone()%></p>
-        <p>Dirección: <%= patient.getAddress()%></p>
-        <hr>
-        <% if (patient.getGuardian() != null) {
-            Responsable guardian = patient.getGuardian();
-        %>
-        <h6 class="text-primary font-weight-bold">Información del responsable</h6>
-        <p>Nombre y apellidos: <%= guardian.getName()%> <%= guardian.getSurname()%></p>
-        <%
-            String guardianBirthdate = simpleDateFormat.format(guardian.getBirthdate());
-        %>
-        <p>Fecha nacimiento: <%= guardianBirthdate %></p>
-        <p>Seguridad Social: <%= guardian.getRelationship() %></p>
-        <p>Teléfono: <%= guardian.getPhone()%></p>
-        <p>Dirección: <%= guardian.getAddress()%></p>
-        <% } %>
+    <div class="col-xl-4 col-l-5">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <span class="m-0 font-weight-bold text-primary">Appointment</span>
+                </div>
+            </div>
+            <div class="card-body">
+                <%
+                    String appointmentDate = simpleDateFormat.format(appointmentInfo.getAppointment());
+                %>
+                <p>Date: <%= appointmentDate%></p>
+                <p>Hour: <%= appointmentInfo.getHour()%></p>
+            </div>
+        </div>
     </div>
 </div>
 
-<div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <div class="d-flex justify-content-between align-items-center">
-            <span class="m-0 font-weight-bold text-primary">Appointment info</span>
-        </div>
-    </div>
-    <div class="card-body">
-        <%
-            String appointmentDate = simpleDateFormat.format(appointmentInfo.getAppointment());
-        %>
-        <p>Día: <%= appointmentDate%></p>
-        <p>Hora: <%= appointmentInfo.getHour()%></p>
-    </div>
-</div>
-
+<% if (patient.getGuardian() != null) {
+        Responsable guardian = patient.getGuardian();
+%>
 <div class="card shadow mb-4">
     <!-- Card Header - Accordion -->
-    <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse"
-       role="button" aria-expanded="true" aria-controls="collapseCardExample">
-        <div class="d-flex">
-            <h6 class="m-0 font-weight-bold text-primary">Professional Info</h6>
+    <a href="#collapseCardGuardian" class="d-block card-header py-3" data-toggle="collapse"
+       role="button" aria-expanded="true" aria-controls="collapseCardGuardian">
+        <div class="d-flex justify-content-between align-items-center">
+            <span class="m-0 font-weight-bold text-primary">Guardian</span>
         </div>
     </a>
 
     <!-- Card Content - Collapse -->
-    <div class="collapse hide" id="collapseCardExample">
+    <div class="collapse hide" id="collapseCardGuardian">
         <div class="card-body">
-            <p>Nombre y apellidos: Dr. <%= odontologist.getName()%> <%= odontologist.getSurname()%></p>
-            <p>Especialidad: <%= odontologist.getSpecialization()%></p>
-            <p>Teléfono: <%= odontologist.getPhone()%></p>
+            <p>Full Name: <%= guardian.getName()%> <%= guardian.getSurname()%></p>
+            <%
+                String guardianBirthdate = simpleDateFormat.format(guardian.getBirthdate());
+            %>
+            <p>Birthdate: <%= guardianBirthdate%></p>
+            <p>Relationship: <%= guardian.getRelationship()%></p>
+            <p>Phone: <%= guardian.getPhone()%></p>
+            <p>Address <%= guardian.getAddress()%></p>
+        </div>
+    </div>
+</div>
+
+<% }%>
+
+<div class="card shadow mb-4">
+    <!-- Card Header - Accordion -->
+    <a href="#collapseCardProfessional" class="d-block card-header py-3" data-toggle="collapse"
+       role="button" aria-expanded="true" aria-controls="collapseCardProfessional">
+        <div class="d-flex justify-content-between align-items-center">
+            <span class="m-0 font-weight-bold text-primary">Professional</span>
+        </div>
+    </a>
+
+    <!-- Card Content - Collapse -->
+    <div class="collapse hide" id="collapseCardProfessional">
+        <div class="card-body">
+            <p>Full Name: Dr. <%= odontologist.getName()%> <%= odontologist.getSurname()%></p>
+            <p>Speciality: <%= odontologist.getSpecialization()%></p>
+            <p>Phone: <%= odontologist.getPhone()%></p>
         </div>
     </div>
 </div>

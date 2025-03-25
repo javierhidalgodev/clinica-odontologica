@@ -1,6 +1,12 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@include file="../auth.jsp" %>
 
+<%
+
+UserDTO userSession = (UserDTO) session.getAttribute("userSession");
+
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 

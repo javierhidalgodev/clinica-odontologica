@@ -2,7 +2,6 @@ package com.javierhidalgodev.clinicaodontologica.servlets;
 
 import com.javierhidalgodev.clinicaodontologica.logica.Controller;
 import com.javierhidalgodev.clinicaodontologica.logica.Odontologo;
-import com.javierhidalgodev.clinicaodontologica.logica.Paciente;
 import java.io.IOException;
 import java.time.LocalDate;
 import javax.servlet.ServletException;
@@ -57,7 +56,7 @@ public class SvAppointmentConfirmation extends HttpServlet {
             
             System.out.println("Cita confirmada a " + LocalDate.now().toString());
             
-            response.sendRedirect("index.jsp");
+            response.sendRedirect("SvIndex");
             return;
         }
         

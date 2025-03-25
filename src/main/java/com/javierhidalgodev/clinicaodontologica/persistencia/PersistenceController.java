@@ -243,4 +243,20 @@ public class PersistenceController {
     public Turno getAppointmentById(int id) {
         return appointmentController.findTurno(id);
     }
+
+    public int getOdontologistsCount() {
+        return odontologistController.getOdontologoCount();
+    }
+
+    public int getSecretariesCount() {
+        return secretaryController.getSecretarioCount();
+    }
+
+    public int getPatientsCount() {
+        return patientController.getPacienteCount();
+    }
+
+    public int getAppointmentsCount() {
+        return appointmentController.getTurnoCount();
+    }
 }

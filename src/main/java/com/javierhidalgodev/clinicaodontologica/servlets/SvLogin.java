@@ -45,13 +45,16 @@ public class SvLogin extends HttpServlet {
                 request.getSession().setAttribute("userRole", loginSuccessfull.getRole());
                 request.getSession().setAttribute("userProfessional", loginSuccessfull.getProfessional());
                 request.getSession().setAttribute("userName", loginSuccessfull.getUsername());
-                
-                response.sendRedirect("index.jsp");
-            } else {
-                response.sendRedirect("error.jsp");
+
+                response.sendRedirect("SvIndex");
+                return;
             }
+            
+            response.sendRedirect("error.jsp");
+            return;
         } catch (Exception e) {
             response.sendRedirect("offline.jsp");
+            return;
         }
     }
 

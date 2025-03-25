@@ -327,4 +327,20 @@ public class Controller {
     public Turno getAppointmentById(int id) {
         return persistenceController.getAppointmentById(id);
     }
+
+    public int getOdontologistsCount() {
+        return persistenceController.getOdontologistsCount();
+    }
+
+    public int getSecretariesCount() {
+        return persistenceController.getSecretariesCount();
+    }
+
+    public int getPatientsCount() {
+        return persistenceController.getPatientsCount();
+    }
+
+    public int getAppointmentsCount() {
+        return persistenceController.getAppointmentsCount();
+    }
 }
