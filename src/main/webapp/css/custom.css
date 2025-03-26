@@ -1,0 +1,13 @@
+.form-control {
+    padding: .75rem 1rem !important;
+    height: auto !important;
+}
+
+select, input[type=date], input[type=time] {
+    padding: .75rem 1rem !important;
+}
+
+label {
+    font-size: smaller;
+}
+

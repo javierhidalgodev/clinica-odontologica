@@ -19,8 +19,9 @@
                     <div class="text-center">
                         <h1 class="h4 text-gray-900 mb-4 text-left">Elija una fecha y una hora</h1>
                     </div>
-                    <form action="SvAvailableOdontologists" method="GET" id="form">
+                    <form class="user" action="SvAvailableOdontologists" method="GET" id="form">
                         <div class="form-group">
+                            <label for="patient">Patient</label>
                             <select class="form-control form-control-user" id="patient" name="patient" data-validations="required">
                                     <option selected value="">Select one</option>
                                     <%                    for (Paciente p : patientList) {
@@ -34,11 +35,13 @@
                         </div>
                         <div class="form-group row">
                             <div class="col-md-6 mb-3 mb-md-0">
+                                <label for="appointmentDate">Date</label>
                                 <input type="date" min="<%= LocalDate.now()%>" class="form-control form-control-user" id="appointmentDate" name="appointmentDate" data-validations="required">
                                 <span id="errorAppointmentDate" class="error-validation"></span>
                             </div>
                             <div class="col-md-6">
-                                <input type="time" min="09:00" max="20:30" class="form-control form-control-user" id="appointmentHour" name="appointmentHour" data-validations="required">
+                                <label for="appointmentHour">Hour (choose 00 or 30 min.)</label>
+                                <input type="time" min="09:00" max="20:30" step="1800" class="form-control form-control-user" id="appointmentHour" name="appointmentHour" data-validations="required">
                                 <span id="errorAppointmentHour" class="error-validation"></span>
                             </div>
                         </div>
