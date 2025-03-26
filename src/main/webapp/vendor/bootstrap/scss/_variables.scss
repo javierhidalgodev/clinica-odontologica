@@ -100,11 +100,11 @@ $yiq-text-light:            $white !default;
 
 // Characters which are escaped by the escape-svg function
 $escaped-characters: (
-  ("<", "%3c"),
-  (">", "%3e"),
-  ("#", "%23"),
-  ("(", "%28"),
-  (")", "%29"),
+  "<": "%3c",
+  ">": "%3e",
+  "#": "%23",
+  "(": "%28",
+  ")": "%29",
 ) !default;
 
 
@@ -260,12 +260,7 @@ $transition-collapse:         height .35s ease !default;
 
 $embed-responsive-aspect-ratios: () !default;
 $embed-responsive-aspect-ratios: join(
-  (
-    (21 9),
-    (16 9),
-    (4 3),
-    (1 1),
-  ),
+  ((21 9), (16 9), (4 3), (1 1)),
   $embed-responsive-aspect-ratios
 );
 
