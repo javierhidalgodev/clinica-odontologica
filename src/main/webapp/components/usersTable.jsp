@@ -39,13 +39,13 @@
             <td class="w-fit">
                 <form action="SvUsersEdit" method="GET">
                     <input type="hidden" name="id" value="<%= u.getId()%>" />
-                    <button type="submit" href="SvUsersEdit" class="btn btn-primary">Editar</button>
+                    <button type="submit" href="SvUsersEdit" class="btn btn-sm btn-primary">Editar</button>
                 </form>
             </td>
             <td class="w-fit">
                 <form action="SvUsersDelete" method="POST">
                     <input type="hidden" name="id" value="<%= u.getId()%>" />
-                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                    <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
                 </form>
             </td>
         </tr> <%
