@@ -24,14 +24,14 @@
             <input type="text" class="form-control form-control-user" id="address" name="address" placeholder="Address" data-validations="required|minLength:5|maxLength:50">
             <span id="errorAddress" class="error-validation"></span>
         </div>
-        <div class="col-md-6 mb-3 mb-md-0">
+        <div class="col-md-6">
             <label for="phone">Phone</label>
             <input type="tel" class="form-control form-control-user" id="phone" name="phone" placeholder="Phone" data-validations="required|phone">
             <span id="errorPhone" class="error-validation"></span>
         </div>
     </div>
     <div class="form-group row">
-        <div class="col-md-6">
+        <div class="col-md-6 mb-3 mb-md-0">
             <label for="birthdate">Birthdate</label>
             <input type="date" class="form-control form-control-user" id="birthdate" name="birthday" data-validations="required|birthdate">
             <span id="errorBirthdate" class="error-validation"></span>
