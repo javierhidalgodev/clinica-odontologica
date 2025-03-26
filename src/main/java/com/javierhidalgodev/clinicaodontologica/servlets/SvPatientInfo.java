@@ -37,7 +37,6 @@ public class SvPatientInfo extends HttpServlet {
             
             HttpSession mySession = request.getSession();
             mySession.setAttribute("patientDetails", patient);
-            System.out.println(patient.getPrepaidHealth());
             response.sendRedirect("vistaPaciente.jsp");
         }
 

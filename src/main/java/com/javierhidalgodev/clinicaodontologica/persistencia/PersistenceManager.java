@@ -14,7 +14,7 @@ public class PersistenceManager {
         try {
             emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
         } catch (Exception e) {
-            System.out.println("Error al inicializar la unidad de persistencia: " + e.getMessage());
+            System.out.println("Error al inicializar la unidad de persistencia en PersistenceManager.java: " + e.getMessage());
             throw new RuntimeException("No se pudo conectar a la base de datos" + e.getMessage());
         }
     }

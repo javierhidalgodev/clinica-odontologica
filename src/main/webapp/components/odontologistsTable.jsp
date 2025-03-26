@@ -13,13 +13,8 @@
     <thead>
         <tr>
             <th>#</th>
-            <th>Name</th>
-            <th>Address</th>
-            <th>Phone</th>
-            <th>Date of birth</th>
-            <th>DNI</th>
-            <th>Specialization</th>
-            <th>Work Schedule</th>
+            <th class="w-100">Name</th>
+            <th>Profile</th>
             <th>Edit</th>
             <th>Delete</th>
         </tr>
@@ -28,12 +23,7 @@
         <tr>
             <th>#</th>
             <th>Name</th>
-            <th>Address</th>
-            <th>Phone</th>
-            <th>Date of birth</th>
-            <th>DNI</th>
-            <th>Specialization</th>
-            <th>Work Schedule</th>
+            <th>Profile</th>
             <th>Edit</th>
             <th>Delete</th>
         </tr>
@@ -43,32 +33,32 @@
             if (!odontologistsList.isEmpty()) {
                 int i = 0;
 
-                            for (Odontologo o : odontologistsList) {%>
+                for (Odontologo o : odontologistsList) {%>
         <tr>
             <td><%= i + 1%></td>
-            <td><%= o.getName() + " " + o.getSurname()%></td>
-            <td><%= o.getAddress()%></td>
-            <td><%= o.getPhone()%></td>
+            <td><%= o.getName() + " " + o.getSurname()%></td>            
             <td>
-                <%
-                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
-                    String formatDate = simpleDateFormat.format(o.getBirthdate());
-                %>
-                <%= formatDate%>
+                <form action="odontologist" method="GET">
+                    <input type="hidden" name="idToInfo" value="<%= o.getId()%>" />
+                    <button type="submit" class="btn btn-success">
+                        <i class="fas fa-solid fa-info-circle"></i>
+                    </button>
+                </form>
             </td>
-            <td><%= o.getDni()%></td>
-            <td><%= o.getSpecialization()%></td>
-            <td><%= o.getWorkSchedule() != null ? o.getWorkSchedule().getName() + " / " + o.getWorkSchedule().getEntryTime() + " - " + o.getWorkSchedule().getExitTime() : "Not assigned"%></td>
             <td>
                 <form action="SvOdontologistsEdit" method="GET">
-                    <input type="hidden" name="id" value="<%= o.getId()%>" />
-                    <button type="submit" class="btn btn-primary fas fa-edit"></button>
+                    <input type="hidden" name="idToEdit" value="<%= o.getId()%>" />
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-solid fa-edit"></i>
+                    </button>
                 </form>
             </td>
             <td>
                 <form action="SvOdontologistsDelete" method="POST" data-form-action="delete">
                     <input type="hidden" name="idToDelete" value="<%= o.getId()%>" />
-                    <button type="submit" class="btn btn-danger fas fa-trash-alt"></button>
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-solid fa-trash-alt"></i>
+                    </button>
                 </form>
             </td>
         </tr> <%
@@ -85,20 +75,20 @@
         %>
     </tbody>
 </table>
-    
-    <script>
-        deleteForms = document.querySelectorAll("[data-form-action=delete]");
-        
-        function confirmDelete(ev) {
-            ev.preventDefault();
-            
-            confirmation = confirm("¿Seguro que desea eliminar el registro? Esta operación es irreversible");
-            
-            if(confirmation) {
-                ev.target.submit();
-            }
+
+<script>
+    deleteForms = document.querySelectorAll("[data-form-action=delete]");
+
+    function confirmDelete(ev) {
+        ev.preventDefault();
+
+        confirmation = confirm("¿Seguro que desea eliminar el registro? Esta operación es irreversible");
+
+        if (confirmation) {
+            ev.target.submit();
         }
-        
-        deleteForms.forEach(f => f.addEventListener("submit", confirmDelete))
-        
-    </script>
+    }
+
+    deleteForms.forEach(f => f.addEventListener("submit", confirmDelete))
+
+</script>

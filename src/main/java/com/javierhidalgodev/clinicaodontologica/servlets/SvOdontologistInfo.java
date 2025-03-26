@@ -1,42 +1,45 @@
 package com.javierhidalgodev.clinicaodontologica.servlets;
 
 import com.javierhidalgodev.clinicaodontologica.logica.Controller;
+import com.javierhidalgodev.clinicaodontologica.logica.Odontologo;
 import java.io.IOException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Javi
  */
-@WebServlet(name = "SvIndex", urlPatterns = {"/SvIndex"})
-public class SvIndex extends HttpServlet {
+@WebServlet(name = "SvOdontologistInfo", urlPatterns = {"/SvOdontologistInfo"})
+public class SvOdontologistInfo extends HttpServlet {
 
     Controller controller = Controller.getInstance();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String odontoID = request.getParameter("idToInfo");
 
-        int odontologistsCount = controller.getOdontologistsCount();
-        int secretariesCount = controller.getSecretariesCount();
-        int patientsCount = controller.getPatientsCount();
-        int appointmentsCount = controller.getAppointmentsCount();
-                
-        HttpSession mySession = request.getSession();
-        mySession.setAttribute("odontologistsCount", String.valueOf(odontologistsCount));
-        mySession.setAttribute("secretariesCount", String.valueOf(secretariesCount));
-        mySession.setAttribute("patientsCount", String.valueOf(patientsCount));
-        mySession.setAttribute("appointmentsCount", String.valueOf(appointmentsCount));
+        if (odontoID != null && !odontoID.isEmpty()) {
+            int odontologistID = Integer.parseInt(odontoID);
+            
+            Odontologo odontologist = controller.getOdontologistById(odontologistID);
+
+            request.setAttribute("odontologist", odontologist);
+
+            RequestDispatcher dispatcher = request.getRequestDispatcher("vistaOdontologoInfo.jsp");
+            dispatcher.forward(request, response);
+//            response.sendRedirect("vistaOdontologos.jsp");
+            return;
+        }
 
         response.sendRedirect("index.jsp");
     }
@@ -44,6 +47,7 @@ public class SvIndex extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
     }
 
     @Override

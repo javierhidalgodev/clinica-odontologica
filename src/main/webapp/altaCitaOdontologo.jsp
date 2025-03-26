@@ -19,9 +19,10 @@
                     <div class="text-center">
                         <h1 class="h4 text-gray-900 mb-4 text-left">Elija un profesional</h1>
                     </div>
-                    <form action="SvAppointmentConfirmation" method="GET" id="form">
+                    <form class="user" action="SvAppointmentConfirmation" method="GET" id="form">
                         <div class="form-group row">
                             <div class="col-md-6 mb-3 mb-md-0">
+                                <label for="odontologist">Professional</label>
                                 <select class="form-control form-control-user" id="odontologist" name="odontologist" data-validations="required">
                                     <option selected value="">Select one</option>
                                     <%                    for (Odontologo o : availableOdontologists) {

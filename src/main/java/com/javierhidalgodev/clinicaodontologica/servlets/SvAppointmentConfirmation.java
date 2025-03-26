@@ -53,9 +53,7 @@ public class SvAppointmentConfirmation extends HttpServlet {
         
         if(date != null && hour != null && professional != null && patient != null) {
             controller.createAppointment(date, hour, professional, patient);
-            
-            System.out.println("Cita confirmada a " + LocalDate.now().toString());
-            
+                        
             response.sendRedirect("SvIndex");
             return;
         }

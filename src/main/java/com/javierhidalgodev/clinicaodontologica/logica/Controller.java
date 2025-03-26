@@ -104,7 +104,7 @@ public class Controller {
             return null;
 
         } catch (RuntimeException e) {
-            System.out.println("Error de conexión: " + e.getMessage());
+            System.out.println("Error de conexión en Controller.java: " + e.getMessage());
             throw new Exception("SIN CONEXIÓN");
         }
     }
@@ -119,7 +119,7 @@ public class Controller {
 
         List<Horario> workScheduleList = persistenceController.getWorkScheduleList();
         for (Horario h : workScheduleList) {
-            System.out.println(h.getName());
+            System.out.println("Nombre del horario: " + h.getName());
             if (h.getName().equals(workSchedule)) {
                 wS = h;
             }
@@ -179,7 +179,7 @@ public class Controller {
     }
 
     public void destroyPatient(int patientID) {
-        System.out.println(patientID);
+        System.out.println("Id del paciente en Controller.java: " + patientID);
         persistenceController.destroyPatient(patientID);
     }
 
@@ -316,6 +316,12 @@ public class Controller {
             Turno appointment = new Turno(appointmentDate, hour, "", odonto, pat);
             
             persistenceController.createAppointment(appointment);
+            
+            odonto.getWorkShift().add(appointment);
+            persistenceController.editOdontologist(odonto);
+            
+            pat.getAppointments().add(appointment);
+            persistenceController.editPatient(pat);
         }
         
     }

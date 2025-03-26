@@ -43,6 +43,10 @@ public class SvAvailableOdontologists extends HttpServlet {
             
             List<Odontologo> odontologist = null;
 
+            // La idea aquí es poder filtrar por los distintos tipos de horarios.
+            // Para una prueba "cercana" hemos establecido los dos principales
+            // pero la aplicación debería de ser capaz de filtar según todos
+            // los horarios.
             if(wSAppointment < 12) {
                 odontologist = controller.getOdontologistsByWS(1);
             } else if(wSAppointment >= 12 && wSAppointment < 16) {
