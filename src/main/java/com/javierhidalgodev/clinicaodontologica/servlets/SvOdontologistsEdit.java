@@ -31,7 +31,7 @@ public class SvOdontologistsEdit extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String odontologistIdToEdit = request.getParameter("id");
+        String odontologistIdToEdit = request.getParameter("idToEdit");
 
         if (odontologistIdToEdit != null && !odontologistIdToEdit.isEmpty()) {
             int odontologistId = Integer.parseInt(odontologistIdToEdit);

@@ -85,7 +85,7 @@
             <p>Birthdate: <%= guardianBirthdate%></p>
             <p>Relationship: <%= guardian.getRelationship()%></p>
             <p>Phone: <%= guardian.getPhone()%></p>
-            <p>Address <%= guardian.getAddress()%></p>
+            <p>Address: <%= guardian.getAddress()%></p>
         </div>
     </div>
 </div>

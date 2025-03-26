@@ -1,7 +1,6 @@
 package com.javierhidalgodev.clinicaodontologica.servlets;
 
 import com.javierhidalgodev.clinicaodontologica.logica.Controller;
-import com.javierhidalgodev.clinicaodontologica.logica.Odontologo;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

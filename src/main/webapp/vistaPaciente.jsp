@@ -82,21 +82,3 @@
 <% }%>
 
 <%@include file="layouts/endPart.jsp" %>
-
-<script>
-    deleteForms = document.querySelectorAll("[data-form-action=delete]");
-
-    function confirmDelete(ev) {
-        ev.preventDefault();
-
-        confirmation = confirm("¿Estás seguro de que deseas eliminar el registro? Esta operación es irreversible.");
-
-        if (confirmation) {
-            ev.target.submit();
-        }
-    }
-
-    deleteForms.forEach(dF => {
-        dF.addEventListener("submit", confirmDelete);
-    })
-</script>

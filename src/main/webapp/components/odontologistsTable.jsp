@@ -15,8 +15,8 @@
             <th>#</th>
             <th class="w-100">Name</th>
             <th>Profile</th>
-            <th>Edit</th>
-            <th>Delete</th>
+<!--            <th>Edit</th>
+            <th>Delete</th>-->
         </tr>
     </thead>
     <tfoot>
@@ -24,8 +24,8 @@
             <th>#</th>
             <th>Name</th>
             <th>Profile</th>
-            <th>Edit</th>
-            <th>Delete</th>
+<!--            <th>Edit</th>
+            <th>Delete</th>-->
         </tr>
     </tfoot>
     <tbody>
@@ -45,7 +45,7 @@
                     </button>
                 </form>
             </td>
-            <td>
+<!--            <td>
                 <form action="SvOdontologistsEdit" method="GET">
                     <input type="hidden" name="idToEdit" value="<%= o.getId()%>" />
                     <button type="submit" class="btn btn-primary">
@@ -60,7 +60,7 @@
                         <i class="fas fa-solid fa-trash-alt"></i>
                     </button>
                 </form>
-            </td>
+            </td>-->
         </tr> <%
 
                 i++;

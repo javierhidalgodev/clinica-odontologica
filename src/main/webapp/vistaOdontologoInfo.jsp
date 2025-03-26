@@ -9,7 +9,23 @@
 
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <span class="m-0 font-weight-bold text-primary">Dr. <%= odontologist.getName()%> <%= odontologist.getSurname()%></span>
+        <div class="d-flex justify-content-between align-items-center">
+            <span class="m-0 font-weight-bold text-primary">Dr. <%= odontologist.getName()%> <%= odontologist.getSurname()%></span>
+            <div class="d-flex" id="actions">
+                <form action="SvOdontologistsEdit" method="GET" class="mr-2">
+                    <input type="hidden" name="idToEdit" value="<%= odontologist.getId()%>" />
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-solid fa-edit"></i>
+                    </button>
+                </form>
+                <form action="SvOdontologistsDelete" method="POST" data-form-action="delete">
+                    <input type="hidden" name="idToDelete" value="<%= odontologist.getId()%>" />
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-solid fa-trash-alt"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
     </div>
     <div class="card-body">
         <p>Address: <%= odontologist.getAddress()%></p>
@@ -24,6 +40,9 @@
         <p>DNI: <%= odontologist.getDni()%></p>
         <p>Speciality: <%= odontologist.getSpecialization()%></p>
         <p>Work Schedule: <%= odontologist.getWorkSchedule() != null ? odontologist.getWorkSchedule().getName() + " / " + odontologist.getWorkSchedule().getEntryTime() + " - " + odontologist.getWorkSchedule().getExitTime() : "Not assigned"%></p>
+        <% if (odontologist.getUser() != null) {%>
+        <p>User: <%= odontologist.getUser().getUsername()%></p>
+        <% } %>
     </div>
 </div>
 
@@ -59,17 +78,17 @@
                             for (Turno t : odontologist.getWorkShift()) {%>
                     <tr>
                         <td><%= i + 1%></td>
-                        <td><%= t.getPatient().getName() %></td>            
+                        <td><%= t.getPatient().getName()%></td>            
                         <td>
                             <%
                                 String appointmentDate = simpleDateFormat.format(t.getAppointment());
                             %>
-                            <%= appointmentDate %>
+                            <%= appointmentDate%>
                         </td>
-                        <td><%= t.getHour() %></td>
+                        <td><%= t.getHour()%></td>
                         <td>
                             <form action="appointment_info" method="GET">
-                                <input type="hidden" name="appointmentID" value="<%= t.getIdAppointment() %>" />
+                                <input type="hidden" name="appointmentID" value="<%= t.getIdAppointment()%>" />
                                 <button type="submit" class="btn btn-primary">
                                     <i class="fas fa-solid fa-info-circle"></i>
                                 </button>
@@ -94,3 +113,21 @@
 </div>
 
 <%@include file="layouts/endPart.jsp" %>
+
+<script>
+    deleteForms = document.querySelectorAll("[data-form-action=delete]");
+
+    function confirmDelete(ev) {
+        ev.preventDefault();
+
+        confirmation = confirm("¿Estás seguro de que deseas eliminar el registro? Esta operación es irreversible.");
+
+        if (confirmation) {
+            ev.target.submit();
+        }
+    }
+
+    deleteForms.forEach(dF => {
+        dF.addEventListener("submit", confirmDelete);
+    })
+</script>
