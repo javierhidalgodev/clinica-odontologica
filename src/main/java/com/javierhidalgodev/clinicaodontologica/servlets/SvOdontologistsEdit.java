@@ -45,10 +45,10 @@ public class SvOdontologistsEdit extends HttpServlet {
             List<Turno> turnos = odontologistToEdit.getWorkShift();
             System.out.println("Cantidad de citas en SvOdontoligstEdit.java: " + turnos.size());
             
-            if (request.getSession().getAttribute("workScheduleList") == null) {
+            if (request.getSession().getAttribute("workSchedulesList") == null) {
                 List<Horario> workScheduleList = controller.getWorkScheduleList();
                 
-                mySession.setAttribute("workScheduleList", workScheduleList);
+                mySession.setAttribute("workSchedulesList", workScheduleList);
             }
 
             response.sendRedirect("edicionOdontologo.jsp");

@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
 public class SvAppointments extends HttpServlet {
 
     Controller controller = Controller.getInstance();
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     }
@@ -29,22 +29,26 @@ public class SvAppointments extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        List<Horario> workSchedulesList = controller.getWorkScheduleList();
-        List<Paciente> patientList = controller.getAllPatients();
-        
+
         HttpSession mySession = request.getSession();
+
+        List<Horario> workSchedulesList = controller.getWorkScheduleList();
         mySession.setAttribute("workSchedulesList", workSchedulesList);
-        mySession.setAttribute("patientList", patientList);
-        
+
+        if (mySession.getAttribute("patientsList") == null) {
+            List<Paciente> patientList = controller.getAllPatients();
+            mySession.setAttribute("patientsList", patientList);
+        }
+
+
         response.sendRedirect("altaCitaHorario.jsp");
-        
+
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
     }
 
     @Override

@@ -3,9 +3,7 @@
 <%@page import="com.javierhidalgodev.clinicaodontologica.logica.Odontologo"%>
 <%@include file="layouts/firstPart.jsp" %>
 
-<%    Odontologo odontologist = (Odontologo) request.getAttribute("odontologist");
-
-%>
+<% Odontologo odontologist = (Odontologo) request.getAttribute("odontologist"); %>
 
 <div class="card shadow mb-4">
     <div class="card-header py-3">
@@ -74,8 +72,10 @@
                     <%
                         if (odontologist.getWorkShift().size() > 0) {
                             int i = 0;
-
+                            
                             for (Turno t : odontologist.getWorkShift()) {%>
+                            
+                            <% out.print(t.getIdAppointment()); %>
                     <tr>
                         <td><%= i + 1%></td>
                         <td><%= t.getPatient().getName()%></td>            

@@ -13,7 +13,7 @@
 
     List<UserDTO> freeUserList = (List) session.getAttribute("freeUserList");
 
-    List<Horario> workScheduleList = (List<Horario>) session.getAttribute("workScheduleList");
+    List<Horario> workSchedulesList = (List<Horario>) session.getAttribute("workSchedulesList");
     String odontologistWorkSchedule = odontologistToEdit.getWorkSchedule() != null ? odontologistToEdit.getWorkSchedule().getName() : "not assigned";
 %>
 
@@ -65,7 +65,7 @@
             <select class="form-control form-control-user" id="workSchedule" name="workSchedule" data-validations="required">
                 <option selected value="">Select one to change</option>
                 <%
-                    for (Horario wS : workScheduleList) {
+                    for (Horario wS : workSchedulesList) {
                 %> <option value="<%= wS.getIdWorkSchedule()%>" <%= odontologistWorkSchedule.equals(wS.getName()) ? "selected" : ""%> ><%= wS.getName() + " / " + wS.getEntryTime()%> -  <%= wS.getExitTime()%></option> <%
                     }
                 %>

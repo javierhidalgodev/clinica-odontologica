@@ -6,7 +6,7 @@
 
 <%
     
-    List<Paciente> patientList = (List) session.getAttribute("patientList");
+    List<Paciente> patientsList = (List) session.getAttribute("patientsList");
 
 %>
 
@@ -24,7 +24,7 @@
                             <label for="patient">Patient</label>
                             <select class="form-control form-control-user" id="patient" name="patient" data-validations="required">
                                     <option selected value="">Select one</option>
-                                    <%                    for (Paciente p : patientList) {
+                                    <%                    for (Paciente p : patientsList) {
                                     %> <option value="<%= p.getId()%>"><%= p.getName() + " / " + p.getBloodType() %></option> <%
                                         }
                                     %>

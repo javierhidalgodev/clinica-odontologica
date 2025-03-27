@@ -50,14 +50,21 @@ public class SvAppointmentConfirmation extends HttpServlet {
         String hour = request.getParameter("appointmentHour");
         String professional = request.getParameter("professional");
         String patient = request.getParameter("patient");
-        
-        if(date != null && hour != null && professional != null && patient != null) {
+
+        if (date != null && hour != null && professional != null && patient != null) {
             controller.createAppointment(date, hour, professional, patient);
-                        
-            response.sendRedirect("SvIndex");
+
+            request.getSession().removeAttribute("appointmentDate");
+            request.getSession().removeAttribute("appointmentHour");
+            request.getSession().removeAttribute("odonotlogist");
+            request.getSession().removeAttribute("appointmentPatient");
+            request.getSession().removeAttribute("availableOdontologists");
+            request.getSession().removeAttribute("patientsList");
+
+            response.sendRedirect("SvAppointmentsView");
             return;
         }
-        
+
         response.sendRedirect("index.jsp");
     }
 

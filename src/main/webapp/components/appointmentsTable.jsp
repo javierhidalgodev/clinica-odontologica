@@ -33,7 +33,7 @@
     </tfoot>
     <tbody>
         <%
-            if (!appointmentList.isEmpty()) {
+            if (appointmentList != null && !appointmentList.isEmpty()) {
                 int i = 0;
 
                 for (Turno a : appointmentList) {%>

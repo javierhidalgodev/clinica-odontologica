@@ -318,6 +318,7 @@ public class Controller {
             persistenceController.createAppointment(appointment);
             
             odonto.getWorkShift().add(appointment);
+            System.out.println("Tamaño de la lista de turnos desde Controller.java: " + odonto.getWorkShift().size());
             persistenceController.editOdontologist(odonto);
             
             pat.getAppointments().add(appointment);
