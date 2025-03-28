@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -29,7 +30,10 @@ public class SvOdontologists extends HttpServlet {
             throws ServletException, IOException {
         List<Odontologo> odontologistsList = controller.getAllOdontologists();
         
-        request.getSession().setAttribute("odontologistsList", odontologistsList);
+        HttpSession mySession = request.getSession();
+        
+        mySession.removeAttribute("odontologistsList");
+        mySession.setAttribute("odontologistsList", odontologistsList);
         
         response.sendRedirect("vistaOdontologos.jsp");
     }

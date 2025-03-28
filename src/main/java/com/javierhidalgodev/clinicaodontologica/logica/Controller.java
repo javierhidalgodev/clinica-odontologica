@@ -91,13 +91,13 @@ public class Controller {
 
             if (user != null) {
                 UserDTO userData = new UserDTO(user.getIdUser(), user.getUsername(), user.getRole(), null);
-                
-                if(user.getOdontologist() != null) {
+
+                if (user.getOdontologist() != null) {
                     userData.setProfessional("odontologist");
                 } else if (user.getSecretary() != null) {
                     userData.setProfessional("secretary");
                 }
-                
+
                 return userData;
             }
 
@@ -303,28 +303,28 @@ public class Controller {
     }
 
     public void createAppointment(String date, String hour, String professional, String patient) {
-        
+
         int professionalID = Integer.parseInt(professional);
         int patientID = Integer.parseInt(patient);
-        
+
         Odontologo odonto = persistenceController.getOdontologistById(professionalID);
         Paciente pat = persistenceController.getPatientById(patientID);
-        
-        if(odonto != null && pat != null) {
+
+        if (odonto != null && pat != null) {
             Date appointmentDate = Date.valueOf(date);
-            
+
             Turno appointment = new Turno(appointmentDate, hour, "", odonto, pat);
-            
+
+//            odonto.getWorkShift().add(appointment);
+//            System.out.println("Tamaño de la lista de turnos desde Controller.java: " + odonto.getWorkShift().size());
+//            persistenceController.editOdontologist(odonto);
+//
+//            pat.getAppointments().add(appointment);
+//            persistenceController.editPatient(pat);
+
             persistenceController.createAppointment(appointment);
-            
-            odonto.getWorkShift().add(appointment);
-            System.out.println("Tamaño de la lista de turnos desde Controller.java: " + odonto.getWorkShift().size());
-            persistenceController.editOdontologist(odonto);
-            
-            pat.getAppointments().add(appointment);
-            persistenceController.editPatient(pat);
         }
-        
+
     }
 
     public List<Turno> getAllAppointments() {

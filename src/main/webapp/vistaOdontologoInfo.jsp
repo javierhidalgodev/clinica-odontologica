@@ -5,6 +5,10 @@
 
 <% Odontologo odontologist = (Odontologo) request.getAttribute("odontologist"); %>
 
+<div class="position-fixed p-3 text-white text" style="bottom: 20px; right: 20px; z-index: 1000; background-color: rgba(32, 32, 32, .8)">
+    Citas médicas programadas: <%= odontologist.getWorkShift().size() %>
+</div>
+
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <div class="d-flex justify-content-between align-items-center">

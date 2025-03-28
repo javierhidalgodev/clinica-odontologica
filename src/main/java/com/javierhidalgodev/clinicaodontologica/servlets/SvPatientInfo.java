@@ -35,6 +35,8 @@ public class SvPatientInfo extends HttpServlet {
 
             Paciente patient = controller.getPatientById(patientID);
             
+            System.out.println(patient.getAppointments().size());
+            
             HttpSession mySession = request.getSession();
             mySession.setAttribute("patientDetails", patient);
             response.sendRedirect("vistaPaciente.jsp");

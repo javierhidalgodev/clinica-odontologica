@@ -33,6 +33,8 @@ public class SvOdontologistInfo extends HttpServlet {
             
             Odontologo odontologist = controller.getOdontologistById(odontologistID);
 
+            System.out.println("Desde SVOdontologistInfo número de citas: " + odontologist.getWorkShift().size());
+            
             request.setAttribute("odontologist", odontologist);
 
             RequestDispatcher dispatcher = request.getRequestDispatcher("vistaOdontologoInfo.jsp");
