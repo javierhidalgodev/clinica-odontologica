@@ -14,15 +14,16 @@
         <div class="d-flex justify-content-between align-items-center">
             <span class="m-0 font-weight-bold text-primary">Dr. <%= odontologist.getName()%> <%= odontologist.getSurname()%></span>
             <div class="d-flex" id="actions">
-                <form action="SvOdontologistsEdit" method="GET" class="mr-2">
-                    <input type="hidden" name="idToEdit" value="<%= odontologist.getId()%>" />
+                <form action="odontologist?id=<%= odontologist.getId() %>" method="POST" class="mr-2">
+                    <input type="hidden" name="action" value="edit" />
+                    <input type="hidden" name="id" value="<%= odontologist.getId() %>" />
                     <button type="submit" class="btn btn-primary">
                         <i class="fas fa-solid fa-edit"></i>
                     </button>
                 </form>
-                <form action="SvOdontologistsDelete" method="POST" data-form-action="delete">
+                <form action="odontologist" method="POST" data-form-action="delete">
                     <input type="hidden" name="idToDelete" value="<%= odontologist.getId()%>" />
-                    <input type="hidden" name="operation" value="delete" />
+                    <input type="hidden" name="action" value="delete" />
                     <button type="submit" class="btn btn-danger">
                         <i class="fas fa-solid fa-trash-alt"></i>
                     </button>

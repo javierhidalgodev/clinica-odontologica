@@ -33,7 +33,37 @@ public class OdontologistService {
 
         controller.createOdontologist(firstName, surname, address, phone, birthday, dni, specialization, workShedule);
 
-        response.sendRedirect("SvOdontologists");
+        response.sendRedirect("odontologists");
+    }
+
+    public void editingOdontologist(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String odontologistIdToEdit = request.getParameter("id");
+
+        if (odontologistIdToEdit != null && !odontologistIdToEdit.isEmpty()) {
+            int odontologistId = Integer.parseInt(odontologistIdToEdit);
+            Odontologo odontologistToEdit = controller.getOdontologistById(odontologistId);
+            List<UserDTO> userList = controller.getAllFreeUsers();
+
+            HttpSession mySession = request.getSession();
+            mySession.setAttribute("odontologistToEdit", odontologistToEdit);
+            mySession.setAttribute("freeUserList", userList);
+
+            List<Turno> turnos = odontologistToEdit.getWorkShift();
+            System.out.println("Cantidad de citas en SvOdontoligstEdit.java: " + turnos.size());
+
+            if (request.getSession().getAttribute("workSchedulesList") == null) {
+                List<Horario> workScheduleList = controller.getWorkScheduleList();
+
+                mySession.setAttribute("workSchedulesList", workScheduleList);
+            }
+
+            request.getRequestDispatcher("edicionOdontologo.jsp").forward(request, response);
+            return;
+//            response.sendRedirect("edicionOdontologo.jsp");
+        } else {
+            response.sendRedirect("index.jsp");
+        }
     }
 
     public void editOdontologist(HttpServletRequest request, HttpServletResponse response)
@@ -52,7 +82,7 @@ public class OdontologistService {
         controller.editOdontologist(odontologistToEdit, firstName, surname, address, phone, birthdate, specialization, workSchedule, user);
         request.removeAttribute("odontologistToEdit");
 
-        response.sendRedirect("SvOdontologists");
+        response.sendRedirect("odontologists");
     }
 
     public void deleteOdontologist(HttpServletRequest request, HttpServletResponse response)
@@ -65,7 +95,7 @@ public class OdontologistService {
 
             controller.destroyOdontologist(odontoID);
 
-            response.sendRedirect("SvOdontologists");
+            response.sendRedirect("odontologists");
         }
     }
 }

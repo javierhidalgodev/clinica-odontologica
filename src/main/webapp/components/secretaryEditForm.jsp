@@ -11,7 +11,7 @@
     List<UserDTO> freeUserList = (List) session.getAttribute("freeUserList");
 %>
 
-<form id="form" class="user" action="SvSecretariesEdit" method="POST">
+<form id="form" class="user" action="secretaries" method="POST">
     <div class="form-group row">
         <div class="col-md-6 mb-3 mb-md-0">
             <input type="text" class="form-control form-control-user" id="firstName" name="firstName" placeholder="First Name" value="<%= secretaryToEdit.getName()%>" data-validations="required|minLength:2|maxLength:30">
@@ -64,6 +64,7 @@
             <% }%>
         </div>
     </div>
+        <input type="hidden" name="action" value="edit" />
     <button id="submitBtn" type="submit" class="btn btn-success btn-user btn-block font-weight-bold">
         Edit
     </button>

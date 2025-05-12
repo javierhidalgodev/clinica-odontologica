@@ -25,7 +25,7 @@
     <div id="collapseSecretaries" class="collapse" aria-labelledby="headingSecretaries" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Acciones</h6>
-            <a class="collapse-item" href="SvSecretaries">Ver citas</a>
+            <a class="collapse-item" href="secretaries">Ver citas</a>
             <!--<a class="collapse-item" href="altaSecretario.jsp">Nuevo profesional</a>-->
         </div>
     </div>
@@ -41,7 +41,7 @@
     <div id="collapseOdontologist" class="collapse" aria-labelledby="headingOdontologist" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Acciones</h6>
-            <a class="collapse-item" href="SvOdontologists">Ver mis horarios</a>
+            <a class="collapse-item" href="odontologists">Ver mis horarios</a>
             <!--<a class="collapse-item" href="SvWSToOdonto">Nuevo profesional</a>-->
         </div>
     </div>

@@ -1,4 +1,4 @@
-package com.javierhidalgodev.clinicaodontologica.servlets;
+package com.javierhidalgodev.clinicaodontologica.servlets.services;
 
 import com.javierhidalgodev.clinicaodontologica.dto.user.UserDTO;
 import com.javierhidalgodev.clinicaodontologica.logica.Controller;
@@ -6,8 +6,6 @@ import com.javierhidalgodev.clinicaodontologica.logica.Secretario;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -16,20 +14,28 @@ import javax.servlet.http.HttpSession;
  *
  * @author Javi
  */
-@WebServlet(name = "SvSecretariesEdit", urlPatterns = {"/SvSecretariesEdit"})
-public class SvSecretariesEdit extends HttpServlet {
+public class SecretaryService {
 
     Controller controller = Controller.getInstance();
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    public void createSecretary(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String firstName = request.getParameter("firstName");
+        String surname = request.getParameter("surname");
+        String address = request.getParameter("address");
+        String phone = request.getParameter("phone");
+        String floor = request.getParameter("floor");
+        String dni = request.getParameter("dni");
+        String birthday = request.getParameter("birthday");
+
+        controller.createSecretary(firstName, surname, address, phone, birthday, dni, floor);
+
+        response.sendRedirect("secretaries");
     }
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    public void editingSecretary(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        String secretaryIdToEdit = request.getParameter("idToEdit");
+        String secretaryIdToEdit = request.getParameter("id");
 
         if (secretaryIdToEdit != null && !secretaryIdToEdit.isEmpty()) {
             int secretaryId = Integer.parseInt(secretaryIdToEdit);
@@ -40,14 +46,15 @@ public class SvSecretariesEdit extends HttpServlet {
             mySession.setAttribute("secretaryToEdit", secretaryToEdit);
             mySession.setAttribute("freeUserList", userList);
 
-            response.sendRedirect("edicionSecretario.jsp");
+            request.getRequestDispatcher("edicionSecretario.jsp").forward(request, response);
+            return;
+        } else {
+            response.sendRedirect("index.jsp");
         }
     }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    public void editSecretary(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         String firstName = request.getParameter("firstName");
         String surname = request.getParameter("surname");
         String address = request.getParameter("address");
@@ -63,12 +70,18 @@ public class SvSecretariesEdit extends HttpServlet {
         controller.editSecretary(secretaryToEdit, firstName, surname, address, phone, birthday, floor, user);
 
         request.removeAttribute("secretaryToEdit");
-        response.sendRedirect("SvSecretaries");
+        response.sendRedirect("secretaries");
     }
 
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+    public void deleteSecretary(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String idUserToDelete = request.getParameter("id");
 
+        if (idUserToDelete != null && !idUserToDelete.isEmpty()) {
+            int idSecretary = Integer.parseInt(idUserToDelete);
+            controller.destroySecretary(idSecretary);
+        }
+
+        response.sendRedirect("secretaries");
+    }
 }

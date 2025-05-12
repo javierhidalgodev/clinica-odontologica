@@ -5,7 +5,7 @@
     List<Horario> workSchedulesList = (List<Horario>) session.getAttribute("workScheduleList");
 %>
 
-<form class="user" action="SvOdontologists" method="POST" id="form" >
+<form class="user" action="odontologists" method="POST" id="form" >
     <div class="form-group row">
         <div class="col-md-6 mb-3 mb-md-0">
             <label for="firstName">Name</label>

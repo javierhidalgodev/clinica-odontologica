@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Javi
  */
-@WebServlet(name = "SvOdontologists", urlPatterns = {"/SvOdontologists"})
+@WebServlet(name = "SvOdontologists", urlPatterns = {"/odontologists"})
 public class SvOdontologists extends HttpServlet {
 
     Controller controller = Controller.getInstance();
@@ -27,9 +27,9 @@ public class SvOdontologists extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<Odontologo> odontologistsList = controller.getAllOdontologists();
+        List<Odontologo> odontologistList = controller.getAllOdontologists();
         
-        request.setAttribute("odontologistsList", odontologistsList);
+        request.setAttribute("odontologistList", odontologistList);
         
         request.getRequestDispatcher("vistaOdontologos.jsp").forward(request, response);
         return;
