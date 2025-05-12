@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
 public class SvWSToOdonto extends HttpServlet {
 
     Controller controller = Controller.getInstance();
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     }
@@ -27,11 +27,13 @@ public class SvWSToOdonto extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        List<Horario> workScheduleList = controller.getWorkScheduleList();
-        HttpSession mysession = request.getSession();
-        mysession.setAttribute("workScheduleList", workScheduleList);
-        
+        HttpSession mySession = request.getSession();
+
+        if (mySession.getAttribute("workScheduleList") == null) {
+            List<Horario> workScheduleList = controller.getWorkScheduleList();
+            mySession.setAttribute("workScheduleList", workScheduleList);
+        }
+
         response.sendRedirect("altaOdontologo.jsp");
     }
 

@@ -18,7 +18,7 @@
 %>
 
 
-<form class="user" action="SvOdontologistsEdit" method="POST" id="form">
+<form class="user" action="SvOdontologists" method="POST" id="form">
     <div class="form-group row">
         <div class="col-md-6 mb-3 mb-md-0">
             <label for="firstName">Name</label>
@@ -99,7 +99,7 @@
             <% }%>
         </div>
     </div>
-
+        <input type="hidden" name="operation" value="edit" />
     <button id="submitBtn" type="submit" class="btn btn-success btn-user btn-block font-weight-bold">
         Edit
     </button>

@@ -4,9 +4,7 @@
 <%@page import="java.sql.Date"%>
 <%@include file="layouts/firstPart.jsp" %>
 
-<%
-    
-    List<Paciente> patientsList = (List) session.getAttribute("patientsList");
+<%    List<Paciente> patientsList = (List) session.getAttribute("patientList");
 
 %>
 
@@ -19,18 +17,18 @@
                     <div class="text-center">
                         <h1 class="h4 text-gray-900 mb-4 text-left">Elija una fecha y una hora</h1>
                     </div>
-                    <form class="user" action="SvAvailableOdontologists" method="GET" id="form">
+                    <form class="user" action="SvAppointments" method="POST" id="form">
                         <div class="form-group">
                             <label for="patient">Patient</label>
                             <select class="form-control form-control-user" id="patient" name="patient" data-validations="required">
-                                    <option selected value="">Select one</option>
-                                    <%                    for (Paciente p : patientsList) {
-                                    %> <option value="<%= p.getId()%>"><%= p.getName() + " / " + p.getBloodType() %></option> <%
-                                        }
-                                    %>
-                                    <!--                                    <option value="morning">Mañana</option>
-                                                                        <option value="evening">Tarde</option>-->
-                                </select>
+                                <option selected value="">Select one</option>
+                                <%                    for (Paciente p : patientsList) {
+                                %> <option value="<%= p.getId()%>"><%= p.getName() + " / " + p.getBloodType()%></option> <%
+                                    }
+                                %>
+                                <!--                                    <option value="morning">Mañana</option>
+                                                                    <option value="evening">Tarde</option>-->
+                            </select>
                             <span id="errorAppointmentPatient" class="error-validation"></span>
                         </div>
                         <div class="form-group row">
@@ -45,6 +43,7 @@
                                 <span id="errorAppointmentHour" class="error-validation"></span>
                             </div>
                         </div>
+                        <input type="hidden" name="step" value="1" />
                         <button id="submitBtn" type="submit" class="btn btn-success btn-user btn-block">
                             Select professional
                         </button>

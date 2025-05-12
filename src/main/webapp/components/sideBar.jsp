@@ -1,5 +1,11 @@
 <%@page import="com.javierhidalgodev.clinicaodontologica.dto.user.UserDTO"%>
 
+<%
+
+    String userRole = (String) session.getAttribute("userRole");
+
+%>
+
 <!-- Sidebar -->
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
     <!-- Sidebar - Brand -->
@@ -28,7 +34,7 @@
         Gestión
     </div>
 
-    <% if (session.getAttribute("userRole").equals("admin")) { %>
+    <% if (userRole != null && userRole.equals("admin")) { %>
     <%@include file="adminSideBar.jsp" %>
     <% } else { %>
     <%@include file="userSideBar.jsp" %>

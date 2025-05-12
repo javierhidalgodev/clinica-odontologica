@@ -7,7 +7,7 @@
 <%@page import="javax.swing.table.DefaultTableModel"%>
 
 <%
-    List<Turno> appointmentList = (List) session.getAttribute("appointmentList");
+    List<Turno> appointmentList = (List) request.getAttribute("appointmentList");
 %>
 
 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">

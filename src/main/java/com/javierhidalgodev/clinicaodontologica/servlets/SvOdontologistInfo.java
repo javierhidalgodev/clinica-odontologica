@@ -26,20 +26,19 @@ public class SvOdontologistInfo extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String odontoID = request.getParameter("idToInfo");
+        String pathInfo = request.getPathInfo();
+        System.out.println(pathInfo);
+        
+        if (pathInfo != null && pathInfo.matches("/\\d+")) {
+            int odontologistID = Integer.parseInt(pathInfo.substring(1));
 
-        if (odontoID != null && !odontoID.isEmpty()) {
-            int odontologistID = Integer.parseInt(odontoID);
-            
             Odontologo odontologist = controller.getOdontologistById(odontologistID);
 
             System.out.println("Desde SVOdontologistInfo número de citas: " + odontologist.getWorkShift().size());
-            
+
             request.setAttribute("odontologist", odontologist);
 
-            RequestDispatcher dispatcher = request.getRequestDispatcher("vistaOdontologoInfo.jsp");
-            dispatcher.forward(request, response);
-//            response.sendRedirect("vistaOdontologos.jsp");
+            request.getRequestDispatcher("/vistaOdontologoInfo.jsp").forward(request, response);
             return;
         }
 

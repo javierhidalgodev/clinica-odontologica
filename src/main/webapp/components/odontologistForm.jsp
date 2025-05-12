@@ -2,7 +2,7 @@
 <%@page import="java.util.List"%>
 
 <%
-    List<Horario> workSchedulesList = (List<Horario>) session.getAttribute("workSchedulesList");
+    List<Horario> workSchedulesList = (List<Horario>) session.getAttribute("workScheduleList");
 %>
 
 <form class="user" action="SvOdontologists" method="POST" id="form" >
@@ -52,17 +52,17 @@
             <label for="workSchedule">Work Schedule</label>
             <select class="form-control form-control-user" id="workSchedule" name="workSchedule" data-validations="required">
                 <option selected value="">Select one</option>
-                <%
-                    for (Horario wS : workSchedulesList) {
-                %> <option value="<%= wS.getName()%>"><%= wS.getName() + " / " + wS.getEntryTime()%> -  <%= wS.getExitTime()%></option> <%
-                    }
-                %>
-                <!--                                    <option value="morning">Mañana</option>
-                                                    <option value="evening">Tarde</option>-->
+                <% if (workSchedulesList != null) {
+                        for (Horario wS : workSchedulesList) {%>
+                <option value="<%= wS.getName()%>"><%= wS.getName() + " / " + wS.getEntryTime()%> -  <%= wS.getExitTime()%></option>                              <% }
+                } else { %>
+                <option value="" disabled="">No options available</option>                              
+                <% }%>
             </select>
             <span id="errorWorkSchedule" class="error-validation"></span>
         </div>
     </div>
+    <input type="hidden" name="operation" value="create" />
     <button id="submitBtn" type="submit" class="btn btn-success btn-user btn-block">
         Create
     </button>

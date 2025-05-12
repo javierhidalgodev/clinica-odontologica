@@ -4,9 +4,7 @@
 <%@page import="java.sql.Date"%>
 <%@include file="layouts/firstPart.jsp" %>
 
-<%
-
-    List<Odontologo> availableOdontologists = (List) session.getAttribute("availableOdontologists");
+<%    List<Odontologo> availableOdontologists = (List) request.getSession().getAttribute("availableOdontologists");
 
 %>
 
@@ -19,7 +17,7 @@
                     <div class="text-center">
                         <h1 class="h4 text-gray-900 mb-4 text-left">Elija un profesional</h1>
                     </div>
-                    <form class="user" action="SvAppointmentConfirmation" method="GET" id="form">
+                    <form class="user" action="SvAppointments" method="POST" id="form">
                         <div class="form-group row">
                             <div class="col-md-6 mb-3 mb-md-0">
                                 <label for="odontologist">Professional</label>
@@ -29,16 +27,11 @@
                                     %> <option value="<%= o.getId()%>"><%= o.getName() + " / " + o.getSpecialization()%></option> <%
                                         }
                                     %>
-                                    <!--                                    <option value="morning">Mañana</option>
-                                                                        <option value="evening">Tarde</option>-->
                                 </select>
                                 <span id="errorAppointmentDate" class="error-validation"></span>
                             </div>
-                            <!--                            <div class="col-md-6">
-                                                            <input type="time" min="09:00" max="20:30" class="form-control form-control-user" id="appointmentHour" name="appointmentHour" data-validations="required">
-                                                            <span id="errorAppointmentHour" class="error-validation"></span>
-                                                        </div>-->
                         </div>
+                        <input type="hidden" name="step" value="2" />
                         <button id="submitBtn" type="submit" class="btn btn-success btn-user btn-block">
                             Confirm appointment
                         </button>

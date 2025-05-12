@@ -8,7 +8,7 @@
     <div id="collapseOdontologist" class="collapse" aria-labelledby="headingOdontologist" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Acciones</h6>
-            <a class="collapse-item" href="SvOdontologists">Ver profesionales</a>
+            <a class="collapse-item" href="odontologists">Ver profesionales</a>
             <a class="collapse-item" href="SvWSToOdonto">Nuevo profesional</a>
         </div>
     </div>

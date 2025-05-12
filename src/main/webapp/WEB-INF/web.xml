@@ -17,4 +17,8 @@
         <servlet-name>SvOdontologistInfo</servlet-name>
         <url-pattern>/odontologist/*</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SvOdontologists</servlet-name>
+        <url-pattern>/odontologists</url-pattern>
+    </servlet-mapping>
 </web-app>

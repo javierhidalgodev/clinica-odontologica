@@ -2,15 +2,14 @@ package com.javierhidalgodev.clinicaodontologica.servlets;
 
 import com.javierhidalgodev.clinicaodontologica.logica.Controller;
 import com.javierhidalgodev.clinicaodontologica.logica.Odontologo;
+import com.javierhidalgodev.clinicaodontologica.servlets.services.OdontologistService;
 import java.io.IOException;
 import java.util.List;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -30,31 +29,31 @@ public class SvOdontologists extends HttpServlet {
             throws ServletException, IOException {
         List<Odontologo> odontologistsList = controller.getAllOdontologists();
         
-        HttpSession mySession = request.getSession();
+        request.setAttribute("odontologistsList", odontologistsList);
         
-        mySession.removeAttribute("odontologistsList");
-        mySession.setAttribute("odontologistsList", odontologistsList);
-        
-        response.sendRedirect("vistaOdontologos.jsp");
+        request.getRequestDispatcher("vistaOdontologos.jsp").forward(request, response);
+        return;
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        OdontologistService odontologistService = new OdontologistService();
+        String operation = request.getParameter("operation");
         
-        String firstName = request.getParameter("firstName");
-        String surname = request.getParameter("surname");
-        String address = request.getParameter("address");
-        String phone = request.getParameter("phone");
-        String specialization = request.getParameter("specialization");
-        String dni = request.getParameter("dni");
-        String birthday = request.getParameter("birthday");
-        String workShedule = request.getParameter("workSchedule");
-                
-        controller.createOdontologist(firstName, surname, address, phone, birthday, dni, specialization, workShedule);
-        
-        response.sendRedirect("SvOdontologists");
-        
+        switch (operation) {
+            case "create":
+                odontologistService.createOdontologist(request, response);
+                break;
+            case "edit":
+                odontologistService.editOdontologist(request, response);
+                break;
+            case "delete":
+                odontologistService.deleteOdontologist(request, response);
+                break;
+            default:
+                response.sendRedirect("index.jsp");
+        }        
     }
 
     @Override

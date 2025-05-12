@@ -6,7 +6,7 @@
 <%@page import="javax.swing.table.DefaultTableModel"%>
 
 <%
-    List<Odontologo> odontologistsList = (List) session.getAttribute("odontologistsList");
+    List<Odontologo> odontologistsList = (List) request.getAttribute("odontologistsList");
 %>
 
 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -15,8 +15,8 @@
             <th>#</th>
             <th class="w-100">Name</th>
             <th>Profile</th>
-<!--            <th>Edit</th>
-            <th>Delete</th>-->
+            <!--            <th>Edit</th>
+                        <th>Delete</th>-->
         </tr>
     </thead>
     <tfoot>
@@ -24,8 +24,8 @@
             <th>#</th>
             <th>Name</th>
             <th>Profile</th>
-<!--            <th>Edit</th>
-            <th>Delete</th>-->
+            <!--            <th>Edit</th>
+                        <th>Delete</th>-->
         </tr>
     </tfoot>
     <tbody>
@@ -38,29 +38,10 @@
             <td><%= i + 1%></td>
             <td><%= o.getName() + " " + o.getSurname()%></td>            
             <td>
-                <form action="odontologist" method="GET">
-                    <input type="hidden" name="idToInfo" value="<%= o.getId()%>" />
-                    <button type="submit" class="btn btn-success">
-                        <i class="fas fa-solid fa-info-circle"></i>
-                    </button>
-                </form>
+                <a href="odontologist/<%= o.getId()%>" class="btn btn-success">
+                    <i class="fas fa-solid fa-info-circle"></i>
+                </a>
             </td>
-<!--            <td>
-                <form action="SvOdontologistsEdit" method="GET">
-                    <input type="hidden" name="idToEdit" value="<%= o.getId()%>" />
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-solid fa-edit"></i>
-                    </button>
-                </form>
-            </td>
-            <td>
-                <form action="SvOdontologistsDelete" method="POST" data-form-action="delete">
-                    <input type="hidden" name="idToDelete" value="<%= o.getId()%>" />
-                    <button type="submit" class="btn btn-danger">
-                        <i class="fas fa-solid fa-trash-alt"></i>
-                    </button>
-                </form>
-            </td>-->
         </tr> <%
 
                 i++;
@@ -75,20 +56,3 @@
         %>
     </tbody>
 </table>
-
-<script>
-    deleteForms = document.querySelectorAll("[data-form-action=delete]");
-
-    function confirmDelete(ev) {
-        ev.preventDefault();
-
-        confirmation = confirm("¿Seguro que desea eliminar el registro? Esta operación es irreversible");
-
-        if (confirmation) {
-            ev.target.submit();
-        }
-    }
-
-    deleteForms.forEach(f => f.addEventListener("submit", confirmDelete))
-
-</script>

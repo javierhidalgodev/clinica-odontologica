@@ -22,6 +22,7 @@
                 </form>
                 <form action="SvOdontologistsDelete" method="POST" data-form-action="delete">
                     <input type="hidden" name="idToDelete" value="<%= odontologist.getId()%>" />
+                    <input type="hidden" name="operation" value="delete" />
                     <button type="submit" class="btn btn-danger">
                         <i class="fas fa-solid fa-trash-alt"></i>
                     </button>

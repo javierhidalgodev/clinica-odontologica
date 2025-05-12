@@ -28,28 +28,15 @@ public class SvAppointmentInfo extends HttpServlet {
             throws ServletException, IOException {
 
         String appointmentID = request.getParameter("appointmentID");
-//        String pathInfo = request.getPathInfo();
+        if (appointmentID != null && !appointmentID.isEmpty()) {
 
-//        if (pathInfo != null && !pathInfo.isEmpty()) {
-        if(appointmentID != null && !appointmentID.isEmpty()) {
-
-//            int id = Integer.parseInt(pathInfo.substring(1));
             int id = Integer.parseInt(appointmentID);
             Turno appointment = controller.getAppointmentById(id);
 
-//            if (appointment != null) {
-                // Vamos a probar a setearlo en la request del navegador, no en la sesión
-                
-                request.setAttribute("appointmentInfo", appointment);
+            request.setAttribute("appointmentInfo", appointment);
 
-                RequestDispatcher dispatcher = request.getRequestDispatcher("vistaCitaInfo.jsp");
-                dispatcher.forward(request, response);
-//                response.sendRedirect("vistaCitaInfo.jsp");
-                return;
-//            }
-            
-//            response.sendRedirect("index.jsp");
-//            return;
+            request.getRequestDispatcher("vistaCitaInfo.jsp").forward(request, response);
+            return;
         }
 
         response.sendRedirect("index.jsp");
