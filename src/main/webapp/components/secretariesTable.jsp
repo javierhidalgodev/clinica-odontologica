@@ -15,26 +15,16 @@
         <tr>
             <th>#</th>
             <th>Name</th>
-            <th>Address</th>
-            <th>Phone</th>
-            <th>Date of birth</th>
             <th>DNI</th>
-            <th>Position</th>
-            <th>Edit</th>
-            <th>Delete</th>
+            <th>Profile</th>
         </tr>
     </thead>
     <tfoot>
         <tr>
             <th>#</th>
             <th>Name</th>
-            <th>Address</th>
-            <th>Phone</th>
-            <th>Date of birth</th>
             <th>DNI</th>
-            <th>Position</th>
-            <th>Edit</th>
-            <th>Delete</th>
+            <th>Profile</th>
         </tr>
     </tfoot>
     <tbody>
@@ -46,29 +36,14 @@
         <tr>
             <td><%= i + 1%></td>
             <td><%= s.getName() + " " + s.getSurname()%></td>
-            <td><%= s.getAddress()%></td>
-            <td><%= s.getPhone()%></td>
-            <td>
-                <%
-                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
-                    String formatDate = simpleDateFormat.format(s.getBirthdate());
-                %>
-                <%= formatDate%>
-            </td>
             <td><%= s.getDni()%></td>
-            <td><%= s.getFloor()%></td>
             <td>
                 <form action="secretaries?id=<%= s.getId()%>" method="POST">
                     <input type="hidden" name="id" value="<%= s.getId()%>" />
-                    <input type="hidden" name="action" value="editing" />
-                    <button type="submit" class="btn btn-primary fas fa-edit"></button>
-                </form>
-            </td>
-            <td>
-                <form action="secretaries" method="POST" data-form-action="delete">
-                    <input type="hidden" name="id" value="<%= s.getId()%>" />
-                    <input type="hidden" name="action" value="delete" />
-                    <button type="submit" class="btn btn-danger fas fa-trash-alt"></button>
+                    <input type="hidden" name="action" value="getInfo" />
+                    <button type="submit" class="btn btn-info">
+                        <i class="fas fa-solid fa-info-circle"></i>
+                    </button>
                 </form>
             </td>
         </tr> <%
@@ -85,21 +60,3 @@
         %>
     </tbody>
 </table>
-
-<script>
-    deleteForms = document.querySelectorAll("[data-form-action=delete]");
-
-    function confirmDelete(ev) {
-        ev.preventDefault();
-
-        confirmation = confirm("¿Estás seguro de que deseas eliminar el registro? Esta operación es irreversible.");
-
-        if (confirmation) {
-            ev.target.submit();
-        }
-    }
-
-    deleteForms.forEach(dF => {
-        dF.addEventListener("submit", confirmDelete);
-    })
-</script>

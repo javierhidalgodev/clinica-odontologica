@@ -4,7 +4,7 @@
 <%@page import="javax.swing.table.DefaultTableModel"%>
 
 <%
-    List<Horario> workSchedulesList = (List<Horario>) session.getAttribute("workSchedulesList");
+    List<Horario> workSchedulesList = (List<Horario>) session.getAttribute("workScheduleList");
 %>
 
 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -12,20 +12,14 @@
         <tr>
             <th>#</th>
             <th>Name</th>
-            <th>Entry Time</th>
-            <th>Exit Time</th>
-            <th>Edit</th>
-            <th>Delete</th>
+            <th>Details</th>
         </tr>
     </thead>
     <tfoot>
         <tr>
             <th>#</th>
             <th>Name</th>
-            <th>Entry Time</th>
-            <th>Exit Time</th>
-            <th>Edit</th>
-            <th>Delete</th>
+            <th>Details</th>
         </tr>
     </tfoot>
     <tbody>
@@ -37,18 +31,13 @@
         <tr>
             <td><%= i + 1%></td>
             <td><%= ws.getName()%></td>
-            <td><%= ws.getEntryTime()%></td>
-            <td><%= ws.getExitTime()%></td>
             <td>
-                <form action="SvUsersEdit" method="GET">
+                <form action="work-schedule?id=<%= ws.getIdWorkSchedule()%>" method="POST">
                     <input type="hidden" name="id" value="<%= ws.getIdWorkSchedule()%>" />
-                    <button type="submit" href="SvUsersEdit" class="btn btn-primary">Editar</button>
-                </form>
-            </td>
-            <td>
-                <form action="SvUsersDelete" method="POST">
-                    <input type="hidden" name="id" value="<%= ws.getIdWorkSchedule()%>" />
-                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                    <input type="hidden" name="action" value="getInfo" />
+                    <button type="submit" class="btn btn-info">
+                        <i class="fas fa-solid fa-info-circle"></i>
+                    </button>
                 </form>
             </td>
         </tr> <%

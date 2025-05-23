@@ -13,19 +13,17 @@
     <thead>
         <tr>
             <th>#</th>
-            <th class="w-100">Name</th>
+            <th>Name</th>
+            <th>DNI</th>
             <th>Profile</th>
-            <!--            <th>Edit</th>
-                        <th>Delete</th>-->
         </tr>
     </thead>
     <tfoot>
         <tr>
             <th>#</th>
             <th>Name</th>
+            <th>DNI</th>
             <th>Profile</th>
-            <!--            <th>Edit</th>
-                        <th>Delete</th>-->
         </tr>
     </tfoot>
     <tbody>
@@ -36,11 +34,16 @@
                 for (Odontologo o : odontologistList) {%>
         <tr>
             <td><%= i + 1%></td>
-            <td><%= o.getName() + " " + o.getSurname()%></td>            
+            <td><%= o.getName() + " " + o.getSurname()%></td>
+            <td><%= o.getDni()%></td>
             <td>
-                <a href="odontologist?id=<%= o.getId()%>" class="btn btn-success">
-                    <i class="fas fa-solid fa-info-circle"></i>
-                </a>
+                <form action="odontologists?id=<%= o.getId()%>" method="POST">
+                    <input type="hidden" name="id" value="<%= o.getId()%>" />
+                    <input type="hidden" name="action" value="getInfo" />
+                    <button type="submit" class="btn btn-info">
+                        <i class="fas fa-solid fa-info-circle"></i>
+                    </button>
+                </form>
             </td>
         </tr> <%
 

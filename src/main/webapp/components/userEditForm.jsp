@@ -2,7 +2,7 @@
 
 <% Usuario userToEdit = (Usuario) session.getAttribute("userToEdit");%>
 
-<form class="user" action="SvUsersEdit" method="POST">
+<form id="form" class="user" action="users" method="POST">
     <div class="form-group row">
         <div class="col-md-6 mb-3 col-md-0">
             <input type="text" class="form-control form-control-user" id="exampleUsername" name="username" placeholder="Username" value="<%= userToEdit.getUsername()%>" disabled>
@@ -15,8 +15,16 @@
             </select>
         </div>
     </div>
-
-    <button type="submit" class="btn btn-success btn-user btn-block">
-        Edit
+    <input type="hidden" name="action" value="edit" />
+    <button
+        type="button"
+        id="action-btn"
+        class="btn btn-success btn-user btn-block font-weight-bold"
+        data-action="edit"
+        data-toggle="modal"
+        data-target="#modal">
+        Editar
     </button>
 </form>
+
+<%@include file="modal.jsp" %>

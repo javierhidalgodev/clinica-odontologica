@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Javi
  */
-@WebServlet(name = "SvLogin", urlPatterns = {"/SvLogin"})
+@WebServlet(name = "SvLogin", urlPatterns = {"/login"})
 public class SvLogin extends HttpServlet {
 
     Controller controller = Controller.getInstance();
@@ -25,6 +25,7 @@ public class SvLogin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.getRequestDispatcher("WEB-INF/views/login.jsp").forward(request, response);
     }
 
     @Override
@@ -46,14 +47,14 @@ public class SvLogin extends HttpServlet {
                 request.getSession().setAttribute("userProfessional", loginSuccessfull.getProfessional());
                 request.getSession().setAttribute("userName", loginSuccessfull.getUsername());
 
-                response.sendRedirect("SvIndex");
+                response.sendRedirect(request.getContextPath() + "/index");
                 return;
             }
             
-            response.sendRedirect("error.jsp");
+            response.sendRedirect("error");
             return;
         } catch (Exception e) {
-            response.sendRedirect("offline.jsp");
+            response.sendRedirect("offline");
             return;
         }
     }

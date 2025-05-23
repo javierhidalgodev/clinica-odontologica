@@ -20,6 +20,40 @@ public class OdontologistService {
 
     Controller controller = Controller.getInstance();
 
+    public void getAllOdontologists(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        List<Odontologo> odontologistList = controller.getAllOdontologists();
+
+        request.setAttribute("odontologistList", odontologistList);
+
+        request.getRequestDispatcher("WEB-INF/views/vistaOdontologos.jsp").forward(request, response);
+        return;
+    }
+
+    public void getInfo(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        String id = request.getParameter("id");
+
+        if (id != null && id.matches("\\d+")) {
+            int odontologistID = Integer.parseInt(id);
+
+            Odontologo odontologist = controller.getOdontologistById(odontologistID);
+
+            if (odontologist != null) {
+
+                request.setAttribute("odontologist", odontologist);
+
+                request.getRequestDispatcher("/WEB-INF/views/vistaOdontologoInfo.jsp").forward(request, response);
+                return;
+            } else {
+                response.sendRedirect("odontologists");
+            }
+        } else {
+            response.sendRedirect("odontologists");
+        }
+    }
+
     public void createOdontologist(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String firstName = request.getParameter("firstName");
@@ -29,17 +63,17 @@ public class OdontologistService {
         String specialization = request.getParameter("specialization");
         String dni = request.getParameter("dni");
         String birthday = request.getParameter("birthday");
-        String workShedule = request.getParameter("workSchedule");
+        String workSchedule = request.getParameter("workSchedule");
 
-        controller.createOdontologist(firstName, surname, address, phone, birthday, dni, specialization, workShedule);
+        controller.createOdontologist(firstName, surname, address, phone, birthday, dni, specialization, workSchedule);
 
-        response.sendRedirect("odontologists");
+        response.sendRedirect(request.getContextPath() + "/odontologists");
     }
 
     public void editingOdontologist(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String odontologistIdToEdit = request.getParameter("id");
-
+        
         if (odontologistIdToEdit != null && !odontologistIdToEdit.isEmpty()) {
             int odontologistId = Integer.parseInt(odontologistIdToEdit);
             Odontologo odontologistToEdit = controller.getOdontologistById(odontologistId);
@@ -50,19 +84,17 @@ public class OdontologistService {
             mySession.setAttribute("freeUserList", userList);
 
             List<Turno> turnos = odontologistToEdit.getWorkShift();
-            System.out.println("Cantidad de citas en SvOdontoligstEdit.java: " + turnos.size());
 
-            if (request.getSession().getAttribute("workSchedulesList") == null) {
+            if (request.getSession().getAttribute("workScheduleList") == null) {
                 List<Horario> workScheduleList = controller.getWorkScheduleList();
 
-                mySession.setAttribute("workSchedulesList", workScheduleList);
+                mySession.setAttribute("workScheduleList", workScheduleList);
             }
 
-            request.getRequestDispatcher("edicionOdontologo.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/views/edicionOdontologo.jsp").forward(request, response);
             return;
-//            response.sendRedirect("edicionOdontologo.jsp");
         } else {
-            response.sendRedirect("index.jsp");
+            response.sendRedirect(request.getContextPath() + "/index");
         }
     }
 
@@ -74,11 +106,14 @@ public class OdontologistService {
         String phone = request.getParameter("phone");
         String birthdate = request.getParameter("birthdate");
         String specialization = request.getParameter("specialization");
-        String workSchedule = request.getParameter("workSchedule");
+        String workSchedule = request.getParameter("wSchedule");
         String user = request.getParameter("user");
 
         Odontologo odontologistToEdit = (Odontologo) request.getSession().getAttribute("odontologistToEdit");
 
+        System.out.println("Name: " + firstName);
+        System.out.println("WSID: " + workSchedule);
+        
         controller.editOdontologist(odontologistToEdit, firstName, surname, address, phone, birthdate, specialization, workSchedule, user);
         request.removeAttribute("odontologistToEdit");
 
@@ -88,7 +123,7 @@ public class OdontologistService {
     public void deleteOdontologist(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String odontologistIdToDelete = request.getParameter("idToDelete");
+        String odontologistIdToDelete = request.getParameter("id");
 
         if (odontologistIdToDelete != null && !odontologistIdToDelete.isEmpty()) {
             int odontoID = Integer.parseInt(odontologistIdToDelete);

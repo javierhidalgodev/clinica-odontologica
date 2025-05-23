@@ -50,7 +50,6 @@ public class PersistenceController {
     }
 
     // User
-    
     public void createUser(Usuario newUser) {
         userController.create(newUser);
     }
@@ -84,7 +83,6 @@ public class PersistenceController {
     }
 
     // Odontologist
-    
     public void createOdontologist(Odontologo odontologist) {
         odontologistController.create(odontologist);
     }
@@ -114,7 +112,6 @@ public class PersistenceController {
     }
 
     // Patient
-    
     public void createPatient(Paciente patient) {
         patientController.create(patient);
     }
@@ -144,7 +141,6 @@ public class PersistenceController {
     }
 
     // Guardian
-    
     public Responsable createGuardian(Responsable guardian) {
         return guardianController.create(guardian);
     }
@@ -158,7 +154,6 @@ public class PersistenceController {
     }
 
     // Secretary
-    
     public void createSecretary(String firstName, String surname, String address, String phone, Date birth, String dni, String floor) {
         Secretario secretary = new Secretario(floor, firstName, surname, phone, address, birth, dni);
 
@@ -190,9 +185,24 @@ public class PersistenceController {
     }
 
     // WorkSchedule
-    
     public void createWorkSchedule(Horario workSchedule) {
         workScheduleController.create(workSchedule);
+    }
+
+    public void editWorkSchedule(Horario workScheduleToEdit) {
+        try {
+            workScheduleController.edit(workScheduleToEdit);
+        } catch (Exception ex) {
+            Logger.getLogger(PersistenceController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void destroyWorkSchedule(int workScheduleID) {
+        try {
+            workScheduleController.destroy(workScheduleID);
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(PersistenceController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public List<Horario> getWorkScheduleList() {
@@ -205,10 +215,10 @@ public class PersistenceController {
 
     public void destroyGuardian(Paciente patient, int guardianIdToDelete) {
         patient.setGuardian(null);
-        
+
         try {
             patientController.edit(patient);
-            
+
 //            try {
 //                guardianController.destroy(guardianIdToDelete);
 //            } catch (NonexistentEntityException ex) {

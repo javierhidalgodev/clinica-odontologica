@@ -1,25 +1,24 @@
 package com.javierhidalgodev.clinicaodontologica.servlets;
 
 import com.javierhidalgodev.clinicaodontologica.logica.Controller;
-import com.javierhidalgodev.clinicaodontologica.logica.Horario;
+import com.javierhidalgodev.clinicaodontologica.servlets.services.WorkScheduleService;
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Javi
  */
-@WebServlet(name = "SvWorkSchedule", urlPatterns = {"/SvWorkSchedule"})
+@WebServlet(name = "SvWorkSchedule", urlPatterns = {"/work-schedule", "/work-schedule/new"})
 public class SvWorkSchedule extends HttpServlet {
 
     Controller controller = Controller.getInstance();
-    
+    WorkScheduleService workScheduleService = new WorkScheduleService();
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     }
@@ -27,26 +26,51 @@ public class SvWorkSchedule extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        List<Horario> workSchedulesList = controller.getWorkScheduleList();
-        
-        HttpSession mySession = request.getSession();
-        mySession.setAttribute("workSchedulesList", workSchedulesList);
-        
-        response.sendRedirect("vistaHorarios.jsp");
+        String servletPath = request.getServletPath();
+
+        if (servletPath.contains("new")) {
+            request.getRequestDispatcher("/WEB-INF/views/altaHorario.jsp").forward(request, response);
+        } else {
+            String queryParams = request.getQueryString();
+
+            if (queryParams == null) {
+                // Si no hay query params obtener todos los horarios
+                workScheduleService.getAllWorkSchedules(request, response);
+            } else {
+                // Obtener el param ID y operar condicionalmente
+                String id = request.getParameter("id");
+
+                if (id == null) {
+                    // El parámetro a consultar no existe
+                    // Redirigir al listado de horarios
+                    response.sendRedirect("work-schedule");
+                } else {
+                    // Intentar obtener el horario por id
+                    workScheduleService.editingWorkSchedule(request, response);
+                }
+            }
+        }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        String wsName = request.getParameter("WSName");
-        String entryTime = request.getParameter("entryTime");
-        String exitTime = request.getParameter("exitTime");
-        
-        controller.createWorkSchedule(wsName, entryTime, exitTime);
-        
-        response.sendRedirect("SvWorkSchedule");
+
+        String action = request.getParameter("action");
+
+        if ("getInfo".equals(action)) {
+            workScheduleService.getInfo(request, response);
+        } else if ("create".equals(action)) {
+            workScheduleService.createWorkSchedule(request, response);
+        } else if ("editing".equals(action)) {
+            workScheduleService.editingWorkSchedule(request, response);
+        } else if ("edit".equals(action)) {
+            workScheduleService.editWorkSchedule(request, response);
+        } else if ("delete".equals(action)) {
+            workScheduleService.deleteWorkSchedule(request, response);
+        } else {
+            response.sendRedirect(request.getContextPath() + "/index");
+        }
     }
 
     @Override

@@ -50,7 +50,7 @@
             </td>
             <td><%= a.getHour()%></td>
             <td>
-                <form action="appointment_info" method="GET">
+                <form action="appointments/<%= a.getIdAppointment() %>" method="POST">
                     <input type="hidden" name="appointmentID" value="<%= a.getIdAppointment() %>" />
                     <button type="submit" class="btn btn-primary fas fa-solid fa-address-book"></button>
                 </form>

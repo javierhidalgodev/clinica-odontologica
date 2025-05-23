@@ -12,7 +12,7 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                             </div>
-                            <form class="user" action="SvLogin" method="POST">
+                            <form class="user" action="login" method="POST">
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-user"
                                            id="exampleInputUsername" name="username" aria-describedby="usernameHelp"
@@ -35,14 +35,12 @@
                             </form>
                             <p class="text-xs text-center mt-3 mb-0">
                                 Don't have an account yet?
-                                 <a href="register.jsp">Register here</a>
+                                 <a href="register">Register here</a>
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
-
 </div>

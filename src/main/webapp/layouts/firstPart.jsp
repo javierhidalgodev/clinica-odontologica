@@ -1,10 +1,9 @@
 <%@page import="com.javierhidalgodev.clinicaodontologica.logica.Paciente"%>
 <%@page import="java.util.Iterator"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
-<%@include file="../auth.jsp" %>
 
-<%    UserDTO userSession = (UserDTO) session.getAttribute("userSession");
-
+<%
+    UserDTO userSession = (UserDTO) session.getAttribute("userSession");
 %>
 
 <!DOCTYPE html>

@@ -14,7 +14,7 @@
 
 %>
 
-<form class="user" action="SvPatientsEdit" method="POST" id="form">
+<form class="user" action="patients" method="POST" id="form">
     <div class="form-group row">
         <div class="col-md-6 mb-3 mb-md-0">
             <label for="firstName">Name</label>
@@ -124,8 +124,18 @@
         </div>
     </div>
     <% }%>
-    <button id="submitBtn" type="submit" class="btn btn-success btn-user btn-block">
-        Edit
+    <input type="hidden" name="action" value="edit" />
+    <!--    <button id="submitBtn" type="submit" class="btn btn-success btn-user btn-block">
+            Edit
+        </button>-->
+    <button
+        type="button"
+        id="action-btn"
+        class="btn btn-success btn-user btn-block font-weight-bold"
+        data-action="edit"
+        data-toggle="modal"
+        data-target="#modal">
+        Editar
     </button>
 </form>
 
@@ -142,7 +152,7 @@
             today = new Date();
             guardianDataForm = document.getElementById("guardianData")
 
-            if(guardianDataForm !== null) {
+            if (guardianDataForm !== null) {
                 if (over18 < today) {
                     guardianDataForm.classList.replace("d-block", "d-none");
                 } else {
@@ -154,7 +164,9 @@
 
 </script>
 
-<script src="js/validations.js"></script>
+<%@include file="modal.jsp" %>
+
+<script src="${pageContext.request.contextPath}/js/validations.js"></script>
 
 <style>
     .error-validation {

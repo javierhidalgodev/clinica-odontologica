@@ -2,6 +2,8 @@ const form = document.getElementById("form");
 const fields = document.querySelectorAll("[data-validations]");
 const submitBtn = document.getElementById("submitBtn");
 
+console.log("validaciones en activo")
+
 function validateField(ev) {
     const field = ev.target;
     

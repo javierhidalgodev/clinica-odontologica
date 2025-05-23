@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Javi
  */
-@WebServlet(name = "SvRegister", urlPatterns = {"/SvRegister"})
+@WebServlet(name = "SvRegister", urlPatterns = {"/register"})
 public class SvRegister extends HttpServlet {
 
     Controller controller = Controller.getInstance();
@@ -24,6 +24,7 @@ public class SvRegister extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.getRequestDispatcher("WEB-INF/views/register.jsp").forward(request, response);
     }
 
     @Override
@@ -36,7 +37,7 @@ public class SvRegister extends HttpServlet {
 
         controller.createUser(username, password, role);
         
-        response.sendRedirect("login.jsp");
+        response.sendRedirect("login");
     }
 
     @Override

@@ -39,7 +39,7 @@
                             </form>
                             <p class="text-xs text-center mt-3 mb-0">
                                 Do you have an account?
-                                 <a href="login.jsp">Login here</a>
+                                <a href="login">Login here</a>
                             </p>
                         </div>
                     </div>

@@ -26,8 +26,9 @@
             <div class="card-header py-3">
                 <div class="d-flex justify-content-between align-items-center">
                     <span class="m-0 font-weight-bold text-primary">Pacient</span>
-                    <form action="SvPatientInfo" method="GET">
+                    <form action="patients?id=<%= patient.getId() %>" method="POST">
                         <input type="hidden" name="id" value="<%= patient.getId()%>" />
+                        <input type="hidden" name="action" value="getInfo" />
                         <button type="submit" class="btn btn-sm btn-primary">Details</button>
                     </form>
                 </div>

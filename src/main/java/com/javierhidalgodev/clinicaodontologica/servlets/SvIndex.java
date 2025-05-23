@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Javi
  */
-@WebServlet(name = "SvIndex", urlPatterns = {"/SvIndex"})
+@WebServlet(name = "SvIndex", urlPatterns = {"/index"})
 public class SvIndex extends HttpServlet {
 
     Controller controller = Controller.getInstance();
@@ -31,14 +31,15 @@ public class SvIndex extends HttpServlet {
         int secretariesCount = controller.getSecretariesCount();
         int patientsCount = controller.getPatientsCount();
         int appointmentsCount = controller.getAppointmentsCount();
-                
+
         HttpSession mySession = request.getSession();
         mySession.setAttribute("odontologistsCount", String.valueOf(odontologistsCount));
         mySession.setAttribute("secretariesCount", String.valueOf(secretariesCount));
         mySession.setAttribute("patientsCount", String.valueOf(patientsCount));
         mySession.setAttribute("appointmentsCount", String.valueOf(appointmentsCount));
 
-        response.sendRedirect("index.jsp");
+        request.getRequestDispatcher("WEB-INF/views/index.jsp").forward(request, response);
+        return;
     }
 
     @Override

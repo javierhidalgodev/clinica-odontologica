@@ -9,8 +9,4 @@
             30
         </session-timeout>
     </session-config>
-    <servlet-mapping>
-        <servlet-name>SvAppointmentInfo</servlet-name>
-        <url-pattern>/appointment_info/*</url-pattern>
-    </servlet-mapping>
 </web-app>

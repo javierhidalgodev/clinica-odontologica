@@ -1,6 +1,6 @@
 <%@page import="java.util.List"%>
 
-<form class="user" action="secretaries" method="POST" id="form">
+<form class="user" action="${pageContext.request.contextPath}/secretaries" method="POST" id="form">
     <div class="form-group row">
         <div class="col-md-6 mb-3 mb-md-0">
             <input type="text" class="form-control form-control-user" id="firstName" name="firstName" placeholder="First Name" data-validations="required|minLength:2|maxLength:30">
@@ -44,7 +44,7 @@
     </button>
 </form>
 
-<script src="js/validations.js"></script>
+<script src="${pageContext.request.contextPath}/js/validations.js"></script>
 
 <style>
     .error-validation {

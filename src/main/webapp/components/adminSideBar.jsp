@@ -8,8 +8,8 @@
     <div id="collapseOdontologist" class="collapse" aria-labelledby="headingOdontologist" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Acciones</h6>
-            <a class="collapse-item" href="odontologists">Ver profesionales</a>
-            <a class="collapse-item" href="SvWSToOdonto">Nuevo profesional</a>
+            <a class="collapse-item" href="${pageContext.request.contextPath}/odontologists">Ver profesionales</a>
+            <a class="collapse-item" href="${pageContext.request.contextPath}/odontologists/new">Nuevo profesional</a>
         </div>
     </div>
 </li>
@@ -24,8 +24,8 @@
     <div id="collapseSecretaries" class="collapse" aria-labelledby="headingSecretaries" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Acciones</h6>
-            <a class="collapse-item" href="secretaries">Ver profesionales</a>
-            <a class="collapse-item" href="altaSecretario.jsp">Nuevo profesional</a>
+            <a class="collapse-item" href="${pageContext.request.contextPath}/secretaries">Ver profesionales</a>
+            <a class="collapse-item" href="${pageContext.request.contextPath}/secretaries/new">Nuevo profesional</a>
         </div>
     </div>
 </li>
@@ -41,8 +41,8 @@
          data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Acciones</h6>
-            <a class="collapse-item" href="SvPatients">Ver pacientes</a>
-            <a class="collapse-item" href="altaPaciente.jsp">Nuevo paciente</a>
+            <a class="collapse-item" href="${pageContext.request.contextPath}/patients">Ver pacientes</a>
+            <a class="collapse-item" href="${pageContext.request.contextPath}/patients/new">Nuevo paciente</a>
         </div>
     </div>
 </li>
@@ -58,8 +58,8 @@
          data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Acciones</h6>
-            <a class="collapse-item" href="SvUsers">Ver usuarios</a>
-            <a class="collapse-item" href="altaUsuario.jsp">Nuevo usuario</a>
+            <a class="collapse-item" href="${pageContext.request.contextPath}/users">Ver usuarios</a>
+            <a class="collapse-item" href="${pageContext.request.contextPath}/users/new">Nuevo usuario</a>
         </div>
     </div>
 </li>
@@ -77,8 +77,8 @@
          data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Acciones</h6>
-            <a class="collapse-item" href="SvWorkSchedule">Ver horarios</a>
-            <a class="collapse-item" href="altaHorario.jsp">Nuevo horario</a>
+            <a class="collapse-item" href="${pageContext.request.contextPath}/work-schedule">Ver horarios</a>
+            <a class="collapse-item" href="${pageContext.request.contextPath}/work-schedule/new">Nuevo horario</a>
         </div>
     </div>
 </li>
@@ -92,8 +92,8 @@
          data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Acciones</h6>
-            <a class="collapse-item" href="SvAppointmentsView">Ver citas</a>
-            <a class="collapse-item" href="SvAppointments">Citar paciente</a>
+            <a class="collapse-item" href="${pageContext.request.contextPath}/appointments">Ver citas</a>
+            <a class="collapse-item" href="${pageContext.request.contextPath}/appointments/new/patient">Citar paciente</a>
         </div>
     </div>
 </li>

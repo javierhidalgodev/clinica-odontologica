@@ -64,13 +64,24 @@
             <% }%>
         </div>
     </div>
-        <input type="hidden" name="action" value="edit" />
-    <button id="submitBtn" type="submit" class="btn btn-success btn-user btn-block font-weight-bold">
-        Edit
+    <input type="hidden" name="action" value="edit" />
+    <!--    <button id="submitBtn" type="submit" class="btn btn-success btn-user btn-block font-weight-bold">
+            Edit
+        </button>-->
+    <button
+        type="button"
+        id="action-btn"
+        class="btn btn-success btn-user btn-block font-weight-bold"
+        data-action="edit"
+        data-toggle="modal"
+        data-target="#modal">
+        Editar
     </button>
 </form>
 
-<script src="js/validations.js"></script>
+<%@include file="modal.jsp" %>
+
+<script src="${pageContext.request.contextPath}/js/validations.js"></script>
 
 <style>
     .error-validation {

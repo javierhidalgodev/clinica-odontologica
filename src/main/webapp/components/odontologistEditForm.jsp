@@ -13,10 +13,18 @@
 
     List<UserDTO> freeUserList = (List) session.getAttribute("freeUserList");
 
-    List<Horario> workSchedulesList = (List<Horario>) session.getAttribute("workSchedulesList");
+    List<Horario> workSchedulesList = (List<Horario>) session.getAttribute("workScheduleList");
     String odontologistWorkSchedule = odontologistToEdit.getWorkSchedule() != null ? odontologistToEdit.getWorkSchedule().getName() : "not assigned";
 %>
 
+<div class="position-fixed bg-dark p-2 text-white" style="top: 10px; right: 10px">
+    <% for (Horario ws : workSchedulesList) { %>
+    <p><%= ws.getIdWorkSchedule()%> / <%= ws.getName() %> / <%= ws.getEntryTime() %> - <%= ws.getExitTime() %></p>
+    <%    }
+    %>
+    
+    <p><%= odontologistWorkSchedule %></p>
+</div>
 
 <form class="user" action="odontologists" method="POST" id="form">
     <div class="form-group row">
@@ -62,7 +70,7 @@
         </div>
         <div class="col-md-6">
             <label for="workSchedule">Work Schedule (Actual: <%= odontologistWorkSchedule%>)</label>
-            <select class="form-control form-control-user" id="workSchedule" name="workSchedule" data-validations="required">
+            <select class="form-control form-control-user" id="workSchedule" name="wSchedule" data-validations="required">
                 <option selected value="">Select one to change</option>
                 <%
                     for (Horario wS : workSchedulesList) {
@@ -99,13 +107,24 @@
             <% }%>
         </div>
     </div>
-        <input type="hidden" name="operation" value="edit" />
-    <button id="submitBtn" type="submit" class="btn btn-success btn-user btn-block font-weight-bold">
-        Edit
+    <input type="hidden" name="action" value="edit" />
+    <!--    <button id="submitBtn" type="submit" class="btn btn-success btn-user btn-block font-weight-bold">
+            Edit
+        </button>-->
+    <button
+        type="button"
+        id="action-btn"
+        class="btn btn-success btn-user btn-block font-weight-bold"
+        data-action="edit"
+        data-toggle="modal"
+        data-target="#modal">
+        Editar
     </button>
 </form>
 
-<script src="js/validations.js"></script>
+<%@include file="modal.jsp" %>
+
+<script src="${pageContext.request.contextPath}/js/validations.js"></script>
 
 <style>
     .error-validation {

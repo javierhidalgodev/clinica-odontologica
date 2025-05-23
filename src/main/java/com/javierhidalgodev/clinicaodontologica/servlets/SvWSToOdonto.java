@@ -34,7 +34,7 @@ public class SvWSToOdonto extends HttpServlet {
             mySession.setAttribute("workScheduleList", workScheduleList);
         }
 
-        response.sendRedirect("altaOdontologo.jsp");
+        response.sendRedirect("WEB-INF/views/altaOdontologo.jsp");
     }
 
     @Override

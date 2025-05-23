@@ -290,6 +290,22 @@ public class Controller {
         persistenceController.createWorkSchedule(workSchedule);
     }
 
+    public void editWorkSchedule(Horario workScheduleToEdit, String wsName, String entryTime, String exitTime) {
+        workScheduleToEdit.setName(wsName);
+        workScheduleToEdit.setEntryTime(entryTime);
+        workScheduleToEdit.setExitTime(exitTime);
+
+        persistenceController.editWorkSchedule(workScheduleToEdit);
+    }
+
+    public void destroyWorkSchedule(int workScheduleID) {
+        persistenceController.destroyWorkSchedule(workScheduleID);
+    }
+
+    public Horario getWorkScheduleById(int workScheduleId) {
+        return persistenceController.getWorkScheduleById(workScheduleId);
+    }
+
     public List<Horario> getWorkScheduleList() {
         return persistenceController.getWorkScheduleList();
     }
@@ -321,7 +337,6 @@ public class Controller {
 //
 //            pat.getAppointments().add(appointment);
 //            persistenceController.editPatient(pat);
-
             persistenceController.createAppointment(appointment);
         }
 

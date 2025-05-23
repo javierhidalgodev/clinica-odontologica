@@ -13,8 +13,7 @@
             <th>#</th>
             <th>Username</th>
             <th>Role</th>
-            <th>Edit</th>
-            <th>Delet</th>
+            <th>Details</th>
         </tr>
     </thead>
     <tfoot>
@@ -22,8 +21,7 @@
             <th>#</th>
             <th>Username</th>
             <th>Role</th>
-            <th>Edit</th>
-            <th>Delete</th>
+            <th>Details</th>
         </tr>
     </tfoot>
     <tbody>
@@ -37,15 +35,12 @@
             <td class="w-50"><%= u.getUsername()%></td>
             <td class="w-50"><%= u.getRole()%></td>
             <td class="w-fit">
-                <form action="SvUsersEdit" method="GET">
+                <form action="users?id=<%= u.getId()%>" method="POST">
                     <input type="hidden" name="id" value="<%= u.getId()%>" />
-                    <button type="submit" href="SvUsersEdit" class="btn btn-sm btn-primary">Editar</button>
-                </form>
-            </td>
-            <td class="w-fit">
-                <form action="SvUsersDelete" method="POST">
-                    <input type="hidden" name="id" value="<%= u.getId()%>" />
-                    <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
+                    <input type="hidden" name="action" value="getInfo" />
+                    <button type="submit" class="btn btn-info">
+                        <i class="fas fa-solid fa-info-circle"></i>
+                    </button>
                 </form>
             </td>
         </tr> <%
@@ -62,3 +57,5 @@
         %>
     </tbody>
 </table>
+
+

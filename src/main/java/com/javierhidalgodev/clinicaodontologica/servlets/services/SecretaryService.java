@@ -18,6 +18,44 @@ public class SecretaryService {
 
     Controller controller = Controller.getInstance();
 
+    public void getAllSecretaries(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        List<Secretario> secretariesList = (List<Secretario>) controller.getAllSecretaries();
+
+        HttpSession mySession = request.getSession();
+        mySession.setAttribute("secretariesList", secretariesList);
+
+//        response.sendRedirect(request.getContextPath() + "/secretaries");
+        request.getRequestDispatcher("WEB-INF/views/vistaSecretarios.jsp").forward(request, response);
+        return;
+    }
+
+    public void getInfo(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String id = request.getParameter("id");
+
+        if (id != null && !id.isEmpty() && id.matches("\\d+")) {
+            int secretaryID = Integer.parseInt(id);
+
+            Secretario secretary = controller.getSecretaryById(secretaryID);
+
+            if (secretary != null) {
+                request.getSession().setAttribute("secretary", secretary);
+
+                request.getRequestDispatcher("/WEB-INF/views/vistaSecretarioInfo.jsp").forward(request, response);
+                return;
+            } else {
+                response.sendRedirect("secretaries");
+//                request.getRequestDispatcher("WEB-INF/views/vistaSecretarios.jsp").forward(request, response);
+//                return;
+            }
+        } else {
+            response.sendRedirect("secretaries");
+//            request.getRequestDispatcher("WEB-INF/views/vistaSecretarios.jsp").forward(request, response);
+//            return;
+        }
+    }
+
     public void createSecretary(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String firstName = request.getParameter("firstName");
@@ -30,7 +68,7 @@ public class SecretaryService {
 
         controller.createSecretary(firstName, surname, address, phone, birthday, dni, floor);
 
-        response.sendRedirect("secretaries");
+        response.sendRedirect(request.getContextPath() + "/secretaries");
     }
 
     public void editingSecretary(HttpServletRequest request, HttpServletResponse response)
@@ -46,10 +84,10 @@ public class SecretaryService {
             mySession.setAttribute("secretaryToEdit", secretaryToEdit);
             mySession.setAttribute("freeUserList", userList);
 
-            request.getRequestDispatcher("edicionSecretario.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/views/edicionSecretario.jsp").forward(request, response);
             return;
         } else {
-            response.sendRedirect("index.jsp");
+            response.sendRedirect(request.getContextPath() + "/index");
         }
     }
 

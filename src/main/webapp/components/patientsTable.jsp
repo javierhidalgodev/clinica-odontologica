@@ -15,9 +15,6 @@
         <tr>
             <th>#</th>
             <th>Name</th>
-            <th>Address</th>
-            <th>Phone</th>
-            <th>Date of birth</th>
             <th>DNI</th>
             <th>Details</th>
         </tr>
@@ -26,9 +23,6 @@
         <tr>
             <th>#</th>
             <th>Name</th>
-            <th>Address</th>
-            <th>Phone</th>
-            <th>Date of birth</th>
             <th>DNI</th>
             <th>Details</th>
         </tr>
@@ -38,24 +32,18 @@
             if (!patientsList.isEmpty()) {
                 int i = 0;
 
-                            for (Paciente p : patientsList) {%>
+                for (Paciente p : patientsList) {%>
         <tr>
             <td><%= i + 1%></td>
             <td><%= p.getName() + " " + p.getSurname()%></td>
-            <td><%= p.getAddress()%></td>
-            <td><%= p.getPhone()%></td>
-            <td>
-                <%
-                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
-                    String formatDate = simpleDateFormat.format(p.getBirthdate());
-                %>
-                <%= formatDate%>
-            </td>
             <td><%= p.getDni()%></td>
             <td>
-                <form action="SvPatientInfo" method="GET">
+                <form action="patients?id=<%= p.getId()%>" method="POST">
                     <input type="hidden" name="id" value="<%= p.getId()%>" />
-                    <button type="submit" class="btn btn-primary">Details</button>
+                    <input type="hidden" name="action" value="getInfo" />
+                    <button type="submit" class="btn btn-info">
+                        <i class="fas fa-solid fa-info-circle"></i>
+                    </button>
                 </form>
             </td>                        
         </tr> <%

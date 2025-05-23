@@ -5,7 +5,7 @@
     List<Horario> workSchedulesList = (List<Horario>) session.getAttribute("workScheduleList");
 %>
 
-<form class="user" action="odontologists" method="POST" id="form" >
+<form class="user" action="${pageContext.request.contextPath}/odontologists" method="POST" id="form" >
     <div class="form-group row">
         <div class="col-md-6 mb-3 mb-md-0">
             <label for="firstName">Name</label>
@@ -62,13 +62,13 @@
             <span id="errorWorkSchedule" class="error-validation"></span>
         </div>
     </div>
-    <input type="hidden" name="operation" value="create" />
+    <input type="hidden" name="action" value="create" />
     <button id="submitBtn" type="submit" class="btn btn-success btn-user btn-block">
         Create
     </button>
 </form>
 
-<script src="js/validations.js"></script>
+<script src="${pageContext.request.contextPath}/js/validations.js"></script>
 
 <style>
     .error-validation {

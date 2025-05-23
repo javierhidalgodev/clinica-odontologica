@@ -1,9 +1,8 @@
 package com.javierhidalgodev.clinicaodontologica.servlets;
 
-import com.javierhidalgodev.clinicaodontologica.dto.user.UserDTO;
 import com.javierhidalgodev.clinicaodontologica.logica.Controller;
+import com.javierhidalgodev.clinicaodontologica.servlets.services.UserService;
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,11 +13,11 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Javi
  */
-@WebServlet(name = "SvUsers", urlPatterns = {"/SvUsers"})
+@WebServlet(name = "SvUsers", urlPatterns = {"/users", "/users/new"})
 public class SvUsers extends HttpServlet {
 
-    Controller controller = Controller.getInstance();
-    
+    UserService userService = new UserService();
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     }
@@ -26,31 +25,45 @@ public class SvUsers extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        List<UserDTO> users = controller.getAllUsers();
-        
-        request.getSession().setAttribute("userList", users);
-        response.sendRedirect("vistaUsuarios.jsp");
-        
+        String servletPath = request.getServletPath();
+
+        if (servletPath.contains("new")) {
+            request.getRequestDispatcher("/WEB-INF/views/altaUsuario.jsp").forward(request, response);
+        } else {
+            String queryParams = request.getQueryString();
+
+            if (queryParams == null) {
+                userService.getAllUsers(request, response);
+            } else {
+                String id = request.getParameter("id");
+                if (id == null) {
+                    response.sendRedirect("users");
+                } else {
+                    userService.editingUser(request, response);
+                }
+            }
+        }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        String username = (String) request.getParameter("username");
-        String password = (String) request.getParameter("password");
-        String role;
-        
-        if(request.getParameter("role") != null) {
-            role = request.getParameter("role");
+
+        String action = request.getParameter("action");
+
+        if ("getInfo".equals(action)) {
+            userService.getInfo(request, response);
+        } else if ("create".equals(action)) {
+            userService.createUser(request, response);
+        } else if ("delete".equals(action)) {
+            userService.deleteUser(request, response);
+        } else if ("editing".equals(action)) {
+            userService.editingUser(request, response);
+        } else if ("edit".equals(action)) {
+            userService.editUser(request, response);
         } else {
-            role = "NA";
+            response.sendRedirect(request.getContextPath() + "/index");
         }
-        
-        controller.createUser(username, password, role);
-        
-        response.sendRedirect("SvUsers");
     }
 
     @Override

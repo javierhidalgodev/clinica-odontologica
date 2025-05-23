@@ -1,25 +1,20 @@
 package com.javierhidalgodev.clinicaodontologica.servlets;
 
-import com.javierhidalgodev.clinicaodontologica.logica.Controller;
-import com.javierhidalgodev.clinicaodontologica.logica.Secretario;
 import com.javierhidalgodev.clinicaodontologica.servlets.services.SecretaryService;
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Javi
  */
-@WebServlet(name = "SvSecretaries", urlPatterns = {"/secretaries"})
+@WebServlet(name = "SvSecretaries", urlPatterns = {"/secretaries", "/secretaries/new"})
 public class SvSecretaries extends HttpServlet {
 
-    Controller controller = Controller.getInstance();
     SecretaryService secretaryService = new SecretaryService();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -29,13 +24,31 @@ public class SvSecretaries extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String servletPath = request.getServletPath();
 
-        List<Secretario> secretariesList = (List<Secretario>) controller.getAllSecretaries();
+        if (servletPath.contains("new")) {
+            request.getRequestDispatcher("/WEB-INF/views/altaSecretario.jsp").forward(request, response);
+        } else {
+            String queryParams = request.getQueryString();
 
-        HttpSession mySession = request.getSession();
-        mySession.setAttribute("secretariesList", secretariesList);
+            if (queryParams == null) {
+                System.err.println("NO HAY PARÁMETROS");
+                secretaryService.getAllSecretaries(request, response);
+            } else {
+                System.err.println("RECUPERO QUERYPARAMS: " + queryParams);
+                String id = request.getParameter("id");
 
-        request.getRequestDispatcher("vistaSecretarios.jsp").forward(request, response);
+                if (id == null) {
+                    System.err.println("NO HAY ID. VOY A SECRETARIOS");
+                    response.sendRedirect("secretaries");
+//                request.getRequestDispatcher("WEB-INF/views/vistaSecretarios.jsp").forward(request, response);
+//                return;
+                } else {
+                    System.err.println("HAY ID. INTENTO RECUPERAR UN SECRETARIO: " + id);
+                    secretaryService.getInfo(request, response);
+                }
+            }
+        }
     }
 
     @Override
@@ -44,8 +57,11 @@ public class SvSecretaries extends HttpServlet {
 
         String action = request.getParameter("action");
 
-        System.out.println("estoy aquí: " + action);
-        if ("create".equals(action)) {
+        // No se ha implementado una pantalla intermedia para la visualización de data
+        // Directamente se pasa de la tabla, al fomulario de edición
+        if("getInfo".equals(action)) {
+            secretaryService.getInfo(request, response);
+        } else if ("create".equals(action)) {
             secretaryService.createSecretary(request, response);
         } else if ("editing".equals(action)) {
             secretaryService.editingSecretary(request, response);
@@ -53,12 +69,8 @@ public class SvSecretaries extends HttpServlet {
             secretaryService.editSecretary(request, response);
         } else if ("delete".equals(action)) {
             secretaryService.deleteSecretary(request, response);
+        } else {
+            response.sendRedirect(request.getContextPath() + "/index");
         }
     }
-
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }
