@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Javi
  */
-@WebServlet(name = "SvGuardianEdit", urlPatterns = {"/guardians"})
-public class SvGuardianEdit extends HttpServlet {
+@WebServlet(name = "SvGuardians", urlPatterns = {"/guardians"})
+public class SvGuardians extends HttpServlet {
 
     GuardianService guardianService = new GuardianService();
 

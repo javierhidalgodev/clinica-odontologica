@@ -20,11 +20,11 @@
                     <div class="text-center">
                         <h1 class="h4 text-gray-900 mb-4 text-left">Elija una fecha y una hora</h1>
                     </div>
-                    <form class="user" action="${pageContext.request.contextPath}/appointments/new/professional" method="POST" id="form">
+                    <form action="${pageContext.request.contextPath}/appointments/new/professional" method="POST" id="form">
                         <div class="form-group">
-                            <label for="patient">Patient</label>
+                            <label for="patient">Paciente</label>
                             <select class="form-control form-control-user" id="patient" name="patient" data-validations="required">
-                                <option value="" selected>Select one</option>
+                                <option value="" selected>Seleccione una opción</option>
                                 <%                    for (Paciente p : patientsList) {
                                 %> <option
                                     value="<%= p.getId()%>"
@@ -39,19 +39,19 @@
                         </div>
                         <div class="form-group row">
                             <div class="col-md-6 mb-3 mb-md-0">
-                                <label for="appointmentDate">Date</label>
+                                <label for="appointmentDate">Fecha</label>
                                 <input type="date" min="<%= LocalDate.now()%>" class="form-control form-control-user" id="appointmentDate" name="appointmentDate" value="<%= date != null ? date : "" %>" data-validations="required">
                                 <span id="errorAppointmentDate" class="error-validation"></span>
                             </div>
                             <div class="col-md-6">
-                                <label for="appointmentHour">Hour (choose 00 or 30 min.)</label>
+                                <label for="appointmentHour">Hora (elija el tramo de 00 o 30)</label>
                                 <input type="time" min="09:00" max="20:30" step="1800" class="form-control form-control-user" id="appointmentHour" name="appointmentHour" value="<%= hour != null ? hour : "" %>" data-validations="required">
                                 <span id="errorAppointmentHour" class="error-validation"></span>
                             </div>
                         </div>
                         <input type="hidden" name="step" value="1" />
                         <button id="submitBtn" type="submit" class="btn btn-success btn-user btn-block">
-                            Select professional
+                            Selección de profesional
                         </button>
                     </form>
                 </div>

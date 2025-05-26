@@ -14,7 +14,7 @@
                 <form action="secretaries?id=<%= secretary.getId()%>" method="POST" class="mr-2">
                     <input type="hidden" name="action" value="editing" />
                     <input type="hidden" name="id" value="<%= secretary.getId()%>" />
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" class="btn btn-success">
                         <i class="fas fa-solid fa-edit"></i>
                     </button>
                 </form>
@@ -35,19 +35,19 @@
         </div>
     </div>
     <div class="card-body">
-        <p>Address: <%= secretary.getAddress()%></p>
-        <p>Phone: <%= secretary.getPhone()%></p>
+        <p>Dirección: <%= secretary.getAddress()%></p>
+        <p>Teléfono: <%= secretary.getPhone()%></p>
         <p>
             <%
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
                 String formatDate = simpleDateFormat.format(secretary.getBirthdate());
             %>
-            Birthdate: <%= formatDate%>
+            Fecha de nacimiento: <%= formatDate%>
         </p>
         <p>DNI: <%= secretary.getDni()%></p>
-        <p>Floor: <%= secretary.getFloor()%></p>
+        <p>Posición: <%= secretary.getFloor()%></p>
         <% if (secretary.getUser() != null) {%>
-        <p>User: <%= secretary.getUser().getUsername()%></p>
+        <p>Usario: <%= secretary.getUser().getUsername()%></p>
         <% }%>
     </div>
 </div>

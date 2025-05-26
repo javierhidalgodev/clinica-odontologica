@@ -25,7 +25,7 @@ public class AppointmentService {
 
         request.setAttribute("appointmentList", appointmentList);
 
-        request.getRequestDispatcher("WEB-INF/views/vistaCitas.jsp").forward(request, response);
+        request.getRequestDispatcher("WEB-INF/views/appointmentsView.jsp").forward(request, response);
         return;
     }
 
@@ -36,7 +36,7 @@ public class AppointmentService {
         if(appointment != null) {
             request.setAttribute("appointmentInfo", appointment);
 
-            request.getRequestDispatcher("/WEB-INF/views/vistaCitaInfo.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/views/appointmentInfoView.jsp").forward(request, response);
             return;
         }
         
@@ -53,7 +53,7 @@ public class AppointmentService {
         mySession.setAttribute("workScheduleList", workSchedulesList);
         mySession.setAttribute("patientList", patientList);
 
-        request.getRequestDispatcher("/WEB-INF/views/altaCitaHorario.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/appointmentRegisterPatientView.jsp").forward(request, response);
         return;
     }
 
@@ -95,7 +95,7 @@ public class AppointmentService {
                 mySession.setAttribute("appointmentPatient", patient);
                 mySession.setAttribute("availableOdontologists", odontologist);
 
-                request.getRequestDispatcher("/WEB-INF/views/altaCitaOdontologo.jsp").forward(request, response);
+                request.getRequestDispatcher("/WEB-INF/views/appointmentRegisterOdontologistView.jsp").forward(request, response);
                 return;
             }
         } else {
@@ -104,7 +104,7 @@ public class AppointmentService {
             Paciente patient = (Paciente) request.getSession().getAttribute("appointmentPatient");
 
             if (date != null && hour != null && patient != null) {
-                request.getRequestDispatcher("/WEB-INF/views/altaCitaOdontologo.jsp").forward(request, response);
+                request.getRequestDispatcher("/WEB-INF/views/appointmentRegisterOdontologistView.jsp").forward(request, response);
                 return;
             } else {
                 response.sendRedirect(request.getContextPath() + "/appointments/new/patient");
@@ -128,7 +128,7 @@ public class AppointmentService {
 
                 mySession.setAttribute("professional", odontologist);
 
-                request.getRequestDispatcher("/WEB-INF/views/confirmarCita.jsp").forward(request, response);
+                request.getRequestDispatcher("/WEB-INF/views/appointmentRegisterConfirmView.jsp").forward(request, response);
                 return;
             }
 
@@ -138,7 +138,7 @@ public class AppointmentService {
             Odontologo professional = (Odontologo) request.getSession().getAttribute("professional");
 
             if (professional != null) {
-                request.getRequestDispatcher("/WEB-INF/views/confirmarCita.jsp").forward(request, response);
+                request.getRequestDispatcher("/WEB-INF/views/appointmentRegisterConfirmView.jsp").forward(request, response);
                 return;
             }
 

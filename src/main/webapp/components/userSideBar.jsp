@@ -10,7 +10,7 @@
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Acciones</h6>
             <a class="collapse-item" href="patients">Ver pacientes</a>
-            <!--<a class="collapse-item" href="altaPaciente.jsp">Nuevo paciente</a>-->
+            <!--<a class="collapse-item" href="patientRegisterView.jsp">Nuevo paciente</a>-->
         </div>
     </div>
 </li>
@@ -26,7 +26,7 @@
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Acciones</h6>
             <a class="collapse-item" href="secretaries">Ver citas</a>
-            <!--<a class="collapse-item" href="altaSecretario.jsp">Nuevo profesional</a>-->
+            <!--<a class="collapse-item" href="secretaryRegisterView.jsp">Nuevo profesional</a>-->
         </div>
     </div>
 </li>

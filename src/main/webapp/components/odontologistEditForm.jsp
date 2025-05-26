@@ -17,59 +17,50 @@
     String odontologistWorkSchedule = odontologistToEdit.getWorkSchedule() != null ? odontologistToEdit.getWorkSchedule().getName() : "not assigned";
 %>
 
-<div class="position-fixed bg-dark p-2 text-white" style="top: 10px; right: 10px">
-    <% for (Horario ws : workSchedulesList) { %>
-    <p><%= ws.getIdWorkSchedule()%> / <%= ws.getName() %> / <%= ws.getEntryTime() %> - <%= ws.getExitTime() %></p>
-    <%    }
-    %>
-    
-    <p><%= odontologistWorkSchedule %></p>
-</div>
-
-<form class="user" action="odontologists" method="POST" id="form">
+<form action="odontologists" method="POST" id="form">
     <div class="form-group row">
         <div class="col-md-6 mb-3 mb-md-0">
-            <label for="firstName">Name</label>
+            <label for="firstName">Nombre</label>
             <input type="text" class="form-control form-control-user" id="firstName" name="firstName" value="<%= odontologistToEdit.getName()%>" placeholder="First Name" data-validations="required|minLength:2|maxLength:30">
             <span id="errorFirstName" class="error-validation"></span>
         </div>
         <div class="col-md-6">
-            <label for="surname">Surname</label>
+            <label for="surname">Apellido</label>
             <input type="text" class="form-control form-control-user" id="surname" name="surname" value="<%= odontologistToEdit.getSurname()%>" placeholder="Surname" data-validations="required|minLength:3|maxLength:50">
             <span id="errorSurname" class="error-validation"></span>
         </div>
     </div>
     <div class="form-group row">
         <div class="col-md-6 mb-3 mb-md-0">
-            <label for="address">Address</label>
+            <label for="address">Dirección</label>
             <input type="text" class="form-control form-control-user" id="address" name="address" value="<%= odontologistToEdit.getAddress()%>" placeholder="Address" data-validations="required|minLength:5|maxLength:50">
             <span id="errorAddress" class="error-validation"></span>
         </div>
         <div class="col-md-6 mb-3 mb-md-0">
-            <label for="phone">Phone</label>
+            <label for="phone">Teléfono</label>
             <input type="tel" class="form-control form-control-user" id="phone" name="phone" value="<%= odontologistToEdit.getPhone()%>" placeholder="Phone" data-validations="required|phone">
             <span id="errorPhone" class="error-validation"></span>
         </div>
     </div>
     <div class="form-group row">
         <div class="col-md-6">
-            <label for="birthdate">Birthdate</label>
+            <label for="birthdate">Fecha de nacimiento</label>
             <input type="date" class="form-control form-control-user" id="birthdate" name="birthdate" value="<%= birth%>" data-validations="required|birthdate">
             <span id="errorBirthdate" class="error-validation"></span>
         </div>
         <div class="col-md-6">
-            <label for="DNI">DNI</label>
-            <input type="text" class="form-control form-control-user" id="DNI" name="dni" value="<%= odontologistToEdit.getDni()%>" placeholder="DNI" disabled="" >
+            <label for="dni">DNI</label>
+            <input type="text" class="form-control form-control-user" id="dni" name="dni" value="<%= odontologistToEdit.getDni()%>" placeholder="DNI" disabled="" >
         </div>
     </div>
     <div class="form-group row">
         <div class="col-md-6">
-            <label for="specialization">Specialization</label>
+            <label for="specialization">Especialidad</label>
             <input type="text" class="form-control form-control-user" id="specialization" name="specialization" value="<%= odontologistToEdit.getSpecialization()%>" placeholder="Specialization">
             <span id="errorSpecialization" class="error-validation"></span>
         </div>
         <div class="col-md-6">
-            <label for="workSchedule">Work Schedule (Actual: <%= odontologistWorkSchedule%>)</label>
+            <label for="workSchedule">Turno de trabajo (Actual: <%= odontologistWorkSchedule%>)</label>
             <select class="form-control form-control-user" id="workSchedule" name="wSchedule" data-validations="required">
                 <option selected value="">Select one to change</option>
                 <%
@@ -86,7 +77,7 @@
             <%
                 if (odontologistToEdit.getUser() == null) {
             %>
-            <label for="user">User</label>
+            <label for="user">Usuario</label>
             <select class="form-control form-control-user" id="user" name="user" >
 
                 <% if (freeUserList.size() == 0) { %>

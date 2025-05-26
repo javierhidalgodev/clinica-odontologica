@@ -25,7 +25,7 @@
 
 </head>
 
-<body class="bg-gradient-primary">
+<body>
 
     <div class="container">
 
@@ -47,3 +47,9 @@
 </body>
 
 </html>
+
+<style>
+    body {
+        background-color: #106cb5
+    }
+</style>

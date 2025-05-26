@@ -15,7 +15,7 @@
                 <form action="users?id=<%= user.getIdUser()%>" method="POST" class="mr-2">
                     <input type="hidden" name="action" value="editing" />
                     <input type="hidden" name="id" value="<%= user.getIdUser()%>" />
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" class="btn btn-success">
                         <i class="fas fa-solid fa-edit"></i>
                     </button>
                 </form>
@@ -36,13 +36,13 @@
         </div>
     </div>
     <div class="card-body">
-        <p>Username: <%= user.getUsername()%></p>
-        <p>Role: <%= user.getRole()%></p>
+        <p>Nombre de usuario: <%= user.getUsername()%></p>
+        <p>Rol: <%= user.getRole()%></p>
         <% if (user.getOdontologist() != null) {%>
-        <p>Profesional asignado: <%= user.getOdontologist().getName()%></p>
+        <p>Profesional asignado: <%= user.getOdontologist().getName()%> <%= user.getOdontologist().getSurname() %></p>
         <% } %>
         <% if (user.getSecretary() != null) {%>
-        <p>Profesional asignado: <%= user.getSecretary().getName()%></p>
+        <p>Profesional asignado: <%= user.getSecretary().getName()%> <%= user.getSecretary().getSurname() %></p>
         <% }%>
     </div>
 </div>

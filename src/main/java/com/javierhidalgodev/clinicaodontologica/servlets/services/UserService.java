@@ -19,7 +19,7 @@ public class UserService {
         List<UserDTO> users = controller.getAllUsers();
 
         request.getSession().setAttribute("userList", users);
-        request.getRequestDispatcher("WEB-INF/views/vistaUsuarios.jsp").forward(request, response);
+        request.getRequestDispatcher("WEB-INF/views/usersView.jsp").forward(request, response);
     }
 
     public void getInfo(HttpServletRequest request, HttpServletResponse response)
@@ -34,7 +34,7 @@ public class UserService {
             if (user != null) {
                 HttpSession mySession = request.getSession();
                 mySession.setAttribute("user", user);
-                request.getRequestDispatcher("WEB-INF/views/vistaUsuarioInfo.jsp").forward(request, response);
+                request.getRequestDispatcher("WEB-INF/views/userInfoView.jsp").forward(request, response);
                 return;
             } else {
                 response.sendRedirect("users");
@@ -83,7 +83,7 @@ public class UserService {
 
             if (userToEdit != null) {
                 request.getSession().setAttribute("userToEdit", userToEdit);
-                request.getRequestDispatcher("WEB-INF/views/edicionUsuario.jsp").forward(request, response);
+                request.getRequestDispatcher("WEB-INF/views/userEditView.jsp").forward(request, response);
                 return;
             } else {
                 response.sendRedirect("users");

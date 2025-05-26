@@ -7,13 +7,13 @@
             <div>
                 <div class="p-5">
                     <div class="text-center">
-                        <h1 class="h4 text-gray-900 mb-4 text-left">Edit an User!</h1>
+                        <h1 class="h4 text-gray-900 mb-4 text-left">Nuevo horario de trabajo</h1>
                     </div>
-                    <%@include file="../../components/userEditForm.jsp" %>
+                    <%@include file="../../components/workScheduleForm.jsp" %>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
+                    
 <%@include file="../../layouts/endPart.jsp" %>

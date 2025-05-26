@@ -27,7 +27,7 @@ public class SvSecretaries extends HttpServlet {
         String servletPath = request.getServletPath();
 
         if (servletPath.contains("new")) {
-            request.getRequestDispatcher("/WEB-INF/views/altaSecretario.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/views/secretaryRegisterView.jsp").forward(request, response);
         } else {
             String queryParams = request.getQueryString();
 
@@ -41,7 +41,7 @@ public class SvSecretaries extends HttpServlet {
                 if (id == null) {
                     System.err.println("NO HAY ID. VOY A SECRETARIOS");
                     response.sendRedirect("secretaries");
-//                request.getRequestDispatcher("WEB-INF/views/vistaSecretarios.jsp").forward(request, response);
+//                request.getRequestDispatcher("WEB-INF/views/secretariesView.jsp").forward(request, response);
 //                return;
                 } else {
                     System.err.println("HAY ID. INTENTO RECUPERAR UN SECRETARIO: " + id);

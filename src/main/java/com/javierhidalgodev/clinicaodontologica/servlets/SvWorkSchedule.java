@@ -29,7 +29,7 @@ public class SvWorkSchedule extends HttpServlet {
         String servletPath = request.getServletPath();
 
         if (servletPath.contains("new")) {
-            request.getRequestDispatcher("/WEB-INF/views/altaHorario.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/views/workScheduleRegisterView.jsp").forward(request, response);
         } else {
             String queryParams = request.getQueryString();
 

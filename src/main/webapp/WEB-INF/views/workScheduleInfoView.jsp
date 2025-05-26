@@ -16,7 +16,7 @@
                 <form action="work-schedule?id=<%= workSchedule.getIdWorkSchedule()%>" method="POST" class="mr-2">
                     <input type="hidden" name="action" value="editing" />
                     <input type="hidden" name="id" value="<%= workSchedule.getIdWorkSchedule()%>" />
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" class="btn btn-success">
                         <i class="fas fa-solid fa-edit"></i>
                     </button>
                 </form>

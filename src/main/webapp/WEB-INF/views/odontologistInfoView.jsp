@@ -5,10 +5,6 @@
 
 <% Odontologo odontologist = (Odontologo) request.getAttribute("odontologist");%>
 
-<div class="position-fixed p-3 text-white text" style="bottom: 20px; right: 20px; z-index: 1000; background-color: rgba(32, 32, 32, .8)">
-    Citas médicas programadas: <%= odontologist.getWorkShift().size()%>
-</div>
-
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <div class="d-flex justify-content-between align-items-center">
@@ -17,7 +13,7 @@
                 <form action="odontologists?id=<%= odontologist.getId()%>" method="POST" class="mr-2">
                     <input type="hidden" name="action" value="editing" />
                     <input type="hidden" name="id" value="<%= odontologist.getId()%>" />
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" class="btn btn-success">
                         <i class="fas fa-solid fa-edit"></i>
                     </button>
                 </form>
@@ -38,18 +34,18 @@
         </div>
     </div>
     <div class="card-body">
-        <p>Address: <%= odontologist.getAddress()%></p>
-        <p>Phone: <%= odontologist.getPhone()%></p>
+        <p>Dirección: <%= odontologist.getAddress()%></p>
+        <p>Teléfono: <%= odontologist.getPhone()%></p>
         <p>
             <%
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
                 String formatDate = simpleDateFormat.format(odontologist.getBirthdate());
             %>
-            Birthdate: <%= formatDate%>
+            Fecha de nacimiento: <%= formatDate%>
         </p>
         <p>DNI: <%= odontologist.getDni()%></p>
-        <p>Speciality: <%= odontologist.getSpecialization()%></p>
-        <p>Work Schedule: <%= odontologist.getWorkSchedule() != null ? odontologist.getWorkSchedule().getName() + " / " + odontologist.getWorkSchedule().getEntryTime() + " - " + odontologist.getWorkSchedule().getExitTime() : "Not assigned"%></p>
+        <p>Especialidad: <%= odontologist.getSpecialization()%></p>
+        <p>Turno de trabajo: <%= odontologist.getWorkSchedule() != null ? odontologist.getWorkSchedule().getName() + " / " + odontologist.getWorkSchedule().getEntryTime() + " - " + odontologist.getWorkSchedule().getExitTime() : "Not assigned"%></p>
         <% if (odontologist.getUser() != null) {%>
         <p>User: <%= odontologist.getUser().getUsername()%></p>
         <% } %>
@@ -66,19 +62,20 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Patient name</th>
-                        <th>Date</th>
-                        <th>Hour</th>
-                        <th>See more</th>
+                        <th>Nombre del paciente</th>
+                        <th>Fecha</th>
+                        <th>Hora</th>
+                        <th>Detalles</th>
                     </tr>
                 </thead>
                 <tfoot>
                     <tr>
                         <th>#</th>
-                        <th>Patient name</th>
-                        <th>Date</th>
-                        <th>Hour</th>
-                        <th>See more</th>                    </tr>
+                        <th>Nombre del paciente</th>
+                        <th>Fecha</th>
+                        <th>Hora</th>
+                        <th>Detalles</th>
+                    </tr>
                 </tfoot>
                 <tbody>
                     <%
@@ -87,7 +84,6 @@
 
                             for (Turno t : odontologist.getWorkShift()) {%>
 
-                    <% out.print(t.getIdAppointment());%>
                     <tr>
                         <td><%= i + 1%></td>
                         <td><%= t.getPatient().getName()%></td>            
@@ -99,15 +95,12 @@
                         </td>
                         <td><%= t.getHour()%></td>
                         <td>
-                            <form action="appointment_info" method="GET">
+                            <form action="${pageContext.request.contextPath}/appointments/<%= t.getIdAppointment() %>" method="POST">
                                 <input type="hidden" name="appointmentID" value="<%= t.getIdAppointment()%>" />
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-info">
                                     <i class="fas fa-solid fa-info-circle"></i>
                                 </button>
                             </form>
-                            <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
-                                <i class="fas fa-solid fa-trash-alt"></i>
-                            </button>
                         </td>
                     </tr> <%
 

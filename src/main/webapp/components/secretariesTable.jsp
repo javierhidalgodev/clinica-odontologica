@@ -14,17 +14,17 @@
     <thead>
         <tr>
             <th>#</th>
-            <th>Name</th>
+            <th>Nombre</th>
             <th>DNI</th>
-            <th>Profile</th>
+            <th>Perfil</th>
         </tr>
     </thead>
     <tfoot>
         <tr>
             <th>#</th>
-            <th>Name</th>
+            <th>Nombre</th>
             <th>DNI</th>
-            <th>Profile</th>
+            <th>Perfil</th>
         </tr>
     </tfoot>
     <tbody>
@@ -53,7 +53,7 @@
         } else {
         %>
         <tr class="bg-gray-200 text-center font-weight-bold">
-            <td colspan="9">No data available</td>
+            <td colspan="9">No hay datos disponibles</td>
         </tr>
         <%
             }

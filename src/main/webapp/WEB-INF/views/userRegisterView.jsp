@@ -7,14 +7,13 @@
             <div>
                 <div class="p-5">
                     <div class="text-center">
-                        <h1 class="h4 text-gray-900 mb-4 text-left">Create an Odontologist!</h1>
+                        <h1 class="h4 text-gray-900 mb-4 text-left">Nuevo usuario</h1>
                     </div>
-                    <%@include file="../../components/odontologistForm.jsp" %>
+                    <%@include file="../../components/userForm.jsp" %>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
 
 <%@include file="../../layouts/endPart.jsp" %>

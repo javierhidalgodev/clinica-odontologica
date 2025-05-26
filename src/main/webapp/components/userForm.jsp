@@ -1,6 +1,6 @@
 <%@page import="com.javierhidalgodev.clinicaodontologica.logica.Usuario"%>
 
-<form class="user" action="${pageContext.request.contextPath}/users" method="POST">
+<form action="${pageContext.request.contextPath}/users" method="POST">
     <div class="form-group row">
         <div class="col-md-6 mb-3 col-md-0">
             <input type="text" class="form-control form-control-user" id="exampleUsername" name="username"

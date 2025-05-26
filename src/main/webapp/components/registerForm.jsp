@@ -12,7 +12,7 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Create your account here!</h1>
                             </div>
-                            <form class="user" action="SvRegister" method="POST">
+                            <form action="SvRegister" method="POST">
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-user"
                                            id="exampleInputUsername" name="username" aria-describedby="usernameHelp"
@@ -48,15 +48,4 @@
         </div>
 
     </div>
-
 </div>
-
-<style>
-    select {
-        padding: 1rem 1rem 2rem 1rem !important;
-    }
-
-    label {
-        font-size: smaller;
-    }
-</style>

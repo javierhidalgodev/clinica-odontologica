@@ -18,5 +18,4 @@
     <link href="${pageContext.request.contextPath}/css/sb-admin-2.min.css" rel="stylesheet" type="text/css">
     <!-- Custom styles-->
     <link href="${pageContext.request.contextPath}/css/custom.css" rel="stylesheet" type="text/css">
-
 </head>

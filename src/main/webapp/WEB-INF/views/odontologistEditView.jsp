@@ -1,4 +1,4 @@
-<%@include file="layouts/firstPart.jsp" %>
+<%@include file="../../layouts/firstPart.jsp" %>
 
 <div class="container">
     <div class="card o-hidden border-0 shadow-lg my-5">
@@ -7,14 +7,14 @@
             <div>
                 <div class="p-5">
                     <div class="text-center">
-                        <h1 class="h4 text-gray-900 mb-4 text-left">Edit Guardian!</h1>
+                        <h1 class="h4 text-gray-900 mb-4 text-left">Edición de odontólogo</h1>
                     </div>
-                    <%@include file="components/guardianEditForm.jsp" %>
+                    <%@include file="../../components/odontologistEditForm.jsp" %>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
 
-<%@include file="layouts/endPart.jsp" %>
+<%@include file="../../layouts/endPart.jsp" %>
+

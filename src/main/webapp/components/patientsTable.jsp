@@ -14,17 +14,17 @@
     <thead>
         <tr>
             <th>#</th>
-            <th>Name</th>
+            <th>Nombre</th>
             <th>DNI</th>
-            <th>Details</th>
+            <th>Detalles</th>
         </tr>
     </thead>
     <tfoot>
         <tr>
             <th>#</th>
-            <th>Name</th>
+            <th>Nombre</th>
             <th>DNI</th>
-            <th>Details</th>
+            <th>Detalles</th>
         </tr>
     </tfoot>
     <tbody>

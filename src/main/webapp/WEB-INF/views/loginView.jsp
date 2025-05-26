@@ -7,7 +7,7 @@
 <html lang="en">
     <%@include file="../../components/head.jsp" %>
 
-    <body class="bg-gradient-primary">
+    <body class="bg-(#106cb5)">
 
         <div class="container">
 
@@ -19,3 +19,9 @@
         <%@include file="../../components/bootstrapCore.jsp" %>
     </body>
 </html>
+
+<style>
+    body {
+        background-color: #106cb5
+    }
+</style>

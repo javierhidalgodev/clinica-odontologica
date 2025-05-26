@@ -26,7 +26,7 @@ public class OdontologistService {
 
         request.setAttribute("odontologistList", odontologistList);
 
-        request.getRequestDispatcher("WEB-INF/views/vistaOdontologos.jsp").forward(request, response);
+        request.getRequestDispatcher("WEB-INF/views/odontologistsView.jsp").forward(request, response);
         return;
     }
 
@@ -44,7 +44,7 @@ public class OdontologistService {
 
                 request.setAttribute("odontologist", odontologist);
 
-                request.getRequestDispatcher("/WEB-INF/views/vistaOdontologoInfo.jsp").forward(request, response);
+                request.getRequestDispatcher("/WEB-INF/views/odontologistInfoView.jsp").forward(request, response);
                 return;
             } else {
                 response.sendRedirect("odontologists");
@@ -91,7 +91,7 @@ public class OdontologistService {
                 mySession.setAttribute("workScheduleList", workScheduleList);
             }
 
-            request.getRequestDispatcher("WEB-INF/views/edicionOdontologo.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/views/odontologistEditView.jsp").forward(request, response);
             return;
         } else {
             response.sendRedirect(request.getContextPath() + "/index");

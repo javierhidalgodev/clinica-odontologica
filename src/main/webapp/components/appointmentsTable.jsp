@@ -14,21 +14,21 @@
     <thead>
         <tr>
             <th>#</th>
-            <th>Patient</th>
-            <th>Professional</th>
-            <th>Date</th>
-            <th>Hour</th>
-            <th>More info.</th>
+            <th>Paciente</th>
+            <th>Profesional</th>
+            <th>Fecha</th>
+            <th>Horarios</th>
+            <th>Detalles</th>
         </tr>
     </thead>
     <tfoot>
         <tr>
             <th>#</th>
-            <th>Patient</th>
-            <th>Professional</th>
-            <th>Date</th>
-            <th>Hour</th>
-            <th>More info.</th>
+            <th>Paciente</th>
+            <th>Profesional</th>
+            <th>Fecha</th>
+            <th>Horarios</th>
+            <th>Detalles</th>
         </tr>
     </tfoot>
     <tbody>
@@ -62,27 +62,10 @@
         } else {
         %>
         <tr class="bg-gray-200 text-center font-weight-bold">
-            <td colspan="10">No data available</td>
+            <td colspan="10">No hay datos disponibles</td>
         </tr>
         <%
             }
         %>
     </tbody>
 </table>
-
-<script>
-    deleteForms = document.querySelectorAll("[data-form-action=delete]");
-
-    function confirmDelete(ev) {
-        ev.preventDefault();
-
-        confirmation = confirm("¿Seguro que desea eliminar el registro? Esta operación es irreversible");
-
-        if (confirmation) {
-            ev.target.submit();
-        }
-    }
-
-    deleteForms.forEach(f => f.addEventListener("submit", confirmDelete))
-
-</script>

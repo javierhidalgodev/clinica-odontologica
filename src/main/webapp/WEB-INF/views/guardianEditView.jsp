@@ -7,13 +7,14 @@
             <div>
                 <div class="p-5">
                     <div class="text-center">
-                        <h1 class="h4 text-gray-900 mb-4 text-left">Edit a Work Schedule!</h1>
+                        <h1 class="h4 text-gray-900 mb-4 text-left">Edición de responsable</h1>
                     </div>
-                    <%@include file="../../components/workScheduleEditForm.jsp" %>
+                    <%@include file="../../components/guardianEditForm.jsp" %>
                 </div>
             </div>
         </div>
     </div>
+
 </div>
 
 <%@include file="../../layouts/endPart.jsp" %>

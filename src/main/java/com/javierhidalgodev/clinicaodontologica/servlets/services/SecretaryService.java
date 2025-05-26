@@ -26,7 +26,7 @@ public class SecretaryService {
         mySession.setAttribute("secretariesList", secretariesList);
 
 //        response.sendRedirect(request.getContextPath() + "/secretaries");
-        request.getRequestDispatcher("WEB-INF/views/vistaSecretarios.jsp").forward(request, response);
+        request.getRequestDispatcher("WEB-INF/views/secretariesView.jsp").forward(request, response);
         return;
     }
 
@@ -42,16 +42,16 @@ public class SecretaryService {
             if (secretary != null) {
                 request.getSession().setAttribute("secretary", secretary);
 
-                request.getRequestDispatcher("/WEB-INF/views/vistaSecretarioInfo.jsp").forward(request, response);
+                request.getRequestDispatcher("/WEB-INF/views/secretaryInfoView.jsp").forward(request, response);
                 return;
             } else {
                 response.sendRedirect("secretaries");
-//                request.getRequestDispatcher("WEB-INF/views/vistaSecretarios.jsp").forward(request, response);
+//                request.getRequestDispatcher("WEB-INF/views/secretariesView.jsp").forward(request, response);
 //                return;
             }
         } else {
             response.sendRedirect("secretaries");
-//            request.getRequestDispatcher("WEB-INF/views/vistaSecretarios.jsp").forward(request, response);
+//            request.getRequestDispatcher("WEB-INF/views/secretariesView.jsp").forward(request, response);
 //            return;
         }
     }
@@ -84,7 +84,7 @@ public class SecretaryService {
             mySession.setAttribute("secretaryToEdit", secretaryToEdit);
             mySession.setAttribute("freeUserList", userList);
 
-            request.getRequestDispatcher("WEB-INF/views/edicionSecretario.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/views/secretaryEditView.jsp").forward(request, response);
             return;
         } else {
             response.sendRedirect(request.getContextPath() + "/index");

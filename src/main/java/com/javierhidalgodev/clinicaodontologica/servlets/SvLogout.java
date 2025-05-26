@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Javi
  */
-@WebServlet(name = "SvLogout", urlPatterns = {"/SvLogout"})
+@WebServlet(name = "SvLogout", urlPatterns = {"/logout"})
 public class SvLogout extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

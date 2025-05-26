@@ -8,17 +8,20 @@
     Horario workScheduleToEdit = (Horario) session.getAttribute("workScheduleToEdit");
 %>
 
-<form id="form" class="user" action="work-schedule" method="POST">
+<form id="form" action="work-schedule" method="POST">
     <div class="form-group">
-        <input type="text" class="form-control form-control-user" id="exampleWSName" name="WSName" value="<%= workScheduleToEdit.getName()%>" data-validations="required|minLength:2|maxLength:30">
+        <label for="wSName">Nombre</label>
+        <input type="text" class="form-control form-control-user" id="wSName" name="WSName" value="<%= workScheduleToEdit.getName()%>" data-validations="required|minLength:2|maxLength:30">
         <!--            <span id="errorFirstName" class="error-validation"></span>-->
     </div>
     <div class="form-group row">
         <div class="col-md-6">
+            <label for="entryTime">Entrada</label>
             <input type="time" class="form-control form-control-user" id="entryTime" name="entryTime" value="<%= workScheduleToEdit.getEntryTime()%>">
             <!--            <span id="errorSurname" class="error-validation"></span>-->
         </div>
         <div class="col-md-6 mb-3 mb-md-0">
+            <label for="exitTime">Salida</label>
             <input type="time" class="form-control form-control-user" id="exitTime" name="exitTime"value="<%= workScheduleToEdit.getExitTime()%>">
             <!--            <span id="errorAddress" class="error-validation"></span>-->
         </div>

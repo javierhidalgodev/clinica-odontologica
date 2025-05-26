@@ -31,7 +31,7 @@
 
     <!-- Heading -->
     <div class="sidebar-heading">
-        Gestión
+        Gestión de profesionales
     </div>
 
     <% if (userRole != null && userRole.equals("admin")) { %>

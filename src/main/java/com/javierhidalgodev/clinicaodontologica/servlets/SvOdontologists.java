@@ -27,7 +27,7 @@ public class SvOdontologists extends HttpServlet {
         String servletPath = request.getServletPath();
         
         if(servletPath.contains("new")) {
-            request.getRequestDispatcher("/WEB-INF/views/altaOdontologo.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/views/odontologistRegisterView.jsp").forward(request, response);
         } else {
             String queryParams = request.getQueryString();
 

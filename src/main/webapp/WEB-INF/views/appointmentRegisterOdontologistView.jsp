@@ -18,12 +18,12 @@
                     <div class="text-center">
                         <h1 class="h4 text-gray-900 mb-4 text-left">Elija un profesional</h1>
                     </div>
-                    <form class="user" action="${pageContext.request.contextPath}/appointments/new/confirmation" method="POST" id="form">
+                    <form action="${pageContext.request.contextPath}/appointments/new/confirmation" method="POST" id="form">
                         <div class="form-group row">
                             <div class="col-md-6 mb-3 mb-md-0">
-                                <label for="odontologist">Professional</label>
+                                <label for="odontologist">Profesional</label>
                                 <select class="form-control form-control-user" id="odontologist" name="odontologist" data-validations="required">
-                                    <option selected value="">Select one</option>
+                                    <option selected value="">Seleccione una opción</option>
                                     <%                    for (Odontologo o : availableOdontologists) {
                                     %> <option
                                         value="<%= o.getId()%>"
@@ -37,7 +37,7 @@
                         </div>
                         <input type="hidden" name="step" value="2" />
                         <button id="submitBtn" type="submit" class="btn btn-success btn-user btn-block">
-                            Confirm appointment
+                            Confirmación de datos
                         </button>
                     </form>
                 </div>

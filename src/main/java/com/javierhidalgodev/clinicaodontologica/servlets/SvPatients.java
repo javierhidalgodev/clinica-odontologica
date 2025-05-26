@@ -28,7 +28,7 @@ public class SvPatients extends HttpServlet {
         String servletPath = request.getServletPath();
 
         if (servletPath.contains("new")) {
-            request.getRequestDispatcher("/WEB-INF/views/altaPaciente.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/views/patientRegisterView.jsp").forward(request, response);
         } else {
             String queryParams = request.getQueryString();
 

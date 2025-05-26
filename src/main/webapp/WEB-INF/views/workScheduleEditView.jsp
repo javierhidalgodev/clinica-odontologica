@@ -7,14 +7,13 @@
             <div>
                 <div class="p-5">
                     <div class="text-center">
-                        <h1 class="h4 text-gray-900 mb-4 text-left">Create a Patient!</h1>
+                        <h1 class="h4 text-gray-900 mb-4 text-left">Edición de horario de trabajo</h1>
                     </div>
-                    <%@include file="../../components/patientForm.jsp" %>
+                    <%@include file="../../components/workScheduleEditForm.jsp" %>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
 
 <%@include file="../../layouts/endPart.jsp" %>

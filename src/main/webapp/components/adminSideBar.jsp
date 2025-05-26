@@ -47,6 +47,22 @@
     </div>
 </li>
 
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseWorkSchedule"
+       aria-expanded="true" aria-controls="collapseWorkSchedule">
+        <i class="fas fa-solid fa-clock"></i>
+        <span>Horarios de trabajo</span>
+    </a>
+    <div id="collapseWorkSchedule" class="collapse" aria-labelledby="headingWorkSchedule"
+         data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Acciones</h6>
+            <a class="collapse-item" href="${pageContext.request.contextPath}/work-schedule">Ver horarios</a>
+            <a class="collapse-item" href="${pageContext.request.contextPath}/work-schedule/new">Nuevo horario</a>
+        </div>
+    </div>
+</li>
+
 <!-- Nav Item - Users Collapse Menu -->
 <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUsers"
@@ -67,21 +83,10 @@
 <!-- Divider -->
 <hr class="sidebar-divider">
 
-<li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseWorkSchedule"
-       aria-expanded="true" aria-controls="collapseWorkSchedule">
-        <i class="fas fa-solid fa-clock"></i>
-        <span>Horarios de trabajo</span>
-    </a>
-    <div id="collapseWorkSchedule" class="collapse" aria-labelledby="headingWorkSchedule"
-         data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Acciones</h6>
-            <a class="collapse-item" href="${pageContext.request.contextPath}/work-schedule">Ver horarios</a>
-            <a class="collapse-item" href="${pageContext.request.contextPath}/work-schedule/new">Nuevo horario</a>
-        </div>
-    </div>
-</li>
+<div class="sidebar-heading">
+    Gestión de pacientes
+</div>
+
 <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAppointments"
        aria-expanded="true" aria-controls="collapseApointments">

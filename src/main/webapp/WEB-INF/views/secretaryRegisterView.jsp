@@ -7,9 +7,9 @@
             <div>
                 <div class="p-5">
                     <div class="text-center">
-                        <h1 class="h4 text-gray-900 mb-4 text-left">Create an User!</h1>
+                        <h1 class="h4 text-gray-900 mb-4 text-left">Nuevo secretario</h1>
                     </div>
-                    <%@include file="../../components/userForm.jsp" %>
+                    <%@include file="../../components/secretaryForm.jsp" %>
                 </div>
             </div>
         </div>

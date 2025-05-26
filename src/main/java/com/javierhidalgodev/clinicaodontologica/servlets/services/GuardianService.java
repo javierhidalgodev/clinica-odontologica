@@ -39,7 +39,7 @@ public class GuardianService {
         }
 
         mySession.setAttribute("patientsList", patientsList);
-        request.getRequestDispatcher("WEB-INF/views/vistaPacientes.jsp").forward(request, response);
+        request.getRequestDispatcher("WEB-INF/views/patientsView.jsp").forward(request, response);
     }
 
     public void getInfo(HttpServletRequest request, HttpServletResponse response)
@@ -54,7 +54,7 @@ public class GuardianService {
             if (patient != null) {
                 HttpSession mySession = request.getSession();
                 mySession.setAttribute("patientDetails", patient);
-                request.getRequestDispatcher("WEB-INF/views/vistaPaciente.jsp").forward(request, response);
+                request.getRequestDispatcher("WEB-INF/views/patientInfoView.jsp").forward(request, response);
                 return;
             } else {
                 response.sendRedirect("patients");
@@ -116,7 +116,7 @@ public class GuardianService {
 
     public void editingGuardian(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("WEB-INF/views/edicionPaciente.jsp").forward(request, response);
+        request.getRequestDispatcher("WEB-INF/views/guardianEditView.jsp").forward(request, response);
     }
 
     public void editGuardian(HttpServletRequest request, HttpServletResponse response)

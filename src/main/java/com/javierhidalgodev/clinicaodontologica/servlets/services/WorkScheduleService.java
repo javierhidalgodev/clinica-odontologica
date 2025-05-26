@@ -24,7 +24,7 @@ public class WorkScheduleService {
         HttpSession mySession = request.getSession();
         mySession.setAttribute("workScheduleList", workSchedulesList);
 
-        request.getRequestDispatcher("WEB-INF/views/vistaHorarios.jsp").forward(request, response);
+        request.getRequestDispatcher("WEB-INF/views/workScheduleView.jsp").forward(request, response);
     }
 
     public void getInfo(HttpServletRequest request, HttpServletResponse response)
@@ -39,7 +39,7 @@ public class WorkScheduleService {
             if (workSchedule != null) {
                 HttpSession mySession = request.getSession();
                 mySession.setAttribute("workSchedule", workSchedule);
-                request.getRequestDispatcher("WEB-INF/views/vistaHorarioInfo.jsp").forward(request, response);
+                request.getRequestDispatcher("WEB-INF/views/workScheduleInfoView.jsp").forward(request, response);
                 return;
             } else {
                 response.sendRedirect("work-schedule");
@@ -84,7 +84,7 @@ public class WorkScheduleService {
             HttpSession mySession = request.getSession();
             mySession.setAttribute("workScheduleToEdit", workScheduleToEdit);
 
-            request.getRequestDispatcher("WEB-INF/views/edicionHorario.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/views/workScheduleEditView.jsp").forward(request, response);
             return;
         } else {
             response.sendRedirect(request.getContextPath() + "/index");

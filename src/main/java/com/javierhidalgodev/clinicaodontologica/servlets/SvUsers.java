@@ -28,7 +28,7 @@ public class SvUsers extends HttpServlet {
         String servletPath = request.getServletPath();
 
         if (servletPath.contains("new")) {
-            request.getRequestDispatcher("/WEB-INF/views/altaUsuario.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/views/userRegisterView.jsp").forward(request, response);
         } else {
             String queryParams = request.getQueryString();
 

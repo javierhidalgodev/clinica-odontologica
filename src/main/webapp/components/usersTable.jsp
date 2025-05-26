@@ -11,17 +11,17 @@
     <thead>
         <tr>
             <th>#</th>
-            <th>Username</th>
-            <th>Role</th>
-            <th>Details</th>
+            <th>Nombre de usuario</th>
+            <th>Rol</th>
+            <th>Detalles</th>
         </tr>
     </thead>
     <tfoot>
         <tr>
             <th>#</th>
-            <th>Username</th>
-            <th>Role</th>
-            <th>Details</th>
+            <th>Nombre de usuario</th>
+            <th>Rol</th>
+            <th>Detalles</th>
         </tr>
     </tfoot>
     <tbody>

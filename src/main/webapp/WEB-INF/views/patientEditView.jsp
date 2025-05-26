@@ -7,14 +7,14 @@
             <div>
                 <div class="p-5">
                     <div class="text-center">
-                        <h1 class="h4 text-gray-900 mb-4 text-left">Edit an Odontologist!</h1>
+                        <h1 class="h4 text-gray-900 mb-4 text-left">Edición de paciente</h1>
                     </div>
-                    <%@include file="../../components/odontologistEditForm.jsp" %>
+                    <%@include file="../../components/patientEditForm.jsp" %>
                 </div>
             </div>
         </div>
     </div>
+
 </div>
 
 <%@include file="../../layouts/endPart.jsp" %>
-

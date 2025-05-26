@@ -106,7 +106,7 @@ public class AuthFilter implements Filter {
         String path = req.getRequestURI().substring(req.getContextPath().length());
 
 // Excluir páginas públicas y recursos estáticos
-        if (path.matches("/login") || path.matches("/register")) {
+        if (path.matches("/login") || path.matches("/register") || path.startsWith("/css") || path.startsWith("/img")) {
 
             HttpSession mySession = req.getSession(false);
             UserDTO user = null;

@@ -1,7 +1,7 @@
 <%@page import="com.javierhidalgodev.clinicaodontologica.logica.Horario"%>
 <%@page import="java.util.List"%>
 
-<form class="user" action="${pageContext.request.contextPath}/work-schedule" method="POST">
+<form action="${pageContext.request.contextPath}/work-schedule" method="POST">
     <div class="form-group">
         <input type="text" class="form-control form-control-user" id="exampleWSName" name="WSName" placeholder="Name">
     </div>
