@@ -20,7 +20,7 @@ public class Usuario implements Serializable {
     private int idUser;
     private String username;
     private String password;
-    private String role;
+    private String role = "user";
     @OneToOne
     @JoinColumn(nullable = true)
     private Odontologo odontologist;

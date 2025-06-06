@@ -3,6 +3,7 @@ package com.javierhidalgodev.clinicaodontologica.logica;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -13,7 +14,6 @@ import javax.persistence.OneToOne;
  *
  * @author Javi
  */
-
 @Entity
 public class Paciente extends Persona implements Serializable {
 
@@ -27,10 +27,10 @@ public class Paciente extends Persona implements Serializable {
     private List<Turno> appointments;
 
     public Paciente() {
-        
+
     }
 
-    public Paciente(/*int idPatient,*/ boolean prepaidHealth, String bloodType, Responsable guardian, List<Turno> appointments, String name, String surname, String phone, String address, Date birthdate, String dni) {
+    public Paciente(/*int idPatient,*/boolean prepaidHealth, String bloodType, Responsable guardian, List<Turno> appointments, String name, String surname, String phone, String address, Date birthdate, String dni) {
         super(name, surname, phone, address, birthdate, dni);
 //        this.idPatient = idPatient;
         this.prepaidHealth = prepaidHealth;
@@ -38,7 +38,7 @@ public class Paciente extends Persona implements Serializable {
         this.guardian = guardian;
         this.appointments = appointments;
     }
-    
+
 //    public int getIdPatient() {
 //        return idPatient;
 //    }
@@ -46,7 +46,6 @@ public class Paciente extends Persona implements Serializable {
 //    public void setIdPatient(int idPatient) {
 //        this.idPatient = idPatient;
 //    }
-
     public boolean getPrepaidHealth() {
         return prepaidHealth;
     }
@@ -77,5 +76,22 @@ public class Paciente extends Persona implements Serializable {
 
     public void setAppointments(List<Turno> appointments) {
         this.appointments = appointments;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Paciente)) {
+            return false;
+        }
+        Paciente that = (Paciente) o;
+        return this.getId() == that.getId(); // o Objects.equals(getId(), that.getId())
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
     }
 }

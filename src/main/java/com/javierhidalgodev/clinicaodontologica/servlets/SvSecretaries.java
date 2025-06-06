@@ -1,6 +1,7 @@
 package com.javierhidalgodev.clinicaodontologica.servlets;
 
-import com.javierhidalgodev.clinicaodontologica.servlets.services.SecretaryService;
+import com.javierhidalgodev.clinicaodontologica.services.SecretaryService;
+import com.javierhidalgodev.clinicaodontologica.utils.PathUtils;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,65 +13,60 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Javi
  */
-@WebServlet(name = "SvSecretaries", urlPatterns = {"/secretaries", "/secretaries/new"})
+@WebServlet(name = "SvSecretaries", urlPatterns = {
+    "/secretaries",
+    "/secretaries/*"})
 public class SvSecretaries extends HttpServlet {
 
     SecretaryService secretaryService = new SecretaryService();
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-    }
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String servletPath = request.getServletPath();
+        String pathInfo = request.getPathInfo();
 
-        if (servletPath.contains("new")) {
+        if (pathInfo == null) {
+            secretaryService.getAllSecretaries(request, response);
+            return;
+        }
+
+        if (PathUtils.isPathInfoID(pathInfo) != null) {
+            secretaryService.getInfo(request, response, PathUtils.isPathInfoID(pathInfo));
+            return;
+        }
+
+        if (PathUtils.isPathInfoNew(pathInfo)) {
             request.getRequestDispatcher("/WEB-INF/views/secretaryRegisterView.jsp").forward(request, response);
+            return;
         } else {
-            String queryParams = request.getQueryString();
-
-            if (queryParams == null) {
-                System.err.println("NO HAY PARÁMETROS");
-                secretaryService.getAllSecretaries(request, response);
-            } else {
-                System.err.println("RECUPERO QUERYPARAMS: " + queryParams);
-                String id = request.getParameter("id");
-
-                if (id == null) {
-                    System.err.println("NO HAY ID. VOY A SECRETARIOS");
-                    response.sendRedirect("secretaries");
-//                request.getRequestDispatcher("WEB-INF/views/secretariesView.jsp").forward(request, response);
-//                return;
-                } else {
-                    System.err.println("HAY ID. INTENTO RECUPERAR UN SECRETARIO: " + id);
-                    secretaryService.getInfo(request, response);
-                }
-            }
+            response.sendRedirect(request.getContextPath() + "/secretaries");
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String pathInfo = request.getPathInfo();
 
-        String action = request.getParameter("action");
+        if (pathInfo != null) {
+            Integer secretaryID = PathUtils.isPathInfoID(pathInfo);
+            String action = request.getParameter("action");
 
-        // No se ha implementado una pantalla intermedia para la visualización de data
-        // Directamente se pasa de la tabla, al fomulario de edición
-        if("getInfo".equals(action)) {
-            secretaryService.getInfo(request, response);
-        } else if ("create".equals(action)) {
-            secretaryService.createSecretary(request, response);
-        } else if ("editing".equals(action)) {
-            secretaryService.editingSecretary(request, response);
-        } else if ("edit".equals(action)) {
-            secretaryService.editSecretary(request, response);
-        } else if ("delete".equals(action)) {
-            secretaryService.deleteSecretary(request, response);
-        } else {
-            response.sendRedirect(request.getContextPath() + "/index");
+            if (secretaryID != null && "getInfo".equals(action)) {
+                secretaryService.getInfo(request, response, secretaryID);
+            } else {
+                if ("create".equals(action)) {
+                    secretaryService.createSecretary(request, response);
+                } else if ("delete".equals(action)) {
+                    secretaryService.deleteSecretary(request, response);
+                } else if ("editing".equals(action)) {
+                    secretaryService.editingSecretary(request, response, secretaryID);
+                } else if ("edit".equals(action)) {
+                    secretaryService.editSecretary(request, response, secretaryID);
+                } else {
+                    response.sendRedirect(request.getContextPath() + "/index");
+                }
+            }
         }
     }
 }

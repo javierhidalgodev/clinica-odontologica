@@ -37,7 +37,7 @@
             <td><%= o.getName() + " " + o.getSurname()%></td>
             <td><%= o.getDni()%></td>
             <td>
-                <form action="odontologists?id=<%= o.getId()%>" method="POST">
+                <form action="odontologists/<%= o.getId() %>" method="POST">
                     <input type="hidden" name="id" value="<%= o.getId()%>" />
                     <input type="hidden" name="action" value="getInfo" />
                     <button type="submit" class="btn btn-info">

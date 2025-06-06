@@ -1,12 +1,18 @@
 package com.javierhidalgodev.clinicaodontologica.persistencia;
 
+import com.javierhidalgodev.clinicaodontologica.logica.Odontologo;
+import com.javierhidalgodev.clinicaodontologica.logica.Paciente;
 import com.javierhidalgodev.clinicaodontologica.logica.Turno;
 import com.javierhidalgodev.clinicaodontologica.persistencia.exceptions.NonexistentEntityException;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
@@ -115,6 +121,54 @@ public class TurnoJpaController implements Serializable {
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
+        } finally {
+            em.close();
+        }
+    }
+
+    List<Paciente> getPatientsByOdontologist(int id) {
+        EntityManager em = PersistenceManager.getInstance().getEntityManager();
+        // Evitar duplicados
+        Set<Paciente> patients = new HashSet<Paciente>();
+
+        try {
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery cq = cb.createQuery(Turno.class);
+            Root<Turno> root = cq.from(Turno.class);
+
+            cq.select(root).where(cb.equal(root.get("odontologist").get("id"), id));
+
+            List<Turno> appointments = em.createQuery(cq).getResultList();
+
+            for (Turno t : appointments) {
+                Paciente p = t.getPatient();
+
+                if (p != null) {
+                    patients.add(p);
+                }
+            }
+
+            List<Paciente> patientList = new ArrayList<>(patients);
+
+            return patientList;
+        } finally {
+            em.close();
+        }
+    }
+
+    List<Turno> getAppointmentsByOdontologist(int id) {
+        EntityManager em = PersistenceManager.getInstance().getEntityManager();
+
+        try {
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery cq = cb.createQuery(Turno.class);
+            Root<Turno> root = cq.from(Turno.class);
+
+            cq.select(root).where(cb.equal(root.get("odontologist").get("id"), id));
+
+            List<Turno> appointments = em.createQuery(cq).getResultList();
+            
+            return appointments;
         } finally {
             em.close();
         }

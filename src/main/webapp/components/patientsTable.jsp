@@ -38,7 +38,7 @@
             <td><%= p.getName() + " " + p.getSurname()%></td>
             <td><%= p.getDni()%></td>
             <td>
-                <form action="patients?id=<%= p.getId()%>" method="POST">
+                <form action="patients/<%= p.getId()%>" method="POST">
                     <input type="hidden" name="id" value="<%= p.getId()%>" />
                     <input type="hidden" name="action" value="getInfo" />
                     <button type="submit" class="btn btn-info">

@@ -1,4 +1,4 @@
-package com.javierhidalgodev.clinicaodontologica.servlets.services;
+package com.javierhidalgodev.clinicaodontologica.services;
 
 import com.javierhidalgodev.clinicaodontologica.logica.Controller;
 import com.javierhidalgodev.clinicaodontologica.logica.Horario;
@@ -27,26 +27,19 @@ public class WorkScheduleService {
         request.getRequestDispatcher("WEB-INF/views/workScheduleView.jsp").forward(request, response);
     }
 
-    public void getInfo(HttpServletRequest request, HttpServletResponse response)
+    public void getInfo(HttpServletRequest request, HttpServletResponse response, int workScheduleID)
             throws ServletException, IOException {
-        String id = request.getParameter("id");
+        Horario workSchedule = controller.getWorkScheduleById(workScheduleID);
 
-        if (id != null && id.matches("\\d+")) {
-            int workScheduleID = Integer.parseInt(id);
+        if (workSchedule != null) {
+            request.setAttribute("workSchedule", workSchedule);
 
-            Horario workSchedule = controller.getWorkScheduleById(workScheduleID);
-
-            if (workSchedule != null) {
-                HttpSession mySession = request.getSession();
-                mySession.setAttribute("workSchedule", workSchedule);
-                request.getRequestDispatcher("WEB-INF/views/workScheduleInfoView.jsp").forward(request, response);
-                return;
-            } else {
-                response.sendRedirect("work-schedule");
-            }
-        } else {
-            response.sendRedirect("work-schedule");
+            request.getRequestDispatcher("/WEB-INF/views/workScheduleInfoView.jsp").forward(request, response);
+            return;
         }
+
+        response.sendRedirect(request.getContextPath() + "/work-schedule");
+        return;
     }
 
     public void createWorkSchedule(HttpServletRequest request, HttpServletResponse response)
@@ -73,36 +66,28 @@ public class WorkScheduleService {
         }
     }
 
-    public void editingWorkSchedule(HttpServletRequest request, HttpServletResponse response)
+    public void editingWorkSchedule(HttpServletRequest request, HttpServletResponse response, Integer workScheduleID)
             throws ServletException, IOException {
-        String workScheduleIdToEdit = request.getParameter("id");
+        Horario workScheduleToEdit = controller.getWorkScheduleById(workScheduleID);
 
-        if (workScheduleIdToEdit != null && !workScheduleIdToEdit.isEmpty()) {
-            int workScheduleId = Integer.parseInt(workScheduleIdToEdit);
-            Horario workScheduleToEdit = controller.getWorkScheduleById(workScheduleId);
+        HttpSession mySession = request.getSession();
+        mySession.setAttribute("workScheduleToEdit", workScheduleToEdit);
 
-            HttpSession mySession = request.getSession();
-            mySession.setAttribute("workScheduleToEdit", workScheduleToEdit);
-
-            request.getRequestDispatcher("WEB-INF/views/workScheduleEditView.jsp").forward(request, response);
-            return;
-        } else {
-            response.sendRedirect(request.getContextPath() + "/index");
-        }
+        request.getRequestDispatcher("/WEB-INF/views/workScheduleEditView.jsp").forward(request, response);
+        return;
     }
 
-    public void editWorkSchedule(HttpServletRequest request, HttpServletResponse response)
+    public void editWorkSchedule(HttpServletRequest request, HttpServletResponse response, Integer workScheduleID)
             throws ServletException, IOException {
+        Horario workScheduleToEdit = controller.getWorkScheduleById(workScheduleID);
+        
         String wsName = request.getParameter("WSName");
         String entryTime = request.getParameter("entryTime");
         String exitTime = request.getParameter("exitTime");
 
-        HttpSession mySession = request.getSession();
-        Horario workScheduleToEdit = (Horario) mySession.getAttribute("workScheduleToEdit");
-
         controller.editWorkSchedule(workScheduleToEdit, wsName, entryTime, exitTime);
 
         request.removeAttribute("workScheduleToEdit");
-        response.sendRedirect("work-schedule");
+        response.sendRedirect(request.getContextPath() + "/work-schedule");
     }
 }

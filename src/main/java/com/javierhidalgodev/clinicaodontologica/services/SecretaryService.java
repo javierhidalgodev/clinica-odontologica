@@ -1,4 +1,4 @@
-package com.javierhidalgodev.clinicaodontologica.servlets.services;
+package com.javierhidalgodev.clinicaodontologica.services;
 
 import com.javierhidalgodev.clinicaodontologica.dto.user.UserDTO;
 import com.javierhidalgodev.clinicaodontologica.logica.Controller;
@@ -30,30 +30,19 @@ public class SecretaryService {
         return;
     }
 
-    public void getInfo(HttpServletRequest request, HttpServletResponse response)
+    public void getInfo(HttpServletRequest request, HttpServletResponse response, Integer secretaryID)
             throws ServletException, IOException {
-        String id = request.getParameter("id");
+        Secretario secretary = controller.getSecretaryById(secretaryID);
 
-        if (id != null && !id.isEmpty() && id.matches("\\d+")) {
-            int secretaryID = Integer.parseInt(id);
+        if (secretary != null) {
+            request.setAttribute("secretary", secretary);
 
-            Secretario secretary = controller.getSecretaryById(secretaryID);
-
-            if (secretary != null) {
-                request.getSession().setAttribute("secretary", secretary);
-
-                request.getRequestDispatcher("/WEB-INF/views/secretaryInfoView.jsp").forward(request, response);
-                return;
-            } else {
-                response.sendRedirect("secretaries");
-//                request.getRequestDispatcher("WEB-INF/views/secretariesView.jsp").forward(request, response);
-//                return;
-            }
-        } else {
-            response.sendRedirect("secretaries");
-//            request.getRequestDispatcher("WEB-INF/views/secretariesView.jsp").forward(request, response);
-//            return;
+            request.getRequestDispatcher("/WEB-INF/views/secretaryInfoView.jsp").forward(request, response);
+            return;
         }
+        
+        response.sendRedirect(request.getContextPath() + "/secretaries");
+        return;
     }
 
     public void createSecretary(HttpServletRequest request, HttpServletResponse response)
@@ -71,28 +60,23 @@ public class SecretaryService {
         response.sendRedirect(request.getContextPath() + "/secretaries");
     }
 
-    public void editingSecretary(HttpServletRequest request, HttpServletResponse response)
+    public void editingSecretary(HttpServletRequest request, HttpServletResponse response, Integer secretaryID)
             throws ServletException, IOException {
-        String secretaryIdToEdit = request.getParameter("id");
-
-        if (secretaryIdToEdit != null && !secretaryIdToEdit.isEmpty()) {
-            int secretaryId = Integer.parseInt(secretaryIdToEdit);
-            Secretario secretaryToEdit = controller.getSecretaryById(secretaryId);
+            Secretario secretaryToEdit = controller.getSecretaryById(secretaryID);
             List<UserDTO> userList = controller.getAllFreeUsers();
 
             HttpSession mySession = request.getSession();
             mySession.setAttribute("secretaryToEdit", secretaryToEdit);
             mySession.setAttribute("freeUserList", userList);
 
-            request.getRequestDispatcher("WEB-INF/views/secretaryEditView.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/views/secretaryEditView.jsp").forward(request, response);
             return;
-        } else {
-            response.sendRedirect(request.getContextPath() + "/index");
-        }
     }
 
-    public void editSecretary(HttpServletRequest request, HttpServletResponse response)
+    public void editSecretary(HttpServletRequest request, HttpServletResponse response, Integer secretaryID)
             throws ServletException, IOException {
+        Secretario secretaryToEdit = controller.getSecretaryById(secretaryID);
+        
         String firstName = request.getParameter("firstName");
         String surname = request.getParameter("surname");
         String address = request.getParameter("address");
@@ -102,13 +86,10 @@ public class SecretaryService {
         String birthday = request.getParameter("birthday");
         String user = request.getParameter("user");
 
-        HttpSession mySession = request.getSession();
-        Secretario secretaryToEdit = (Secretario) mySession.getAttribute("secretaryToEdit");
-
         controller.editSecretary(secretaryToEdit, firstName, surname, address, phone, birthday, floor, user);
 
         request.removeAttribute("secretaryToEdit");
-        response.sendRedirect("secretaries");
+        response.sendRedirect(request.getContextPath() + "/secretaries");
     }
 
     public void deleteSecretary(HttpServletRequest request, HttpServletResponse response)
@@ -120,6 +101,6 @@ public class SecretaryService {
             controller.destroySecretary(idSecretary);
         }
 
-        response.sendRedirect("secretaries");
+        response.sendRedirect(request.getContextPath() + "/secretaries");
     }
 }

@@ -35,7 +35,7 @@
             <td class="w-50"><%= u.getUsername()%></td>
             <td class="w-50"><%= u.getRole()%></td>
             <td class="w-fit">
-                <form action="users?id=<%= u.getId()%>" method="POST">
+                <form action="users/<%= u.getId()%>" method="POST">
                     <input type="hidden" name="id" value="<%= u.getId()%>" />
                     <input type="hidden" name="action" value="getInfo" />
                     <button type="submit" class="btn btn-info">

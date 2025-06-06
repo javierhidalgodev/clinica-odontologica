@@ -6,7 +6,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.javierhidalgodev.clinicaodontologica.servlets.services.AppointmentService;
+import com.javierhidalgodev.clinicaodontologica.services.AppointmentService;
+import com.javierhidalgodev.clinicaodontologica.utils.PathUtils;
 
 /**
  *
@@ -15,6 +16,7 @@ import com.javierhidalgodev.clinicaodontologica.servlets.services.AppointmentSer
 @WebServlet(name = "SvAppointments", urlPatterns = {
     "/appointments",
     "/appointments/*",
+    "/appointments/reset",
     "/appointments/new/patient",
     "/appointments/new/professional",
     "/appointments/new/confirmation",
@@ -23,20 +25,15 @@ public class SvAppointments extends HttpServlet {
 
     AppointmentService appointmentService = new AppointmentService();
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-    }
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String pathInfo = request.getPathInfo();
 
         if (pathInfo != null) {
-            String appointmentID = pathInfo.split("/")[1];
-            int pathInfoLength = pathInfo.split("/").length;
+            Integer appointmentID = PathUtils.isPathInfoID(pathInfo);
 
-            if (appointmentID.matches("\\d+") && pathInfoLength == 2) {
+            if (appointmentID != null) {
                 appointmentService.getAppointmentInfo(request, response, appointmentID);
             } else {
                 response.sendRedirect(request.getContextPath() + "/index");
@@ -53,12 +50,17 @@ public class SvAppointments extends HttpServlet {
                 appointmentService.handleAppointmentCheck(request, response);
             } else if (servletPath.contains("ok")) {
                 appointmentService.handleAppointmentConfirmation(request, response);
-            } else {
-                String queryParams = request.getQueryString();
+            } else if (servletPath.contains("reset")) {
+                request.getSession(false).removeAttribute("appointmentPatient");
+                request.getSession(false).removeAttribute("appointmentHour");
+                request.getSession(false).removeAttribute("appointmentDate");
+                request.getSession(false).removeAttribute("professional");
+                request.getSession(false).removeAttribute("patientList");
+                request.getSession(false).removeAttribute("availableOdontologists");
 
-                if (queryParams == null) {
-                    appointmentService.getAllAppointments(request, response);
-                }
+                response.sendRedirect(request.getContextPath() + "/appointments/new/patient");
+            } else {
+                appointmentService.getAllAppointments(request, response);
             }
         }
     }
@@ -69,12 +71,11 @@ public class SvAppointments extends HttpServlet {
         String pathInfo = request.getPathInfo();
 
         if (pathInfo != null) {
-            String info = request.getPathInfo().split("/")[1];
+            Integer appointmentID = PathUtils.isPathInfoID(pathInfo);
 
-            if (info.matches("\\d+")) {
-                appointmentService.getAppointmentInfo(request, response, info);
+            if (appointmentID != null) {
+                appointmentService.getAppointmentInfo(request, response, appointmentID);
             }
-
         } else {
             String step = request.getParameter("step");
 
@@ -93,9 +94,4 @@ public class SvAppointments extends HttpServlet {
             }
         }
     }
-
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
 }

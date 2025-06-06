@@ -234,8 +234,8 @@ public class PersistenceController {
     }
 
     public List<Paciente> getPatientsByOdontologist(int id) {
-//        return patientController.getPatientsByOdontologist(id);
-        return patientController.findPacienteEntities();
+        return appointmentController.getPatientsByOdontologist(id);
+//        return patientController.findPacienteEntities();
     }
 
     public List<Odontologo> getOdontologistsByWS(int ws) {
@@ -268,5 +268,13 @@ public class PersistenceController {
 
     public int getAppointmentsCount() {
         return appointmentController.getTurnoCount();
+    }
+
+    public boolean userExists(String username) {
+        return userController.userExists(username);
+    }
+
+    public List<Turno> getAppointmentsByOdontologist(int id) {
+        return appointmentController.getAppointmentsByOdontologist(id);
     }
 }

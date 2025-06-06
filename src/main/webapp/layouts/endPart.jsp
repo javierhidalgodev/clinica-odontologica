@@ -18,3 +18,39 @@
 </body>
 
 </html>
+
+<style>
+    .form-control {
+        height: auto;
+        padding: 0.7rem 1rem !important;
+    }
+
+    .btn-user {
+        padding: .7rem;
+    }
+
+    .btn:not(.btn-user):not(.btn-modal) {
+        aspect-ratio: 1/1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .error-validation {
+        color: red;
+        font-size: .7rem;
+    }
+
+    .sidebar {
+        width: 10rem;
+        min-height: 100vh;
+    }
+
+    @media (min-width: 768px) {
+        .sidebar.toggled {
+            overflow: visible;
+            width: 10rem !important;
+            align-items: center;
+        }
+    }
+</style>

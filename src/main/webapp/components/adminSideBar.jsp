@@ -30,23 +30,6 @@
     </div>
 </li>
 
-<!-- Nav Item - Patients Collapse Menu -->
-<li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePatients"
-       aria-expanded="true" aria-controls="collapsePatients">
-        <i class="fas fa-solid fa-hospital-user"></i>
-        <span>Pacientes</span>
-    </a>
-    <div id="collapsePatients" class="collapse" aria-labelledby="headingPatients"
-         data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Acciones</h6>
-            <a class="collapse-item" href="${pageContext.request.contextPath}/patients">Ver pacientes</a>
-            <a class="collapse-item" href="${pageContext.request.contextPath}/patients/new">Nuevo paciente</a>
-        </div>
-    </div>
-</li>
-
 <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseWorkSchedule"
        aria-expanded="true" aria-controls="collapseWorkSchedule">
@@ -86,6 +69,23 @@
 <div class="sidebar-heading">
     Gestión de pacientes
 </div>
+
+<!-- Nav Item - Patients Collapse Menu -->
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePatients"
+       aria-expanded="true" aria-controls="collapsePatients">
+        <i class="fas fa-solid fa-hospital-user"></i>
+        <span>Pacientes</span>
+    </a>
+    <div id="collapsePatients" class="collapse" aria-labelledby="headingPatients"
+         data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Acciones</h6>
+            <a class="collapse-item" href="${pageContext.request.contextPath}/patients">Ver pacientes</a>
+            <a class="collapse-item" href="${pageContext.request.contextPath}/patients/new">Nuevo paciente</a>
+        </div>
+    </div>
+</li>
 
 <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseAppointments"

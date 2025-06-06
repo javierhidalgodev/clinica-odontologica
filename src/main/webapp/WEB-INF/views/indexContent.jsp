@@ -1,12 +1,10 @@
 <%@page import="com.javierhidalgodev.clinicaodontologica.dto.user.UserDTO"%>
 
 <%
-
     String odontologistsCount = (String) session.getAttribute("odontologistsCount");
     String secretariesCount = (String) session.getAttribute("secretariesCount");
     String patientsCount = (String) session.getAttribute("patientsCount");
     String appointmentsCount = (String) session.getAttribute("appointmentsCount");
-
 %>
 
 <div class="d-sm-flex align-items-center justify-content-between mb-4">

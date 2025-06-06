@@ -143,14 +143,14 @@ public class UsuarioJpaController implements Serializable {
 
     public List<Usuario> findFreeUsuarioEntities() {
         EntityManager em = PersistenceManager.getInstance().getEntityManager();
-        
+
         try {
             CriteriaBuilder cb = em.getCriteriaBuilder();
             CriteriaQuery cq = cb.createQuery(Usuario.class);
             Root<Usuario> root = cq.from(Usuario.class);
-            
+
             cq.select(root).where(cb.and(cb.isNull(root.get("odontologist")), cb.isNull(root.get("secretary"))));
-            
+
             List<Usuario> users = em.createQuery(cq).getResultList();
             return users;
         } catch (Exception e) {
@@ -158,6 +158,21 @@ public class UsuarioJpaController implements Serializable {
         } finally {
             em.close();
         }
+    }
 
+    boolean userExists(String username) {
+        EntityManager em = PersistenceManager.getInstance().getEntityManager();
+        try {
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery cq = cb.createQuery(Usuario.class);
+            Root<Usuario> root = cq.from(Usuario.class);
+
+            cq.select(root).where(cb.equal(root.get("username"), username));
+
+            List<Usuario> users = em.createQuery(cq).getResultList();
+            return !users.isEmpty();
+        } finally {
+            em.close();
+        }
     }
 }

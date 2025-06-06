@@ -1,4 +1,4 @@
-package com.javierhidalgodev.clinicaodontologica.servlets.services;
+package com.javierhidalgodev.clinicaodontologica.services;
 
 import com.javierhidalgodev.clinicaodontologica.dto.user.UserDTO;
 import com.javierhidalgodev.clinicaodontologica.logica.Controller;
@@ -26,32 +26,37 @@ public class OdontologistService {
 
         request.setAttribute("odontologistList", odontologistList);
 
-        request.getRequestDispatcher("WEB-INF/views/odontologistsView.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/odontologistsView.jsp").forward(request, response);
         return;
     }
 
-    public void getInfo(HttpServletRequest request, HttpServletResponse response)
+    public void getInfo(HttpServletRequest request, HttpServletResponse response, int odontologistID)
             throws ServletException, IOException {
+        Odontologo odontologist = controller.getOdontologistById(odontologistID);
 
-        String id = request.getParameter("id");
+        if (odontologist != null) {
+            request.setAttribute("odontologist", odontologist);
 
-        if (id != null && id.matches("\\d+")) {
-            int odontologistID = Integer.parseInt(id);
-
-            Odontologo odontologist = controller.getOdontologistById(odontologistID);
-
-            if (odontologist != null) {
-
-                request.setAttribute("odontologist", odontologist);
-
-                request.getRequestDispatcher("/WEB-INF/views/odontologistInfoView.jsp").forward(request, response);
-                return;
-            } else {
-                response.sendRedirect("odontologists");
-            }
-        } else {
-            response.sendRedirect("odontologists");
+            request.getRequestDispatcher("/WEB-INF/views/odontologistInfoView.jsp").forward(request, response);
+            return;
         }
+
+        response.sendRedirect(request.getContextPath() + "/odontologists");
+        return;
+    }
+
+    public void loadFormData(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        HttpSession mySession = request.getSession(false);
+
+        if (request.getSession().getAttribute("workScheduleList") == null) {
+            List<Horario> workScheduleList = controller.getWorkScheduleList();
+
+            mySession.setAttribute("workScheduleList", workScheduleList);
+        }
+
+        request.getRequestDispatcher("/WEB-INF/views/odontologistRegisterView.jsp").forward(request, response);
+        return;
     }
 
     public void createOdontologist(HttpServletRequest request, HttpServletResponse response)
@@ -90,8 +95,8 @@ public class OdontologistService {
 
                 mySession.setAttribute("workScheduleList", workScheduleList);
             }
-
-            request.getRequestDispatcher("WEB-INF/views/odontologistEditView.jsp").forward(request, response);
+            
+            request.getRequestDispatcher("/WEB-INF/views/odontologistEditView.jsp").forward(request, response);
             return;
         } else {
             response.sendRedirect(request.getContextPath() + "/index");
@@ -111,18 +116,14 @@ public class OdontologistService {
 
         Odontologo odontologistToEdit = (Odontologo) request.getSession().getAttribute("odontologistToEdit");
 
-        System.out.println("Name: " + firstName);
-        System.out.println("WSID: " + workSchedule);
-        
         controller.editOdontologist(odontologistToEdit, firstName, surname, address, phone, birthdate, specialization, workSchedule, user);
         request.removeAttribute("odontologistToEdit");
 
-        response.sendRedirect("odontologists");
+        response.sendRedirect(request.getContextPath() + "/odontologists");
     }
 
     public void deleteOdontologist(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         String odontologistIdToDelete = request.getParameter("id");
 
         if (odontologistIdToDelete != null && !odontologistIdToDelete.isEmpty()) {
@@ -130,7 +131,7 @@ public class OdontologistService {
 
             controller.destroyOdontologist(odontoID);
 
-            response.sendRedirect("odontologists");
+            response.sendRedirect(request.getContextPath() + "/odontologists");
         }
     }
 }

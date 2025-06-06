@@ -1,5 +1,6 @@
-package com.javierhidalgodev.clinicaodontologica.servlets.services;
+package com.javierhidalgodev.clinicaodontologica.services;
 
+import com.javierhidalgodev.clinicaodontologica.dto.user.UserDTO;
 import com.javierhidalgodev.clinicaodontologica.logica.Controller;
 import com.javierhidalgodev.clinicaodontologica.logica.Horario;
 import com.javierhidalgodev.clinicaodontologica.logica.Odontologo;
@@ -21,25 +22,63 @@ public class AppointmentService {
     Controller controller = Controller.getInstance();
 
     public void getAllAppointments(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Turno> appointmentList = controller.getAllAppointments();
+        HttpSession mySession = request.getSession();
+        UserDTO userSession = (UserDTO) mySession.getAttribute("userSession");
+        List<Turno> appointmentList = null;
 
-        request.setAttribute("appointmentList", appointmentList);
+        if (userSession.getRole() != null && userSession.getRole().equals("admin")) {
+            appointmentList = controller.getAllAppointments();
+        } else {
+            if (userSession.getProfessional() == null) {
+                response.sendRedirect(request.getContextPath() + "/index");
+                return;
+            }
+
+            if (userSession.getProfessional() instanceof Odontologo) {
+                appointmentList = controller.getAppointmentsByOdontologist(userSession.getProfessional().getId());
+            } else {
+                appointmentList = controller.getAllAppointments();
+            }
+        }
+
+        mySession.setAttribute("appointmentList", appointmentList);
 
         request.getRequestDispatcher("WEB-INF/views/appointmentsView.jsp").forward(request, response);
         return;
     }
 
-    public void getAppointmentInfo(HttpServletRequest request, HttpServletResponse response, String appointmentID) throws ServletException, IOException {
-        int id = Integer.parseInt(appointmentID);
-        Turno appointment = controller.getAppointmentById(id);
+    public void getAppointmentInfo(HttpServletRequest request, HttpServletResponse response, int appointmentID) throws ServletException, IOException {
+        HttpSession mySession = request.getSession();
+        UserDTO userSession = (UserDTO) mySession.getAttribute("userSession");
+        List<Turno> appointmentList = (List<Turno>) mySession.getAttribute("appointmentList");
+        Turno appointment = controller.getAppointmentById(appointmentID);
 
-        if(appointment != null) {
+        if (userSession != null && userSession.getRole().equals("user")) {
+            boolean isMyAppointment = false;
+            for (Turno t : appointmentList) {
+                if (t.getIdAppointment() == appointmentID) {
+                    isMyAppointment = true;
+                    break;
+                }
+            }
+
+            if (isMyAppointment) {
+                request.setAttribute("appointmentInfo", appointment);
+                request.getRequestDispatcher("/WEB-INF/views/appointmentInfoView.jsp").forward(request, response);
+                return;
+            }
+            
+            response.sendRedirect(request.getContextPath() + "/appointments");
+            return;
+        }
+
+        if (appointment != null) {
             request.setAttribute("appointmentInfo", appointment);
 
             request.getRequestDispatcher("/WEB-INF/views/appointmentInfoView.jsp").forward(request, response);
             return;
         }
-        
+
         response.sendRedirect(request.getContextPath() + "/index");
     }
 
@@ -163,7 +202,7 @@ public class AppointmentService {
             request.getSession().removeAttribute("appointmentPatient");
             request.getSession().removeAttribute("availableOdontologists");
             request.getSession().removeAttribute("professional");
-            request.getSession().removeAttribute("patientsList");
+            request.getSession().removeAttribute("patientList");
 
             response.sendRedirect(request.getContextPath() + "/appointments");
         } else {

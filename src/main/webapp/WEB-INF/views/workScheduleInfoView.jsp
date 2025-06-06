@@ -6,14 +6,18 @@
 <%@page import="com.javierhidalgodev.clinicaodontologica.logica.Odontologo"%>
 <%@include file="../../layouts/firstPart.jsp" %>
 
-<% Horario workSchedule = (Horario) request.getSession().getAttribute("workSchedule"); %>
+<%
+    UserDTO userSession = (UserDTO) request.getSession(false).getAttribute("userSession");
+    Horario workSchedule = (Horario) request.getAttribute("workSchedule");
+%>
 
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <div class="d-flex justify-content-between align-items-center">
             <span class="m-0 font-weight-bold text-primary">Información del horario de trabajo</span>
+            <% if ("admin".equals(userSession.getRole())) {%>
             <div class="d-flex" id="actions">
-                <form action="work-schedule?id=<%= workSchedule.getIdWorkSchedule()%>" method="POST" class="mr-2">
+                <form action="${pageContext.request.contextPath}/work-schedule/<%= workSchedule.getIdWorkSchedule()%>" method="POST" class="mr-2">
                     <input type="hidden" name="action" value="editing" />
                     <input type="hidden" name="id" value="<%= workSchedule.getIdWorkSchedule()%>" />
                     <button type="submit" class="btn btn-success">
@@ -34,6 +38,7 @@
                     <i class="fas fa-solid fa-trash-alt"></i>
                 </button>
             </div>
+            <% } %>
         </div>
     </div>
     <div class="card-body">

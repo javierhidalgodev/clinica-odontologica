@@ -8,7 +8,10 @@
 <%@page import="com.javierhidalgodev.clinicaodontologica.logica.Paciente"%>
 <%@include file="../../layouts/firstPart.jsp" %>
 
-<%    Paciente patient = (Paciente) session.getAttribute("patientDetails");
+<%
+    String role = (String) request.getSession().getAttribute("userRole");
+
+    Paciente patient = (Paciente) request.getAttribute("patient");
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     String patientBirth = sdf.format(patient.getBirthdate());
 
@@ -21,8 +24,9 @@
             <div class="card-header py-3">
                 <div class="d-flex justify-content-between align-items-center">
                     <span class="m-0 font-weight-bold text-primary">Información del paciente</span>
+                    <% if ("admin".equals(role)) {%>
                     <div class="d-flex" id="actions">
-                        <form action="patients?id=<%= patient.getId()%>" method="POST">
+                        <form action="${pageContext.request.contextPath}/patients/<%= patient.getId()%>" method="POST">
                             <input type="hidden" id="patientIdToEdit" name="id" value="<%= patient.getId()%>">
                             <input type="hidden" name="action" value="editing" />
                             <button type="submit" class="btn btn-success mr-2">
@@ -43,6 +47,7 @@
                             <i class="fas fa-solid fa-trash-alt"></i>
                         </button>
                     </div>
+                    <% }%>
                 </div>
             </div>
             <div class="card-body">
@@ -65,6 +70,7 @@
             <div class="card-header py-3">
                 <div class="d-flex justify-content-between align-items-center">
                     <span class="m-0 font-weight-bold text-primary">Información del responsable</span>
+                    <% if ("adim".equals(role)) {%>
                     <div class="d-flex" id="guardianActions">
                         <form action="guardians" method="POST" data-form-action="edit">
                             <input type="hidden" id="guardianIdToDelete" name="guardianIdToDelete" value="<%= guardian.getId()%>">
@@ -88,6 +94,7 @@
                         </form>
                         <% }%>
                     </div>
+                    <% }%>
                 </div>
             </div>
             <!-- Card Content - Collapse -->
@@ -106,6 +113,7 @@
     </div>
 </div>
 
+<% if ("admin".equals(role)) { %>
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <div class="d-flex justify-content-between align-items-center">
@@ -173,6 +181,7 @@
         </div>
     </div>
 </div>
+<% }%>
 
 <%@include file="../../components/modal.jsp" %>
 

@@ -1,5 +1,7 @@
 package com.javierhidalgodev.clinicaodontologica.dto.user;
 
+import com.javierhidalgodev.clinicaodontologica.logica.Persona;
+
 /**
  *
  * @author Javi
@@ -8,9 +10,9 @@ public class UserDTO {
     private int id;
     private String username;
     private String role;
-    private String professional;
+    private Persona professional;
     
-    public UserDTO(int id, String username, String role, String professional){
+    public UserDTO(int id, String username, String role, Persona professional){
         this.id = id;
         this.username = username;
         this.role = role;
@@ -41,11 +43,11 @@ public class UserDTO {
         this.role = role;
     }
 
-    public String getProfessional() {
+    public Persona getProfessional() {
         return professional;
     }
 
-    public void setProfessional(String professional) {
+    public void setProfessional(Persona professional) {
         this.professional = professional;
     }
 }

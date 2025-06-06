@@ -26,10 +26,10 @@
             <div class="card-header py-3">
                 <div class="d-flex justify-content-between align-items-center">
                     <span class="m-0 font-weight-bold text-primary">Paciente</span>
-                    <form action="${pageContext.request.contextPath}/patients?id=<%= patient.getId() %>" method="POST">
+                    <form action="${pageContext.request.contextPath}/patients/<%= patient.getId() %>" method="POST">
                         <input type="hidden" name="id" value="<%= patient.getId()%>" />
                         <input type="hidden" name="action" value="getInfo" />
-                        <button type="submit" class="btn btn-sm btn-primary">Detalles</button>
+                        <button type="submit" class="btn btn-sm btn-primary btn-user">Detalles</button>
                     </form>
                 </div>
             </div>

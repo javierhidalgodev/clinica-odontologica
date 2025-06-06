@@ -32,7 +32,7 @@
             <td><%= i + 1%></td>
             <td><%= ws.getName()%></td>
             <td>
-                <form action="work-schedule?id=<%= ws.getIdWorkSchedule()%>" method="POST">
+                <form action="work-schedule/<%= ws.getIdWorkSchedule()%>" method="POST">
                     <input type="hidden" name="id" value="<%= ws.getIdWorkSchedule()%>" />
                     <input type="hidden" name="action" value="getInfo" />
                     <button type="submit" class="btn btn-info">

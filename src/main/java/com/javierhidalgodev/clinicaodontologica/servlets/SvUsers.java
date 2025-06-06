@@ -1,7 +1,7 @@
 package com.javierhidalgodev.clinicaodontologica.servlets;
 
-import com.javierhidalgodev.clinicaodontologica.logica.Controller;
-import com.javierhidalgodev.clinicaodontologica.servlets.services.UserService;
+import com.javierhidalgodev.clinicaodontologica.services.UserService;
+import com.javierhidalgodev.clinicaodontologica.utils.PathUtils;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,62 +13,61 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Javi
  */
-@WebServlet(name = "SvUsers", urlPatterns = {"/users", "/users/new"})
+@WebServlet(name = "SvUsers", urlPatterns = {
+    "/users",
+    "/users/*"})
 public class SvUsers extends HttpServlet {
 
     UserService userService = new UserService();
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-    }
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String servletPath = request.getServletPath();
 
-        if (servletPath.contains("new")) {
+        String pathInfo = request.getPathInfo();
+
+        if (pathInfo == null) {
+            userService.getAllUsers(request, response);
+            return;
+        }
+
+        if (PathUtils.isPathInfoID(pathInfo) != null) {
+            userService.getInfo(request, response, PathUtils.isPathInfoID(pathInfo));
+            return;
+        }
+
+        if (PathUtils.isPathInfoNew(pathInfo)) {
             request.getRequestDispatcher("/WEB-INF/views/userRegisterView.jsp").forward(request, response);
+            return;
         } else {
-            String queryParams = request.getQueryString();
-
-            if (queryParams == null) {
-                userService.getAllUsers(request, response);
-            } else {
-                String id = request.getParameter("id");
-                if (id == null) {
-                    response.sendRedirect("users");
-                } else {
-                    userService.editingUser(request, response);
-                }
-            }
+            response.sendRedirect(request.getContextPath() + "/users");
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String pathInfo = request.getPathInfo();
 
-        String action = request.getParameter("action");
+        if (pathInfo != null) {
+            Integer patientID = PathUtils.isPathInfoID(pathInfo);
+            String action = request.getParameter("action");
 
-        if ("getInfo".equals(action)) {
-            userService.getInfo(request, response);
-        } else if ("create".equals(action)) {
-            userService.createUser(request, response);
-        } else if ("delete".equals(action)) {
-            userService.deleteUser(request, response);
-        } else if ("editing".equals(action)) {
-            userService.editingUser(request, response);
-        } else if ("edit".equals(action)) {
-            userService.editUser(request, response);
-        } else {
-            response.sendRedirect(request.getContextPath() + "/index");
+            if (patientID != null && "getInfo".equals(action)) {
+                userService.getInfo(request, response, patientID);
+            } else {
+                if ("create".equals(action)) {
+                    userService.createUser(request, response);
+                } else if ("delete".equals(action)) {
+                    userService.deleteUser(request, response);
+                } else if ("editing".equals(action)) {
+                    userService.editingUser(request, response, patientID);
+                } else if ("edit".equals(action)) {
+                    userService.editUser(request, response, patientID);
+                } else {
+                    response.sendRedirect(request.getContextPath() + "/index");
+                }
+            }
         }
     }
-
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }

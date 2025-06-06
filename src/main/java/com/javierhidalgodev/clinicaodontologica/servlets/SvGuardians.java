@@ -1,6 +1,6 @@
 package com.javierhidalgodev.clinicaodontologica.servlets;
 
-import com.javierhidalgodev.clinicaodontologica.servlets.services.GuardianService;
+import com.javierhidalgodev.clinicaodontologica.services.GuardianService;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,15 +17,9 @@ public class SvGuardians extends HttpServlet {
 
     GuardianService guardianService = new GuardianService();
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-    }
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
     }
 
     @Override
@@ -49,15 +43,4 @@ public class SvGuardians extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/index");
         }
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }

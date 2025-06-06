@@ -6,14 +6,14 @@
 <%@page import="java.util.List"%>
 
 <%
-    Paciente patient = (Paciente) session.getAttribute("patientDetails");
+    Paciente patient = (Paciente) request.getAttribute("patient");
 
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     String birth = sdf.format(patient.getBirthdate());
 
 %>
 
-<form action="patients" method="POST" id="form">
+<form action="${pageContext.request.contextPath}/patients/<%= patient.getId() %>" method="POST" id="form">
     <div class="form-group row">
         <div class="col-md-6 mb-3 mb-md-0">
             <label for="firstName">Nombre</label>
@@ -54,7 +54,7 @@
         <div class="col-md-6 mb-3 mb-md-0">
             <label for="prepaidHealth">Seguro médico</label>
             <select class="form-control form-control-user" id="prepaidHealth" name="prepaidHealth" data-validations="required" >
-                <option disabled="" selected="true" value="">Selecciona uno</option>
+                <option disabled="" selected="true" value="">Seleccione uno</option>
                 <option value="true" <%= patient.getPrepaidHealth() ? "selected" : ""%> >YES</option>
                 <option value="false" <%= patient.getPrepaidHealth() ? "" : "selected"%> >NO</option>
             </select>
@@ -63,7 +63,7 @@
         <div class="col-md-6">
             <label for="bloodType">Grupo sanguíneo</label>            
             <select class="form-control form-control-user" id="bloodType" name="bloodType" data-validations="required">
-                <option disabled="" selected="true" value="">Selecciona uno</option>
+                <option disabled="" selected="true" value="">Seleccione uno</option>
                 <%
                     for (BloodType bloodType : BloodType.values()) {%>
                 <option value="<%= bloodType.getBloodType()%>" <%= patient.getBloodType().equals(bloodType.getBloodType()) ? "selected" : ""%> ><%= bloodType.getBloodType()%></option>                   <%

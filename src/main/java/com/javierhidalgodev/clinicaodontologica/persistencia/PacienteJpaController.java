@@ -122,19 +122,4 @@ public class PacienteJpaController implements Serializable {
             em.close();
         }
     }
-
-//    List<Paciente> getPatientsByOdontologist(int id) {
-//        EntityManager em = PersistenceManager.getInstance().getEntityManager();
-//
-//        try {
-//            CriteriaBuilder cb = em.getCriteriaBuilder();
-//            CriteriaQuery cq = cb.createQuery(Paciente.class);
-//            Root<Paciente> root = cq.from(Paciente.class);
-//            
-//            // Hay que hacer referencia a las citas, no al paciente.
-////            cq.select(root).where(cb.equal(root.get(), root))
-//        } finally {
-//        }
-//    }
-
 }

@@ -17,7 +17,7 @@
     String odontologistWorkSchedule = odontologistToEdit.getWorkSchedule() != null ? odontologistToEdit.getWorkSchedule().getName() : "not assigned";
 %>
 
-<form action="odontologists" method="POST" id="form">
+<form action="${pageContext.request.contextPath}/odontologists/<%= odontologistToEdit.getId() %>" method="POST" id="form">
     <div class="form-group row">
         <div class="col-md-6 mb-3 mb-md-0">
             <label for="firstName">Nombre</label>
@@ -99,9 +99,6 @@
         </div>
     </div>
     <input type="hidden" name="action" value="edit" />
-    <!--    <button id="submitBtn" type="submit" class="btn btn-success btn-user btn-block font-weight-bold">
-            Edit
-        </button>-->
     <button
         type="button"
         id="action-btn"

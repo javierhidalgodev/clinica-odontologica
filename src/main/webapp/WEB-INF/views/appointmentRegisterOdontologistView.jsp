@@ -9,6 +9,13 @@
     Odontologo odontologist = (Odontologo) session.getAttribute("professional");
 %>
 
+<%
+    if (odontologist != null) { %>
+<%@include file="../../components/modalToContinue.jsp" %>
+<%
+    }
+%>
+
 <div class="container">
     <div class="card o-hidden border-0 shadow-lg my-5">
         <div class="card-body p-0">

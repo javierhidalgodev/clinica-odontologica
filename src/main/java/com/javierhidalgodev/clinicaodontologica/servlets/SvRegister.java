@@ -1,6 +1,7 @@
 package com.javierhidalgodev.clinicaodontologica.servlets;
 
 import com.javierhidalgodev.clinicaodontologica.logica.Controller;
+import com.javierhidalgodev.clinicaodontologica.services.UserService;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,33 +17,32 @@ import javax.servlet.http.HttpServletResponse;
 public class SvRegister extends HttpServlet {
 
     Controller controller = Controller.getInstance();
-
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-    }
+    UserService userService = new UserService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("WEB-INF/views/registerView.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/registerView.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        String role = request.getParameter("role");
-
-        controller.createUser(username, password, role);
-        
-        response.sendRedirect("login");
+        userService.createUser(request, response);      
+//        String username = request.getParameter("username");
+//        String password = request.getParameter("password");
+//        String role = request.getParameter("role");
+//
+//        if (controller.userExists(username)) {
+//            request.setAttribute("userExists", true);
+//
+//            request.getRequestDispatcher("/WEB-INF/views/registerView.jsp").forward(request, response);
+//            return;
+//        } else {
+//            controller.createUser(username, password, role);
+//
+//            response.sendRedirect(request.getContextPath() + "/login");
+//        }
     }
-
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }

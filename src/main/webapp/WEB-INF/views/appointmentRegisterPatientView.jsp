@@ -11,6 +11,13 @@
     Paciente patient = (Paciente) session.getAttribute("appointmentPatient");
 %>
 
+<%
+    if (patient != null) { %>
+<%@include file="../../components/modalToContinue.jsp" %>
+<%
+    }
+%>
+
 <div class="container">
     <div class="card o-hidden border-0 shadow-lg my-5">
         <div class="card-body p-0">
@@ -28,10 +35,10 @@
                                 <%                    for (Paciente p : patientsList) {
                                 %> <option
                                     value="<%= p.getId()%>"
-                                    <%= (patient != null && patient.getId() == p.getId()) ? "selected" : "" %>>
+                                    <%= (patient != null && patient.getId() == p.getId()) ? "selected" : ""%>>
                                     <%= p.getName() + " / " + p.getBloodType()%></option> <%
-                                    }
-                                %>
+                                        }
+                                    %>
                                 <!--                                    <option value="morning">Mañana</option>
                                                                     <option value="evening">Tarde</option>-->
                             </select>
@@ -40,12 +47,12 @@
                         <div class="form-group row">
                             <div class="col-md-6 mb-3 mb-md-0">
                                 <label for="appointmentDate">Fecha</label>
-                                <input type="date" min="<%= LocalDate.now()%>" class="form-control form-control-user" id="appointmentDate" name="appointmentDate" value="<%= date != null ? date : "" %>" data-validations="required">
+                                <input type="date" min="<%= LocalDate.now()%>" class="form-control form-control-user" id="appointmentDate" name="appointmentDate" value="<%= date != null ? date : ""%>" data-validations="required">
                                 <span id="errorAppointmentDate" class="error-validation"></span>
                             </div>
                             <div class="col-md-6">
                                 <label for="appointmentHour">Hora (elija el tramo de 00 o 30)</label>
-                                <input type="time" min="09:00" max="20:30" step="1800" class="form-control form-control-user" id="appointmentHour" name="appointmentHour" value="<%= hour != null ? hour : "" %>" data-validations="required">
+                                <input type="time" min="09:00" max="20:30" step="1800" class="form-control form-control-user" id="appointmentHour" name="appointmentHour" value="<%= hour != null ? hour : ""%>" data-validations="required">
                                 <span id="errorAppointmentHour" class="error-validation"></span>
                             </div>
                         </div>

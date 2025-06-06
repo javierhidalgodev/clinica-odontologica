@@ -4,10 +4,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
     <%@include file="../../components/head.jsp" %>
 
-    <body class="bg-(#106cb5)">
+    <body>
 
         <div class="container">
 
@@ -23,5 +23,23 @@
 <style>
     body {
         background-color: #106cb5
+    }
+    
+    .form-control {
+        height: auto;
+        padding: 0.7rem 1rem !important;
+    }
+
+    .btn-user {
+        padding: .7rem;
+    }
+
+    .btn:not(.btn-user):not(.btn-modal) {
+        aspect-ratio: 1/1;
+    }
+
+    .error-validation {
+        color: red;
+        font-size: .7rem;
     }
 </style>

@@ -2,10 +2,6 @@
 <%@page import="java.util.Iterator"%>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 
-<%
-    UserDTO userSession = (UserDTO) session.getAttribute("userSession");
-%>
-
 <!DOCTYPE html>
 <html lang="en">
 

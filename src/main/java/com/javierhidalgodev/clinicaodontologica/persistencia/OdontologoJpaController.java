@@ -128,8 +128,6 @@ public class OdontologoJpaController implements Serializable {
             CriteriaQuery cq = cb.createQuery(Odontologo.class);
             Root<Odontologo> root = cq.from(Odontologo.class);
             
-            
-            
             cq.select(root).where(cb.equal(root.get("workSchedule").get("idWorkSchedule"), ws));
             
             List<Odontologo> odontos = em.createQuery(cq).getResultList();

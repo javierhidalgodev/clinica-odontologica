@@ -4,14 +4,18 @@
 <%@page import="com.javierhidalgodev.clinicaodontologica.logica.Odontologo"%>
 <%@include file="../../layouts/firstPart.jsp" %>
 
-<% Secretario secretary = (Secretario) request.getSession().getAttribute("secretary");%>
+<%
+    UserDTO userSession = (UserDTO) request.getSession(false).getAttribute("userSession");
+    Secretario secretary = (Secretario) request.getAttribute("secretary");
+%>
 
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <div class="d-flex justify-content-between align-items-center">
             <span class="m-0 font-weight-bold text-primary">Dr. <%= secretary.getName()%> <%= secretary.getSurname()%></span>
+            <% if (userSession.getRole().equals("admin")) {%>
             <div class="d-flex" id="actions">
-                <form action="secretaries?id=<%= secretary.getId()%>" method="POST" class="mr-2">
+                <form action="${pageContext.request.contextPath}/secretaries/<%= secretary.getId()%>" method="POST" class="mr-2">
                     <input type="hidden" name="action" value="editing" />
                     <input type="hidden" name="id" value="<%= secretary.getId()%>" />
                     <button type="submit" class="btn btn-success">
@@ -32,6 +36,7 @@
                     <i class="fas fa-solid fa-trash-alt"></i>
                 </button>
             </div>
+            <% }%>
         </div>
     </div>
     <div class="card-body">

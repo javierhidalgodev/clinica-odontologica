@@ -93,9 +93,9 @@ public class Controller {
                 UserDTO userData = new UserDTO(user.getIdUser(), user.getUsername(), user.getRole(), null);
 
                 if (user.getOdontologist() != null) {
-                    userData.setProfessional("odontologist");
+                    userData.setProfessional(user.getOdontologist());
                 } else if (user.getSecretary() != null) {
-                    userData.setProfessional("secretary");
+                    userData.setProfessional(user.getSecretary());
                 }
 
                 return userData;
@@ -154,7 +154,7 @@ public class Controller {
         odontologistToEdit.setSpecialization(specialization);
         odontologistToEdit.setWorkSchedule(wS);
         odontologistToEdit.setUser(userFinal);
-
+        
         persistenceController.editOdontologist(odontologistToEdit);
     }
 
@@ -364,5 +364,13 @@ public class Controller {
 
     public int getAppointmentsCount() {
         return persistenceController.getAppointmentsCount();
+    }
+
+    public boolean userExists(String username) {
+        return persistenceController.userExists(username);
+    }
+
+    public List<Turno> getAppointmentsByOdontologist(int id) {
+        return persistenceController.getAppointmentsByOdontologist(id);
     }
 }

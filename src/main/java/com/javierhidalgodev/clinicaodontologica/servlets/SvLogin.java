@@ -18,10 +18,6 @@ public class SvLogin extends HttpServlet {
 
     Controller controller = Controller.getInstance();
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-    }
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -41,7 +37,11 @@ public class SvLogin extends HttpServlet {
 //            loginSuccessfull = controller.verifyUser(username, password);
             loginSuccessfull = controller.verifyUser(username, password);
 
-            if (loginSuccessfull != null) {
+            if (loginSuccessfull != null) {                
+                // Recuperar el profesional, si existe
+                
+//                controller.getProfessionalByUserID(loginSuccessfull.getId());
+                
                 request.getSession().setAttribute("userSession", loginSuccessfull);
                 request.getSession().setAttribute("userRole", loginSuccessfull.getRole());
                 request.getSession().setAttribute("userProfessional", loginSuccessfull.getProfessional());
@@ -51,17 +51,13 @@ public class SvLogin extends HttpServlet {
                 return;
             }
             
-            response.sendRedirect("error");
+            request.setAttribute("invalidCredentials", true);
+            
+            request.getRequestDispatcher("/WEB-INF/views/loginView.jsp").forward(request, response);
             return;
         } catch (Exception e) {
-            response.sendRedirect("offline");
+            response.sendRedirect(request.getContextPath() + "/offline");
             return;
         }
     }
-
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }

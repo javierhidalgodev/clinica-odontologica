@@ -1,17 +1,18 @@
 <%@page import="com.javierhidalgodev.clinicaodontologica.logica.Horario"%>
 <%@page import="java.util.List"%>
 
-<form action="${pageContext.request.contextPath}/work-schedule" method="POST">
+<form action="${pageContext.request.contextPath}/work-schedule/new" method="POST">
     <div class="form-group">
-        <input type="text" class="form-control form-control-user" id="exampleWSName" name="WSName" placeholder="Name">
+        <label for="workScheduleName">Nombre</label>
+        <input type="text" class="form-control form-control-user" id="workScheduleName" name="WSName" placeholder="">
     </div>
     <div class="form-group row">
         <div class="col-md-6 mb-3 mb-md-0">
-            <label class="text-xs font-weight-bold pl-2" for="entryTime">Entry Time</label>
+            <label for="entryTime">Entrada</label>
             <input type="time" class="form-control form-control-user" id="entryTime" name="entryTime">
         </div>
         <div class="col-md-6 mb-3 mb-md-0">
-            <label class="text-xs font-weight-bold pl-2" for="exitTime">Exit Time</label>
+            <label for="exitTime">Salida</label>
             <input type="time" class="form-control form-control-user" id="exitTime" name="exitTime">
         </div>
     </div>

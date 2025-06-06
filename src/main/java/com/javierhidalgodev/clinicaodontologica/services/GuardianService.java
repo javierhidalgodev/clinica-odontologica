@@ -1,4 +1,4 @@
-package com.javierhidalgodev.clinicaodontologica.servlets.services;
+package com.javierhidalgodev.clinicaodontologica.services;
 
 import com.javierhidalgodev.clinicaodontologica.dto.user.UserDTO;
 import com.javierhidalgodev.clinicaodontologica.logica.Controller;

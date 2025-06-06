@@ -11,7 +11,7 @@
     List<UserDTO> freeUserList = (List) session.getAttribute("freeUserList");
 %>
 
-<form id="form" action="secretaries" method="POST">
+<form id="form" action="${pageContext.request.contextPath}/secretaries/<%= secretaryToEdit.getId() %>" method="POST">
     <div class="form-group row">
         <div class="col-md-6 mb-3 mb-md-0">
             <label for="firstName">Nombre</label>

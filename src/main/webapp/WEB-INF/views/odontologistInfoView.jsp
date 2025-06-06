@@ -3,14 +3,18 @@
 <%@page import="com.javierhidalgodev.clinicaodontologica.logica.Odontologo"%>
 <%@include file="../../layouts/firstPart.jsp" %>
 
-<% Odontologo odontologist = (Odontologo) request.getAttribute("odontologist");%>
+<%
+    UserDTO userSession = (UserDTO) request.getSession(false).getAttribute("userSession");
+    Odontologo odontologist = (Odontologo) request.getAttribute("odontologist");
+%>
 
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <div class="d-flex justify-content-between align-items-center">
             <span class="m-0 font-weight-bold text-primary">Dr. <%= odontologist.getName()%> <%= odontologist.getSurname()%></span>
+            <% if ("admin".equals(userSession.getRole())) {%>
             <div class="d-flex" id="actions">
-                <form action="odontologists?id=<%= odontologist.getId()%>" method="POST" class="mr-2">
+                <form action="${pageContext.request.contextPath}/odontologists/<%= odontologist.getId()%>" method="POST" class="mr-2">
                     <input type="hidden" name="action" value="editing" />
                     <input type="hidden" name="id" value="<%= odontologist.getId()%>" />
                     <button type="submit" class="btn btn-success">
@@ -31,6 +35,7 @@
                     <i class="fas fa-solid fa-trash-alt"></i>
                 </button>
             </div>
+            <% } %>
         </div>
     </div>
     <div class="card-body">
@@ -95,7 +100,7 @@
                         </td>
                         <td><%= t.getHour()%></td>
                         <td>
-                            <form action="${pageContext.request.contextPath}/appointments/<%= t.getIdAppointment() %>" method="POST">
+                            <form action="${pageContext.request.contextPath}/appointments/<%= t.getIdAppointment()%>" method="POST">
                                 <input type="hidden" name="appointmentID" value="<%= t.getIdAppointment()%>" />
                                 <button type="submit" class="btn btn-info">
                                     <i class="fas fa-solid fa-info-circle"></i>

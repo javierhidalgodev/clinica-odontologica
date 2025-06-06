@@ -1,9 +1,7 @@
 <%@page import="com.javierhidalgodev.clinicaodontologica.dto.user.UserDTO"%>
 
 <%
-
     String userRole = (String) session.getAttribute("userRole");
-
 %>
 
 <!-- Sidebar -->
@@ -36,9 +34,15 @@
 
     <% if (userRole != null && userRole.equals("admin")) { %>
     <%@include file="adminSideBar.jsp" %>
-    <% } else { %>
+    <% } else {%>
     <%@include file="userSideBar.jsp" %>
     <% }%>
+
+<!--    <li class="nav-item">
+        <a class="nav-link" href="${pageContext.request.contextPath}/profile">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Profile</span></a>
+    </li>-->
     <!--             Heading 
                 <div class="sidebar-heading">
                     Addons
