@@ -9,13 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author Javi
- */
 @WebServlet(name = "SvUsers", urlPatterns = {
     "/users",
-    "/users/*"})
+    "/users/*",})
 public class SvUsers extends HttpServlet {
 
     UserService userService = new UserService();
@@ -32,6 +28,17 @@ public class SvUsers extends HttpServlet {
         }
 
         if (PathUtils.isPathInfoID(pathInfo) != null) {
+            String queryParams = request.getQueryString();
+            if (queryParams != null) {
+                if (queryParams.equals("editing=true")) {
+                    userService.editingUser(request, response, PathUtils.isPathInfoID(pathInfo));
+                    return;
+                } else {
+                    response.sendRedirect(request.getContextPath() + "/users" + pathInfo);
+                    return;
+                }
+            }
+
             userService.getInfo(request, response, PathUtils.isPathInfoID(pathInfo));
             return;
         }
@@ -47,27 +54,21 @@ public class SvUsers extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         String pathInfo = request.getPathInfo();
 
-        if (pathInfo != null) {
-            Integer patientID = PathUtils.isPathInfoID(pathInfo);
-            String action = request.getParameter("action");
-
-            if (patientID != null && "getInfo".equals(action)) {
-                userService.getInfo(request, response, patientID);
-            } else {
-                if ("create".equals(action)) {
-                    userService.createUser(request, response);
-                } else if ("delete".equals(action)) {
-                    userService.deleteUser(request, response);
-                } else if ("editing".equals(action)) {
-                    userService.editingUser(request, response, patientID);
-                } else if ("edit".equals(action)) {
-                    userService.editUser(request, response, patientID);
-                } else {
-                    response.sendRedirect(request.getContextPath() + "/index");
-                }
-            }
+        if (pathInfo == null) {
+            response.sendRedirect(request.getContextPath() + request.getServletPath());
+            return;
         }
+
+        String action = request.getParameter("action");
+
+        if (action != null) {
+            userService.doAction(pathInfo, action, request, response);
+            return;
+        }
+
+        response.sendRedirect(request.getContextPath() + "/index");
     }
 }

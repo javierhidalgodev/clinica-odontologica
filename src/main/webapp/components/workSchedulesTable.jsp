@@ -32,13 +32,9 @@
             <td><%= i + 1%></td>
             <td><%= ws.getName()%></td>
             <td>
-                <form action="work-schedule/<%= ws.getIdWorkSchedule()%>" method="POST">
-                    <input type="hidden" name="id" value="<%= ws.getIdWorkSchedule()%>" />
-                    <input type="hidden" name="action" value="getInfo" />
-                    <button type="submit" class="btn btn-info">
-                        <i class="fas fa-solid fa-info-circle"></i>
-                    </button>
-                </form>
+                <a href="${pageContext.request.contextPath}/work-schedule/<%= ws.getIdWorkSchedule()%>" role="button" class="btn btn-info w-fit">
+                    <i class="fas fa-solid fa-info-circle"></i>
+                </a>
             </td>
         </tr> <%
 

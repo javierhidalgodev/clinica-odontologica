@@ -37,13 +37,9 @@
             <td><%= o.getName() + " " + o.getSurname()%></td>
             <td><%= o.getDni()%></td>
             <td>
-                <form action="odontologists/<%= o.getId() %>" method="POST">
-                    <input type="hidden" name="id" value="<%= o.getId()%>" />
-                    <input type="hidden" name="action" value="getInfo" />
-                    <button type="submit" class="btn btn-info">
-                        <i class="fas fa-solid fa-info-circle"></i>
-                    </button>
-                </form>
+                <a role="button" href="${pageContext.request.contextPath}/odontologists/<%= o.getId()%>" class="btn btn-info w-fit">
+                    <i class="fas fa-solid fa-info-circle"></i>
+                </a>
             </td>
         </tr> <%
 

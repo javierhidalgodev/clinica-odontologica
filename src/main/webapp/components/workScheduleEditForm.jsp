@@ -8,7 +8,10 @@
     Horario workScheduleToEdit = (Horario) session.getAttribute("workScheduleToEdit");
 %>
 
-<form id="form" action="${pageContext.request.contextPath}/work-schedule/<%= workScheduleToEdit.getIdWorkSchedule() %>" method="POST">
+<form
+    id="form"
+    action="${pageContext.request.contextPath}/work-schedule/<%= workScheduleToEdit.getIdWorkSchedule() %>" 
+    method="POST">
     <div class="form-group">
         <label for="wSName">Nombre</label>
         <input type="text" class="form-control form-control-user" id="wSName" name="WSName" value="<%= workScheduleToEdit.getName()%>" data-validations="required|minLength:2|maxLength:30">
@@ -30,6 +33,7 @@
     <button
         type="button"
         id="action-btn"
+        role="validations"
         class="btn btn-success btn-user btn-block font-weight-bold"
         data-action="edit"
         data-toggle="modal"

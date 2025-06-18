@@ -1,6 +1,14 @@
 const form = document.getElementById("form");
 const fields = document.querySelectorAll("[data-validations]");
-const submitBtn = document.getElementById("submitBtn");
+let submitBtn = document.querySelector("button[role=validations]");
+
+submitBtn.addEventListener("click", (ev) => {
+    const isValid = Array.from(fields).every(field => validateField({target: field}));
+
+    if (isValid) {
+        $("#modal").modal("show");
+    }
+});
 
 function validateField(ev) {
     const field = ev.target;
@@ -38,13 +46,13 @@ function validateField(ev) {
         } else if (rule === "confirmPassword") {
             const passwordField = document.getElementById("inputPassword").value;
             console.log(passwordField, value);
-            
+
             if (value !== passwordField) {
                 message = "Las contraseñas no coinciden";
             }
-        }  else if (rule === "role") {
+        } else if (rule === "role") {
             console.log(value.toString().trim().length === 0);
-            
+
             if (value.toString().trim().length === 0) {
                 message = "Seleccione un rol";
             }
@@ -71,7 +79,7 @@ function validateField(ev) {
     if (message !== null) {
         showError(field, message);
         submitBtn.disabled = true;
-        
+
         return false;
     } else {
         field.nextElementSibling.textContent = "";

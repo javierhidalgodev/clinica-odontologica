@@ -35,13 +35,9 @@
             <td class="w-50"><%= u.getUsername()%></td>
             <td class="w-50"><%= u.getRole()%></td>
             <td class="w-fit">
-                <form action="users/<%= u.getId()%>" method="POST">
-                    <input type="hidden" name="id" value="<%= u.getId()%>" />
-                    <input type="hidden" name="action" value="getInfo" />
-                    <button type="submit" class="btn btn-info">
-                        <i class="fas fa-solid fa-info-circle"></i>
-                    </button>
-                </form>
+                <a href="${pageContext.request.contextPath}/users/<%= u.getId()%>" role="button" class="btn btn-info w-fit">
+                    <i class="fas fa-solid fa-info-circle"></i>
+                </a>
             </td>
         </tr> <%
 

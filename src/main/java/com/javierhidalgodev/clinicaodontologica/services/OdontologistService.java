@@ -5,6 +5,7 @@ import com.javierhidalgodev.clinicaodontologica.logica.Controller;
 import com.javierhidalgodev.clinicaodontologica.logica.Horario;
 import com.javierhidalgodev.clinicaodontologica.logica.Odontologo;
 import com.javierhidalgodev.clinicaodontologica.logica.Turno;
+import com.javierhidalgodev.clinicaodontologica.utils.PathUtils;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -20,6 +21,24 @@ public class OdontologistService {
 
     Controller controller = Controller.getInstance();
 
+    public void doAction(String pathInfo, String action, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if(pathInfo.equals("/new")) {
+            createOdontologist(request, response);
+        }
+        
+        Integer odontologistID = PathUtils.isPathInfoID(pathInfo);
+        
+        if(odontologistID != null) {
+            if(action.equals("edit")) {
+                editOdontologist(request, response);
+            }
+            
+            if(action.equals("delete")) {
+                deleteOdontologist(request, response);
+            }
+        }
+    }
+    
     public void getAllOdontologists(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         List<Odontologo> odontologistList = controller.getAllOdontologists();
@@ -35,12 +54,15 @@ public class OdontologistService {
         Odontologo odontologist = controller.getOdontologistById(odontologistID);
 
         if (odontologist != null) {
+            System.out.println("DEVUELVO EL ODONTÓLOGO");
+
             request.setAttribute("odontologist", odontologist);
 
             request.getRequestDispatcher("/WEB-INF/views/odontologistInfoView.jsp").forward(request, response);
             return;
         }
 
+        System.out.println("NO EXISTE ESE ODONTÓLOGO");
         response.sendRedirect(request.getContextPath() + "/odontologists");
         return;
     }
@@ -75,32 +97,25 @@ public class OdontologistService {
         response.sendRedirect(request.getContextPath() + "/odontologists");
     }
 
-    public void editingOdontologist(HttpServletRequest request, HttpServletResponse response)
+    public void editingOdontologist(HttpServletRequest request, HttpServletResponse response, Integer odontologistID)
             throws ServletException, IOException {
-        String odontologistIdToEdit = request.getParameter("id");
-        
-        if (odontologistIdToEdit != null && !odontologistIdToEdit.isEmpty()) {
-            int odontologistId = Integer.parseInt(odontologistIdToEdit);
-            Odontologo odontologistToEdit = controller.getOdontologistById(odontologistId);
-            List<UserDTO> userList = controller.getAllFreeUsers();
+        Odontologo odontologistToEdit = controller.getOdontologistById(odontologistID);
+        List<UserDTO> userList = controller.getAllFreeUsers();
 
-            HttpSession mySession = request.getSession();
-            mySession.setAttribute("odontologistToEdit", odontologistToEdit);
-            mySession.setAttribute("freeUserList", userList);
+        HttpSession mySession = request.getSession(false);
+        mySession.setAttribute("odontologistToEdit", odontologistToEdit);
+        mySession.setAttribute("freeUserList", userList);
 
-            List<Turno> turnos = odontologistToEdit.getWorkShift();
+        List<Turno> turnos = odontologistToEdit.getWorkShift();
 
-            if (request.getSession().getAttribute("workScheduleList") == null) {
-                List<Horario> workScheduleList = controller.getWorkScheduleList();
+        if (mySession.getAttribute("workScheduleList") == null) {
+            List<Horario> workScheduleList = controller.getWorkScheduleList();
 
-                mySession.setAttribute("workScheduleList", workScheduleList);
-            }
-            
-            request.getRequestDispatcher("/WEB-INF/views/odontologistEditView.jsp").forward(request, response);
-            return;
-        } else {
-            response.sendRedirect(request.getContextPath() + "/index");
+            mySession.setAttribute("workScheduleList", workScheduleList);
         }
+
+        request.getRequestDispatcher("/WEB-INF/views/odontologistEditView.jsp").forward(request, response);
+        return;
     }
 
     public void editOdontologist(HttpServletRequest request, HttpServletResponse response)

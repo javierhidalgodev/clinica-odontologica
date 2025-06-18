@@ -1,0 +1,27 @@
+PETICIONES GET/POST POR SERVLET
+
+** SvOdontologist **
+
+GET:
+/odontologists -> Recuperar todos los odontólogos
+/odontologists/:id -> Recuperar un odontólogo específico
+/odontologists/new -> Navegar al formulario de creación de un nuevo odontólogo
+(Este último tiene la particularidad que necesita recuperar datos
+de otras entidades, pero, detectando la URL, no necesita ser enviado
+con un POST).
+
+POST:
+/odontologists/new -> Enviar el formulario y crear el odontólogo
+
+** SvSecretaries **
+
+GET:
+/secretaries -> Recuperar todos los secretarios
+/secretaries/:id -> Recuperar un secretario específico
+/secretaries/:id?editing=true -> Recuperar el formulario con la data de un secretario
+para poder editar su información
+/secretaries/new -> Navegar al formulario de creación de un nuevo secretario
+
+POST:
+/secretaries/new + action=edit -> Enviar el formulario y crear el odontólogo
+/secretaries + action=delete -> Eliminar el secretario

@@ -50,10 +50,9 @@
             </td>
             <td><%= a.getHour()%></td>
             <td>
-                <form action="appointments/<%= a.getIdAppointment() %>" method="POST">
-                    <input type="hidden" name="appointmentID" value="<%= a.getIdAppointment() %>" />
-                    <button type="submit" class="btn btn-primary fas fa-solid fa-address-book"></button>
-                </form>
+                <a href="${pageContext.request.contextPath}/appointments/<%= a.getIdAppointment()%>" role="button" class="btn btn-primary w-fit">
+                    <i class="fas fa-solid fa-address-book"></i>
+                </a>
             </td>
         </tr> <%
 

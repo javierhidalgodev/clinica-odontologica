@@ -11,7 +11,10 @@
     List<UserDTO> freeUserList = (List) session.getAttribute("freeUserList");
 %>
 
-<form id="form" action="${pageContext.request.contextPath}/secretaries/<%= secretaryToEdit.getId() %>" method="POST">
+<form
+    id="form"
+    action="${pageContext.request.contextPath}/secretaries/<%= secretaryToEdit.getId()%>"
+    method="POST">
     <div class="form-group row">
         <div class="col-md-6 mb-3 mb-md-0">
             <label for="firstName">Nombre</label>
@@ -72,12 +75,10 @@
         </div>
     </div>
     <input type="hidden" name="action" value="edit" />
-    <!--    <button id="submitBtn" type="submit" class="btn btn-success btn-user btn-block font-weight-bold">
-            Edit
-        </button>-->
     <button
-        type="button"
         id="action-btn"
+        type="button"
+        role="validations"
         class="btn btn-success btn-user btn-block font-weight-bold"
         data-action="edit"
         data-toggle="modal"

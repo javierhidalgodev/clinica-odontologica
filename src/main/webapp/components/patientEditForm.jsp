@@ -6,35 +6,38 @@
 <%@page import="java.util.List"%>
 
 <%
-    Paciente patient = (Paciente) request.getAttribute("patient");
+    Paciente patientToEdit = (Paciente) request.getAttribute("patient");
 
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-    String birth = sdf.format(patient.getBirthdate());
+    String birth = sdf.format(patientToEdit.getBirthdate());
 
 %>
 
-<form action="${pageContext.request.contextPath}/patients/<%= patient.getId() %>" method="POST" id="form">
+<form
+    id="form"
+    action="${pageContext.request.contextPath}/patients/<%= patientToEdit.getId() %>"
+    method="POST">
     <div class="form-group row">
         <div class="col-md-6 mb-3 mb-md-0">
             <label for="firstName">Nombre</label>
-            <input type="text" class="form-control form-control-user" id="firstName" name="patientFirstName" placeholder="First Name" value="<%= patient.getName()%>" data-validations="required|minLength:3|maxLength:20">
+            <input type="text" class="form-control form-control-user" id="firstName" name="patientFirstName" placeholder="First Name" value="<%= patientToEdit.getName()%>" data-validations="required|minLength:3|maxLength:20">
             <span class="error-validation"></span>
         </div>
         <div class="col-md-6">
             <label for="surname">Apellidos</label>            
-            <input type="text" class="form-control form-control-user" id="surname" name="patientSurname" placeholder="Surname" value="<%= patient.getSurname()%>" data-validations="required|minLength:3|maxLength:50">
+            <input type="text" class="form-control form-control-user" id="surname" name="patientSurname" placeholder="Surname" value="<%= patientToEdit.getSurname()%>" data-validations="required|minLength:3|maxLength:50">
             <span class="error-validation"></span>
         </div>
     </div>
     <div class="form-group row">
         <div class="col-md-6 mb-3 mb-md-0">
             <label for="address">Dirección</label>
-            <input type="text" class="form-control form-control-user" id="address" name="patientAddress" placeholder="Address" value="<%= patient.getAddress()%>" data-validations="required|minLength:3|maxLength:50">
+            <input type="text" class="form-control form-control-user" id="address" name="patientAddress" placeholder="Address" value="<%= patientToEdit.getAddress()%>" data-validations="required|minLength:3|maxLength:50">
             <span class="error-validation"></span>
         </div>
         <div class="col-md-6">
             <label for="phone">Teléfono</label>            
-            <input type="tel" class="form-control form-control-user" id="phone" name="patientPhone" placeholder="Phone" value="<%= patient.getPhone()%>" data-validations="required|phone">
+            <input type="tel" class="form-control form-control-user" id="phone" name="patientPhone" placeholder="Phone" value="<%= patientToEdit.getPhone()%>" data-validations="required|phone">
             <span class="error-validation"></span>
         </div>
     </div>
@@ -46,7 +49,7 @@
         </div>
         <div class="col-md-6">
             <label for="dni">DNI</label>            
-            <input type="text" class="form-control form-control-user" id="dni" name="patientDNI" placeholder="Patient DNI" value="<%= patient.getDni()%>" data-validations="required|dni" disabled>
+            <input type="text" class="form-control form-control-user" id="dni" name="patientDNI" placeholder="Patient DNI" value="<%= patientToEdit.getDni()%>" data-validations="required|dni" disabled>
             <span class="error-validation"></span>
         </div>
     </div>
@@ -55,8 +58,8 @@
             <label for="prepaidHealth">Seguro médico</label>
             <select class="form-control form-control-user" id="prepaidHealth" name="prepaidHealth" data-validations="required" >
                 <option disabled="" selected="true" value="">Seleccione uno</option>
-                <option value="true" <%= patient.getPrepaidHealth() ? "selected" : ""%> >YES</option>
-                <option value="false" <%= patient.getPrepaidHealth() ? "" : "selected"%> >NO</option>
+                <option value="true" <%= patientToEdit.getPrepaidHealth() ? "selected" : ""%> >YES</option>
+                <option value="false" <%= patientToEdit.getPrepaidHealth() ? "" : "selected"%> >NO</option>
             </select>
             <span class="error-validation"></span>
         </div>
@@ -66,7 +69,7 @@
                 <option disabled="" selected="true" value="">Seleccione uno</option>
                 <%
                     for (BloodType bloodType : BloodType.values()) {%>
-                <option value="<%= bloodType.getBloodType()%>" <%= patient.getBloodType().equals(bloodType.getBloodType()) ? "selected" : ""%> ><%= bloodType.getBloodType()%></option>                   <%
+                <option value="<%= bloodType.getBloodType()%>" <%= patientToEdit.getBloodType().equals(bloodType.getBloodType()) ? "selected" : ""%> ><%= bloodType.getBloodType()%></option>                   <%
                     }
                 %>
             </select>
@@ -75,41 +78,41 @@
     </div>
     <hr>
     <%
-        if (patient.getGuardian() == null) { %>
+        if (patientToEdit.getGuardian() == null) { %>
     <div id="guardianData" class="d-none">
         <h6>Información del responsable</h6>
         <div class="form-group row">
             <div class="col-md-6 mb-3 mb-md-0">
-                <input type="text" class="form-control form-control-user" id="exampleFirstName" name="guardianFirstName" placeholder="First Name" data-validations="required|minLength:3|maxLength:20">
+                <input type="text" class="form-control form-control-user" id="guardianFirstName" name="guardianFirstName" placeholder="First Name" data-validations="required|minLength:3|maxLength:20">
                 <span class="error-validation"></span>                
             </div>
             <div class="col-md-6">
-                <input type="text" class="form-control form-control-user" id="exampleSurname" name="guardianSurname" placeholder="Surname" data-validations="required|minLength:3|maxLength:50">
+                <input type="text" class="form-control form-control-user" id="guardianSurname" name="guardianSurname" placeholder="Surname" data-validations="required|minLength:3|maxLength:50">
                 <span class="error-validation"></span>
             </div>
         </div>
         <div class="form-group row">
             <div class="col-md-6 mb-3 mb-md-0">
-                <input type="text" class="form-control form-control-user" id="exampleInputAddress" name="guardianAddress" placeholder="Address" data-validations="required|minLength:5|maxLength:50">
+                <input type="text" class="form-control form-control-user" id="guardianInputAddress" name="guardianAddress" placeholder="Address" data-validations="required|minLength:5|maxLength:50">
                 <span class="error-validation"></span>
             </div>
             <div class="col-md-6">
-                <input type="tel" class="form-control form-control-user" id="examplePhone" name="guardianPhone" placeholder="Phone" data-validations="required|phone">
+                <input type="tel" class="form-control form-control-user" id="guardianPhone" name="guardianPhone" placeholder="Phone" data-validations="required|phone">
                 <span class="error-validation"></span>
             </div>
         </div>
         <div class="form-group row">
             <div class="col-md-6 mb-3 mb-md-0">
-                <input type="date" class="form-control form-control-user" id="exampleBirthday" name="guardianBirthdate" onchange="checkDate()" data-validations="required|birthdate">
+                <input type="date" class="form-control form-control-user" id="guardianBirthdate" name="guardianBirthdate" onchange="checkDate()" data-validations="required|birthdate">
                 <span class="error-validation"></span>
             </div>
             <div class="col-md-6">
-                <input type="text" class="form-control form-control-user" id="exampleDNI" name="guardianDNI" placeholder="DNI" data-validations="required|dni">
+                <input type="text" class="form-control form-control-user" id="guardianDNI" name="guardianDNI" placeholder="DNI" data-validations="required|dni">
                 <span class="error-validation"></span>
             </div>
         </div>
         <div class="form-group">
-            <select class="form-control form-control-user" id="exampleRelationship" name="relationship" data-validations="required">
+            <select class="form-control form-control-user" id="guardianRelationship" name="relationship" data-validations="required">
                 <option disabled="" selected="true" value="">RELATIONSHIP - Select one</option>
                 <%
                     for (Relationship relationship : Relationship.values()) {
@@ -129,11 +132,10 @@
         </button>-->
     <button
         type="button"
+        role="validations"
         id="action-btn"
         class="btn btn-success btn-user btn-block font-weight-bold"
-        data-action="edit"
-        data-toggle="modal"
-        data-target="#modal">
+        data-action="edit">
         Editar
     </button>
 </form>
@@ -141,21 +143,27 @@
 <script>
 
     function checkDate() {
-        dateField = document.getElementById("patientBirthdate");
-        dateValue = dateField.value;
-
+        const dateField = document.getElementById("patientBirthdate");
+        const dateValue = dateField.value;
 
         if (dateValue) {
-            over18 = new Date(dateValue);
+            const over18 = new Date(dateValue);
             over18.setFullYear(parseInt(over18.getFullYear()) + 18);
-            today = new Date();
-            guardianDataForm = document.getElementById("guardianData")
+            const today = new Date();
+            const guardianDataForm = document.getElementById("guardianData")
 
             if (guardianDataForm !== null) {
                 if (over18 < today) {
                     guardianDataForm.classList.replace("d-block", "d-none");
                 } else {
                     guardianDataForm.classList.replace("d-none", "d-block");
+                                        
+                    const guardianFields = guardianDataForm.querySelectorAll("[data-validations]");
+                                        
+                    guardianFields.forEach(f => {
+                        console.log(f)
+                        f.addEventListener("change", validateField);
+                    })
                 }
             }
         }

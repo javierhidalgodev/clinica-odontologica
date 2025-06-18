@@ -2,6 +2,7 @@ package com.javierhidalgodev.clinicaodontologica.services;
 
 import com.javierhidalgodev.clinicaodontologica.logica.Controller;
 import com.javierhidalgodev.clinicaodontologica.logica.Horario;
+import com.javierhidalgodev.clinicaodontologica.utils.PathUtils;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -16,6 +17,24 @@ import javax.servlet.http.HttpSession;
 public class WorkScheduleService {
 
     Controller controller = Controller.getInstance();
+
+    public void doAction(String pathInfo, String action, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (pathInfo.equals("/new")) {
+            createWorkSchedule(request, response);
+        }
+
+        Integer workScheduleID = PathUtils.isPathInfoID(pathInfo);
+
+        if (workScheduleID != null) {
+            if (action.equals("edit")) {
+                editWorkSchedule(request, response, workScheduleID);
+            }
+
+            if (action.equals("delete")) {
+                deleteWorkSchedule(request, response);
+            }
+        }
+    }
 
     public void getAllWorkSchedules(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -80,7 +99,7 @@ public class WorkScheduleService {
     public void editWorkSchedule(HttpServletRequest request, HttpServletResponse response, Integer workScheduleID)
             throws ServletException, IOException {
         Horario workScheduleToEdit = controller.getWorkScheduleById(workScheduleID);
-        
+
         String wsName = request.getParameter("WSName");
         String entryTime = request.getParameter("entryTime");
         String exitTime = request.getParameter("exitTime");

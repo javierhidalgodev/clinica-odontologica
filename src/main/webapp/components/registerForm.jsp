@@ -47,7 +47,7 @@
                                     </select>
                                     <span id="errorRole" class="error-validation"></span>
                                 </div>
-                                <button id="submitBtn"  type="submit" class="btn btn-primary btn-user btn-block">
+                                <button id="submitBtn" type="submit" class="btn btn-primary btn-user btn-block" role="validations">
                                     Registrar
                                 </button>
                             </form>

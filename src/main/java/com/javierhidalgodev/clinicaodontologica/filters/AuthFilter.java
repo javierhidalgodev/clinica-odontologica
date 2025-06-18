@@ -15,94 +15,61 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author Javi
- */
-@WebFilter(filterName = "AuthFilter", urlPatterns = {"/"})
+@WebFilter(filterName = "AuthFilter", urlPatterns = {"/*"})
 public class AuthFilter implements Filter {
 
     private static final boolean debug = true;
 
     private FilterConfig filterConfig = null;
 
-    public AuthFilter() {}
+    public AuthFilter() {
+    }
 
-    public void doFilter(ServletRequest request, ServletResponse response,
-            FilterChain chain)
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
-
-//        doBeforeProcessing(request, response);
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
 
         String path = req.getRequestURI().substring(req.getContextPath().length());
-        
-// Excluir páginas públicas y recursos estáticos
-        if (path.matches("/login") || path.matches("/register") || path.startsWith("/css") || path.startsWith("/img") || path.startsWith("/js") || path.startsWith("/vendor")) {
-                
-            HttpSession mySession = req.getSession(false);
-            UserDTO user = null;
-            if (mySession != null) {
-                user = (UserDTO) mySession.getAttribute("userSession");
-            }
 
-            // Si el usuario no está logueado, redirige a login
-            if (user != null) {
-                res.sendRedirect(req.getContextPath() + "/index");
-                return;
-            }
-            
+        HttpSession mySession = req.getSession(false);
+        UserDTO userSession = (mySession != null) ? (UserDTO) mySession.getAttribute("userSession") : null;
+
+        if (path.startsWith("/css") || path.startsWith("/js") || path.startsWith("/img") || path.startsWith("/vendor")) {
             chain.doFilter(request, response);
             return;
         }
 
-        HttpSession mySession = req.getSession(false);
-        UserDTO user = null;
-        if (mySession != null) {
-            user = (UserDTO) mySession.getAttribute("userSession");
-        }
+        if (path.equals("/login") || path.equals("/register")) {
 
-        // Si el usuario no está logueado, redirige a login
-        if (user == null) {
-            if (mySession != null) {
-                mySession.invalidate();
+            if (userSession != null) {
+                res.sendRedirect(req.getContextPath() + "/index");
+                return;
             }
-            res.sendRedirect(req.getContextPath() + "/login");
+
+            chain.doFilter(request, response);
             return;
         }
 
-        // Continuar con la petición si todo está correcto
-        chain.doFilter(req, res);
-
-//        doAfterProcessing(request, response);
+        if (userSession == null) {
+            res.sendRedirect(req.getContextPath() + "/login");
+            return;
+        }
+        
+        chain.doFilter(request, response);
     }
 
-    /**
-     * Return the filter configuration object for this filter.
-     */
     public FilterConfig getFilterConfig() {
         return (this.filterConfig);
     }
 
-    /**
-     * Set the filter configuration object for this filter.
-     *
-     * @param filterConfig The filter configuration object
-     */
     public void setFilterConfig(FilterConfig filterConfig) {
         this.filterConfig = filterConfig;
     }
 
-    /**
-     * Destroy method for this filter
-     */
     public void destroy() {
     }
 
-    /**
-     * Init method for this filter
-     */
     public void init(FilterConfig filterConfig) {
         this.filterConfig = filterConfig;
         if (filterConfig != null) {
@@ -112,9 +79,6 @@ public class AuthFilter implements Filter {
         }
     }
 
-    /**
-     * Return a String representation of this object.
-     */
     @Override
     public String toString() {
         if (filterConfig == null) {

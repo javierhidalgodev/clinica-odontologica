@@ -38,13 +38,9 @@
             <td><%= s.getName() + " " + s.getSurname()%></td>
             <td><%= s.getDni()%></td>
             <td>
-                <form action="secretaries/<%= s.getId()%>" method="POST">
-                    <input type="hidden" name="id" value="<%= s.getId()%>" />
-                    <input type="hidden" name="action" value="getInfo" />
-                    <button type="submit" class="btn btn-info">
-                        <i class="fas fa-solid fa-info-circle"></i>
-                    </button>
-                </form>
+                <a role="button" href="${pageContext.request.contextPath}/secretaries/<%= s.getId()%>" class="btn btn-info w-fit">
+                    <i class="fas fa-solid fa-info-circle"></i>
+                </a>
             </td>
         </tr> <%
 

@@ -38,13 +38,9 @@
             <td><%= p.getName() + " " + p.getSurname()%></td>
             <td><%= p.getDni()%></td>
             <td>
-                <form action="patients/<%= p.getId()%>" method="POST">
-                    <input type="hidden" name="id" value="<%= p.getId()%>" />
-                    <input type="hidden" name="action" value="getInfo" />
-                    <button type="submit" class="btn btn-info">
-                        <i class="fas fa-solid fa-info-circle"></i>
-                    </button>
-                </form>
+                <a role="button" href="${pageContext.request.contextPath}/patients/<%= p.getId()%>" class="btn btn-info w-fit">
+                    <i class="fas fa-solid fa-info-circle"></i>
+                </a>
             </td>                        
         </tr> <%
 

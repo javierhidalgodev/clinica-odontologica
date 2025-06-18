@@ -1,0 +1,6 @@
+@import "../vendor/bootstrap/scss/bootstrap";
+@import "../vendor/bootstrap/scss/_breadcrumb";
+
+.breadcrumb-item.no-divider::before{
+    content: "";
+}

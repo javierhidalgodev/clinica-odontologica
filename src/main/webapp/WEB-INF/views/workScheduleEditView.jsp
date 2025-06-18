@@ -1,5 +1,17 @@
 <%@include file="../../layouts/firstPart.jsp" %>
 
+<%
+    Horario workScheduleInfo = (Horario) session.getAttribute("workScheduleToEdit");
+%>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/work-schedule">Horarios de trabajo</a></li>
+        <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/work-schedule/<%= workScheduleInfo.getIdWorkSchedule()%>"><%= workScheduleInfo.getName()%></a></li>
+        <li class="breadcrumb-item" aria-current="page">Edición</li>
+    </ol>
+</nav>
+
 <div class="container">
     <div class="card o-hidden border-0 shadow-lg my-5">
         <div class="card-body p-0">

@@ -17,8 +17,16 @@
         Paciente patient = appointmentInfo.getPatient();
         Odontologo odontologist = appointmentInfo.getOdontologist();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
-
+        String patientBirthdate = simpleDateFormat.format(patient.getBirthdate());
+        String appointmentDate = simpleDateFormat.format(appointmentInfo.getAppointment());
 %>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/appointments">Citas</a></li>
+        <li class="breadcrumb-item" aria-current="page"><%= appointmentInfo.getPatient().getName()%> <%= appointmentInfo.getPatient().getSurname()%> (<%= appointmentDate%>)</li>
+    </ol>
+</nav>
 
 <div class="row">
     <div class="col-xl-8 col-l-7">
@@ -26,18 +34,11 @@
             <div class="card-header py-3">
                 <div class="d-flex justify-content-between align-items-center">
                     <span class="m-0 font-weight-bold text-primary">Paciente</span>
-                    <form action="${pageContext.request.contextPath}/patients/<%= patient.getId() %>" method="POST">
-                        <input type="hidden" name="id" value="<%= patient.getId()%>" />
-                        <input type="hidden" name="action" value="getInfo" />
-                        <button type="submit" class="btn btn-sm btn-primary btn-user">Detalles</button>
-                    </form>
+                    <a href="${pageContext.request.contextPath}/patients/<%= patient.getId()%>" role="button" class="btn btn-sm btn-primary btn-user">Detalles</a>
                 </div>
             </div>
             <div class="card-body">
                 <p>Nombre completo: <%= patient.getName()%> <%= patient.getSurname()%></p>
-                <%
-                    String patientBirthdate = simpleDateFormat.format(patient.getBirthdate());
-                %>
                 <p>Fecha de nacimiento: <%= patientBirthdate%></p>
                 <p>Seguro médico: <%= patient.getPrepaidHealth() ? "Sí" : "No"%></p>
                 <p>Grupo sanguíneo: <%= patient.getBloodType()%></p>
@@ -54,9 +55,6 @@
                 </div>
             </div>
             <div class="card-body">
-                <%
-                    String appointmentDate = simpleDateFormat.format(appointmentInfo.getAppointment());
-                %>
                 <p>Fecha: <%= appointmentDate%></p>
                 <p>Hora: <%= appointmentInfo.getHour()%></p>
             </div>

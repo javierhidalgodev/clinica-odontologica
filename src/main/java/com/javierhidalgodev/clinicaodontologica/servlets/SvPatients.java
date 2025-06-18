@@ -31,6 +31,17 @@ public class SvPatients extends HttpServlet {
         }
 
         if (PathUtils.isPathInfoID(pathInfo) != null) {
+            String queryParams = request.getQueryString();
+            if (queryParams != null) {
+                if (queryParams.equals("editing=true")) {
+                    patientService.editingPatient(request, response, PathUtils.isPathInfoID(pathInfo));
+                    return;
+                } else {
+                    response.sendRedirect(request.getContextPath() + "/patients" + pathInfo);
+                    return;
+                }
+            }
+
             patientService.getInfo(request, response, PathUtils.isPathInfoID(pathInfo));
             return;
         }
@@ -48,25 +59,18 @@ public class SvPatients extends HttpServlet {
             throws ServletException, IOException {
         String pathInfo = request.getPathInfo();
 
-        if (pathInfo != null) {
-            Integer patientID = PathUtils.isPathInfoID(pathInfo);
-            String action = request.getParameter("action");
-
-            if (patientID != null && "getInfo".equals(action)) {
-                patientService.getInfo(request, response, patientID);
-            } else {
-                if ("create".equals(action)) {
-                    patientService.createPatient(request, response);
-                } else if ("delete".equals(action)) {
-                    patientService.deletePatient(request, response);
-                } else if ("editing".equals(action)) {
-                    patientService.editingPatient(request, response, patientID);
-                } else if ("edit".equals(action)) {
-                    patientService.editPatient(request, response, patientID);
-                } else {
-                    response.sendRedirect(request.getContextPath() + "/index");
-                }
-            }
+        if (pathInfo == null) {
+            response.sendRedirect(request.getContextPath() + request.getServletPath());
+            return;
         }
+
+        String action = request.getParameter("action");
+
+        if (action != null) {
+            patientService.doAction(pathInfo, action, request, response);
+            return;
+        }
+
+        response.sendRedirect(request.getContextPath() + "/index");
     }
 }

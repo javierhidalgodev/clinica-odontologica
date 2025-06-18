@@ -3,6 +3,7 @@ package com.javierhidalgodev.clinicaodontologica.services;
 import com.javierhidalgodev.clinicaodontologica.dto.user.UserDTO;
 import com.javierhidalgodev.clinicaodontologica.logica.Controller;
 import com.javierhidalgodev.clinicaodontologica.logica.Usuario;
+import com.javierhidalgodev.clinicaodontologica.utils.PathUtils;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -12,6 +13,24 @@ import javax.servlet.http.HttpServletResponse;
 public class UserService {
 
     Controller controller = Controller.getInstance();
+
+    public void doAction(String pathInfo, String action, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (pathInfo.equals("/new")) {
+            createUser(request, response);
+        }
+
+        Integer userID = PathUtils.isPathInfoID(pathInfo);
+
+        if (userID != null) {
+            if (action.equals("edit")) {
+                editUser(request, response, userID);
+            }
+
+            if (action.equals("delete")) {
+                deleteUser(request, response);
+            }
+        }
+    }
 
     public void getAllUsers(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

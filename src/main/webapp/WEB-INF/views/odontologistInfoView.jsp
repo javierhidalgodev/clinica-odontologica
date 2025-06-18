@@ -8,23 +8,24 @@
     Odontologo odontologist = (Odontologo) request.getAttribute("odontologist");
 %>
 
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/odontologists">Odontólogos</a></li>
+        <li class="breadcrumb-item" aria-current="page">Dr. <%= odontologist.getName()%> <%= odontologist.getSurname()%></li>
+    </ol>
+</nav>
+
 <div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <div class="d-flex justify-content-between align-items-center">
-            <span class="m-0 font-weight-bold text-primary">Dr. <%= odontologist.getName()%> <%= odontologist.getSurname()%></span>
-            <% if ("admin".equals(userSession.getRole())) {%>
-            <div class="d-flex" id="actions">
-                <form action="${pageContext.request.contextPath}/odontologists/<%= odontologist.getId()%>" method="POST" class="mr-2">
-                    <input type="hidden" name="action" value="editing" />
-                    <input type="hidden" name="id" value="<%= odontologist.getId()%>" />
-                    <button type="submit" class="btn btn-success">
-                        <i class="fas fa-solid fa-edit"></i>
-                    </button>
-                </form>
-                <form action="odontologists" method="POST" id="form">
-                    <input type="hidden" name="id" value="<%= odontologist.getId()%>" />
-                    <input type="hidden" name="action" value="delete" />
-                </form>
+    <div class="card-header py-3 d-flex justify-content-between align-items-center">
+        <span class="m-0 font-weight-bold text-primary">Dr. <%= odontologist.getName()%> <%= odontologist.getSurname()%></span>
+        <% if ("admin".equals(userSession.getRole())) {%>
+        <div id="actions" class="d-flex" style="gap: 8px">
+            <a href="${pageContext.request.contextPath}/odontologists/<%= odontologist.getId()%>?editing=true" role="button" class="btn btn-success">
+                <i class="fas fa-solid fa-edit" style="width: 16px"></i>
+            </a>
+            <form action="${pageContext.request.contextPath}/odontologists/<%= odontologist.getId()%>" method="POST" id="form">
+                <input type="hidden" name="id" value="<%= odontologist.getId()%>" />
+                <input type="hidden" name="action" value="delete" />
                 <button
                     type="button"
                     id="action-btn"
@@ -32,11 +33,12 @@
                     data-action="delete"
                     data-toggle="modal"
                     data-target="#modal">
-                    <i class="fas fa-solid fa-trash-alt"></i>
+                    <i class="fas fa-solid fa-trash-alt" style="width: 16px"></i>
                 </button>
-            </div>
-            <% } %>
+            </form>
+
         </div>
+        <% }%>
     </div>
     <div class="card-body">
         <p>Dirección: <%= odontologist.getAddress()%></p>

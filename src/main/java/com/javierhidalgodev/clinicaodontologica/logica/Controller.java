@@ -154,7 +154,7 @@ public class Controller {
         odontologistToEdit.setSpecialization(specialization);
         odontologistToEdit.setWorkSchedule(wS);
         odontologistToEdit.setUser(userFinal);
-        
+
         persistenceController.editOdontologist(odontologistToEdit);
     }
 
@@ -262,6 +262,7 @@ public class Controller {
         if (user != null && !user.isEmpty()) {
             int userId = Integer.parseInt(user);
             userFinal = persistenceController.getUserById(userId);
+            secretaryToEdit.setUser(userFinal);
         }
 
         secretaryToEdit.setName(firstName);
@@ -270,7 +271,6 @@ public class Controller {
         secretaryToEdit.setPhone(phone);
         secretaryToEdit.setBirthdate(birth);
         secretaryToEdit.setFloor(floor);
-        secretaryToEdit.setUser(userFinal);
 
         persistenceController.editSecretary(secretaryToEdit);
     }

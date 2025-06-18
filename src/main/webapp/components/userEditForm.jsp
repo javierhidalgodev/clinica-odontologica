@@ -2,7 +2,10 @@
 
 <% Usuario userToEdit = (Usuario) session.getAttribute("userToEdit");%>
 
-<form id="form" action="${pageContext.request.contextPath}/users/<%= userToEdit.getIdUser() %>" method="POST">
+<form
+    id="form"
+    action="${pageContext.request.contextPath}/users/<%= userToEdit.getIdUser()%>" 
+    method="POST">
     <div class="form-group row">
         <div class="col-md-6 mb-3 col-md-0">
             <label>Nombre de usuario</label>
@@ -21,6 +24,7 @@
     <button
         type="button"
         id="action-btn"
+        role="validations"
         class="btn btn-success btn-user btn-block font-weight-bold"
         data-action="edit"
         data-toggle="modal"

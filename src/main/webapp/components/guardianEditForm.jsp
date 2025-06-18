@@ -65,7 +65,7 @@
         <span class="error-validation"></span>
     </div>
     <input type="hidden" name="action" value="edit" />
-    <button id="submitBtn" type="submit" class="btn btn-success btn-user btn-block">
+    <button id="submitBtn" role="validations" type="submit" class="btn btn-success btn-user btn-block">
         Editar
     </button>
 </form>

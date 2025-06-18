@@ -18,6 +18,13 @@
     Responsable guardian = patient.getGuardian();
 %>
 
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/patients">Pacientes</a></li>
+        <li class="breadcrumb-item" aria-current="page"><%= patient.getName() + " " + patient.getSurname()%></li>
+    </ol>
+</nav>
+
 <div class="row">
     <div class="<%= guardian != null ? "col-xl-6 col-l-12" : "col-12"%>">
         <div class="card shadow mb-4">
@@ -25,27 +32,23 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <span class="m-0 font-weight-bold text-primary">Información del paciente</span>
                     <% if ("admin".equals(role)) {%>
-                    <div class="d-flex" id="actions">
-                        <form action="${pageContext.request.contextPath}/patients/<%= patient.getId()%>" method="POST">
-                            <input type="hidden" id="patientIdToEdit" name="id" value="<%= patient.getId()%>">
-                            <input type="hidden" name="action" value="editing" />
-                            <button type="submit" class="btn btn-success mr-2">
-                                <i class="fas fa-solid fa-edit"></i>
-                            </button>
-                        </form>
-                        <form id="form" action="patients" method="POST">
+                    <div id="actions" class="d-flex" style="gap: 8px">
+                        <a href="${pageContext.request.contextPath}/patients/<%= patient.getId()%>?editing=true" type="submit" class="btn btn-success">
+                            <i class="fas fa-solid fa-edit" style="width: 16px"></i>
+                        </a>
+                        <form id="form" action="${pageContext.request.contextPath}/patients/<%= patient.getId()%>" method="POST">
                             <input type="hidden" name="id" value="<%= patient.getId()%>">
                             <input type="hidden" name="action" value="delete" />
+                            <button
+                                type="button"
+                                id="action-btn"
+                                class="btn btn-danger"
+                                data-action="delete"
+                                data-toggle="modal"
+                                data-target="#modal">
+                                <i class="fas fa-solid fa-trash-alt" style="width: 16px"></i>
+                            </button>
                         </form>
-                        <button
-                            type="button"
-                            id="action-btn"
-                            class="btn btn-danger"
-                            data-action="delete"
-                            data-toggle="modal"
-                            data-target="#modal">
-                            <i class="fas fa-solid fa-trash-alt"></i>
-                        </button>
                     </div>
                     <% }%>
                 </div>

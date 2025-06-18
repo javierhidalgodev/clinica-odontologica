@@ -28,12 +28,14 @@
                                 }
                             %>
 
-                            <form action="login" method="POST">
+                            <form action="login" method="POST" id="form">
                                 <div class="form-group">
-                                    <input type="text" class="form-control form-control-user" id="inputUsername" name="username" aria-describedby="usernameHelp" placeholder="Nombre de usuario">
+                                    <input type="text" class="form-control form-control-user" id="inputUsername" name="username" aria-describedby="usernameHelp" placeholder="Nombre de usuario" data-validations="required">
+                                    <span id="errorUsername" class="error-validation"></span>
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" name="password" class="form-control form-control-user" id="inputPassword" placeholder="Contraseña">
+                                    <input type="password" name="password" class="form-control form-control-user" id="inputPassword" placeholder="Contraseña" data-validations="required">
+                                    <span id="errorConfirmPassword" class="error-validation"></span>
                                 </div>
                                 <div class="form-group">
                                     <div class="custom-control custom-checkbox small">
@@ -41,7 +43,7 @@
                                         <label class="custom-control-label" for="customCheck">Recuérdame</label>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary btn-user btn-block">
+                                <button id="submitBtn" type="submit" class="btn btn-primary btn-user btn-block" role="validations">
                                     Iniciar sesión
                                 </button>
                             </form>

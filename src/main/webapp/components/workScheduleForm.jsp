@@ -17,7 +17,11 @@
         </div>
     </div>
     <input type="hidden" name="action" value="create" />
-    <button type="submit" class="btn btn-success btn-user btn-block">
+    <button
+        id="submitBtn"
+        type="submit"
+        role="validations"
+        class="btn btn-success btn-user btn-block">
         Create
     </button>
 </form>

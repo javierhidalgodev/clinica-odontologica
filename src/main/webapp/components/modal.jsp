@@ -20,15 +20,14 @@
 <script>
         const mainForm = document.getElementById("form");
         const modalActionBtn = document.getElementById("modal-action-btn");
-        modalActionBtn.addEventListener("click", () => {
-            mainForm.submit();
+        modalActionBtn.addEventListener("click", (ev) => {
+            mainForm.dispatchEvent(new Event("submit", { cancelable: true }));
         })
     
         // Obtención del botón que invoca el modal
         // y extracción de la data necesaria para el modal
         const actionBtn = document.getElementById("action-btn");
         const dataAction = actionBtn.getAttribute("data-action");
-
 
         // Obtención de los inputs para setear la data,
         // del contenedor del modal

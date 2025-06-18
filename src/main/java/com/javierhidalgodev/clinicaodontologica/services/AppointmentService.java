@@ -13,10 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author Javi
- */
 public class AppointmentService {
 
     Controller controller = Controller.getInstance();
@@ -53,7 +49,11 @@ public class AppointmentService {
         List<Turno> appointmentList = (List<Turno>) mySession.getAttribute("appointmentList");
         Turno appointment = controller.getAppointmentById(appointmentID);
 
+        System.out.println("VOY A CONSEGUIR LA CITA POR ID");
+
         if (userSession != null && userSession.getRole().equals("user")) {
+            System.out.println("SOY UN USER");
+
             boolean isMyAppointment = false;
             for (Turno t : appointmentList) {
                 if (t.getIdAppointment() == appointmentID) {
@@ -63,23 +63,29 @@ public class AppointmentService {
             }
 
             if (isMyAppointment) {
+                System.out.println("Y ES MI CITA");
                 request.setAttribute("appointmentInfo", appointment);
                 request.getRequestDispatcher("/WEB-INF/views/appointmentInfoView.jsp").forward(request, response);
                 return;
             }
-            
+
+            System.out.println("PERO NO ES MI CITA");
             response.sendRedirect(request.getContextPath() + "/appointments");
             return;
         }
 
+        System.out.println("SOY UN ADMIN");
         if (appointment != null) {
+            System.out.println("Y RECUPERO LA CITA");
             request.setAttribute("appointmentInfo", appointment);
 
             request.getRequestDispatcher("/WEB-INF/views/appointmentInfoView.jsp").forward(request, response);
             return;
         }
 
-        response.sendRedirect(request.getContextPath() + "/index");
+        System.out.println("PERO LA CITA NO EXISTE");
+        response.sendRedirect(request.getContextPath() + "/appointments");
+        return;
     }
 
     //    appointments/new/patient
@@ -137,18 +143,10 @@ public class AppointmentService {
                 request.getRequestDispatcher("/WEB-INF/views/appointmentRegisterOdontologistView.jsp").forward(request, response);
                 return;
             }
-        } else {
-            String date = (String) request.getSession().getAttribute("appointmentDate");
-            String hour = (String) request.getSession().getAttribute("appointmentHour");
-            Paciente patient = (Paciente) request.getSession().getAttribute("appointmentPatient");
-
-            if (date != null && hour != null && patient != null) {
-                request.getRequestDispatcher("/WEB-INF/views/appointmentRegisterOdontologistView.jsp").forward(request, response);
-                return;
-            } else {
-                response.sendRedirect(request.getContextPath() + "/appointments/new/patient");
-            }
         }
+
+        response.sendRedirect(request.getContextPath() + "/appointments/new/patient");
+        return;
     }
 
     //    appointments/new/confirmation
@@ -170,19 +168,10 @@ public class AppointmentService {
                 request.getRequestDispatcher("/WEB-INF/views/appointmentRegisterConfirmView.jsp").forward(request, response);
                 return;
             }
-
-            response.sendRedirect(request.getContextPath() + "/index");
-        } else {
-
-            Odontologo professional = (Odontologo) request.getSession().getAttribute("professional");
-
-            if (professional != null) {
-                request.getRequestDispatcher("/WEB-INF/views/appointmentRegisterConfirmView.jsp").forward(request, response);
-                return;
-            }
-
-            response.sendRedirect(request.getContextPath() + "/index");
         }
+        
+        response.sendRedirect(request.getContextPath() + "/appointments/new/patient");
+        return;
     }
 
 //    appointments/new/confirmation
@@ -205,8 +194,10 @@ public class AppointmentService {
             request.getSession().removeAttribute("patientList");
 
             response.sendRedirect(request.getContextPath() + "/appointments");
+            return;
         } else {
             response.sendRedirect(request.getContextPath() + "/index");
+            return;
         }
     }
 }

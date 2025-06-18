@@ -1,7 +1,6 @@
 package com.javierhidalgodev.clinicaodontologica.servlets;
 
 import com.javierhidalgodev.clinicaodontologica.dto.user.UserDTO;
-import com.javierhidalgodev.clinicaodontologica.logica.Controller;
 import com.javierhidalgodev.clinicaodontologica.services.WorkScheduleService;
 import com.javierhidalgodev.clinicaodontologica.utils.PathUtils;
 import java.io.IOException;
@@ -12,10 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author Javi
- */
 @WebServlet(name = "SvWorkSchedule", urlPatterns = {
     "/work-schedule",
     "/work-schedule/*"})
@@ -23,24 +18,10 @@ public class SvWorkSchedule extends HttpServlet {
 
     WorkScheduleService workScheduleService = new WorkScheduleService();
 
-    private boolean doBefore(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        HttpSession mySession = request.getSession(false);
-        UserDTO userSession = (UserDTO) mySession.getAttribute("userSession");
-        
-        if(userSession.getRole().equals("user")) {
-            response.sendRedirect(request.getContextPath() + "/index");
-            return false;
-        }
-        
-        return true;
-    }
-    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        if(!doBefore(request, response)) return;
-        
+
         String pathInfo = request.getPathInfo();
 
         if (pathInfo == null) {
@@ -49,6 +30,17 @@ public class SvWorkSchedule extends HttpServlet {
         }
 
         if (PathUtils.isPathInfoID(pathInfo) != null) {
+            String queryParams = request.getQueryString();
+            if (queryParams != null) {
+                if (queryParams.equals("editing=true")) {
+                    workScheduleService.editingWorkSchedule(request, response, PathUtils.isPathInfoID(pathInfo));
+                    return;
+                } else {
+                    response.sendRedirect(request.getContextPath() + "/work-schedule" + pathInfo);
+                    return;
+                }
+            }
+
             workScheduleService.getInfo(request, response, PathUtils.isPathInfoID(pathInfo));
             return;
         }
@@ -67,25 +59,18 @@ public class SvWorkSchedule extends HttpServlet {
 
         String pathInfo = request.getPathInfo();
 
-        if (pathInfo != null) {
-            Integer workScheduleID = PathUtils.isPathInfoID(pathInfo);
-            String action = request.getParameter("action");
-
-            if (workScheduleID != null && "getInfo".equals(action)) {
-                workScheduleService.getInfo(request, response, workScheduleID);
-            } else {
-                if ("create".equals(action)) {
-                    workScheduleService.createWorkSchedule(request, response);
-                } else if ("delete".equals(action)) {
-                    workScheduleService.deleteWorkSchedule(request, response);
-                } else if ("editing".equals(action)) {
-                    workScheduleService.editingWorkSchedule(request, response, workScheduleID);
-                } else if ("edit".equals(action)) {
-                    workScheduleService.editWorkSchedule(request, response, workScheduleID);
-                } else {
-                    response.sendRedirect(request.getContextPath() + "/index");
-                }
-            }
+        if (pathInfo == null) {
+            response.sendRedirect(request.getContextPath() + request.getServletPath());
+            return;
         }
+
+        String action = request.getParameter("action");
+
+        if (action != null) {
+            workScheduleService.doAction(pathInfo, action, request, response);
+            return;
+        }
+
+        response.sendRedirect(request.getContextPath() + "/index");
     }
 }
